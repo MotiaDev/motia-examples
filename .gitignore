@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.npm
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Motia generated
+.motia/
+
+# Python cache files
+*/__pycache__/*
+*.py[cod]
+*.pyo

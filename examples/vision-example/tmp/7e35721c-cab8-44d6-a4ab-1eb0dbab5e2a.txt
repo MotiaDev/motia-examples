@@ -1,0 +1,4 @@
+{
+  "prompt": "Create a striking black and white sketch depicting a carefree couple embarking on a backpacking adventure through the rugged trails of the Eastern Sierra Nevada mountains. Capture the essence of their journey with bold, expressive strokes that convey the majestic peaks looming in the distance, the winding path carved into the rocky terrain, and the couple's silhouettes adorned with backpacks, exuding a sense of wanderlust and unity with nature. Incorporate intricate cross-hatching techniques to add depth and texture, while allowing the negative space to breathe, creating a harmonious interplay of light and shadow.",
+  "original_prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."
+}

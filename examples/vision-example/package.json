@@ -1,0 +1,27 @@
+{
+  "name": "my-motia-project",
+  "description": "",
+  "scripts": {
+    "dev": "motia dev",
+    "dev:debug": "motia dev --debug",
+    "generate:config": "motia get-config --output ./"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@fal-ai/client": "^1.2.3",
+    "@motiadev/core": "^0.0.22",
+    "@motiadev/workbench": "^0.0.22",
+    "dotenv": "^16.4.7",
+    "motia": "^0.0.22",
+    "openai": "^4.83.0",
+    "react": "^19.0.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

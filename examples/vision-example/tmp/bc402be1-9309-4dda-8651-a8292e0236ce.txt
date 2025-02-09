@@ -1,0 +1,4 @@
+{
+  "prompt": "Create a captivating black and white sketch illustration depicting a young adventurous couple trekking along a winding trail in the majestic Eastern Sierra Nevada mountains. Capture the rugged and towering peaks in the background, their silhouettes fading into the distance. Use bold, expressive strokes to convey the couple's determination and sense of wonder as they navigate through the breathtaking wilderness. Incorporate intricate details like their backpacks, trekking poles, and the rocky terrain underfoot, showcasing a harmonious blend of realism and stylized elements.",
+  "original_prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."
+}

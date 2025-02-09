@@ -1,0 +1,4 @@
+{
+  "prompt": "Render a striking black and white sketch of an adventurous couple trekking along a serpentine trail in the majestic Eastern Sierras. Capture the rugged terrain with jagged peaks, a winding path, and scattered boulders. Depict the hikers in a dynamic pose, backpacks slung over their shoulders, exuding a sense of wonder and determination. Employ bold, expressive lines and strategic use of shading to convey depth and texture in this evocative monochromatic landscape.",
+  "original_prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."
+}

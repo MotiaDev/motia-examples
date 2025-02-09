@@ -1,0 +1,4 @@
+{
+  "prompt": "Create a black and white sketch-style image of a young adventurous couple hiking through a winding trail in the rugged Eastern Sierra Nevada mountains. Capture the dramatic shadows cast by the jagged peaks and the couple's silhouettes against the stark mountain landscape. Use dynamic lines and shading to convey the rocky terrain, twisting pine trees, and a sense of serenity in the vast wilderness.",
+  "original_prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."
+}

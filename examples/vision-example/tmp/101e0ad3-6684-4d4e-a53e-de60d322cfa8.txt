@@ -1,0 +1,4 @@
+{
+  "prompt": "Render a monochromatic sketch depicting an adventurous couple trekking along a winding trail in the majestic Eastern Sierra Nevada mountains. Capture the rugged terrain with intricate hatching and cross-hatching techniques, accentuating the jagged peaks and rocky outcroppings that tower over the hikers. Incorporate a dramatic play of light and shadow, highlighting the couple's silhouettes against the vast, sun-drenched landscape. Infuse a sense of wonder and exploration into the scene through expressive brushwork and dynamic compositional elements.",
+  "original_prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."
+}

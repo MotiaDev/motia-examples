@@ -1,0 +1,4 @@
+{
+  "prompt": "Craft a sketch-style monochrome illustration capturing a young adventurous couple traversing a winding trail amidst the rugged grandeur of the Eastern Sierra Nevada mountains, their silhouettes etched against a backdrop of towering granite peaks and cascading waterfalls, conveying a sense of awe and wonder through dynamic brushstrokes and bold contrasts.",
+  "original_prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."
+}

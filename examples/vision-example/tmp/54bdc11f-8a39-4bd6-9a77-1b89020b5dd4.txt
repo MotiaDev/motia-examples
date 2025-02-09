@@ -1,0 +1,4 @@
+{
+  "prompt": "Create a stylized black and white sketch depicting a young adventurous couple navigating a winding trail in the Eastern Sierra Nevada mountains. Render the scene with bold, expressive brushstrokes, accentuating the majestic peaks and rugged terrain. Incorporate dynamic lighting and interesting angles to heighten the sense of exploration and discovery. Convey a sense of wonder and awe through the couple's body language and facial expressions as they take in the breathtaking natural surroundings.",
+  "original_prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."
+}
