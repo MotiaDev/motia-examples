@@ -1,6 +1,6 @@
-import { ApiRouteConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { GithubPREvent, GithubWebhookEndpoint } from '../../types/github-events'
+import type { ApiRouteConfig, StepHandler } from 'motia'
 
 const webhookSchema = z.object({
   action: z.string(),
@@ -32,25 +32,30 @@ export const config: ApiRouteConfig = {
   path: GithubWebhookEndpoint.PR,
   virtualSubscribes: [GithubWebhookEndpoint.PR],
   method: 'POST',
-  emits: [{
-    type: GithubPREvent.Opened,
-    label: 'New PR created'
-  }, {
-    type: GithubPREvent.Edited,
-    label: 'PR content updated'
-  }, {
-    type: GithubPREvent.Closed,
-    label: 'PR closed'
-  }, {
-    type: GithubPREvent.Merged,
-    label: 'PR merged successfully'
-  }],
+  emits: [
+    {
+      topic: GithubPREvent.Opened,
+      label: 'New PR created',
+    },
+    {
+      topic: GithubPREvent.Edited,
+      label: 'PR content updated',
+    },
+    {
+      topic: GithubPREvent.Closed,
+      label: 'PR closed',
+    },
+    {
+      topic: GithubPREvent.Merged,
+      label: 'PR merged successfully',
+    },
+  ],
   bodySchema: webhookSchema,
   flows: ['github-pr-management'],
 }
 
 export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
-  const { action, pull_request: pr } = req.body
+  const { action, pull_request: pr, repository } = req.body
 
   logger.info('[PR Webhook] Received webhook', { action, prNumber: pr.number })
 
@@ -59,29 +64,40 @@ export const handler: StepHandler<typeof config> = async (req, { emit, logger })
     title: pr.title,
     body: pr.body,
     state: pr.state,
-    labels: pr.labels.map((l: { name: string }) => l.name),
+    labels: pr.labels ? pr.labels.map((l: { name: string }) => l.name) : [],
     author: pr.user.login,
-    owner: pr.base.repo.owner.login,
-    repo: pr.base.repo.name,
+    owner: pr.base.repo?.owner?.login || repository.owner.login,
+    repo: pr.base.repo?.name || repository.name,
     baseBranch: pr.base.ref,
     headBranch: pr.head.ref,
     commitSha: pr.head.sha,
   }
 
-  if (action === 'closed' && pr.merged) {
+  // Handle different webhook actions
+  if (action === 'opened' || action === 'edited') {
     await emit({
-      type: GithubPREvent.Merged,
+      topic: `github.pr.${action}`,
       data: baseEventData,
     })
+  } else if (action === 'closed') {
+    if (pr.merged) {
+      await emit({
+        topic: GithubPREvent.Merged,
+        data: baseEventData,
+      })
+    } else {
+      await emit({
+        topic: GithubPREvent.Closed,
+        data: baseEventData,
+      })
+    }
   } else {
-    await emit({
-      type: `github.pr.${action}`,
-      data: baseEventData,
-    })
+    logger.warn('[PR Webhook] Unsupported action', { action })
+    // Don't emit any event for unsupported actions
   }
 
   return {
     status: 200,
-    body: { message: 'PR webhook processed successfully' },
+    body: { message: 'Webhook processed successfully' },
   }
-} 
+}

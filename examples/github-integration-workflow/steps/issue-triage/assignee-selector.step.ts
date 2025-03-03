@@ -1,13 +1,22 @@
-import { EventConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { GithubClient } from '../../services/github/GithubClient'
 import { OpenAIClient } from '../../services/openai/OpenAIClient'
 import { GithubIssueEvent } from '../../types/github-events'
+import type { EventConfig, StepHandler } from 'motia'
 
 const TEAM_MEMBERS = [
-  { login: 'frontend-team', expertise: ['javascript', 'react', 'ui', 'frontend'] },
-  { login: 'backend-team', expertise: ['python', 'api', 'database', 'backend'] },
-  { login: 'documentation-team', expertise: ['documentation', 'technical-writing'] },
+  {
+    login: 'frontend-team',
+    expertise: ['javascript', 'react', 'ui', 'frontend'],
+  },
+  {
+    login: 'backend-team',
+    expertise: ['python', 'api', 'database', 'backend'],
+  },
+  {
+    login: 'documentation-team',
+    expertise: ['documentation', 'technical-writing'],
+  },
 ]
 
 const labeledIssueSchema = z.object({
@@ -29,10 +38,12 @@ export const config: EventConfig<typeof labeledIssueSchema> = {
   name: 'Assignee Selector',
   description: 'Uses LLM to select appropriate assignees for issues',
   subscribes: [GithubIssueEvent.Labeled],
-  emits: [{
-    type: GithubIssueEvent.Assigned,
-    label: 'Team members assigned'
-  }],
+  emits: [
+    {
+      topic: GithubIssueEvent.Assigned,
+      label: 'Team members assigned',
+    },
+  ],
   input: labeledIssueSchema,
   flows: ['github-issue-management'],
 }
@@ -40,7 +51,7 @@ export const config: EventConfig<typeof labeledIssueSchema> = {
 export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
   const github = new GithubClient()
   const openai = new OpenAIClient()
-  
+
   logger.info('[Assignee Selector] Finding suitable assignees', {
     issueNumber: input.issueNumber,
   })
@@ -52,12 +63,9 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       TEAM_MEMBERS
     )
 
-    await github.updateIssue(
-      input.owner,
-      input.repo,
-      input.issueNumber,
-      { assignees: suggestedAssignees }
-    )
+    await github.updateIssue(input.owner, input.repo, input.issueNumber, {
+      assignees: suggestedAssignees,
+    })
 
     await github.createComment(
       input.owner,
@@ -67,7 +75,7 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
     )
 
     await emit({
-      type: GithubIssueEvent.Assigned,
+      topic: GithubIssueEvent.Assigned,
       data: {
         ...input,
         assignees: suggestedAssignees,
@@ -79,4 +87,4 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       issueNumber: input.issueNumber,
     })
   }
-} 
+}

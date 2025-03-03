@@ -1,11 +1,14 @@
-import { EventConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { GithubClient } from '../../services/github/GithubClient'
 import { OpenAIClient } from '../../services/openai/OpenAIClient'
 import { GithubPREvent } from '../../types/github-events'
+import type { EventConfig, StepHandler } from 'motia'
 
 const TEAM_MEMBERS = [
-  { login: 'frontend-dev', expertise: ['javascript', 'react', 'ui', 'frontend'] },
+  {
+    login: 'frontend-dev',
+    expertise: ['javascript', 'react', 'ui', 'frontend'],
+  },
   { login: 'backend-dev', expertise: ['python', 'api', 'database', 'backend'] },
   { login: 'devops-eng', expertise: ['infrastructure', 'ci-cd', 'deployment'] },
 ]
@@ -29,10 +32,12 @@ export const config: EventConfig<typeof classifiedPRSchema> = {
   name: 'PR Reviewer Assigner',
   description: 'Assigns appropriate reviewers based on PR content and team expertise',
   subscribes: [GithubPREvent.Classified],
-  emits: [{
-    type: GithubPREvent.ReviewersAssigned,
-    label: 'Reviewers assigned to PR'
-  }],
+  emits: [
+    {
+      topic: GithubPREvent.ReviewersAssigned,
+      label: 'Reviewers assigned to PR',
+    },
+  ],
   input: classifiedPRSchema,
   flows: ['github-pr-management'],
 }
@@ -40,7 +45,7 @@ export const config: EventConfig<typeof classifiedPRSchema> = {
 export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
   const github = new GithubClient()
   const openai = new OpenAIClient()
-  
+
   logger.info('[PR Reviewer Assigner] Finding reviewers', {
     prNumber: input.prNumber,
   })
@@ -53,33 +58,32 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       input.classification
     )
 
-    // Request reviews
-    await github.requestReviews(
-      input.owner,
-      input.repo,
-      input.prNumber,
-      suggestedReviewers
-    )
+    if (suggestedReviewers.length > 0) {
+      await github.requestReviews(input.owner, input.repo, input.prNumber, suggestedReviewers)
 
-    // Add comment explaining reviewer selection
-    await github.createComment(
-      input.owner,
-      input.repo,
-      input.prNumber,
-      `🔍 Based on the PR content and team expertise, I've requested reviews from: ${suggestedReviewers.map((r: any) => `@${r}`).join(', ')}`
-    )
+      await github.createComment(
+        input.owner,
+        input.repo,
+        input.prNumber,
+        `🔍 Based on the PR content and team expertise, I've requested reviews from: ${suggestedReviewers.map((r: any) => `@${r}`).join(', ')}`
+      )
 
-    await emit({
-      type: GithubPREvent.ReviewersAssigned,
-      data: {
-        ...input,
-        reviewers: suggestedReviewers,
-      },
-    })
+      await emit({
+        topic: GithubPREvent.ReviewersAssigned,
+        data: {
+          ...input,
+          reviewers: suggestedReviewers,
+        },
+      })
+    } else {
+      logger.warn('[PR Reviewer Assigner] No suitable reviewers found', {
+        prNumber: input.prNumber,
+      })
+    }
   } catch (error) {
     logger.error('[PR Reviewer Assigner] Failed to assign reviewers', {
       error,
       prNumber: input.prNumber,
     })
   }
-} 
+}

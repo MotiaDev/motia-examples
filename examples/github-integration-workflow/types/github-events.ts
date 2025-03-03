@@ -1,14 +1,4 @@
-export enum GithubIssueEvent {
-  Opened = 'github.issue.opened',
-  Edited = 'github.issue.edited',
-  Closed = 'github.issue.closed',
-  Processed = 'github.issue.processed',
-  Classified = 'github.issue.classified',
-  Labeled = 'github.issue.labeled',
-  Assigned = 'github.issue.assigned',
-  Updated = 'github.issue.updated',
-  Archived = 'github.issue.archived'
-}
+import { IssueClassification } from './github'
 
 export enum GithubPREvent {
   Opened = 'github.pr.opened',
@@ -18,27 +8,72 @@ export enum GithubPREvent {
   Classified = 'github.pr.classified',
   Labeled = 'github.pr.labeled',
   ReviewersAssigned = 'github.pr.reviewers-assigned',
-  TestsCompleted = 'github.pr.tests-completed'
+  TestsCompleted = 'github.pr.tests-completed',
+}
+
+export enum GithubIssueEvent {
+  Opened = 'github.issue.opened',
+  Edited = 'github.issue.edited',
+  Closed = 'github.issue.closed',
+  Processed = 'github.issue.processed',
+  Classified = 'github.issue.classified',
+  Labeled = 'github.issue.labeled',
+  Assigned = 'github.issue.assigned',
+  Updated = 'github.issue.updated',
+  Archived = 'github.issue.archived',
 }
 
 export enum GithubWebhookEndpoint {
   Issue = '/api/github/webhook',
-  PR = '/api/github/pr-webhook'
+  PR = '/api/github/pr-webhook',
 }
 
-export type GithubEventTypes = {
-  // Webhook events
-  '/api/github/webhook': 'Simulated GitHub webhook'
-  
-  // Issue lifecycle events
-  'github.issue.opened': 'New issue created'
-  'github.issue.edited': 'Issue updated'
-  'github.issue.closed': 'Issue closed'
-  
-  // Processing events
-  'github.issue.processed': 'Initial processing complete'
-  'github.issue.classified': 'Issue classified by LLM'
-  'github.issue.labeled': 'Labels applied'
-  'github.issue.assigned': 'Assignees selected'
-  'github.issue.archived': 'Issue archived'
-} 
+/**
+ * Base interface for GitHub issue events
+ */
+export interface GithubIssueBaseEvent {
+  issueNumber: number
+  title: string
+  body: string
+  owner: string
+  repo: string
+  author: string
+  state?: string
+  labels?: string[]
+}
+
+/**
+ * Event emitted when a GitHub issue is opened
+ */
+export type GithubIssueOpenedEvent = GithubIssueBaseEvent
+
+/**
+ * Event emitted when a GitHub issue is edited
+ */
+export type GithubIssueEditedEvent = GithubIssueBaseEvent
+
+/**
+ * Event emitted when a GitHub issue is closed
+ */
+export type GithubIssueClosedEvent = GithubIssueBaseEvent
+
+/**
+ * Event emitted when a GitHub issue is classified
+ */
+export interface GithubIssueClassifiedEvent extends GithubIssueBaseEvent {
+  classification: IssueClassification
+}
+
+/**
+ * Event emitted when assignees are suggested for a GitHub issue
+ */
+export interface GithubIssueSuggestedAssigneesEvent extends GithubIssueClassifiedEvent {
+  suggestedAssignees: string[]
+}
+
+/**
+ * Event emitted when a GitHub issue is assigned
+ */
+export interface GithubIssueAssignedEvent extends GithubIssueClassifiedEvent {
+  assignees: string[]
+}

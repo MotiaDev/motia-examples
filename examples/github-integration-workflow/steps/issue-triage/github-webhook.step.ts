@@ -1,8 +1,7 @@
-import { ApiRouteConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { GithubIssueEvent, GithubWebhookEndpoint } from '../../types/github-events'
+import type { ApiRouteConfig, StepHandler } from 'motia'
 
-// Define webhook payload schema
 const webhookSchema = z.object({
   action: z.string(),
   issue: z.object({
@@ -24,16 +23,20 @@ export const config: ApiRouteConfig = {
   path: GithubWebhookEndpoint.Issue,
   virtualSubscribes: [GithubWebhookEndpoint.Issue],
   method: 'POST',
-  emits: [{
-    type: GithubIssueEvent.Opened,
-    label: 'New issue created'
-  }, {
-    type: GithubIssueEvent.Edited,
-    label: 'Issue content updated'
-  }, {
-    type: GithubIssueEvent.Closed,
-    label: 'Issue marked as closed'
-  }],
+  emits: [
+    {
+      topic: GithubIssueEvent.Opened,
+      label: 'New issue created',
+    },
+    {
+      topic: GithubIssueEvent.Edited,
+      label: 'Issue content updated',
+    },
+    {
+      topic: GithubIssueEvent.Closed,
+      label: 'Issue marked as closed',
+    },
+  ],
   bodySchema: webhookSchema,
   flows: ['github-issue-management'],
 }
@@ -41,11 +44,13 @@ export const config: ApiRouteConfig = {
 export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
   const { action, issue, repository } = req.body
 
-  logger.info('[GitHub Webhook] Received webhook', { action, issueNumber: issue.number })
+  logger.info('[GitHub Webhook] Received webhook', {
+    action,
+    issueNumber: issue.number,
+  })
 
-  // Emit appropriate event based on action
   await emit({
-    type: `github.issue.${action}` as GithubIssueEvent,
+    topic: `github.issue.${action}` as GithubIssueEvent,
     data: {
       issueNumber: issue.number,
       title: issue.title,
@@ -61,4 +66,4 @@ export const handler: StepHandler<typeof config> = async (req, { emit, logger })
     status: 200,
     body: { message: 'Webhook processed successfully' },
   }
-} 
+}

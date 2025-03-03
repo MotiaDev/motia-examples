@@ -1,7 +1,7 @@
-import { EventConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { GithubClient } from '../../services/github/GithubClient'
 import { GithubIssueEvent } from '../../types/github-events'
+import type { EventConfig, StepHandler } from 'motia'
 
 const classifiedIssueSchema = z.object({
   issueNumber: z.number(),
@@ -19,17 +19,19 @@ export const config: EventConfig<typeof classifiedIssueSchema> = {
   name: 'Label Assigner',
   description: 'Assigns labels based on issue classification',
   subscribes: [GithubIssueEvent.Classified],
-  emits: [{
-    type: GithubIssueEvent.Labeled,
-    label: 'Labels applied to issue'
-  }],
+  emits: [
+    {
+      topic: GithubIssueEvent.Labeled,
+      label: 'Labels applied to issue',
+    },
+  ],
   input: classifiedIssueSchema,
   flows: ['github-issue-management'],
 }
 
 export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
   const github = new GithubClient()
-  
+
   logger.info('[Label Assigner] Assigning labels', {
     issueNumber: input.issueNumber,
     classification: input.classification,
@@ -42,15 +44,10 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       `complexity:${input.classification.complexity}`,
     ]
 
-    await github.addLabels(
-      input.owner,
-      input.repo,
-      input.issueNumber,
-      labels
-    )
+    await github.addLabels(input.owner, input.repo, input.issueNumber, labels)
 
     await emit({
-      type: GithubIssueEvent.Labeled,
+      topic: GithubIssueEvent.Labeled,
       data: {
         ...input,
         labels,
@@ -62,4 +59,4 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       issueNumber: input.issueNumber,
     })
   }
-} 
+}

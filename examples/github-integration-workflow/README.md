@@ -35,11 +35,13 @@ A comprehensive workflow for automating GitHub issue and pull request management
 ## Development
 
 Start the development server:
+
 ```bash
 npm run dev
 ```
 
 For debugging:
+
 ```bash
 npm run dev:debug
 ```
@@ -47,16 +49,19 @@ npm run dev:debug
 ## Testing
 
 Run tests:
+
 ```bash
 npm test
 ```
 
 Watch mode:
+
 ```bash
 npm run test:watch
 ```
 
 Generate coverage report:
+
 ```bash
 npm run test:coverage
 ```

@@ -25,7 +25,12 @@ module.exports = {
       },
     ],
     'no-console': 'warn',
-    quotes: ['error', 'single'],
-    'prettier/prettier': ['error'],
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        semi: false,
+      },
+    ],
   },
 }

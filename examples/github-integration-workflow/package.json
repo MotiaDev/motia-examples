@@ -17,18 +17,16 @@
     "motia"
   ],
   "dependencies": {
-    "@motiadev/core": "^0.0.29",
-    "@motiadev/workbench": "^0.0.29",
     "@octokit/rest": "^19.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.1",
-    "motia": "^0.0.29",
+    "motia": "^0.1.0-alpha.2",
     "openai": "^4.85.1",
     "react": "^19.0.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@motiadev/test": "^0.0.29",
+    "@motiadev/test": "^0.1.0-alpha.2",
     "@types/jest": "^29.5.14",
     "@types/react": "^18.3.18",
     "jest": "^29.7.0",

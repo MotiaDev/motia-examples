@@ -29,12 +29,17 @@ export class GithubClient {
     return data
   }
 
-  async updateIssue(owner: string, repo: string, issueNumber: number, update: Partial<RestEndpointMethodTypes["issues"]["update"]["parameters"]>) {
+  async updateIssue(
+    owner: string,
+    repo: string,
+    issueNumber: number,
+    update: Partial<RestEndpointMethodTypes['issues']['update']['parameters']>
+  ) {
     const { data } = await this.client.issues.update({
       owner,
       repo,
       issue_number: issueNumber,
-      ...update
+      ...update,
     })
     return data
   }
@@ -60,20 +65,16 @@ export class GithubClient {
       repo,
       pull_number: pullNumber,
       reviewers,
-    });
+    })
   }
 
-  async getCheckRuns(
-    owner: string,
-    repo: string,
-    ref: string
-  ): Promise<CheckRun[]> {
+  async getCheckRuns(owner: string, repo: string, ref: string): Promise<CheckRun[]> {
     const { data } = await this.client.rest.checks.listForRef({
       owner,
       repo,
       ref,
       per_page: 100,
-    });
+    })
 
     return data.check_runs.map((run: RawCheckRun) => ({
       id: run.id,
@@ -82,6 +83,6 @@ export class GithubClient {
       conclusion: run.conclusion || 'neutral',
       started_at: run.started_at || '',
       completed_at: run.completed_at || '',
-    }));
+    }))
   }
-} 
+}

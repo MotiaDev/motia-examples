@@ -1,7 +1,7 @@
-import { EventConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { GithubClient } from '../../services/github/GithubClient'
 import { GithubIssueEvent } from '../../types/github-events'
+import type { EventConfig, StepHandler } from 'motia'
 
 const updateSchema = z.object({
   issueNumber: z.number(),
@@ -16,17 +16,19 @@ export const config: EventConfig<typeof updateSchema> = {
   name: 'Issue Update Handler',
   description: 'Handles issue updates by notifying reviewers of changes',
   subscribes: [GithubIssueEvent.Edited],
-  emits: [{
-    type: GithubIssueEvent.Updated,
-    label: 'Update processed'
-  }],
+  emits: [
+    {
+      topic: GithubIssueEvent.Updated,
+      label: 'Update processed',
+    },
+  ],
   input: updateSchema,
   flows: ['github-issue-management'],
 }
 
 export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
   const github = new GithubClient()
-  
+
   logger.info('[Issue Update Handler] Processing issue update', {
     issueNumber: input.issueNumber,
   })
@@ -40,7 +42,7 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
     )
 
     await emit({
-      type: GithubIssueEvent.Updated,
+      topic: GithubIssueEvent.Updated,
       data: {
         issueNumber: input.issueNumber,
         status: 'updated',
@@ -52,4 +54,4 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       issueNumber: input.issueNumber,
     })
   }
-} 
+}

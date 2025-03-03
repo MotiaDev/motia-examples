@@ -33,9 +33,9 @@ export class OpenAIClient {
   }
 
   async suggestAssignees(
-    title: string, 
-    body: string, 
-    availableAssignees: Array<{ login: string, expertise: string[] }>
+    title: string,
+    body: string,
+    availableAssignees: Array<{ login: string; expertise: string[] }>
   ): Promise<string[]> {
     const prompt = `
       Based on this GitHub issue and available team members, suggest up to 2 assignees:
@@ -75,26 +75,23 @@ export class OpenAIClient {
     Team members and their expertise:
     ${teamMembers.map(member => `- ${member.login}: ${member.expertise.join(', ')}`).join('\n')}
     
-    Return only the usernames of the 1-2 most suitable reviewers based on expertise match.`;
+    Return only the usernames of the 1-2 most suitable reviewers based on expertise match.`
 
     const response = await this.client.chat.completions.create({
-      model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
+      model: 'gpt-4',
+      messages: [{ role: 'user', content: prompt }],
       temperature: 0.3,
-    });
+    })
 
     const suggestedReviewers = response.choices[0].message.content
       ?.split(/[\s,]+/)
       .filter(reviewer => teamMembers.some(member => member.login === reviewer))
-      .slice(0, 2);
+      .slice(0, 2)
 
-    return suggestedReviewers || [];
+    return suggestedReviewers || []
   }
 
-  async classifyPR(
-    title: string,
-    body: string
-  ): Promise<PRClassification> {
+  async classifyPR(title: string, body: string): Promise<PRClassification> {
     const prompt = `Analyze this Pull Request and classify it:
     
     Title: ${title}
@@ -110,25 +107,25 @@ export class OpenAIClient {
     - impact: assess potential risk and scope of changes
     - areas: identify technical areas affected by changes
     
-    Return only valid JSON matching the specified format.`;
+    Return only valid JSON matching the specified format.`
 
     const response = await this.client.chat.completions.create({
-      model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
+      model: 'gpt-4',
+      messages: [{ role: 'user', content: prompt }],
       temperature: 0.1,
-    });
+    })
 
     try {
-      const classification = JSON.parse(response.choices[0].message.content || '{}');
-      
+      const classification = JSON.parse(response.choices[0].message.content || '{}')
+
       // Validate the response matches our expected schema
       return {
         type: classification.type,
         impact: classification.impact,
         areas: Array.isArray(classification.areas) ? classification.areas : [],
-      } as PRClassification;
+      } as PRClassification
     } catch (error) {
-      throw new Error('Failed to parse PR classification response');
+      throw new Error('Failed to parse PR classification response')
     }
   }
-} 
+}

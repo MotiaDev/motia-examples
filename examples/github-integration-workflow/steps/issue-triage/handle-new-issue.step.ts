@@ -1,7 +1,7 @@
-import { EventConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { GithubClient } from '../../services/github/GithubClient'
 import { GithubIssueEvent } from '../../types/github-events'
+import type { EventConfig, StepHandler } from 'motia'
 
 const issueSchema = z.object({
   issueNumber: z.number(),
@@ -16,28 +16,25 @@ export const config: EventConfig<typeof issueSchema> = {
   name: 'New Issue Handler',
   description: 'Processes newly created issues by adding initial labels and welcome comment',
   subscribes: [GithubIssueEvent.Opened],
-  emits: [{
-    type: GithubIssueEvent.Processed,
-    label: 'Initial processing complete'
-  }],
+  emits: [
+    {
+      topic: GithubIssueEvent.Processed,
+      label: 'Initial processing complete',
+    },
+  ],
   input: issueSchema,
   flows: ['github-issue-management'],
 }
 
 export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
   const github = new GithubClient()
-  
-  logger.info('[New Issue Handler] Processing new issue', { 
-    issueNumber: input.issueNumber 
+
+  logger.info('[New Issue Handler] Processing new issue', {
+    issueNumber: input.issueNumber,
   })
 
   try {
-    await github.addLabels(
-      input.owner,
-      input.repo,
-      input.issueNumber,
-      ['triage-needed']
-    )
+    await github.addLabels(input.owner, input.repo, input.issueNumber, ['triage-needed'])
 
     await github.createComment(
       input.owner,
@@ -47,7 +44,7 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
     )
 
     await emit({
-      type: GithubIssueEvent.Processed,
+      topic: GithubIssueEvent.Processed,
       data: {
         ...input,
         status: 'triaged',
@@ -59,4 +56,4 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       issueNumber: input.issueNumber,
     })
   }
-} 
+}

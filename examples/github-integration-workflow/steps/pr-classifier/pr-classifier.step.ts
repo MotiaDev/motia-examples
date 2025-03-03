@@ -1,7 +1,7 @@
-import { EventConfig, StepHandler } from '@motiadev/core'
 import { z } from 'zod'
 import { OpenAIClient } from '../../services/openai/OpenAIClient'
 import { GithubPREvent } from '../../types/github-events'
+import type { EventConfig, StepHandler } from 'motia'
 
 const prSchema = z.object({
   prNumber: z.number(),
@@ -20,26 +20,25 @@ export const config: EventConfig<typeof prSchema> = {
   name: 'PR Classifier',
   description: 'Uses LLM to classify PRs by type and impact',
   subscribes: [GithubPREvent.Opened],
-  emits: [{
-    type: GithubPREvent.Classified,
-    label: 'PR classification complete'
-  }],
+  emits: [
+    {
+      topic: GithubPREvent.Classified,
+      label: 'PR classification complete',
+    },
+  ],
   input: prSchema,
   flows: ['github-pr-management'],
 }
 
 export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
   const openai = new OpenAIClient()
-  
+
   logger.info('[PR Classifier] Analyzing PR', {
     prNumber: input.prNumber,
   })
 
   try {
-    const classification = await openai.classifyPR(
-      input.title,
-      input.body || ''
-    )
+    const classification = await openai.classifyPR(input.title, input.body || '')
 
     logger.info('[PR Classifier] Classification complete', {
       prNumber: input.prNumber,
@@ -47,7 +46,7 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
     })
 
     await emit({
-      type: GithubPREvent.Classified,
+      topic: GithubPREvent.Classified,
       data: {
         ...input,
         classification,
@@ -59,4 +58,4 @@ export const handler: StepHandler<typeof config> = async (input, { emit, logger 
       prNumber: input.prNumber,
     })
   }
-} 
+}
