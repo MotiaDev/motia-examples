@@ -1,0 +1,44 @@
+{
+  "default": {
+    "steps/api.step.ts": {
+      "x": 0,
+      "y": 0
+    },
+    "steps/one.step.ts": {
+      "x": 18,
+      "y": 236
+    },
+    "steps/two.step.ts": {
+      "x": 8,
+      "y": 412
+    },
+    "steps/01-conversation-reader.step.ts": {
+      "x": -50.91263383297651,
+      "y": 0
+    },
+    "steps/02-vision-transcriber.step.ts": {
+      "x": 25.899785867237625,
+      "y": 235.63982869379018
+    },
+    "steps/03-vision-transcriber.step.ts": {
+      "x": 380.77870563674327,
+      "y": 384.4952762334432
+    },
+    "steps/02-conversation-reader.step.ts": {
+      "x": 394.8830897703549,
+      "y": 247.91649269311063
+    },
+    "steps/01-api-trigger.step.ts": {
+      "x": 366,
+      "y": 0
+    },
+    "steps/04-transcription-file-writer.step.ts": {
+      "x": 423.4793814855573,
+      "y": 516.3158223109
+    },
+    "steps/05-conversation-summarizer.step.ts": {
+      "x": 416.66961892101006,
+      "y": 660.4834827053778
+    }
+  }
+}
