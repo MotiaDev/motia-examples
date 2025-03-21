@@ -1,0 +1,258 @@
+---
+description: API step http handler
+globs: 
+alwaysApply: false
+---
+# API Step Implementation Guide
+
+API Steps expose HTTP endpoints that act as entry points into your Motia workflow. They allow external systems to trigger events within your application.
+
+## API Step Configuration
+
+```typescript
+// TypeScript
+import { ApiRouteConfig, StepHandler } from 'motia'
+import { z } from 'zod'
+
+export const config: ApiRouteConfig = {
+  type: 'api',
+  name: 'CreateOrder',
+  description: 'Endpoint to create a new order',
+  path: '/api/orders', // HTTP path to expose
+  method: 'POST', // HTTP method (GET or POST)
+  emits: ['order.created'], // Events this API can trigger
+  bodySchema: z.object({ // Request body validation (TS/JS only)
+    customerId: z.string(),
+    items: z.array(z.object({
+      productId: z.string(),
+      quantity: z.number().int().positive()
+    }))
+  }),
+  flows: ['order-processing']
+}
+```
+
+```javascript
+// JavaScript
+const { z } = require('zod')
+
+exports.config = {
+  type: 'api',
+  name: 'CreateOrder',
+  description: 'Endpoint to create a new order',
+  path: '/api/orders',
+  method: 'POST',
+  emits: ['order.created'],
+  bodySchema: z.object({
+    customerId: z.string(),
+    items: z.array(z.object({
+      productId: z.string(),
+      quantity: z.number().int().positive()
+    }))
+  }),
+  flows: ['order-processing']
+}
+```
+
+```python
+# Python
+config = {
+    'type': 'api',
+    'name': 'CreateOrder',
+    'description': 'Endpoint to create a new order',
+    'path': '/api/orders',
+    'method': 'POST',
+    'emits': ['order.created'],
+    'flows': ['order-processing']
+}
+```
+
+```ruby
+# Ruby
+def config
+  {
+    type: 'api',
+    name: 'CreateOrder',
+    description: 'Endpoint to create a new order',
+    path: '/api/orders',
+    method: 'POST',
+    emits: ['order.created'],
+    flows: ['order-processing']
+  }
+end
+```
+
+## API Step Handler
+
+API handlers work differently from event handlers. They:
+1. Receive the HTTP request
+2. Process the request data
+3. Emit events to trigger workflows
+4. Return an HTTP response
+
+### TypeScript
+
+```typescript
+export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
+  const { customerId, items } = req.body
+
+  logger.info('Creating order', { customerId, itemCount: items.length })
+
+  // Generate a unique order ID
+  const orderId = `order-${Date.now()}`
+
+  // Emit event to trigger the order processing flow
+  await emit({
+    topic: 'order.created',
+    data: {
+      orderId,
+      customerId,
+      items,
+      timestamp: new Date().toISOString()
+    }
+  })
+
+  // Return HTTP response
+  return {
+    status: 201, // HTTP status code
+    body: {
+      success: true,
+      orderId,
+      message: 'Order created successfully'
+    }
+  }
+}
+```
+
+### JavaScript
+
+```javascript
+exports.handler = async (req, { emit, logger }) => {
+  const { customerId, items } = req.body
+
+  logger.info('Creating order', { customerId, itemCount: items.length })
+
+  // Generate a unique order ID
+  const orderId = `order-${Date.now()}`
+
+  // Emit event to trigger the order processing flow
+  await emit({
+    topic: 'order.created',
+    data: {
+      orderId,
+      customerId,
+      items,
+      timestamp: new Date().toISOString()
+    }
+  })
+
+  // Return HTTP response
+  return {
+    status: 201,
+    body: {
+      success: true,
+      orderId,
+      message: 'Order created successfully'
+    }
+  }
+}
+```
+
+### Python
+
+```python
+async def handler(req, ctx):
+    body = req.body
+    ctx.logger.info('Creating order', {'customer_id': body.get('customerId'), 'item_count': len(body.get('items', []))})
+
+    # Generate a unique order ID
+    import time
+    order_id = f"order-{int(time.time() * 1000)}"
+
+    # Emit event to trigger the order processing flow
+    await ctx.emit({
+        'topic': 'order.created',
+        'data': {
+            'orderId': order_id,
+            'customerId': body.get('customerId'),
+            'items': body.get('items'),
+            'timestamp': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+        }
+    })
+
+    # Return HTTP response
+    return {
+        'status': 201,
+        'body': {
+            'success': True,
+            'orderId': order_id,
+            'message': 'Order created successfully'
+        }
+    }
+```
+
+### Ruby
+
+```ruby
+def handler(req, ctx)
+  body = req.body
+  ctx.logger.info('Creating order', {customer_id: body['customerId'], item_count: body['items']&.length || 0})
+
+  # Generate a unique order ID
+  order_id = "order-#{Time.now.to_i * 1000}"
+
+  # Emit event to trigger the order processing flow
+  ctx.emit({
+    topic: 'order.created',
+    data: {
+      orderId: order_id,
+      customerId: body['customerId'],
+      items: body['items'],
+      timestamp: Time.now.utc.iso8601
+    }
+  })
+
+  # Return HTTP response
+  {
+    status: 201,
+    body: {
+      success: true,
+      orderId: order_id,
+      message: 'Order created successfully'
+    }
+  }
+end
+```
+
+## Error Handling
+
+API steps should handle errors gracefully and return appropriate HTTP status codes:
+
+```typescript
+export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
+  try {
+    // Process request...
+    return {
+      status: 200,
+      body: { success: true }
+    }
+  } catch (error) {
+    logger.error('Error processing request', { error: error.message, stack: error.stack })
+    return {
+      status: 500,
+      body: {
+        success: false,
+        error: 'Internal server error'
+      }
+    }
+  }
+}
+```
+
+## Security Considerations
+
+1. Always validate input data
+2. Apply proper authentication/authorization if needed
+3. Sanitize user inputs to prevent injection attacks
+4. Use HTTPS in production environments
+5. Follow the principle of least privilege

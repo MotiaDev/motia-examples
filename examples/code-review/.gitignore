@@ -1,0 +1,9 @@
+node_modules/
+.motia/
+dist/
+*.log
+.env
+coverage/
+.cursor/
+.bak/
+Review.md

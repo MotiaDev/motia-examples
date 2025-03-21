@@ -1,0 +1,150 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Step Implementation Guide
+
+## Step Configuration Properties
+
+Every Motia step requires a `config` object with the following properties:
+
+- **type**: String - `'event'`, `'api'`, `'cron'`, or `'noop'`
+- **name**: String - A unique identifier for the step
+- **subscribes**: String[] - Topics this step listens to (can be empty array)
+- **emits**: String[] - Topics this step can emit (can be empty array)
+- **flows**: String[] - Flow identifiers this step belongs to
+- **description**: String (optional) - Documentation for the step
+
+## Step Handler Function
+
+Every step requires a handler function that contains the business logic. The handler receives:
+
+1. **input**: Data from the triggering event
+2. **context object** with utilities:
+   - `emit`: Function to send new events
+   - `traceId`: Unique ID for tracking operations
+   - `state`: For data persistence
+   - `logger`: For recording information
+
+## Implementation by Language
+
+### TypeScript
+
+```typescript
+import { EventConfig, StepHandler } from 'motia'
+import { z } from 'zod' // For input validation (optional)
+
+// Optional: Define input schema for validation
+const inputSchema = z.object({
+  property: z.string()
+})
+
+export const config: EventConfig = {
+  type: 'event',
+  name: 'MyStep',
+  subscribes: ['topic.to.listen'],
+  emits: ['topic.to.emit'],
+  flows: ['my-flow'],
+  // For TypeScript with Zod validation:
+  input: inputSchema 
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, traceId, state, logger }) => {
+  logger.info('Processing input', input)
+  
+  // Business logic here
+  
+  await emit({
+    topic: 'topic.to.emit',
+    data: { result: 'processed' }
+  })
+}
+```
+
+### JavaScript
+
+```javascript
+const { z } = require('zod') // Optional
+
+// Optional input schema
+const inputSchema = z.object({
+  property: z.string()
+})
+
+exports.config = {
+  type: 'event',
+  name: 'MyStep',
+  subscribes: ['topic.to.listen'],
+  emits: ['topic.to.emit'],
+  flows: ['my-flow'],
+  input: inputSchema // Optional
+}
+
+exports.handler = async (input, { emit, traceId, state, logger }) => {
+  logger.info('Processing input', input)
+  
+  // Business logic here
+  
+  await emit({
+    topic: 'topic.to.emit',
+    data: { result: 'processed' }
+  })
+}
+```
+
+### Python
+
+```python
+config = {
+    'type': 'event',
+    'name': 'MyStep',
+    'subscribes': ['topic.to.listen'],
+    'emits': ['topic.to.emit'],
+    'flows': ['my-flow']
+}
+
+async def handler(input, ctx):
+    ctx.logger.info('Processing input', input)
+    
+    # Business logic here
+    
+    await ctx.emit({
+        'topic': 'topic.to.emit',
+        'data': { 'result': 'processed' }
+    })
+```
+
+### Ruby
+
+```ruby
+def config
+  {
+    type: 'event',
+    name: 'MyStep',
+    subscribes: ['topic.to.listen'],
+    emits: ['topic.to.emit'],
+    flows: ['my-flow']
+  }
+end
+
+def handler(input, ctx)
+  ctx.logger.info('Processing input', input)
+  
+  # Business logic here
+  
+  ctx.emit({
+    topic: 'topic.to.emit',
+    data: { result: 'processed' }
+  })
+end
+```
+
+## File Naming Convention
+
+- Steps should be placed in a `steps` directory
+- File names should follow the pattern: `[name].step.[extension]`
+  - TypeScript: `myStep.step.ts`
+  - JavaScript: `myStep.step.js`
+  - Python: `my_step.step.py`
+  - Ruby: `my_step.step.rb`

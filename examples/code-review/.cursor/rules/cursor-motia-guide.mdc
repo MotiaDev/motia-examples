@@ -1,0 +1,696 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Motia Framework Guide for Cursor Agent
+
+This guide is specifically for the Cursor Agent to help users implement workflows, steps, and flows correctly using the Motia framework.
+
+## Quick Start Tasks
+
+When a user asks for help with Motia, follow these guidelines:
+
+1. **Setting up a new Motia project:**
+   ```bash
+   mkdir my-motia-project
+   cd my-motia-project
+   npm init -y
+   npm install motia zod
+   mkdir steps
+   ```
+
+2. **Add development script to package.json:**
+   ```json
+   "scripts": {
+     "dev": "motia dev"
+   }
+   ```
+
+3. **Create a basic step:**
+   ```typescript
+   // steps/myFirstStep.step.ts
+   import { EventConfig, StepHandler } from 'motia'
+   
+   export const config: EventConfig = {
+     type: 'event',
+     name: 'MyFirstStep',
+     subscribes: ['my.topic'],
+     emits: ['my.response'],
+     flows: ['my-flow']
+   }
+   
+   export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+     logger.info('Processing input', input)
+     
+     await emit({
+       topic: 'my.response',
+       data: { processed: true, input }
+     })
+   }
+   ```
+
+## Step Implementation Patterns
+
+### 1. Event Step Pattern
+
+```typescript
+// Event step template
+import { EventConfig, StepHandler } from 'motia'
+import { z } from 'zod'
+
+// Optional: Define input schema with zod
+const inputSchema = z.object({
+  property: z.string()
+})
+
+export const config: EventConfig = {
+  type: 'event',
+  name: 'ProcessData',
+  description: 'Processes incoming data and transforms it',
+  subscribes: ['data.received'],
+  emits: ['data.processed'],
+  input: inputSchema, // For TS/JS only
+  flows: ['data-processing']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger, state, traceId }) => {
+  try {
+    logger.info('Processing data', { input })
+    
+    // Business logic here
+    const result = processData(input)
+    
+    // Optional: Store state
+    await state.set(traceId, 'processedData', result)
+    
+    // Emit result event
+    await emit({
+      topic: 'data.processed',
+      data: { result, timestamp: new Date().toISOString() }
+    })
+  } catch (error) {
+    logger.error('Error processing data', { error: error.message })
+    
+    // Emit error event
+    await emit({
+      topic: 'data.processingError',
+      data: { error: error.message, timestamp: new Date().toISOString() }
+    })
+  }
+}
+```
+
+### 2. API Step Pattern
+
+```typescript
+// API step template
+import { ApiRouteConfig, StepHandler } from 'motia'
+import { z } from 'zod'
+
+export const config: ApiRouteConfig = {
+  type: 'api',
+  name: 'CreateResource',
+  description: 'Creates a new resource',
+  path: '/api/resources',
+  method: 'POST',
+  emits: ['resource.created'],
+  bodySchema: z.object({
+    name: z.string().min(1),
+    type: z.string(),
+    properties: z.record(z.string(), z.any()).optional()
+  }),
+  flows: ['resource-management']
+}
+
+export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
+  try {
+    const { name, type, properties } = req.body
+    
+    logger.info('Creating resource', { name, type })
+    
+    // Generate unique ID
+    const resourceId = `res-${Date.now()}`
+    
+    // Emit resource created event
+    await emit({
+      topic: 'resource.created',
+      data: {
+        resourceId,
+        name,
+        type,
+        properties,
+        createdAt: new Date().toISOString()
+      }
+    })
+    
+    // Return success response
+    return {
+      status: 201,
+      body: {
+        success: true,
+        resourceId,
+        message: 'Resource created successfully'
+      }
+    }
+  } catch (error) {
+    logger.error('Error creating resource', { error: error.message })
+    
+    // Return error response
+    return {
+      status: 500,
+      body: {
+        success: false,
+        error: 'Failed to create resource',
+        message: error.message
+      }
+    }
+  }
+}
+```
+
+### 3. Cron Step Pattern
+
+```typescript
+// Cron step template
+import { CronConfig, StepHandler } from 'motia'
+
+export const config: CronConfig = {
+  type: 'cron',
+  name: 'DailyCleanup',
+  description: 'Performs daily system cleanup',
+  cron: '0 0 * * *', // Run at midnight daily
+  emits: ['maintenance.cleanup.started'],
+  flows: ['system-maintenance']
+}
+
+export const handler: StepHandler<typeof config> = async (_, { emit, logger }) => {
+  try {
+    logger.info('Starting daily cleanup')
+    
+    // Emit cleanup started event
+    await emit({
+      topic: 'maintenance.cleanup.started',
+      data: {
+        timestamp: new Date().toISOString(),
+        type: 'daily'
+      }
+    })
+  } catch (error) {
+    logger.error('Error starting cleanup', { error: error.message })
+    
+    // Emit error event
+    await emit({
+      topic: 'maintenance.error',
+      data: {
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+## Flow Design Patterns
+
+### 1. Sequential Flow
+
+```
+┌────────────┐      ┌────────────┐      ┌────────────┐
+│  Receive   │ ──→  │  Process   │ ──→  │   Notify   │
+│  Request   │      │    Data    │      │  Complete  │
+└────────────┘      └────────────┘      └────────────┘
+```
+
+**Step 1: Receive Request**
+```typescript
+// receiveRequest.api.step.ts
+export const config: ApiRouteConfig = {
+  type: 'api',
+  name: 'ReceiveRequest',
+  path: '/api/request',
+  method: 'POST',
+  emits: ['request.received'],
+  flows: ['sequential-flow']
+}
+```
+
+**Step 2: Process Data**
+```typescript
+// processData.step.ts
+export const config: EventConfig = {
+  type: 'event',
+  name: 'ProcessData',
+  subscribes: ['request.received'],
+  emits: ['data.processed'],
+  flows: ['sequential-flow']
+}
+```
+
+**Step 3: Notify Complete**
+```typescript
+// notifyComplete.step.ts
+export const config: EventConfig = {
+  type: 'event',
+  name: 'NotifyComplete',
+  subscribes: ['data.processed'],
+  emits: ['notification.sent'],
+  flows: ['sequential-flow']
+}
+```
+
+### 2. Branching Flow
+
+```
+                    ┌────────────┐
+                ┌─→ │  Approve   │ ─→┐
+┌────────────┐  │   └────────────┘   │  ┌────────────┐
+│  Validate  │ ─┤                    ├─→│  Complete  │
+│  Request   │  │   ┌────────────┐   │  │  Process   │
+└────────────┘  └─→ │   Reject   │ ─→┘  └────────────┘
+                    └────────────┘
+```
+
+**Step 1: Validate Request**
+```typescript
+// validateRequest.step.ts
+export const config: EventConfig = {
+  type: 'event',
+  name: 'ValidateRequest',
+  subscribes: ['request.submitted'],
+  emits: ['request.valid', 'request.invalid'],
+  flows: ['approval-flow']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  if (isValid(input)) {
+    await emit({ topic: 'request.valid', data: input })
+  } else {
+    await emit({ topic: 'request.invalid', data: { ...input, reason: 'Validation failed' } })
+  }
+}
+```
+
+**Step 2A: Approve Request**
+```typescript
+// approveRequest.step.ts
+export const config: EventConfig = {
+  type: 'event',
+  name: 'ApproveRequest',
+  subscribes: ['request.valid'],
+  emits: ['request.approved'],
+  flows: ['approval-flow']
+}
+```
+
+**Step 2B: Reject Request**
+```typescript
+// rejectRequest.step.ts
+export const config: EventConfig = {
+  type: 'event',
+  name: 'RejectRequest',
+  subscribes: ['request.invalid'],
+  emits: ['request.rejected'],
+  flows: ['approval-flow']
+}
+```
+
+**Step 3: Complete Process**
+```typescript
+// completeProcess.step.ts
+export const config: EventConfig = {
+  type: 'event',
+  name: 'CompleteProcess',
+  subscribes: ['request.approved', 'request.rejected'],
+  emits: ['process.completed'],
+  flows: ['approval-flow']
+}
+```
+
+## Implementation Guidelines
+
+When implementing Motia components, follow these guidelines:
+
+### File Organization
+
+1. **Organize steps by domain/flow:**
+   ```
+   steps/
+   ├── auth/
+   │   ├── login.api.step.ts
+   │   └── validateToken.step.ts
+   ├── orders/
+   │   ├── createOrder.api.step.ts
+   │   ├── validateOrder.step.ts
+   │   └── processPayment.step.ts
+   └── notifications/
+       ├── sendEmail.step.ts
+       └── sendSms.step.ts
+   ```
+
+2. **Use consistent file naming:**
+   - `verbNoun.step.ts` - example: `processPayment.step.ts`
+   - `verbNoun.api.step.ts` - example: `createOrder.api.step.ts`
+   - `verbNoun.cron.step.ts` - example: `generateReport.cron.step.ts`
+
+### Code Structure
+
+1. **Import order:**
+   ```typescript
+   // Framework imports
+   import { EventConfig, StepHandler } from 'motia'
+   
+   // External dependencies
+   import axios from 'axios'
+   
+   // Internal utilities and types
+   import { validateOrder } from '../utils/validation'
+   import type { Order } from '../types/order'
+   ```
+
+2. **Config before handler:**
+   ```typescript
+   // Define config first
+   export const config: EventConfig = {
+     // Config properties
+   }
+   
+   // Then handler
+   export const handler: StepHandler<typeof config> = async (input, context) => {
+     // Handler logic
+   }
+   ```
+
+3. **Handler structure:**
+   ```typescript
+   export const handler: StepHandler<typeof config> = async (input, { emit, logger, state, traceId }) => {
+     // 1. Log start of processing
+     logger.info('Starting process', { input })
+     
+     // 2. Try-catch for error handling
+     try {
+       // 3. Business logic
+       const result = await processData(input)
+       
+       // 4. State management (if needed)
+       await state.set(traceId, 'processResult', result)
+       
+       // 5. Emit success event
+       await emit({
+         topic: 'process.completed',
+         data: { result, timestamp: new Date().toISOString() }
+       })
+     } catch (error) {
+       // 6. Error handling
+       logger.error('Process failed', { error: error.message })
+       
+       // 7. Emit error event
+       await emit({
+         topic: 'process.failed',
+         data: { error: error.message, timestamp: new Date().toISOString() }
+       })
+     }
+   }
+   ```
+
+### Topic Naming
+
+1. **Use hierarchical domain.entity.action format:**
+   ```
+   user.registered
+   order.payment.completed
+   inventory.stock.updated
+   ```
+
+2. **Use past tense for actions:**
+   ```
+   order.created       // Not order.create
+   payment.processed   // Not payment.process
+   email.sent          // Not email.send
+   ```
+
+3. **Be consistent with plurality:**
+   ```
+   user.created        // Singular entity
+   document.updated    // Singular entity
+   logs.archived       // Plural for collections
+   ```
+
+## Testing Guidelines
+
+1. **Test each step individually:**
+   ```typescript
+   // processOrder.step.test.ts
+   import { createTestContext } from '@motiadev/testing'
+   import { handler } from './processOrder.step'
+   
+   describe('Process Order Step', () => {
+     it('should process valid orders', async () => {
+       const { emit, state, logger, traceId } = createTestContext()
+       
+       // Mock dependencies
+       
+       // Test execution
+       await handler(validOrderInput, { emit, state, logger, traceId })
+       
+       // Assertions
+       expect(emit).toHaveBeenCalledWith({
+         topic: 'order.processed',
+         data: expect.objectContaining({
+           orderId: validOrderInput.orderId
+         })
+       })
+     })
+   })
+   ```
+
+2. **Mock external dependencies:**
+   ```typescript
+   jest.mock('../services/paymentService', () => ({
+     processPayment: jest.fn().mockResolvedValue({ id: 'pay123' })
+   }))
+   ```
+
+3. **Test both success and error paths:**
+   ```typescript
+   it('should handle payment failures', async () => {
+     // Mock payment failure
+     paymentService.processPayment.mockRejectedValueOnce(
+       new Error('Payment declined')
+     )
+     
+     // Test execution
+     await handler(validOrderInput, { emit, logger })
+     
+     // Assertions
+     expect(emit).toHaveBeenCalledWith({
+       topic: 'order.payment.failed',
+       data: expect.objectContaining({
+         error: expect.stringContaining('declined')
+       })
+     })
+   })
+   ```
+
+## Common Task Responses
+
+### 1. Creating a New Step
+
+When the user asks to create a new step, provide this template:
+
+```typescript
+// newStep.step.ts
+import { EventConfig, StepHandler } from 'motia'
+import { z } from 'zod' // Include if using input validation
+
+// Optional: Define input schema
+const inputSchema = z.object({
+  // Define expected properties
+})
+
+export const config: EventConfig = {
+  type: 'event', // Or 'api', 'cron'
+  name: 'StepName',
+  description: 'Description of what this step does',
+  subscribes: ['topic.to.subscribe'],
+  emits: ['topic.to.emit'],
+  input: inputSchema, // Include for TS/JS if using zod
+  flows: ['flow-name']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger, state, traceId }) => {
+  try {
+    logger.info('Processing in StepName', { input })
+    
+    // Business logic here
+    
+    await emit({
+      topic: 'topic.to.emit',
+      data: {
+        // Result data
+        timestamp: new Date().toISOString()
+      }
+    })
+  } catch (error) {
+    logger.error('Error in StepName', { error: error.message })
+    
+    // Error handling
+  }
+}
+```
+
+### 2. Setting up a Flow
+
+When the user asks to create a flow, explain that flows are created by connecting steps:
+
+```typescript
+// Step 1
+export const config = {
+  // ...
+  flows: ['my-new-flow']
+}
+
+// Step 2
+export const config = {
+  // ...
+  subscribes: ['topic.from.step1'],
+  flows: ['my-new-flow']
+}
+
+// Step 3
+export const config = {
+  // ...
+  subscribes: ['topic.from.step2'],
+  flows: ['my-new-flow']
+}
+```
+
+Explain that they should:
+1. Identify the steps needed in the flow
+2. Connect steps through topics (subscribes/emits)
+3. Assign the same flow name to all steps
+4. Start the Motia dev server to visualize the flow
+
+### 3. Debugging Help
+
+When a user needs debugging help, suggest:
+
+```
+1. Check logs in the terminal or Motia Workbench
+2. Verify step configuration (subscribes/emits/flows)
+3. Ensure all events are properly awaited: `await emit(...)`
+4. Check that topics match exactly between emitting and subscribing steps
+5. Verify all required properties in the config object
+6. Start the dev server with verbose logging: `motia dev --verbose`
+7. Test steps individually using the CLI: `npx motia emit --topic "your.topic" --message '{}'`
+```
+
+## React to Common Questions
+
+### "How do I pass data between steps?"
+
+```
+Data is passed between steps through events. The emitting step includes data in the event payload, and the subscribing step receives this data as input:
+
+Step 1:
+```typescript
+await emit({
+  topic: 'order.created',
+  data: { orderId: '123', customer: { id: 'cust1', name: 'John Doe' } }
+})
+```
+
+Step 2:
+```typescript
+export const handler: StepHandler<typeof config> = async (input, context) => {
+  // input contains { orderId: '123', customer: { id: 'cust1', name: 'John Doe' } }
+}
+```
+
+For data that needs to persist beyond a single step or event, use state management:
+```typescript
+// Store data
+await state.set(traceId, 'orderData', { /* data */ })
+
+// Retrieve in another step
+const orderData = await state.get(traceId, 'orderData')
+```
+```
+
+### "How do I handle errors?"
+
+```
+1. Always use try-catch blocks in your handlers
+2. Log detailed error information
+3. Emit specific error events
+4. Return appropriate error responses from API steps
+
+Example:
+```typescript
+try {
+  // Business logic
+} catch (error) {
+  // Log error
+  logger.error('Operation failed', { 
+    error: error.message,
+    stack: error.stack
+  })
+  
+  // Emit error event
+  await emit({
+    topic: 'operation.failed',
+    data: { error: error.message }
+  })
+  
+  // For API steps, return error response
+  return {
+    status: 500,
+    body: { 
+      success: false,
+      error: 'Operation failed'
+    }
+  }
+}
+```
+
+For transient errors (like network issues), consider implementing retry logic.
+```
+
+### "How do I use state management?"
+
+```
+State management allows you to store and retrieve data across steps:
+
+1. Store data:
+```typescript
+// Using traceId for proper isolation
+await state.set(traceId, 'userData', {
+  userId: '123',
+  preferences: { theme: 'dark' }
+})
+```
+
+2. Retrieve data:
+```typescript
+const userData = await state.get(traceId, 'userData')
+if (userData) {
+  // Use userData
+}
+```
+
+3. Delete specific data:
+```typescript
+await state.delete(traceId, 'userData')
+```
+
+4. Clear all state for a trace:
+```typescript
+await state.clear(traceId)
+```
+
+Best practices:
+- Always use traceId as the scope parameter
+- Store only what's needed
+- Clean up state when no longer needed
+- Use structured, hierarchical keys
+```

@@ -1,0 +1,652 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Common Pitfalls and How to Avoid Them
+
+This guide highlights common mistakes when working with Motia and provides solutions to avoid them.
+
+## Event Handling Pitfalls
+
+### Missing Await on Emit Calls
+
+**Pitfall:**
+```typescript
+// Incorrect: missing await
+emit({
+  topic: 'order.created',
+  data: { orderId: '123' }
+})
+
+// Code continues immediately without waiting for emit to complete
+```
+
+**Solution:**
+```typescript
+// Correct: properly awaited
+await emit({
+  topic: 'order.created',
+  data: { orderId: '123' }
+})
+
+// Code continues after emit completes
+```
+
+### Using Reserved or Inconsistent Topic Names
+
+**Pitfall:**
+```typescript
+// Inconsistent naming
+await emit({ topic: 'orders.create' })
+await emit({ topic: 'order_updated' })
+await emit({ topic: 'OrderDeleted' })
+```
+
+**Solution:**
+```typescript
+// Consistent naming convention (domain.entity.action)
+await emit({ topic: 'order.created' })
+await emit({ topic: 'order.updated' })
+await emit({ topic: 'order.deleted' })
+```
+
+### Emitting Events with Insufficient Data
+
+**Pitfall:**
+```typescript
+// Missing crucial data
+await emit({
+  topic: 'order.shipped',
+  data: { orderId: '123' }
+  // Missing customer details, shipping info, etc.
+})
+```
+
+**Solution:**
+```typescript
+// Complete event data
+await emit({
+  topic: 'order.shipped',
+  data: {
+    orderId: '123',
+    customerEmail: 'customer@example.com',
+    trackingNumber: 'TRK12345',
+    carrier: 'FedEx',
+    estimatedDelivery: '2023-11-15T00:00:00Z',
+    timestamp: new Date().toISOString()
+  }
+})
+```
+
+## Step Configuration Pitfalls
+
+### Missing Required Config Properties
+
+**Pitfall:**
+```typescript
+// Missing required properties
+export const config = {
+  type: 'event',
+  name: 'ProcessOrder'
+  // Missing subscribes, emits, flows
+}
+```
+
+**Solution:**
+```typescript
+export const config = {
+  type: 'event',
+  name: 'ProcessOrder',
+  subscribes: ['order.created'],
+  emits: ['order.processed', 'order.error'],
+  flows: ['order-processing']
+}
+```
+
+### Incorrect Type Property
+
+**Pitfall:**
+```typescript
+// Invalid type
+export const config = {
+  type: 'process', // Invalid type
+  name: 'ProcessOrder',
+  subscribes: ['order.created'],
+  emits: ['order.processed'],
+  flows: ['order-processing']
+}
+```
+
+**Solution:**
+```typescript
+// Valid type options: 'event', 'api', 'cron', 'noop'
+export const config = {
+  type: 'event',
+  name: 'ProcessOrder',
+  subscribes: ['order.created'],
+  emits: ['order.processed'],
+  flows: ['order-processing']
+}
+```
+
+### Inconsistent Flow Naming
+
+**Pitfall:**
+```typescript
+// Inconsistent flow names across steps
+// Step 1
+export const config = {
+  flows: ['order-processing']
+}
+
+// Step 2
+export const config = {
+  flows: ['orderProcessing']
+}
+
+// Step 3
+export const config = {
+  flows: ['Order Processing']
+}
+```
+
+**Solution:**
+```typescript
+// Consistent flow naming (kebab-case recommended)
+// All steps
+export const config = {
+  flows: ['order-processing']
+}
+```
+
+## State Management Pitfalls
+
+### Forgetting to Use traceId as Scope
+
+**Pitfall:**
+```typescript
+// Missing traceId scope
+await state.set('orderData', { orderId: '123' })
+const orderData = await state.get('orderData')
+```
+
+**Solution:**
+```typescript
+// Using traceId for proper isolation
+await state.set(traceId, 'orderData', { orderId: '123' })
+const orderData = await state.get(traceId, 'orderData')
+```
+
+### Not Handling Null State Values
+
+**Pitfall:**
+```typescript
+// Not checking if state.get returns null
+const userData = await state.get(traceId, 'userData')
+const email = userData.email // Error if userData is null
+```
+
+**Solution:**
+```typescript
+// Properly checking for null values
+const userData = await state.get(traceId, 'userData')
+if (userData) {
+  const email = userData.email
+} else {
+  // Handle missing data case
+}
+```
+
+### Storing Excessive Data in State
+
+**Pitfall:**
+```typescript
+// Storing large, unnecessary data
+await state.set(traceId, 'orderData', {
+  // Necessary data
+  orderId: '123',
+  status: 'pending',
+  
+  // Unnecessary large data
+  fullOrderHistory: [...largeHistoryArray],
+  catalogData: {...entireProductCatalog},
+  rawApiResponses: {...largeApiResponseObjects}
+})
+```
+
+**Solution:**
+```typescript
+// Store only what's needed
+await state.set(traceId, 'orderData', {
+  orderId: '123',
+  status: 'pending',
+  items: orderItems.map(item => ({
+    id: item.id,
+    quantity: item.quantity
+  }))
+})
+```
+
+## API Step Pitfalls
+
+### Not Validating Request Bodies
+
+**Pitfall:**
+```typescript
+// Missing input validation
+export const handler: StepHandler<typeof config> = async (req, { emit }) => {
+  const { orderId, items } = req.body
+  
+  // Directly using potentially invalid data
+  await processOrder(orderId, items)
+}
+```
+
+**Solution:**
+```typescript
+// With TypeScript and Zod validation
+import { z } from 'zod'
+
+export const config: ApiRouteConfig = {
+  // ...other properties
+  bodySchema: z.object({
+    orderId: z.string().min(1),
+    items: z.array(z.object({
+      productId: z.string(),
+      quantity: z.number().int().positive()
+    }))
+  })
+}
+
+export const handler: StepHandler<typeof config> = async (req, { emit }) => {
+  // Body is already validated by Motia
+  const { orderId, items } = req.body
+  
+  await processOrder(orderId, items)
+}
+```
+
+### Forgetting to Return a Response
+
+**Pitfall:**
+```typescript
+// Missing return statement
+export const handler: StepHandler<typeof config> = async (req, { emit }) => {
+  await emit({
+    topic: 'order.created',
+    data: req.body
+  })
+  
+  // Missing return statement - API will hang
+}
+```
+
+**Solution:**
+```typescript
+// Properly returning a response
+export const handler: StepHandler<typeof config> = async (req, { emit }) => {
+  await emit({
+    topic: 'order.created',
+    data: req.body
+  })
+  
+  return {
+    status: 202,
+    body: { 
+      message: 'Order received successfully',
+      orderId: req.body.orderId
+    }
+  }
+}
+```
+
+### Using Wrong HTTP Methods
+
+**Pitfall:**
+```typescript
+// Using GET for data modification
+export const config: ApiRouteConfig = {
+  type: 'api',
+  name: 'CreateOrder',
+  path: '/api/orders/create',
+  method: 'GET', // Wrong method for creation
+  // ...other properties
+}
+```
+
+**Solution:**
+```typescript
+// Using appropriate HTTP methods
+export const config: ApiRouteConfig = {
+  type: 'api',
+  name: 'CreateOrder',
+  path: '/api/orders',
+  method: 'POST', // Correct method for creation
+  // ...other properties
+}
+```
+
+## Cron Step Pitfalls
+
+### Invalid Cron Expressions
+
+**Pitfall:**
+```typescript
+// Invalid cron expression
+export const config = {
+  type: 'cron',
+  name: 'DailyReport',
+  cron: '0 24 * * *', // Invalid: hours are 0-23
+  // ...other properties
+}
+```
+
+**Solution:**
+```typescript
+// Valid cron expression
+export const config = {
+  type: 'cron',
+  name: 'DailyReport',
+  cron: '0 0 * * *', // Correct: run at midnight
+  // ...other properties
+}
+```
+
+### Cron Jobs with Side Effects Only
+
+**Pitfall:**
+```typescript
+// Cron step with side effects but no events
+export const handler = async (_, { logger }) => {
+  // Side effects without emitting events
+  await cleanupDatabase()
+  logger.info('Database cleanup completed')
+  
+  // No events emitted - can't be observed or chained
+}
+```
+
+**Solution:**
+```typescript
+// Emitting events for observability
+export const handler = async (_, { emit, logger }) => {
+  try {
+    await cleanupDatabase()
+    logger.info('Database cleanup completed')
+    
+    // Emit event to notify of completion
+    await emit({
+      topic: 'maintenance.databaseCleanup.completed',
+      data: {
+        recordsRemoved: 150,
+        timestamp: new Date().toISOString()
+      }
+    })
+  } catch (error) {
+    // Emit error event
+    await emit({
+      topic: 'maintenance.databaseCleanup.failed',
+      data: {
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+## Error Handling Pitfalls
+
+### Catching Errors but Not Handling Them
+
+**Pitfall:**
+```typescript
+// Empty catch block
+try {
+  await processOrder(input)
+} catch (error) {
+  // Empty catch block - error swallowed
+  console.log('Error occurred')
+}
+```
+
+**Solution:**
+```typescript
+// Proper error handling
+try {
+  await processOrder(input)
+} catch (error) {
+  // Log detailed error
+  logger.error('Order processing failed', {
+    error: error.message,
+    orderId: input.orderId
+  })
+  
+  // Emit error event
+  await emit({
+    topic: 'order.processing.failed',
+    data: {
+      orderId: input.orderId,
+      error: error.message,
+      timestamp: new Date().toISOString()
+    }
+  })
+}
+```
+
+### Not Distinguishing Error Types
+
+**Pitfall:**
+```typescript
+// Treating all errors the same
+try {
+  await callExternalApi()
+} catch (error) {
+  await emit({ topic: 'api.error', data: { error: error.message } })
+}
+```
+
+**Solution:**
+```typescript
+// Distinguish between error types
+try {
+  await callExternalApi()
+} catch (error) {
+  if (error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT') {
+    // Handle connection errors
+    await emit({
+      topic: 'api.connection.error',
+      data: { service: 'payment-api', error: error.message }
+    })
+  } else if (error.response && error.response.status === 401) {
+    // Handle authentication errors
+    await emit({
+      topic: 'api.authentication.error',
+      data: { service: 'payment-api' }
+    })
+  } else {
+    // Handle other errors
+    await emit({
+      topic: 'api.unexpected.error',
+      data: { service: 'payment-api', error: error.message }
+    })
+  }
+}
+```
+
+## Performance Pitfalls
+
+### Inefficient State Usage
+
+**Pitfall:**
+```typescript
+// Making too many state calls
+await state.set(traceId, 'user.firstName', input.firstName)
+await state.set(traceId, 'user.lastName', input.lastName)
+await state.set(traceId, 'user.email', input.email)
+await state.set(traceId, 'user.phone', input.phone)
+```
+
+**Solution:**
+```typescript
+// Batch state operations
+await state.set(traceId, 'user', {
+  firstName: input.firstName,
+  lastName: input.lastName,
+  email: input.email,
+  phone: input.phone
+})
+```
+
+### Synchronous Blocking Operations
+
+**Pitfall:**
+```typescript
+// Blocking synchronous operation
+export const handler = async (input, { emit }) => {
+  // CPU-intensive synchronous operation
+  const result = performHeavyCalculation(input.data)
+  
+  await emit({ topic: 'calculation.completed', data: { result } })
+}
+```
+
+**Solution:**
+```typescript
+// Break down heavy work
+export const handler = async (input, { emit }) => {
+  // Emit event to offload heavy work to another step
+  await emit({
+    topic: 'calculation.requested',
+    data: { workId: generateId(), data: input.data }
+  })
+}
+
+// In another step that handles 'calculation.requested'
+export const calculationHandler = async (input, { emit }) => {
+  // Perform heavy calculation in a dedicated step
+  const result = performHeavyCalculation(input.data)
+  
+  await emit({
+    topic: 'calculation.completed',
+    data: { workId: input.workId, result }
+  })
+}
+```
+
+## Testing Pitfalls
+
+### Not Mocking External Dependencies
+
+**Pitfall:**
+```typescript
+// Testing with real dependencies
+test('should process order', async () => {
+  const { emit } = createTestContext()
+  
+  // Will call real API - unpredictable and slow
+  await handler(orderInput, { emit })
+  
+  expect(emit).toHaveBeenCalledWith(/* ... */)
+})
+```
+
+**Solution:**
+```typescript
+// Properly mocking dependencies
+jest.mock('../services/paymentService', () => ({
+  processPayment: jest.fn().mockResolvedValue({ id: 'pay123' })
+}))
+
+test('should process order', async () => {
+  const { emit } = createTestContext()
+  
+  await handler(orderInput, { emit })
+  
+  // Verify interactions with mocked dependencies
+  expect(paymentService.processPayment).toHaveBeenCalledWith(
+    orderInput.paymentDetails
+  )
+  
+  expect(emit).toHaveBeenCalledWith(/* ... */)
+})
+```
+
+### Not Testing Error Paths
+
+**Pitfall:**
+```typescript
+// Only testing happy path
+test('should process order', async () => {
+  const { emit } = createTestContext()
+  
+  await handler(validOrderInput, { emit })
+  
+  expect(emit).toHaveBeenCalledWith({
+    topic: 'order.processed',
+    data: expect.any(Object)
+  })
+  
+  // Missing tests for error scenarios
+})
+```
+
+**Solution:**
+```typescript
+// Testing both happy and error paths
+test('should process valid order', async () => {
+  const { emit } = createTestContext()
+  
+  await handler(validOrderInput, { emit })
+  
+  expect(emit).toHaveBeenCalledWith({
+    topic: 'order.processed',
+    data: expect.any(Object)
+  })
+})
+
+test('should handle invalid order', async () => {
+  const { emit } = createTestContext()
+  
+  await handler(invalidOrderInput, { emit })
+  
+  expect(emit).toHaveBeenCalledWith({
+    topic: 'order.validation.failed',
+    data: expect.objectContaining({
+      errors: expect.any(Array)
+    })
+  })
+})
+
+test('should handle payment failure', async () => {
+  // Mock payment failure
+  paymentService.processPayment.mockRejectedValueOnce(
+    new Error('Payment declined')
+  )
+  
+  const { emit } = createTestContext()
+  
+  await handler(validOrderInput, { emit })
+  
+  expect(emit).toHaveBeenCalledWith({
+    topic: 'order.payment.failed',
+    data: expect.objectContaining({
+      error: expect.stringContaining('declined')
+    })
+  })
+})
+```
+
+## Best Practices to Avoid Pitfalls
+
+1. **Use TypeScript**: Leverage type checking to catch errors early
+2. **Write comprehensive tests**: Cover both success and failure scenarios
+3. **Implement input validation**: Validate all inputs, especially API requests
+4. **Be consistent with naming**: Follow consistent conventions for topics and flows
+5. **Always await async operations**: Especially `emit()` and state operations
+6. **Use proper error handling**: Never swallow errors in empty catch blocks
+7. **Clean up state**: Don't leave unused state data lingering
+8. **Keep payloads focused**: Include necessary data but avoid excessive fields
+9. **Document your steps**: Clearly document expected inputs and outputs
+10. **Review event flows**: Periodically check for event disconnects or orphaned steps

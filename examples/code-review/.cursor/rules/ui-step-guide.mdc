@@ -1,0 +1,230 @@
+---
+description: UI display for user
+globs: 
+alwaysApply: false
+---
+# UI Step Implementation Guide
+
+UI Steps allow you to create custom visual representations of your workflow steps in Motia Workbench. This enhances understanding and clarity of your workflows by providing tailored, context-aware visualizations.
+
+> **Note:** Currently, UI Steps are only supported in TypeScript and JavaScript.
+
+## UI Step Structure
+
+To create a custom UI for a step, you need to create a `.tsx` or `.jsx` file next to your step file with the same base name:
+
+```
+steps/
+  ├── myStep.step.ts      # Step definition
+  └── myStep.step.tsx     # Visual override
+```
+
+## Basic Implementation
+
+### Simple UI Override
+
+```tsx
+// TypeScript: processPayment.step.tsx
+import React from 'react'
+import { EventNode } from 'motia/workbench'
+import type { EventNodeProps } from 'motia/workbench'
+
+export default function ProcessPayment({ data }: EventNodeProps) {
+  return (
+    <EventNode
+      data={data}
+      variant="white"
+      shape="rounded"
+      className="border-green-500 py-2"
+    >
+      <div className="text-xs">
+        <span className="text-green-500">💰</span> Payment Processing
+      </div>
+    </EventNode>
+  )
+}
+```
+
+```jsx
+// JavaScript: processPayment.step.jsx
+import React from 'react'
+import { EventNode } from 'motia/workbench'
+
+export default function ProcessPayment({ data }) {
+  return (
+    <EventNode
+      data={data}
+      variant="white"
+      shape="rounded"
+      className="border-green-500 py-2"
+    >
+      <div className="text-xs">
+        <span className="text-green-500">💰</span> Payment Processing
+      </div>
+    </EventNode>
+  )
+}
+```
+
+## Core UI Components
+
+### EventNode Component
+
+For event steps, use the `EventNode` component:
+
+```tsx
+<EventNode
+  data={data}                // Required: Step data from props
+  variant="white"            // Optional: 'white' | 'ghost' | 'noop'
+  shape="rounded"            // Optional: 'rounded' | 'square' | 'noop'
+  className="custom-styles"  // Optional: Additional CSS classes
+>
+  {/* Custom content goes here */}
+</EventNode>
+```
+
+### ApiNode Component
+
+For API steps, use the `ApiNode` component:
+
+```tsx
+<ApiNode
+  data={data}                // Required: API step data
+  className="custom-styles"  // Optional: Additional CSS classes
+>
+  {/* Custom content goes here */}
+</ApiNode>
+```
+
+## Advanced UI Customization
+
+### Adding Interactive Elements
+
+```tsx
+export default function OrderProcessingStep({ data }: EventNodeProps) {
+  const [status, setStatus] = React.useState('pending')
+  
+  return (
+    <EventNode data={data} variant="white" className="p-2">
+      <div className="text-sm font-medium">Order Processing</div>
+      <div className="mt-2 flex flex-col gap-1">
+        <div className="text-xs">Status: <span className={`font-medium ${
+          status === 'completed' ? 'text-green-500' : 
+          status === 'failed' ? 'text-red-500' : 'text-yellow-500'
+        }`}>{status}</span></div>
+        <div className="flex gap-2 mt-1">
+          <button 
+            onClick={() => setStatus('completed')} 
+            className="px-2 py-1 bg-green-700 text-white text-xs rounded"
+          >
+            Mark Complete
+          </button>
+          <button 
+            onClick={() => setStatus('failed')} 
+            className="px-2 py-1 bg-red-700 text-white text-xs rounded"
+          >
+            Mark Failed
+          </button>
+        </div>
+      </div>
+    </EventNode>
+  )
+}
+```
+
+### Displaying Dynamic Information
+
+```tsx
+export default function DataProcessingStep({ data }: EventNodeProps) {
+  // Mock data processing statistics
+  const stats = {
+    totalRecords: 1243,
+    processedRecords: 952,
+    failedRecords: 12,
+    progress: 76.5
+  }
+  
+  return (
+    <EventNode data={data} variant="white" className="p-3">
+      <div className="text-sm font-medium">Data Processing</div>
+      <div className="mt-2">
+        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+          <div 
+            className="bg-blue-600 h-2.5 rounded-full" 
+            style={{ width: `${stats.progress}%` }}
+          ></div>
+        </div>
+        <div className="flex justify-between text-xs mt-1">
+          <div>{stats.processedRecords} processed</div>
+          <div>{stats.failedRecords} failed</div>
+        </div>
+      </div>
+    </EventNode>
+  )
+}
+```
+
+## Step Types and Specific UI Guidelines
+
+### API Step UI
+
+Use visual cues that indicate this is an HTTP endpoint:
+
+```tsx
+export default function ApiEndpoint({ data }: ApiNodeProps) {
+  return (
+    <ApiNode data={data} className="border-blue-500">
+      <div className="text-xs flex items-center">
+        <span className="bg-blue-600 text-white px-2 py-0.5 rounded mr-2">
+          {data.method || 'POST'}
+        </span>
+        <span className="font-mono">{data.path}</span>
+      </div>
+    </ApiNode>
+  )
+}
+```
+
+### Cron Step UI
+
+Use visual cues that indicate scheduling:
+
+```tsx
+export default function ScheduledTask({ data }: EventNodeProps) {
+  return (
+    <EventNode data={data} variant="white" className="border-purple-500">
+      <div className="text-xs flex items-center">
+        <span className="text-purple-500 mr-1">⏰</span>
+        <span>{data.name}</span>
+      </div>
+      <div className="text-xs mt-1 font-mono text-gray-500">
+        {data.cron}
+      </div>
+    </EventNode>
+  )
+}
+```
+
+## Styling Guidelines
+
+1. **Use Tailwind CSS Only**: Stick to Tailwind utility classes for styling
+2. **Avoid Arbitrary Values**: Use predefined scales instead of arbitrary values like `w-[123px]`
+3. **Keep Components Responsive**: Design UI that adapts to different screen sizes
+4. **Follow Motia Design System**: Maintain consistency with established design patterns
+5. **Use Semantic Colors**:
+   - API Steps: Blues
+   - Cron Steps: Purples
+   - Normal Steps: Neutral or themed by function
+   - Error States: Reds
+   - Success States: Greens
+
+## Best Practices
+
+1. **Keep it Simple**: Focus on clarity over complexity
+2. **Optimize Performance**: Avoid heavy computations in UI components
+3. **Maintain Connection Points**: Don't override the connection point handles
+4. **Be Consistent**: Use consistent styling patterns
+5. **Document Components**: Add JSDoc comments to explain props and usage
+6. **Test Different Viewports**: Ensure your UI works in different viewport sizes
+7. **Use Appropriate Sizing**: Avoid overly large components that disrupt flow visualization
+8. **Provide Visual Feedback**: Use colors and icons to indicate status or purpose

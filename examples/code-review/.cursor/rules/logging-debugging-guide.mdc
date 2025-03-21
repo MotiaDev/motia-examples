@@ -1,0 +1,271 @@
+---
+description: logging and debugging
+globs: 
+alwaysApply: false
+---
+# Logging and Debugging Guide
+
+Motia provides a comprehensive logging and debugging system to help monitor and troubleshoot your workflows. The logging system works across different runtime environments and languages.
+
+## Log Levels
+
+Motia supports four standard log levels:
+
+| Log Level | Description                                                           | Use Case                                             |
+|-----------|-----------------------------------------------------------------------|------------------------------------------------------|
+| `info`    | General information about step execution and workflow progress         | Normal operations, successful actions                 |
+| `error`   | Critical issues, exceptions, and system errors                         | Failed operations, exceptions, critical problems      |
+| `debug`   | Detailed diagnostic information for troubleshooting                    | Development troubleshooting, detailed data inspection |
+| `warn`    | Potential issues or situations requiring attention but not failures    | Edge cases, potential problems, deprecation notices   |
+
+## Using Loggers in Each Language
+
+### TypeScript/JavaScript
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { logger }) => {
+  // Basic logging
+  logger.info('Starting process')
+
+  // Logging with context
+  logger.info('Operation completed', {
+    operationId: input.id,
+    duration: 1500
+  })
+
+  // Error handling with logging
+  try {
+    await riskyOperation()
+  } catch (error) {
+    logger.error('Operation failed', {
+      error: error.message,
+      stack: error.stack
+    })
+  }
+
+  // Debug logging
+  logger.debug('Operation details', {
+    rawInput: JSON.stringify(input),
+    timestamp: Date.now()
+  })
+
+  // Warning logging
+  if (input.amount > 1000) {
+    logger.warn('Large operation detected', {
+      amount: input.amount,
+      threshold: 1000
+    })
+  }
+}
+```
+
+### Python
+
+```python
+async def handler(input, ctx):
+    # Basic logging
+    ctx.logger.info('Starting process')
+
+    # Logging with context
+    ctx.logger.info('Operation completed', {
+        'operation_id': input.get('id'),
+        'duration': 1500
+    })
+
+    # Error handling with logging
+    try:
+        await risky_operation()
+    except Exception as error:
+        import traceback
+        ctx.logger.error('Operation failed', {
+            'error': str(error),
+            'stack': traceback.format_exc()
+        })
+
+    # Debug logging
+    import json
+    ctx.logger.debug('Operation details', {
+        'raw_input': json.dumps(input),
+        'timestamp': import time; time.time()
+    })
+
+    # Warning logging
+    if input.get('amount', 0) > 1000:
+        ctx.logger.warn('Large operation detected', {
+            'amount': input.get('amount'),
+            'threshold': 1000
+        })
+```
+
+### Ruby
+
+```ruby
+def handler(input, ctx)
+  # Basic logging
+  ctx.logger.info('Starting process')
+
+  # Logging with context
+  ctx.logger.info('Operation completed', {
+    operation_id: input[:id],
+    duration: 1500
+  })
+
+  # Error handling with logging
+  begin
+    risky_operation()
+  rescue StandardError => error
+    ctx.logger.error('Operation failed', {
+      error: error.message,
+      stack: error.backtrace.join("\n")
+    })
+  end
+
+  # Debug logging
+  ctx.logger.debug('Operation details', {
+    raw_input: input.to_json,
+    timestamp: Time.now.to_i
+  })
+
+  # Warning logging
+  if input[:amount].to_i > 1000
+    ctx.logger.warn('Large operation detected', {
+      amount: input[:amount],
+      threshold: 1000
+    })
+  end
+end
+```
+
+## Structured Logging Best Practices
+
+Always use structured logging with context objects:
+
+```typescript
+// Good: Structured and searchable
+logger.info('Payment processed', {
+  paymentId: '123',
+  amount: 100,
+  status: 'success'
+})
+
+// Avoid: Harder to parse and search
+logger.info(`Payment ${paymentId} processed: amount=${amount}`)
+```
+
+## Log Enrichment
+
+Each log entry automatically includes:
+
+- `timestamp`: When the log was generated
+- `traceId`: Unique identifier for tracking flow execution
+- `flows`: Array of flow names this step belongs to
+- `file`: Source file generating the log
+- `level`: Log level
+- `msg`: The log message
+
+## Performance Monitoring with Logs
+
+Use logs to monitor performance:
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { logger }) => {
+  const startTime = performance.now()
+  
+  // Process operation
+  const result = await processOperation(input)
+
+  const duration = performance.now() - startTime
+  logger.info('Operation completed', {
+    duration,
+    memoryUsage: process.memoryUsage().heapUsed,
+    inputSize: JSON.stringify(input).length,
+    resultSize: JSON.stringify(result).length
+  })
+}
+```
+
+## Debugging Techniques
+
+### Using Live Logs in Workbench
+
+1. Start your Motia dev server
+2. Open Motia Workbench in your browser (http://localhost:3000)
+3. Select your flow in the sidebar
+4. Examine the logs container for real-time logs
+
+### Filtering and Searching Logs
+
+In the terminal, use standard tools to filter logs:
+
+```bash
+# Filter logs containing "error"
+npx motia dev | grep error
+
+# Save logs to file
+npx motia dev > workflow.log
+```
+
+### Testing and Triggering Workflows
+
+Trigger flows for testing:
+
+```bash
+# Using CLI
+npx motia emit --topic "order.created" --message '{"id": "12345"}'
+
+# Using curl for API steps
+curl -X POST http://localhost:3000/api/orders \
+  -H "Content-Type: application/json" \
+  -d '{"id": "12345"}'
+```
+
+## Workflow Debugging Strategies
+
+### Strategic Log Placement
+
+Place logs at critical points:
+
+1. **Entry Points**: Start of each step
+2. **Exit Points**: Before emitting events
+3. **Decision Points**: Where logic branches
+4. **Integration Points**: Before/after external API calls
+5. **Error Boundaries**: Around try/catch blocks
+
+### Log Context Continuity
+
+Maintain context across steps:
+
+```typescript
+// Step 1
+await emit({
+  topic: 'next.step',
+  data: {
+    ...processedData,
+    _debug: { // Pass debug info to next step
+      origin: 'step1',
+      processingTime: 230,
+      timestamp: Date.now()
+    }
+  }
+})
+
+// Step 2
+export const handler = async (input, { logger }) => {
+  if (input._debug) {
+    logger.debug('Received from previous step', input._debug)
+  }
+}
+```
+
+## Best Practices
+
+1. **Use appropriate log levels** consistently
+2. **Always use structured logging** with context objects
+3. **Include correlation IDs** (traceId) for tracking requests
+4. **Log the right amount** - not too much, not too little
+5. **Be security-conscious** - don't log sensitive data
+6. **Include timestamps** for performance monitoring
+7. **Tag logs meaningfully** for easier filtering
+8. **Implement custom error objects** for better error reporting
+9. **Document logging standards** for your project
+10. **Sanitize and truncate** large objects before logging

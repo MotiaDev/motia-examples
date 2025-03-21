@@ -1,0 +1,493 @@
+---
+description: Error handling, error types, retry strategies, alerting, dead letter queues
+globs: 
+alwaysApply: false
+---
+# Error Handling Guide
+
+Effective error handling is crucial for building robust Motia workflows. This guide covers best practices for handling errors within your steps and flows.
+
+## Error Handling Basics
+
+### Try-Catch Pattern
+
+Always wrap your business logic in try-catch blocks:
+
+```typescript
+// TypeScript
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  try {
+    // Business logic
+    const result = await processData(input)
+    
+    // Emit success event
+    await emit({
+      topic: 'data.processed',
+      data: { result }
+    })
+  } catch (error) {
+    // Log error
+    logger.error('Failed to process data', {
+      error: error.message,
+      stack: error.stack,
+      input: JSON.stringify(input)
+    })
+    
+    // Emit error event
+    await emit({
+      topic: 'data.processingError',
+      data: {
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### Error Events
+
+Emit specific error events that downstream steps can handle:
+
+```typescript
+// Instead of a generic error
+await emit({ topic: 'error', data: { message: error.message } })
+
+// Use specific, actionable error topics
+await emit({ topic: 'payment.failed', data: { orderId, reason: error.message } })
+await emit({ topic: 'validation.failed', data: { errors: validationErrors } })
+await emit({ topic: 'api.connectionError', data: { service: 'payment-gateway' } })
+```
+
+## Error Handling per Step Type
+
+### API Step Error Handling
+
+Return appropriate HTTP status codes and error responses:
+
+```typescript
+// API Step
+export const handler: StepHandler<typeof config> = async (req, { logger }) => {
+  try {
+    // Process request
+    const result = await processRequest(req.body)
+    
+    // Return success response
+    return {
+      status: 200,
+      body: { success: true, data: result }
+    }
+  } catch (error) {
+    // Log error
+    logger.error('API request failed', { error: error.message })
+    
+    // Determine appropriate status code
+    let status = 500
+    if (error.name === 'ValidationError') status = 400
+    if (error.name === 'NotFoundError') status = 404
+    if (error.name === 'UnauthorizedError') status = 401
+    
+    // Return error response
+    return {
+      status,
+      body: {
+        success: false,
+        error: error.message,
+        code: error.code || 'UNKNOWN_ERROR'
+      }
+    }
+  }
+}
+```
+
+### Event Step Error Handling
+
+Handle errors and emit error events:
+
+```typescript
+// Event Step
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  try {
+    // Process event
+    const result = await processEvent(input)
+    
+    // Emit success event
+    await emit({
+      topic: 'event.processed',
+      data: { result }
+    })
+  } catch (error) {
+    // Log error
+    logger.error('Event processing failed', { error: error.message })
+    
+    // Emit error event
+    await emit({
+      topic: 'event.processingError',
+      data: {
+        originalInput: input,
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### Cron Step Error Handling
+
+Handle errors in scheduled tasks:
+
+```typescript
+// Cron Step
+export const handler: StepHandler<typeof config> = async (_, { emit, logger }) => {
+  try {
+    // Execute scheduled task
+    const result = await executeScheduledTask()
+    
+    // Emit success event
+    await emit({
+      topic: 'scheduledTask.completed',
+      data: { result }
+    })
+  } catch (error) {
+    // Log error
+    logger.error('Scheduled task failed', { error: error.message })
+    
+    // Emit error event
+    await emit({
+      topic: 'scheduledTask.failed',
+      data: {
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+    
+    // Consider if the task should be retried
+    if (isRetryableError(error)) {
+      await emit({
+        topic: 'scheduledTask.retryRequested',
+        data: {
+          errorMessage: error.message,
+          timestamp: new Date().toISOString()
+        }
+      })
+    }
+  }
+}
+```
+
+## Error Types and Classification
+
+Create a consistent error classification system:
+
+```typescript
+// Define custom error types
+class ValidationError extends Error {
+  constructor(message, public validationErrors: any[]) {
+    super(message)
+    this.name = 'ValidationError'
+  }
+}
+
+class NotFoundError extends Error {
+  constructor(message, public resourceId: string) {
+    super(message)
+    this.name = 'NotFoundError'
+  }
+}
+
+class ApiError extends Error {
+  constructor(message, public statusCode: number, public responseBody: any) {
+    super(message)
+    this.name = 'ApiError'
+  }
+}
+
+// Use in your code
+try {
+  // Business logic
+} catch (error) {
+  if (error instanceof ValidationError) {
+    // Handle validation errors
+  } else if (error instanceof NotFoundError) {
+    // Handle not found errors
+  } else if (error instanceof ApiError) {
+    // Handle API errors
+  } else {
+    // Handle generic errors
+  }
+}
+```
+
+## Retry Strategies
+
+Implement retry logic for transient errors:
+
+```typescript
+// Retry utility function
+async function withRetry<T>(
+  operation: () => Promise<T>,
+  options = { maxRetries: 3, delay: 1000, backoff: 2 }
+): Promise<T> {
+  let attempt = 0
+  
+  while (true) {
+    try {
+      return await operation()
+    } catch (error) {
+      attempt++
+      
+      // If we've reached max retries or error isn't retryable, throw
+      if (attempt >= options.maxRetries || !isRetryableError(error)) {
+        throw error
+      }
+      
+      // Calculate backoff delay
+      const retryDelay = options.delay * Math.pow(options.backoff, attempt - 1)
+      
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, retryDelay))
+    }
+  }
+}
+
+// Usage in a step
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  try {
+    // Use retry wrapper for API calls
+    const apiResult = await withRetry(
+      () => externalApiCall(input),
+      { maxRetries: 3, delay: 500, backoff: 2 }
+    )
+    
+    // Process result
+  } catch (error) {
+    // Handle error after all retries failed
+    logger.error('Operation failed after retries', { error: error.message })
+  }
+}
+```
+
+## Circuit Breaker Pattern
+
+Implement circuit breaker for external dependencies:
+
+```typescript
+// Simple circuit breaker
+class CircuitBreaker {
+  private failureCount = 0
+  private lastFailureTime = 0
+  private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED'
+  
+  constructor(
+    private threshold = 5,
+    private resetTimeout = 30000
+  ) {}
+  
+  async execute<T>(operation: () => Promise<T>): Promise<T> {
+    // Check if circuit is open
+    if (this.state === 'OPEN') {
+      const timeSinceLastFailure = Date.now() - this.lastFailureTime
+      
+      if (timeSinceLastFailure > this.resetTimeout) {
+        this.state = 'HALF_OPEN'
+      } else {
+        throw new Error('Circuit is open')
+      }
+    }
+    
+    try {
+      const result = await operation()
+      
+      // Reset on success
+      if (this.state === 'HALF_OPEN') {
+        this.reset()
+      }
+      
+      return result
+    } catch (error) {
+      this.recordFailure()
+      throw error
+    }
+  }
+  
+  private recordFailure() {
+    this.failureCount++
+    this.lastFailureTime = Date.now()
+    
+    if (this.failureCount >= this.threshold) {
+      this.state = 'OPEN'
+    }
+  }
+  
+  private reset() {
+    this.failureCount = 0
+    this.state = 'CLOSED'
+  }
+}
+
+// Usage in a step
+const paymentApiCircuitBreaker = new CircuitBreaker(5, 60000)
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  try {
+    // Use circuit breaker for API call
+    const result = await paymentApiCircuitBreaker.execute(() => 
+      paymentApiClient.processPayment(input.paymentDetails)
+    )
+    
+    // Handle success
+  } catch (error) {
+    if (error.message === 'Circuit is open') {
+      logger.warn('Payment service unavailable, circuit is open')
+      // Handle gracefully, e.g., queue for later
+    } else {
+      // Handle other errors
+    }
+  }
+}
+```
+
+## Monitoring and Alerting
+
+Set up monitoring for errors:
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  try {
+    // Business logic
+  } catch (error) {
+    // Log error with severity
+    logger.error('Critical payment processing error', {
+      error: error.message,
+      orderId: input.orderId,
+      customerId: input.customerId,
+      amount: input.amount,
+      severity: 'CRITICAL' // Flag for monitoring
+    })
+    
+    // Emit monitoring event for critical errors
+    await emit({
+      topic: 'monitoring.alert',
+      data: {
+        service: 'payment-processing',
+        error: error.message,
+        severity: 'CRITICAL',
+        metadata: {
+          orderId: input.orderId,
+          customerId: input.customerId
+        },
+        timestamp: new Date().toISOString()
+      }
+    })
+    
+    // Re-throw or handle the error
+  }
+}
+```
+
+## Error Recovery Patterns
+
+### Dead Letter Queues
+
+Implement dead letter pattern for failed events:
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { emit, logger, state, traceId }) => {
+  try {
+    // Process the event
+    await processEvent(input)
+  } catch (error) {
+    // Log error
+    logger.error('Event processing failed', { error: error.message })
+    
+    // Store failed event in state (as a dead letter)
+    await state.set(
+      'deadLetters', // Dedicated scope for dead letters
+      `${input.type}-${Date.now()}`, // Unique key
+      {
+        input,
+        error: error.message,
+        timestamp: new Date().toISOString(),
+        traceId
+      }
+    )
+    
+    // Emit dead letter event for monitoring
+    await emit({
+      topic: 'deadLetter.created',
+      data: {
+        eventType: input.type,
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### Compensating Transactions
+
+Implement compensating transactions for rollbacks:
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { emit, logger, state, traceId }) => {
+  // Store original state for potential rollback
+  await state.set(traceId, 'orderState.original', { ...input })
+  
+  try {
+    // Step 1: Charge payment
+    const paymentResult = await chargePayment(input.paymentDetails)
+    
+    // Store intermediate state
+    await state.set(traceId, 'orderState.paymentComplete', { paymentId: paymentResult.id })
+    
+    try {
+      // Step 2: Update inventory
+      await updateInventory(input.items)
+      
+      // Success - emit completion event
+      await emit({
+        topic: 'order.completed',
+        data: { orderId: input.orderId, paymentId: paymentResult.id }
+      })
+    } catch (error) {
+      // Inventory update failed - compensate the payment
+      logger.warn('Inventory update failed, rolling back payment', {
+        error: error.message,
+        paymentId: paymentResult.id
+      })
+      
+      await refundPayment(paymentResult.id)
+      
+      throw error // Re-throw to trigger outer error handler
+    }
+  } catch (error) {
+    // Overall process failed
+    logger.error('Order processing failed', { error: error.message })
+    
+    // Emit failure event
+    await emit({
+      topic: 'order.failed',
+      data: {
+        orderId: input.orderId,
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+## Best Practices
+
+1. **Be specific about errors**: Use descriptive error messages and types
+2. **Log error details**: Include relevant context, but avoid sensitive data
+3. **Fail gracefully**: Provide helpful feedback to users and systems
+4. **Use error events**: Emit specific error events that can be handled
+5. **Implement retries**: Add retry logic for transient failures
+6. **Use circuit breakers**: Protect against cascading failures
+7. **Add monitoring**: Set up alerts for critical errors
+8. **Implement recovery patterns**: Use dead letters and compensating transactions
+9. **Document error scenarios**: Include error handling in documentation
+10. **Test error paths**: Write tests specifically for error scenarios

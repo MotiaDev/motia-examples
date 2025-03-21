@@ -1,0 +1,542 @@
+---
+description: integration with external services, user interaction, cli, chat, system tools or other systems
+globs: 
+alwaysApply: false
+---
+# Integration Patterns Guide
+
+This guide covers common integration patterns for connecting Motia workflows with external systems, APIs, and services.
+
+## External API Integration
+
+### Making API Calls from Steps
+
+```typescript
+// TypeScript Example: Integrating with an external API
+import axios from 'axios'
+import { EventConfig, StepHandler } from 'motia'
+
+export const config: EventConfig = {
+  type: 'event',
+  name: 'FetchWeatherData',
+  subscribes: ['weather.requested'],
+  emits: ['weather.fetched', 'weather.error'],
+  flows: ['weather-service']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  const { location } = input
+  logger.info('Fetching weather data', { location })
+  
+  try {
+    // Make API call
+    const response = await axios.get(`https://weather-api.example.com/forecast`, {
+      params: { location },
+      headers: {
+        'Authorization': `Bearer ${process.env.WEATHER_API_KEY}`
+      }
+    })
+    
+    // Process successful response
+    logger.info('Weather data retrieved successfully')
+    await emit({
+      topic: 'weather.fetched',
+      data: {
+        location,
+        forecast: response.data.forecast,
+        temperature: response.data.temperature,
+        timestamp: new Date().toISOString()
+      }
+    })
+  } catch (error) {
+    // Handle API errors
+    logger.error('Failed to fetch weather data', {
+      error: error.message,
+      status: error.response?.status,
+      location
+    })
+    
+    await emit({
+      topic: 'weather.error',
+      data: {
+        location,
+        error: error.message,
+        status: error.response?.status,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### Best Practices for API Integration
+
+1. **Use a dedicated HTTP client** like Axios or node-fetch
+2. **Implement proper error handling**
+3. **Add timeouts to prevent hanging requests**
+4. **Implement retry logic for transient failures**
+5. **Store API keys in environment variables**
+6. **Log request and response details (without sensitive data)**
+7. **Handle rate limiting and throttling**
+
+## Webhook Integration
+
+### Receiving Webhooks
+
+```typescript
+// TypeScript Example: Handling webhooks from a payment provider
+import { ApiRouteConfig, StepHandler } from 'motia'
+import { verifyWebhookSignature } from '../utils/webhookValidator'
+
+export const config: ApiRouteConfig = {
+  type: 'api',
+  name: 'PaymentWebhook',
+  path: '/webhooks/payment',
+  method: 'POST',
+  emits: [
+    'payment.succeeded', 
+    'payment.failed', 
+    'payment.refunded'
+  ],
+  flows: ['payment-processing']
+}
+
+export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
+  // Get signature from headers
+  const signature = req.headers['x-payment-signature']
+  
+  // Verify webhook signature
+  if (!verifyWebhookSignature(req.body, signature, process.env.WEBHOOK_SECRET)) {
+    logger.warn('Invalid webhook signature', { path: req.path })
+    return {
+      status: 401,
+      body: { error: 'Invalid signature' }
+    }
+  }
+  
+  const { type, data } = req.body
+  logger.info('Received payment webhook', { type })
+  
+  // Route to appropriate event based on webhook type
+  switch (type) {
+    case 'payment_intent.succeeded':
+      await emit({
+        topic: 'payment.succeeded',
+        data: {
+          paymentId: data.id,
+          amount: data.amount,
+          currency: data.currency,
+          customerId: data.customer,
+          timestamp: new Date().toISOString()
+        }
+      })
+      break;
+      
+    case 'payment_intent.payment_failed':
+      await emit({
+        topic: 'payment.failed',
+        data: {
+          paymentId: data.id,
+          amount: data.amount,
+          error: data.last_payment_error,
+          customerId: data.customer,
+          timestamp: new Date().toISOString()
+        }
+      })
+      break;
+      
+    case 'charge.refunded':
+      await emit({
+        topic: 'payment.refunded',
+        data: {
+          paymentId: data.id,
+          amount: data.amount_refunded,
+          customerId: data.customer,
+          timestamp: new Date().toISOString()
+        }
+      })
+      break;
+      
+    default:
+      logger.info('Ignored webhook event', { type })
+  }
+  
+  // Return success response to the webhook provider
+  return {
+    status: 200,
+    body: { received: true }
+  }
+}
+```
+
+### Webhook Security
+
+1. **Always validate webhook signatures**
+2. **Use HTTPS for all webhook endpoints**
+3. **Implement IP filtering when possible**
+4. **Create a dedicated token/key for each webhook source**
+5. **Return 2xx responses quickly to acknowledge receipt**
+
+## Database Integration
+
+### Connecting to Databases
+
+```typescript
+// TypeScript Example: Integrating with MongoDB
+import { MongoClient, ObjectId } from 'mongodb'
+import { EventConfig, StepHandler } from 'motia'
+
+// Create a MongoDB client
+const uri = process.env.MONGODB_URI
+const client = new MongoClient(uri)
+
+// Connect to the database
+async function connectToDatabase() {
+  if (!client.isConnected()) {
+    await client.connect()
+  }
+  return client.db('motia-app')
+}
+
+export const config: EventConfig = {
+  type: 'event',
+  name: 'SaveOrderToDatabase',
+  subscribes: ['order.validated'],
+  emits: ['order.saved', 'order.error'],
+  flows: ['order-processing']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  const { orderId, customerId, items, totalAmount } = input
+  
+  try {
+    // Connect to database
+    const db = await connectToDatabase()
+    const collection = db.collection('orders')
+    
+    // Save order to database
+    const result = await collection.insertOne({
+      _id: new ObjectId(),
+      orderId,
+      customerId,
+      items,
+      totalAmount,
+      status: 'pending',
+      createdAt: new Date()
+    })
+    
+    logger.info('Order saved to database', { 
+      orderId, 
+      documentId: result.insertedId.toString() 
+    })
+    
+    // Emit success event
+    await emit({
+      topic: 'order.saved',
+      data: {
+        orderId,
+        documentId: result.insertedId.toString(),
+        timestamp: new Date().toISOString()
+      }
+    })
+  } catch (error) {
+    logger.error('Failed to save order', { 
+      orderId, 
+      error: error.message 
+    })
+    
+    // Emit error event
+    await emit({
+      topic: 'order.error',
+      data: {
+        orderId,
+        error: error.message,
+        operation: 'save',
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### Database Best Practices
+
+1. **Reuse database connections** across requests
+2. **Implement connection pooling**
+3. **Handle connection failures gracefully**
+4. **Use transactions for multi-step operations**
+5. **Create specific indexes for common queries**
+6. **Implement proper security and access controls**
+7. **Consider using an ORM/ODM for complex data models**
+
+## Message Queue Integration
+
+### Connecting to Message Queues
+
+```typescript
+// TypeScript Example: Integrating with RabbitMQ
+import amqp from 'amqplib'
+import { EventConfig, StepHandler } from 'motia'
+
+// Create a connection to RabbitMQ
+let channel = null
+async function getChannel() {
+  if (!channel) {
+    const connection = await amqp.connect(process.env.RABBITMQ_URL)
+    channel = await connection.createChannel()
+    await channel.assertQueue('order-processing', { durable: true })
+  }
+  return channel
+}
+
+export const config: EventConfig = {
+  type: 'event',
+  name: 'SendOrderToQueue',
+  subscribes: ['order.validated'],
+  emits: ['order.queued', 'queue.error'],
+  flows: ['order-processing']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  try {
+    // Get RabbitMQ channel
+    const channel = await getChannel()
+    
+    // Prepare message
+    const message = {
+      orderId: input.orderId,
+      items: input.items,
+      customerId: input.customerId,
+      timestamp: new Date().toISOString()
+    }
+    
+    // Send to queue
+    await channel.sendToQueue(
+      'order-processing', 
+      Buffer.from(JSON.stringify(message)),
+      { persistent: true }
+    )
+    
+    logger.info('Sent order to processing queue', { orderId: input.orderId })
+    
+    // Emit success event
+    await emit({
+      topic: 'order.queued',
+      data: {
+        orderId: input.orderId,
+        queueName: 'order-processing',
+        timestamp: new Date().toISOString()
+      }
+    })
+  } catch (error) {
+    logger.error('Failed to queue order', { 
+      orderId: input.orderId, 
+      error: error.message 
+    })
+    
+    // Emit error event
+    await emit({
+      topic: 'queue.error',
+      data: {
+        orderId: input.orderId,
+        operation: 'send',
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### Message Queue Best Practices
+
+1. **Implement connection retry logic**
+2. **Use persistent messages for important data**
+3. **Implement dead-letter queues for failed messages**
+4. **Keep messages small and focused**
+5. **Consider message serialization format carefully**
+6. **Implement consumer acknowledgments**
+7. **Set appropriate queue parameters (TTL, limits, etc.)**
+
+## File Storage Integration
+
+### Integrating with Cloud Storage
+
+```typescript
+// TypeScript Example: Integrating with AWS S3
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
+import { EventConfig, StepHandler } from 'motia'
+
+// Create S3 client
+const s3Client = new S3Client({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  }
+})
+
+export const config: EventConfig = {
+  type: 'event',
+  name: 'StoreReportFile',
+  subscribes: ['report.generated'],
+  emits: ['report.stored', 'storage.error'],
+  flows: ['reporting']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  const { reportId, content, format } = input
+  const bucketName = process.env.S3_BUCKET_NAME
+  const fileName = `reports/${reportId}.${format}`
+  
+  try {
+    // Upload file to S3
+    const command = new PutObjectCommand({
+      Bucket: bucketName,
+      Key: fileName,
+      Body: Buffer.from(content),
+      ContentType: format === 'json' ? 'application/json' : 'text/csv'
+    })
+    
+    await s3Client.send(command)
+    
+    logger.info('Report stored in S3', { reportId, fileName })
+    
+    // Generate public URL (if bucket allows)
+    const fileUrl = `https://${bucketName}.s3.amazonaws.com/${fileName}`
+    
+    // Emit success event
+    await emit({
+      topic: 'report.stored',
+      data: {
+        reportId,
+        fileName,
+        url: fileUrl,
+        timestamp: new Date().toISOString()
+      }
+    })
+  } catch (error) {
+    logger.error('Failed to store report', { 
+      reportId, 
+      error: error.message 
+    })
+    
+    // Emit error event
+    await emit({
+      topic: 'storage.error',
+      data: {
+        reportId,
+        operation: 'store',
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### File Storage Best Practices
+
+1. **Use pre-signed URLs for client uploads**
+2. **Implement proper access controls for files**
+3. **Set appropriate content types and metadata**
+4. **Consider file storage lifecycle policies**
+5. **Implement file validation before storage**
+6. **Use efficient libraries for large file handling**
+7. **Monitor storage usage and costs**
+
+## Monitoring and Observability
+
+### Integrating with APM and Monitoring Tools
+
+```typescript
+// TypeScript Example: Integrating with DataDog
+import { datadogRum } from '@datadog/browser-rum'
+import { EventConfig, StepHandler } from 'motia'
+
+// Initialize DataDog RUM
+datadogRum.init({
+  applicationId: process.env.DD_APPLICATION_ID,
+  clientToken: process.env.DD_CLIENT_TOKEN,
+  site: 'datadoghq.com',
+  service: 'motia-application',
+  env: process.env.NODE_ENV
+})
+
+export const config: EventConfig = {
+  type: 'event',
+  name: 'ProcessOrder',
+  subscribes: ['order.validated'],
+  emits: ['order.processed', 'order.failed'],
+  flows: ['order-processing']
+}
+
+export const handler: StepHandler<typeof config> = async (input, { emit, logger, traceId }) => {
+  // Create a custom span for monitoring
+  const span = datadogRum.startSpan('processOrder', {
+    orderId: input.orderId,
+    customerId: input.customerId
+  })
+  
+  try {
+    logger.info('Processing order', { orderId: input.orderId })
+    
+    // Business logic
+    const processingResult = await processOrderItems(input.items)
+    
+    // Record successful metrics
+    datadogRum.addAction('order_processed', {
+      orderId: input.orderId,
+      items: input.items.length,
+      totalAmount: processingResult.totalAmount
+    })
+    
+    // Emit success event
+    await emit({
+      topic: 'order.processed',
+      data: {
+        orderId: input.orderId,
+        processingResults: processingResult,
+        timestamp: new Date().toISOString()
+      }
+    })
+    
+    // End span with success
+    span.finish()
+  } catch (error) {
+    // Record error
+    datadogRum.addError(error, {
+      orderId: input.orderId,
+      traceId
+    })
+    
+    logger.error('Order processing failed', {
+      orderId: input.orderId,
+      error: error.message
+    })
+    
+    // Emit failure event
+    await emit({
+      topic: 'order.failed',
+      data: {
+        orderId: input.orderId,
+        error: error.message,
+        timestamp: new Date().toISOString()
+      }
+    })
+    
+    // End span with error
+    span.finish(error)
+  }
+}
+```
+
+### Monitoring Best Practices
+
+1. **Use structured logging formats (JSON)**
+2. **Include correlation IDs in all logs**
+3. **Track business metrics separately from system metrics**
+4. **Set up alerts for critical errors**
+5. **Use distributed tracing for end-to-end visibility**
+6. **Monitor external service dependencies**
+7. **Implement health checks for all components**

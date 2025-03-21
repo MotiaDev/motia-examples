@@ -1,0 +1,44 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Motia Framework Overview
+
+Motia is a code-first framework designed to empower developers to build robust, scalable, and observable event-driven workflows. It supports JavaScript/TypeScript, Python, and Ruby.
+
+## Key Features
+
+- Zero infrastructure setup - no need to configure message queues or event brokers
+- Multi-language support: JavaScript, TypeScript, Python, and Ruby
+- Built-in observability through Motia Workbench
+- Out-of-the-box API endpoints and scheduling capabilities
+- Visual flow representation and debugging
+
+## Core Concepts
+
+1. **Steps**: Self-contained, reusable units of business logic
+2. **Flows**: Logical groupings of related steps to accomplish specific tasks
+3. **Events**: Messages that flow between steps
+4. **Topics**: Named channels for events, enabling routing and decoupling
+
+## Step Types
+
+1. **Event Step**: Reacts to events, processes data, and emits new events
+2. **API Step**: Exposes HTTP endpoints to trigger workflows
+3. **Cron Step**: Schedules tasks to run at specific intervals
+4. **NOOP Step**: Represents virtual points where external actions occur
+
+## Step Structure
+
+Every step consists of:
+1. Configuration (`config` object) - defines metadata and event routing
+2. Handler function - contains the business logic
+
+## Motia Workbench
+
+The built-in development platform that provides:
+- Interactive flow visualization
+- Real-time testing
+- Live log streaming
+- Development tools and debugging features

@@ -1,0 +1,219 @@
+---
+description: testing and design for flows, topic naming, and multi-flow steps
+globs: 
+alwaysApply: false
+---
+# Flow Design Guide
+
+Flows in Motia organize steps into logical, understandable workflows. They provide structure, visualization, and context for your event-driven applications.
+
+## What Are Flows?
+
+A Flow is a logical grouping of steps that work together to accomplish a specific business process or task. Flows:
+
+- Provide clarity on how steps interact
+- Enable visual representation of event flow
+- Group logs and events for easier debugging
+- Create a namespace for related steps
+
+## Creating and Tagging Steps with Flows
+
+Flow assignment happens through the `flows` property in the step's configuration:
+
+### TypeScript
+
+```typescript
+export const config: EventConfig = {
+  type: 'event',
+  name: 'ValidateOrder',
+  subscribes: ['order.submitted'],
+  emits: ['order.validated', 'order.rejected'],
+  flows: ['order-processing'] // Flow association
+}
+```
+
+### JavaScript
+
+```javascript
+exports.config = {
+  type: 'event',
+  name: 'ValidateOrder',
+  subscribes: ['order.submitted'],
+  emits: ['order.validated', 'order.rejected'],
+  flows: ['order-processing'] // Flow association
+}
+```
+
+### Python
+
+```python
+config = {
+    'type': 'event',
+    'name': 'ValidateOrder',
+    'subscribes': ['order.submitted'],
+    'emits': ['order.validated', 'order.rejected'],
+    'flows': ['order-processing'] # Flow association
+}
+```
+
+### Ruby
+
+```ruby
+def config
+  {
+    type: 'event',
+    name: 'ValidateOrder',
+    subscribes: ['order.submitted'],
+    emits: ['order.validated', 'order.rejected'],
+    flows: ['order-processing'] # Flow association
+  }
+end
+```
+
+## Multi-Flow Steps
+
+Steps can belong to multiple flows, enabling reuse and cross-flow functionality:
+
+```typescript
+export const config: EventConfig = {
+  // ...other properties
+  flows: ['order-processing', 'analytics', 'audit-log']
+}
+```
+
+## Flow Patterns and Architectures
+
+### Sequential Flow
+
+Steps execute in a predetermined sequence:
+
+```
+(API Step) → (Validation) → (Processing) → (Notification)
+```
+
+Example topic naming: `order.submitted` → `order.validated` → `order.processed` → `order.completed`
+
+### Branching Flow
+
+Steps diverge based on conditions:
+
+```
+                 ┌→ (Approval) → (Fulfill Order)
+(Validation) ─┤
+                 └→ (Rejection) → (Notify Customer)
+```
+
+Example topics:
+- `order.validated` → `order.approved` → `order.fulfill`
+- `order.validated` → `order.rejected` → `notification.send`
+
+### Parallel Processing
+
+Multiple steps process the same event simultaneously:
+
+```
+                 ┌→ (Update Inventory)
+                 ├→ (Send Notification)
+(Order Created) ─┤
+                 ├→ (Update Analytics)
+                 └→ (Generate Invoice)
+```
+
+All steps subscribe to `order.created` and operate independently.
+
+### Aggregation/Join
+
+Collect results from multiple parallel processes:
+
+```
+                 ┌→ (Payment Processing) ─┐
+(Order Created) ─┤                         ├→ (Complete Order)
+                 └→ (Inventory Check) ────┘
+```
+
+Use state management to track completion status:
+
+```typescript
+// Payment processing step
+export const handler: StepHandler<typeof config> = async (input, { emit, state, traceId }) => {
+  // Process payment
+  
+  // Mark payment as completed
+  await state.set(traceId, 'completion.payment', true)
+  
+  // Check if all processes are complete
+  const inventoryComplete = await state.get(traceId, 'completion.inventory')
+  
+  if (inventoryComplete) {
+    // All processes complete, emit completion event
+    await emit({ topic: 'order.ready', data: { orderId: input.orderId } })
+  }
+}
+```
+
+## Flow Naming Conventions
+
+Follow these guidelines for flow names:
+
+1. **Use kebab-case**: `order-processing`, `user-authentication`
+2. **Be descriptive but concise**: `payment-processing` vs `pay`
+3. **Group related workflows with prefixes**: `inventory-check`, `inventory-update`
+4. **Reflect business domains**: `user-onboarding`, `order-fulfillment`
+
+## Topic Naming for Flows
+
+Establish a consistent topic naming convention:
+
+1. **Hierarchical structure**: `domain.entity.action`
+   - `order.payment.completed`
+   - `user.profile.updated`
+2. **Action verbs in past tense**: `created`, `updated`, `processed`
+3. **Consistent plurality**: `order.created` (not `orders.created`)
+
+## Visualizing Flows
+
+To visualize your flows:
+
+1. Start your development server
+2. Open Motia Workbench (http://localhost:3000)
+3. Select your flow from the sidebar
+4. See the visual graph where:
+   - Steps are represented as nodes
+   - Event flows are shown as connecting lines
+   - API steps are highlighted as entry points
+   - Click any step to see its details
+
+## Flow Testing Strategies
+
+### End-to-End Testing
+
+Test the entire flow from API to completion:
+
+```bash
+# Test an API-triggered flow
+curl -X POST http://localhost:3000/api/orders \
+  -H "Content-Type: application/json" \
+  -d '{"productId":"123", "quantity": 2}'
+```
+
+### Targeted Step Testing
+
+Test individual steps using the Motia CLI:
+
+```bash
+# Test a specific step by emitting its subscribed topic
+npx motia emit --topic "order.submitted" --message '{"orderId":"123"}'
+```
+
+## Best Practices
+
+1. **Design flows around business processes**, not technical implementation
+2. **Keep flows focused** on a specific business function
+3. **Reuse steps across flows** when appropriate
+4. **Use clear, consistent naming conventions**
+5. **Document flow structure** with diagrams or comments
+6. **Test flows thoroughly** from end to end
+7. **Consider error handling and retry patterns**
+8. **Visualize flows regularly** to understand their complexity
+9. **Use state management** to maintain context across steps
+10. **Implement proper logging** for flow debugging

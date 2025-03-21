@@ -1,0 +1,339 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Topic and Event Guide
+
+Events and Topics are the core communication mechanism in Motia. They enable steps to interact with each other in a loosely coupled, asynchronous manner.
+
+## Understanding Events and Topics
+
+- **Events**: Messages that carry data and signal occurrences within your system
+- **Topics**: Named channels or categories to which events are published and steps subscribe
+
+## Event Structure
+
+An event in Motia consists of:
+
+1. **Topic**: A string identifier indicating the type of event (e.g., `order.created`)
+2. **Data**: The payload containing information relevant to the event
+
+```typescript
+// TypeScript event emission
+await emit({
+  topic: 'order.created',
+  data: {
+    orderId: '12345',
+    customerName: 'John Doe',
+    items: [
+      { productId: 'P001', quantity: 2 }
+    ],
+    timestamp: new Date().toISOString()
+  }
+})
+```
+
+## Topic Naming Conventions
+
+Follow these guidelines for topic names:
+
+### Domain-Driven Hierarchy
+
+Use a hierarchical structure: `domain.entity.action`
+
+```
+user.registered        // User domain, registration action
+order.payment.completed  // Order domain, payment entity, completion action
+inventory.stock.updated  // Inventory domain, stock entity, update action
+```
+
+### Action Verbs in Past Tense
+
+Use past tense for actions to indicate they have occurred:
+
+```
+order.created         // Not order.create
+payment.processed     // Not payment.process
+email.sent            // Not email.send
+```
+
+### Consistent Plurality
+
+Be consistent with singular/plural usage:
+
+```
+user.created          // Singular entity
+document.updated      // Singular entity
+logs.archived         // Plural for collections
+```
+
+## Emitting Events in Different Languages
+
+### TypeScript
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+  logger.info('Processing payment')
+  
+  // Business logic
+  const success = await processPayment(input.paymentDetails)
+  
+  if (success) {
+    // Emit successful payment event
+    await emit({
+      topic: 'payment.processed',
+      data: {
+        orderId: input.orderId,
+        amount: input.amount,
+        status: 'success',
+        timestamp: new Date().toISOString()
+      }
+    })
+  } else {
+    // Emit payment failure event
+    await emit({
+      topic: 'payment.failed',
+      data: {
+        orderId: input.orderId,
+        reason: 'Payment declined',
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### JavaScript
+
+```javascript
+exports.handler = async (input, { emit, logger }) => {
+  logger.info('Processing payment')
+  
+  // Business logic
+  const success = await processPayment(input.paymentDetails)
+  
+  if (success) {
+    // Emit successful payment event
+    await emit({
+      topic: 'payment.processed',
+      data: {
+        orderId: input.orderId,
+        amount: input.amount,
+        status: 'success',
+        timestamp: new Date().toISOString()
+      }
+    })
+  } else {
+    // Emit payment failure event
+    await emit({
+      topic: 'payment.failed',
+      data: {
+        orderId: input.orderId,
+        reason: 'Payment declined',
+        timestamp: new Date().toISOString()
+      }
+    })
+  }
+}
+```
+
+### Python
+
+```python
+async def handler(input, ctx):
+    ctx.logger.info('Processing payment')
+    
+    # Business logic
+    success = await process_payment(input.get('paymentDetails'))
+    
+    if success:
+        # Emit successful payment event
+        await ctx.emit({
+            'topic': 'payment.processed',
+            'data': {
+                'orderId': input.get('orderId'),
+                'amount': input.get('amount'),
+                'status': 'success',
+                'timestamp': import datetime; datetime.datetime.now().isoformat()
+            }
+        })
+    else:
+        # Emit payment failure event
+        await ctx.emit({
+            'topic': 'payment.failed',
+            'data': {
+                'orderId': input.get('orderId'),
+                'reason': 'Payment declined',
+                'timestamp': import datetime; datetime.datetime.now().isoformat()
+            }
+        })
+```
+
+### Ruby
+
+```ruby
+def handler(input, ctx)
+  ctx.logger.info('Processing payment')
+  
+  # Business logic
+  success = process_payment(input[:paymentDetails])
+  
+  if success
+    # Emit successful payment event
+    ctx.emit({
+      topic: 'payment.processed',
+      data: {
+        orderId: input[:orderId],
+        amount: input[:amount],
+        status: 'success',
+        timestamp: Time.now.utc.iso8601
+      }
+    })
+  else
+    # Emit payment failure event
+    ctx.emit({
+      topic: 'payment.failed',
+      data: {
+        orderId: input[:orderId],
+        reason: 'Payment declined',
+        timestamp: Time.now.utc.iso8601
+      }
+    })
+  end
+end
+```
+
+## Subscribing to Events
+
+Subscription happens in the step configuration through the `subscribes` array:
+
+```typescript
+export const config: EventConfig = {
+  type: 'event',
+  name: 'OrderNotificationHandler',
+  subscribes: ['order.created', 'order.updated', 'order.cancelled'],
+  emits: ['notification.sent'],
+  flows: ['order-notifications']
+}
+```
+
+## Event Patterns
+
+### Command Pattern
+
+Use topics to represent commands:
+
+```
+order.create.requested → order.created
+payment.process.requested → payment.processed
+email.send.requested → email.sent
+```
+
+### Event Sourcing Pattern
+
+Use topics to track state changes:
+
+```
+user.registered → user.verified → user.profile.completed → user.subscription.started
+```
+
+### Notification Pattern
+
+Use topics to broadcast notifications:
+
+```
+notification.email.requested
+notification.sms.requested
+notification.push.requested
+```
+
+## Advanced Topic Usage
+
+### Wildcard Subscriptions (Future Feature)
+
+```typescript
+// Subscribe to all events in the payment domain
+subscribes: ['payment.*']
+
+// Subscribe to all created events across domains
+subscribes: ['*.created']
+```
+
+### Versioned Topics
+
+Handle breaking changes by versioning topics:
+
+```
+order.created.v1
+order.created.v2
+```
+
+## Event Data Best Practices
+
+1. **Include all necessary data** for downstream steps
+2. **Use consistent property naming** (camelCase in JS/TS, snake_case in Python/Ruby)
+3. **Add timestamps** to all events
+4. **Include correlation IDs** for tracing (the `traceId` is added automatically)
+5. **Consider schema evolution** for long-lived workflows
+6. **Don't include sensitive data** in event payloads
+7. **Keep payloads reasonably sized** (prefer IDs over large objects)
+8. **Use type-safe schemas** when possible
+9. **Include status information** relevant to the event
+
+## Testing Events and Topics
+
+### Using the CLI
+
+```bash
+# Emit an event with a specific topic and payload
+npx motia emit --topic "order.created" --message '{
+  "orderId": "12345",
+  "customer": {
+    "id": "cust123",
+    "name": "John Doe"
+  },
+  "items": [
+    {"productId": "prod1", "quantity": 2}
+  ]
+}'
+```
+
+### Monitoring Events in Workbench
+
+1. Open Motia Workbench
+2. Select your flow
+3. Look for the event flow visualizations
+4. Check the logs panel for event details
+
+## Error Handling with Events
+
+Use specific error topics:
+
+```typescript
+try {
+  // Processing logic
+} catch (error) {
+  await emit({
+    topic: 'order.processing.error',
+    data: {
+      orderId: input.orderId,
+      error: error.message,
+      timestamp: new Date().toISOString()
+    }
+  })
+}
+```
+
+## Best Practices
+
+1. **Design a clear topic taxonomy** for your application
+2. **Document topic schemas** for team reference
+3. **Be consistent with naming conventions**
+4. **Use meaningful, descriptive topics**
+5. **Keep topics focused on specific events**
+6. **Consider topic granularity** carefully
+7. **Avoid overly generic topics**
+8. **Include adequate context** in event payloads
+9. **Consider the event consumer's needs** when designing payloads
+10. **Establish team conventions** for topic naming

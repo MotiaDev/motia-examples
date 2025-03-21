@@ -1,0 +1,243 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# State Management Guide
+
+Motia provides a built-in state management system that allows you to store and retrieve data across steps in your workflows. This is crucial for maintaining context throughout a flow's execution.
+
+## Core State Management Methods
+
+The `state` object is accessible within your step handlers through the `ctx` context object. It provides the following methods:
+
+| Method   | Parameters                      | Return Type           | Description                                                   |
+|----------|--------------------------------|----------------------|---------------------------------------------------------------|
+| `get`    | `scope: string, key: string`   | `Promise<T \| null>` | Retrieves a value by key within a scope                       |
+| `set`    | `scope: string, key: string, value: T` | `Promise<void>` | Stores a value by key within a scope                        |
+| `delete` | `scope: string, key: string`   | `Promise<void>`      | Removes a key-value pair from a scope                         |
+| `clear`  | `scope: string`                | `Promise<void>`      | Removes all state data within a scope                         |
+| `cleanup`| *(None)*                       | `Promise<void>`      | Performs maintenance tasks like removing expired state data    |
+
+## Using State in Each Language
+
+### TypeScript
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { state, traceId, logger }) => {
+  // Store data
+  await state.set<BookingData>(traceId, 'booking', {
+    customer: input.customer,
+    venue: input.venue,
+  })
+
+  // Retrieve data with type safety
+  const booking = await state.get<BookingData>(traceId, 'booking')
+  if (booking) {
+    logger.info('Retrieved booking', { customerId: booking.customer.id })
+  }
+
+  // Delete specific data
+  await state.delete(traceId, 'booking')
+
+  // Clear all data for this trace
+  await state.clear(traceId)
+}
+```
+
+### JavaScript
+
+```javascript
+exports.handler = async (input, { state, traceId, logger }) => {
+  // Store data
+  await state.set(traceId, 'booking', {
+    customer: input.customer,
+    venue: input.venue,
+  })
+
+  // Retrieve data
+  const booking = await state.get(traceId, 'booking')
+  if (booking) {
+    logger.info('Retrieved booking', { customerId: booking.customer.id })
+  }
+
+  // Delete specific data
+  await state.delete(traceId, 'booking')
+
+  // Clear all data for this trace
+  await state.clear(traceId)
+}
+```
+
+### Python
+
+```python
+async def handler(input, ctx):
+    trace_id = ctx.trace_id
+    
+    # Store data
+    await ctx.state.set(trace_id, 'booking', {
+        'customer': input.get('customer'),
+        'venue': input.get('venue')
+    })
+    
+    # Retrieve data
+    booking = await ctx.state.get(trace_id, 'booking')
+    if booking:
+        ctx.logger.info('Retrieved booking', {'customer_id': booking.get('customer', {}).get('id')})
+    
+    # Delete specific data
+    await ctx.state.delete(trace_id, 'booking')
+    
+    # Clear all data for this trace
+    await ctx.state.clear(trace_id)
+```
+
+### Ruby
+
+```ruby
+def handler(input, ctx)
+  trace_id = ctx.trace_id
+  
+  # Store data
+  ctx.state.set(trace_id, 'booking', {
+    customer: input[:customer],
+    venue: input[:venue]
+  })
+  
+  # Retrieve data
+  booking = ctx.state.get(trace_id, 'booking')
+  if booking
+    ctx.logger.info('Retrieved booking', {customer_id: booking[:customer][:id]})
+  end
+  
+  # Delete specific data
+  ctx.state.delete(trace_id, 'booking')
+  
+  # Clear all data for this trace
+  ctx.state.clear(trace_id)
+end
+```
+
+## State Scoping and Isolation
+
+The `traceId` is crucial for state isolation. Each flow execution is assigned a unique `traceId` (a UUID), which:
+
+1. Ensures proper isolation of state data between different flow executions
+2. Prevents interference between separate workflows
+3. Makes cleanup straightforward
+
+Always use `traceId` as the scope for flow-specific state:
+
+```typescript
+// TypeScript
+await state.set(traceId, 'key', value)
+const data = await state.get(traceId, 'key')
+```
+
+```python
+# Python
+await ctx.state.set(ctx.trace_id, 'key', value)
+data = await ctx.state.get(ctx.trace_id, 'key')
+```
+
+## Namespacing Strategies
+
+Use dot notation to organize related state data hierarchically:
+
+```typescript
+// Hierarchical organization
+await state.set(traceId, 'booking.customer', customerData)
+await state.set(traceId, 'booking.venue', venueData)
+await state.set(traceId, 'payment.status', 'pending')
+
+// Flat structure (less organized)
+await state.set(traceId, 'customer', customerData)
+await state.set(traceId, 'venue', venueData)
+await state.set(traceId, 'paymentStatus', 'pending')
+```
+
+## Type Safety in TypeScript
+
+Define interfaces for your state data to ensure type safety:
+
+```typescript
+interface CustomerData {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface VenueData {
+  id: string;
+  name: string;
+  capacity: number;
+}
+
+interface BookingState {
+  customer: CustomerData;
+  venue: VenueData;
+  status: 'pending' | 'confirmed' | 'cancelled';
+}
+
+// Use with state management
+const booking = await state.get<BookingState>(traceId, 'booking')
+if (booking) {
+  // TypeScript knows booking.customer, booking.venue, and booking.status exist
+  console.log(booking.customer.name)
+}
+```
+
+## Storage Adapters
+
+Motia supports three built-in storage adapters:
+
+1. **File (Default)**: Persists state to a JSON file (`.motia/motia.state.json`)
+2. **Memory**: Stores state in-memory (fastest, but not persistent across restarts)
+3. **Redis**: Uses Redis for persistent and scalable state storage
+
+Configure in `config.yml`:
+
+```yaml
+# Memory adapter
+state:
+  adapter: memory
+
+# Redis adapter
+state:
+  adapter: redis
+  host: localhost
+  port: 6379
+  password: optional
+  ttl: 3600  # Optional: TTL in seconds
+```
+
+## State Cleanup Patterns
+
+Always clean up state when you're done with it:
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { state, traceId }) => {
+  try {
+    // Process the workflow
+    await processWorkflow(input)
+    
+    // Clean up afterwards
+    await state.clear(traceId)
+  } catch (error) {
+    // Handle errors but still clean up
+    await state.set(traceId, 'error', error.message)
+  }
+}
+```
+
+## Best Practices
+
+1. **Always use `traceId` as scope** for flow-specific state
+2. **Clean up state** when workflow is complete
+3. **Use namespacing** for organizing related data
+4. **Consider TTL** for production Redis implementations
+5. **Implement type safety** in TypeScript
+6. **Be mindful of state size** - keep it minimal and relevant
+7. **Use structured state data** - avoid storing raw, unstructured information
+8. **Handle errors** when retrieving state

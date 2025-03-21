@@ -1,0 +1,460 @@
+---
+description: test utilities and how to test each step and flow
+globs: 
+alwaysApply: false
+---
+# Testing Guide
+
+This guide covers the best practices for testing Motia workflows, steps, and event handling logic.
+
+## Setting Up Testing
+
+Motia uses [Jest](https://jestjs.io/) as its testing framework. To set up testing:
+
+1. Install dependencies:
+
+```bash
+npm install --save-dev jest @types/jest ts-jest
+```
+
+2. Configure Jest in `jest.config.js`:
+
+```javascript
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  testMatch: ['**/*.test.ts'],
+  collectCoverageFrom: ['steps/**/*.ts'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
+}
+```
+
+3. Add test script to `package.json`:
+
+```json
+{
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  }
+}
+```
+
+## Testing Utilities
+
+Motia provides testing utilities to make testing steps easier:
+
+```typescript
+// Import testing utilities
+import { createTestContext } from '@motiadev/testing'
+```
+
+## Testing Steps
+
+### Testing Event Steps
+
+Create a test file alongside your step with a `.test.ts` extension:
+
+```typescript
+// processOrder.step.test.ts
+import { createTestContext } from '@motiadev/testing'
+import { handler } from './processOrder.step'
+
+describe('Process Order Step', () => {
+  it('should process valid orders and emit order.processed event', async () => {
+    // Create test context with mocked emit and state functions
+    const { emit, state, logger, traceId } = createTestContext()
+    
+    // Mock state behavior if needed
+    state.get.mockResolvedValue(null)
+    
+    // Test input
+    const input = {
+      orderId: '12345',
+      items: [{ productId: 'prod1', quantity: 2 }],
+      customer: { id: 'cust1', name: 'Test Customer' }
+    }
+    
+    // Execute handler
+    await handler(input, { emit, state, logger, traceId })
+    
+    // Assert that correct event was emitted
+    expect(emit).toHaveBeenCalledWith({
+      topic: 'order.processed',
+      data: expect.objectContaining({
+        orderId: '12345',
+        status: 'processed'
+      })
+    })
+    
+    // Assert that state was updated
+    expect(state.set).toHaveBeenCalledWith(
+      traceId,
+      'order.12345.status',
+      'processed'
+    )
+  })
+  
+  it('should handle invalid orders and emit order.rejected event', async () => {
+    const { emit, state, logger, traceId } = createTestContext()
+    
+    // Invalid input (missing items)
+    const input = {
+      orderId: '12345',
+      customer: { id: 'cust1', name: 'Test Customer' }
+      // Missing items array
+    }
+    
+    await handler(input, { emit, state, logger, traceId })
+    
+    // Assert rejection event was emitted
+    expect(emit).toHaveBeenCalledWith({
+      topic: 'order.rejected',
+      data: expect.objectContaining({
+        orderId: '12345',
+        reason: expect.stringContaining('missing')
+      })
+    })
+  })
+})
+```
+
+### Testing API Steps
+
+API steps require testing both the request handling and response:
+
+```typescript
+// createOrder.api.step.test.ts
+import { createTestContext } from '@motiadev/testing'
+import { handler } from './createOrder.api.step'
+
+describe('Create Order API Step', () => {
+  it('should create an order and return success response', async () => {
+    const { emit, state, logger, traceId } = createTestContext()
+    
+    // Mock request
+    const req = {
+      body: {
+        items: [{ productId: 'prod1', quantity: 2 }],
+        customerId: 'cust1'
+      }
+    }
+    
+    // Execute handler
+    const response = await handler(req, { emit, state, logger, traceId })
+    
+    // Assert event emission
+    expect(emit).toHaveBeenCalledWith({
+      topic: 'order.created',
+      data: expect.objectContaining({
+        customerId: 'cust1'
+      })
+    })
+    
+    // Assert response
+    expect(response).toEqual({
+      status: 201,
+      body: expect.objectContaining({
+        success: true,
+        orderId: expect.any(String)
+      })
+    })
+  })
+  
+  it('should return 400 for invalid input', async () => {
+    const { emit, state, logger, traceId } = createTestContext()
+    
+    // Mock request with invalid input
+    const req = {
+      body: {
+        // Missing required fields
+      }
+    }
+    
+    // Execute handler
+    const response = await handler(req, { emit, state, logger, traceId })
+    
+    // Assert response
+    expect(response).toEqual({
+      status: 400,
+      body: expect.objectContaining({
+        success: false,
+        error: expect.stringContaining('required')
+      })
+    })
+    
+    // Assert no event emitted
+    expect(emit).not.toHaveBeenCalled()
+  })
+})
+```
+
+### Testing Cron Steps
+
+Test cron steps by verifying event emissions:
+
+```typescript
+// dailyReport.cron.step.test.ts
+import { createTestContext } from '@motiadev/testing'
+import { handler } from './dailyReport.cron.step'
+
+describe('Daily Report Cron Step', () => {
+  it('should trigger report generation', async () => {
+    const { emit, logger } = createTestContext()
+    
+    // Execute handler with minimal context (cron handlers don't receive input)
+    await handler(null, { emit, logger })
+    
+    // Assert event emission
+    expect(emit).toHaveBeenCalledWith({
+      topic: 'report.generation.started',
+      data: expect.objectContaining({
+        reportType: 'daily',
+        timestamp: expect.any(String)
+      })
+    })
+  })
+})
+```
+
+## Testing Flows
+
+Test complete flows using the flow testing utilities:
+
+```typescript
+// orderFlow.test.ts
+import { createTestFlow } from '@motiadev/testing'
+import { handler as createOrderHandler } from './steps/createOrder.api.step'
+import { handler as validateOrderHandler } from './steps/validateOrder.step'
+import { handler as processOrderHandler } from './steps/processOrder.step'
+import { handler as notifyCustomerHandler } from './steps/notifyCustomer.step'
+
+describe('Order Processing Flow', () => {
+  it('should process a complete order flow', async () => {
+    // Create a test flow with all steps
+    const flow = createTestFlow('order-processing')
+      .step('createOrder', createOrderHandler)
+      .step('validateOrder', validateOrderHandler)
+      .step('processOrder', processOrderHandler)
+      .step('notifyCustomer', notifyCustomerHandler)
+    
+    // Test input
+    const input = {
+      body: {
+        items: [{ productId: 'prod1', quantity: 2 }],
+        customerId: 'cust1'
+      }
+    }
+    
+    // Execute the entire flow
+    const result = await flow.execute(input)
+    
+    // Assert final state
+    expect(result).toEqual(
+      expect.objectContaining({
+        orderStatus: 'completed',
+        notificationSent: true
+      })
+    )
+  })
+})
+```
+
+## Testing State Management
+
+Test state management specifically:
+
+```typescript
+// state.test.ts
+import { createTestContext } from '@motiadev/testing'
+
+describe('State Management', () => {
+  it('should store and retrieve state values', async () => {
+    const { state, traceId } = createTestContext()
+    
+    // Set a state value
+    await state.set(traceId, 'test.key', { value: 'test-value' })
+    
+    // Retrieve the value
+    const result = await state.get(traceId, 'test.key')
+    
+    // Assert value was retrieved correctly
+    expect(result).toEqual({ value: 'test-value' })
+  })
+  
+  it('should clear state values', async () => {
+    const { state, traceId } = createTestContext()
+    
+    // Set multiple state values
+    await state.set(traceId, 'test.key1', 'value1')
+    await state.set(traceId, 'test.key2', 'value2')
+    
+    // Clear specific key
+    await state.delete(traceId, 'test.key1')
+    
+    // Verify key1's value was deleted but key2 remains
+    const result1 = await state.get(traceId, 'test.key1')
+    const result2 = await state.get(traceId, 'test.key2')
+    
+    expect(result1).toBeNull()
+    expect(result2).toBe('value2')
+    
+    // Clear all state
+    await state.clear(traceId)
+    
+    // Verify all values are gone
+    const afterClear = await state.get(traceId, 'test.key2')
+    expect(afterClear).toBeNull()
+  })
+})
+```
+
+## Mocking External Dependencies
+
+Mock external dependencies using Jest:
+
+```typescript
+// payment.step.test.ts
+import { createTestContext } from '@motiadev/testing'
+import { handler } from './payment.step'
+import paymentService from '../services/paymentService'
+
+// Mock the payment service
+jest.mock('../services/paymentService', () => ({
+  processPayment: jest.fn()
+}))
+
+describe('Payment Step', () => {
+  beforeEach(() => {
+    // Reset mocks before each test
+    jest.clearAllMocks()
+  })
+  
+  it('should process payment successfully', async () => {
+    const { emit, logger } = createTestContext()
+    
+    // Mock successful payment
+    paymentService.processPayment.mockResolvedValue({
+      success: true,
+      transactionId: 'tx123'
+    })
+    
+    // Test input
+    const input = {
+      orderId: 'order123',
+      amount: 99.99,
+      customerId: 'cust1'
+    }
+    
+    // Execute handler
+    await handler(input, { emit, logger })
+    
+    // Verify service was called with correct parameters
+    expect(paymentService.processPayment).toHaveBeenCalledWith(
+      input.customerId,
+      input.amount,
+      expect.any(String) // Order ID or reference
+    )
+    
+    // Verify successful payment event was emitted
+    expect(emit).toHaveBeenCalledWith({
+      topic: 'payment.completed',
+      data: expect.objectContaining({
+        orderId: 'order123',
+        transactionId: 'tx123'
+      })
+    })
+  })
+  
+  it('should handle payment failures', async () => {
+    const { emit, logger } = createTestContext()
+    
+    // Mock failed payment
+    paymentService.processPayment.mockResolvedValue({
+      success: false,
+      error: 'Insufficient funds'
+    })
+    
+    // Test input
+    const input = {
+      orderId: 'order123',
+      amount: 9999.99, // Large amount to trigger failure
+      customerId: 'cust1'
+    }
+    
+    // Execute handler
+    await handler(input, { emit, logger })
+    
+    // Verify failed payment event was emitted
+    expect(emit).toHaveBeenCalledWith({
+      topic: 'payment.failed',
+      data: expect.objectContaining({
+        orderId: 'order123',
+        reason: 'Insufficient funds'
+      })
+    })
+  })
+})
+```
+
+## Integration Testing
+
+Test the integration between steps:
+
+```typescript
+// order-integration.test.ts
+import { setupIntegrationTest } from '@motiadev/testing'
+import { handler as createOrderHandler } from './steps/createOrder.api.step'
+import { handler as processPaymentHandler } from './steps/processPayment.step'
+
+describe('Order and Payment Integration', () => {
+  it('should create order and process payment', async () => {
+    // Set up integration test with real event propagation
+    const { emit, state, traceId } = setupIntegrationTest()
+    
+    // Register step handlers
+    const steps = {
+      'createOrder': createOrderHandler,
+      'processPayment': processPaymentHandler
+    }
+    
+    // Mock initial request
+    const req = {
+      body: {
+        items: [{ productId: 'prod1', quantity: 2, price: 29.99 }],
+        customerId: 'cust1',
+        paymentMethod: 'credit-card'
+      }
+    }
+    
+    // Execute first step
+    const response = await steps.createOrder(req, { emit, state, traceId })
+    
+    // Wait for events to propagate and trigger the payment step
+    await new Promise(resolve => setTimeout(resolve, 100))
+    
+    // Verify order was created
+    const orderData = await state.get(traceId, 'order')
+    expect(orderData).toBeTruthy()
+    
+    // Verify payment was processed
+    const paymentData = await state.get(traceId, 'payment')
+    expect(paymentData).toBeTruthy()
+    expect(paymentData.status).toBe('completed')
+  })
+})
+```
+
+## Best Practices
+
+1. **Test Each Step Independently**: Write focused tests for each step's functionality.
+2. **Mock External Dependencies**: Use Jest's mocking capabilities to isolate your tests.
+3. **Test Error Handling**: Ensure your steps handle errors gracefully.
+4. **Test Edge Cases**: Include tests for boundary conditions and special cases.
+5. **Use Test Data Factories**: Create helper functions to generate test data.
+6. **Test Complete Flows**: Verify that steps work together correctly.
+7. **Check Event Emissions**: Confirm events are emitted with correct payloads.
+8. **Verify State Management**: Test that state is properly stored and retrieved.
+9. **Test API Endpoints**: Verify request validation, response structure, and status codes.
+10. **Run Tests Before Deployment**: Include tests in your CI/CD pipeline.

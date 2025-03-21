@@ -1,0 +1,306 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Deployment Guide
+
+This guide covers the best practices for preparing and deploying Motia applications to various environments.
+
+## Environment Setup
+
+### Development Environment
+
+For local development:
+
+```bash
+# Start the development server
+npm run dev
+
+# Additional options
+npm run dev -- --port 3001 --verbose
+```
+
+### Production Environment
+
+For production deployments, consider:
+
+1. **State storage persistence**
+2. **Environment-specific configuration**
+3. **Robust error handling**
+4. **Logging and monitoring**
+5. **Security measures**
+
+## Environment Variables
+
+Use environment variables for sensitive and environment-specific configurations:
+
+```env
+# .env.development
+PORT=3000
+LOG_LEVEL=debug
+OPENAI_API_KEY=sk_test_123456
+
+# .env.production
+PORT=8080
+LOG_LEVEL=info
+OPENAI_API_KEY=sk_live_789012
+```
+
+## Production Configuration
+
+### State Storage
+
+Configure a persistent state adapter for production:
+
+```yaml
+# config.yml
+state:
+  adapter: redis
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}
+  password: ${REDIS_PASSWORD}
+  ttl: 86400  # 24 hours
+```
+
+### Logging Configuration
+
+Adjust logging levels for production:
+
+```yaml
+# config.yml
+logging:
+  level: info  # 'debug', 'info', 'warn', or 'error'
+  format: json # 'json' or 'text'
+```
+
+## Building for Production
+
+### TypeScript Projects
+
+For TypeScript projects, compile before deployment:
+
+```bash
+# Add to package.json
+"scripts": {
+  "build": "tsc -p tsconfig.json",
+  "start": "node dist/index.js"
+}
+```
+
+Ensure your `tsconfig.json` is properly configured:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["steps/**/*", "index.ts"],
+  "exclude": ["node_modules", "**/*.test.ts"]
+}
+```
+
+### JavaScript Projects
+
+For JavaScript projects, ensure all dependencies are properly listed:
+
+```bash
+npm ci --production
+```
+
+## Containerization
+
+### Dockerfile
+
+Create a `Dockerfile` for containerized deployment:
+
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --production
+
+# Copy application files
+COPY . .
+
+# If using TypeScript, build the project
+RUN npm run build
+
+# Set environment variables
+ENV NODE_ENV=production
+
+# Expose port
+EXPOSE 8080
+
+# Start the application
+CMD ["npm", "start"]
+```
+
+### Docker Compose
+
+For local testing with dependencies:
+
+```yaml
+# docker-compose.yml
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      - NODE_ENV=production
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+```
+
+## Cloud Deployments
+
+### AWS Lambda
+
+For serverless deployments:
+
+1. Create a handler file:
+
+```javascript
+// lambda.js
+const { handler } = require('./dist/index')
+
+exports.handler = async (event, context) => {
+  return await handler(event, context)
+}
+```
+
+2. Package your application:
+
+```bash
+zip -r function.zip node_modules dist lambda.js
+```
+
+3. Deploy to Lambda using AWS CLI or AWS Console
+
+### Heroku
+
+Deploy to Heroku:
+
+```bash
+# Create a Procfile
+echo "web: npm start" > Procfile
+
+# Initialize Git repository
+git init
+git add .
+git commit -m "Initial commit"
+
+# Create Heroku app
+heroku create my-motia-app
+
+# Set environment variables
+heroku config:set NODE_ENV=production
+
+# Deploy to Heroku
+git push heroku main
+```
+
+## Testing Deployments
+
+Verify your deployment with these tests:
+
+1. **API Endpoint Test**: Verify API steps respond correctly
+2. **Event Flow Test**: Test complete workflow execution
+3. **Cron Job Test**: Ensure scheduled jobs run properly
+4. **Performance Test**: Check response times under load
+5. **Error Handling**: Verify error handling and recovery
+
+## Monitoring and Logging
+
+### Logging Solutions
+
+Configure external logging:
+
+```javascript
+// logger-config.js
+const winston = require('winston')
+
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'app.log' })
+  ]
+})
+
+// For production, add third-party transport
+if (process.env.NODE_ENV === 'production') {
+  // For example, add DataDog or LogDNA transport
+}
+
+module.exports = logger
+```
+
+### Health Checks
+
+Implement a health check endpoint:
+
+```typescript
+// health.api.step.ts
+import { ApiRouteConfig, StepHandler } from 'motia'
+
+export const config: ApiRouteConfig = {
+  type: 'api',
+  name: 'HealthCheck',
+  path: '/health',
+  method: 'GET',
+  emits: [],
+  flows: ['system']
+}
+
+export const handler: StepHandler<typeof config> = async (req, { logger }) => {
+  // Check dependencies status
+  const redisStatus = await checkRedisConnection()
+  
+  return {
+    status: redisStatus ? 200 : 503,
+    body: {
+      status: redisStatus ? 'healthy' : 'unhealthy',
+      timestamp: new Date().toISOString(),
+      version: process.env.APP_VERSION || '1.0.0',
+      dependencies: {
+        redis: redisStatus ? 'connected' : 'disconnected'
+      }
+    }
+  }
+}
+```
+
+## Best Practices
+
+1. **Use environment variables** for configuration
+2. **Implement proper error handling**
+3. **Configure persistent state storage**
+4. **Set up proper logging**
+5. **Create health check endpoints**
+6. **Use a containerized approach** when possible
+7. **Implement CI/CD pipelines**
+8. **Follow security best practices**
+9. **Test thoroughly before deployment**
+10. **Monitor application performance and errors**

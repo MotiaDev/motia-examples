@@ -1,0 +1,232 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Structure Guide
+
+This guide outlines the recommended project structure for Motia applications to promote organization, maintainability, and scalability.
+
+## Basic Project Structure
+
+A typical Motia project follows this structure:
+
+```
+my-motia-project/
+├── config.yml                 # Optional configuration 
+├── package.json               # Project dependencies
+├── steps/                     # Step definitions
+│   ├── api/                   # API steps
+│   ├── events/                # Event steps
+│   ├── cron/                  # Cron steps
+│   └── shared/                # Shared utilities and types
+├── .motia/                    # Motia runtime data (auto-generated)
+└── .env                       # Environment variables
+```
+
+## Step Organization
+
+Organize steps by their function or domain:
+
+### By Step Type
+
+```
+steps/
+├── api/                    
+│   ├── createOrder.step.ts
+│   └── processPayment.step.ts
+├── events/
+│   ├── validateOrder.step.ts
+│   └── sendNotification.step.ts
+└── cron/
+    ├── dailyReport.step.ts
+    └── cleanupJobs.step.ts
+```
+
+### By Domain/Flow
+
+```
+steps/
+├── orders/
+│   ├── createOrder.step.ts    # API step
+│   ├── validateOrder.step.ts  # Event step
+│   └── processOrder.step.ts   # Event step
+├── payments/
+│   ├── processPayment.step.ts # API step
+│   └── confirmPayment.step.ts # Event step
+└── reports/
+    └── dailyReport.step.ts    # Cron step
+```
+
+### By Feature Module
+
+```
+steps/
+├── user-management/
+│   ├── registration/
+│   │   ├── registerUser.step.ts
+│   │   └── verifyEmail.step.ts
+│   └── authentication/
+│       ├── login.step.ts
+│       └── resetPassword.step.ts
+└── order-processing/
+    ├── checkout/
+    │   ├── createOrder.step.ts
+    │   └── processPayment.step.ts
+    └── fulfillment/
+        ├── checkInventory.step.ts
+        └── shipOrder.step.ts
+```
+
+## File Naming Conventions
+
+### Step Files
+
+Follow consistent naming patterns for step files:
+
+```
+<functionality>.<step-type>.ts  # action + type pattern
+createOrder.api.step.ts
+processPayment.event.step.ts
+dailyReport.cron.step.ts
+
+# Alternative: <noun>-<verb>.<step-type>.ts  # noun-verb + type pattern
+order-create.api.step.ts
+payment-process.event.step.ts
+report-generate.cron.step.ts
+```
+
+### UI Step Files
+
+For UI step overrides:
+
+```
+<step-name>.step.tsx  # Same base name as the step file
+createOrder.step.tsx
+processPayment.step.tsx
+```
+
+## Shared Code Management
+
+Place shared utilities, types, and helpers in a dedicated directory:
+
+```
+steps/
+└── shared/
+    ├── types/
+    │   ├── order.types.ts
+    │   └── payment.types.ts
+    ├── utils/
+    │   ├── validation.ts
+    │   └── formatters.ts
+    └── services/
+        ├── paymentProvider.ts
+        └── emailService.ts
+```
+
+## Configuration Management
+
+### config.yml
+
+Configure global settings in `config.yml`:
+
+```yaml
+# State management configuration
+state:
+  adapter: redis
+  host: localhost
+  port: 6379
+  ttl: 3600
+
+# Step directory configuration (optional)
+steps:
+  directory: './src/steps'
+
+# Custom settings (available to steps)
+settings:
+  apiTimeout: 5000
+  retryAttempts: 3
+```
+
+### Environment Variables
+
+Use `.env` for secret and environment-specific configuration:
+
+```
+# API Keys
+STRIPE_API_KEY=sk_test_123456
+SENDGRID_API_KEY=SG.abcdefg
+
+# Service URLs
+INVENTORY_API_URL=https://inventory-api.example.com
+
+# Feature flags
+ENABLE_NOTIFICATIONS=true
+```
+
+## Step Dependencies
+
+Manage dependencies carefully:
+
+### External Node Modules
+
+Install from npm and import normally:
+
+```typescript
+// Install with: npm install axios
+import axios from 'axios'
+
+export const handler: StepHandler<typeof config> = async (input, { logger }) => {
+  const response = await axios.get('https://api.example.com/data')
+  // ...
+}
+```
+
+### Internal Shared Code
+
+Use relative imports:
+
+```typescript
+// Import from shared directory
+import { validateOrderInput } from '../shared/utils/validation'
+import type { Order } from '../shared/types/order.types'
+
+export const handler: StepHandler<typeof config> = async (input, { logger }) => {
+  const isValid = validateOrderInput(input as Order)
+  // ...
+}
+```
+
+## Project Templates
+
+Start with a template to set up the basic structure:
+
+```bash
+# Create a new project with the recommended structure
+npx motia create -n my-project -t default
+
+# List available templates
+npx motia templates
+```
+
+## Development Workflow
+
+Recommended workflow for development:
+
+1. Create a new step: `npx motia generate step`
+2. Start development server: `npm run dev`
+3. Test with Motia Workbench or CLI
+4. Iterate on design and implementation
+
+## Best Practices
+
+1. **Organize by domain** for better maintainability
+2. **Keep steps focused** on single responsibilities
+3. **Use consistent naming conventions**
+4. **Factor out shared code** to avoid duplication
+5. **Document step purposes** with clear descriptions
+6. **Group related steps by flow**
+7. **Isolate business logic** from infrastructure concerns
+8. **Version control your Motia project** with Git
+9. **Use TypeScript** for type safety when possible
+10. **Configure linting and formatting tools** for consistency

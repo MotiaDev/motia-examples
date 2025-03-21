@@ -1,0 +1,206 @@
+---
+description: Cron timer for scheduled jobs
+globs: 
+alwaysApply: false
+---
+# Cron Step Implementation Guide
+
+Cron Steps allow you to schedule tasks to run at specified intervals using cron expressions. They're perfect for recurring tasks like data synchronization, report generation, or cleanup operations.
+
+## Cron Step Configuration
+
+```typescript
+// TypeScript
+import { CronConfig, StepHandler } from 'motia'
+
+export const config: CronConfig = {
+  type: 'cron',
+  name: 'DailyReport',
+  description: 'Generates daily reports at midnight',
+  cron: '0 0 * * *', // Cron expression (this runs at midnight every day)
+  emits: ['report.generation.started'],
+  flows: ['reporting-flow']
+}
+```
+
+```javascript
+// JavaScript
+exports.config = {
+  type: 'cron',
+  name: 'DailyReport',
+  description: 'Generates daily reports at midnight',
+  cron: '0 0 * * *', // Cron expression (this runs at midnight every day)
+  emits: ['report.generation.started'],
+  flows: ['reporting-flow']
+}
+```
+
+```python
+# Python
+config = {
+    'type': 'cron',
+    'name': 'DailyReport',
+    'description': 'Generates daily reports at midnight',
+    'cron': '0 0 * * *', # Cron expression (this runs at midnight every day)
+    'emits': ['report.generation.started'],
+    'flows': ['reporting-flow']
+}
+```
+
+```ruby
+# Ruby
+def config
+  {
+    type: 'cron',
+    name: 'DailyReport',
+    description: 'Generates daily reports at midnight',
+    cron: '0 0 * * *', # Cron expression (this runs at midnight every day)
+    emits: ['report.generation.started'],
+    flows: ['reporting-flow']
+  }
+end
+```
+
+## Cron Step Handler
+
+Cron step handlers don't receive external input like event or API handlers. Instead, they generate their own context based on the scheduled execution.
+
+### TypeScript
+
+```typescript
+export const handler: StepHandler<typeof config> = async (_, { emit, logger }) => {
+  logger.info('Starting scheduled daily report generation')
+  
+  const reportTimestamp = new Date().toISOString()
+  const reportId = `report-${Date.now()}`
+  
+  // Business logic for initiating report generation
+  
+  // Emit event to trigger the report generation flow
+  await emit({
+    topic: 'report.generation.started',
+    data: {
+      reportId,
+      timestamp: reportTimestamp,
+      type: 'daily'
+    }
+  })
+  
+  logger.info('Scheduled report generation initiated', { reportId })
+}
+```
+
+### JavaScript
+
+```javascript
+exports.handler = async (_, { emit, logger }) => {
+  logger.info('Starting scheduled daily report generation')
+  
+  const reportTimestamp = new Date().toISOString()
+  const reportId = `report-${Date.now()}`
+  
+  // Business logic for initiating report generation
+  
+  // Emit event to trigger the report generation flow
+  await emit({
+    topic: 'report.generation.started',
+    data: {
+      reportId,
+      timestamp: reportTimestamp,
+      type: 'daily'
+    }
+  })
+  
+  logger.info('Scheduled report generation initiated', { reportId })
+}
+```
+
+### Python
+
+```python
+async def handler(_, ctx):
+    ctx.logger.info('Starting scheduled daily report generation')
+    
+    import time
+    from datetime import datetime
+    
+    report_timestamp = datetime.utcnow().isoformat()
+    report_id = f"report-{int(time.time() * 1000)}"
+    
+    # Business logic for initiating report generation
+    
+    # Emit event to trigger the report generation flow
+    await ctx.emit({
+        'topic': 'report.generation.started',
+        'data': {
+            'reportId': report_id,
+            'timestamp': report_timestamp,
+            'type': 'daily'
+        }
+    })
+    
+    ctx.logger.info('Scheduled report generation initiated', {'reportId': report_id})
+```
+
+### Ruby
+
+```ruby
+def handler(_, ctx)
+  ctx.logger.info('Starting scheduled daily report generation')
+  
+  report_timestamp = Time.now.utc.iso8601
+  report_id = "report-#{Time.now.to_i * 1000}"
+  
+  # Business logic for initiating report generation
+  
+  # Emit event to trigger the report generation flow
+  ctx.emit({
+    topic: 'report.generation.started',
+    data: {
+      reportId: report_id,
+      timestamp: report_timestamp,
+      type: 'daily'
+    }
+  })
+  
+  ctx.logger.info('Scheduled report generation initiated', {reportId: report_id})
+end
+```
+
+## Cron Expression Format
+
+Cron expressions follow the standard Unix format:
+
+```
+* * * * *
+┬ ┬ ┬ ┬ ┬
+│ │ │ │ │
+│ │ │ │ └─ Day of the week (0-6, Sunday to Saturday)
+│ │ │ └─── Month (1-12)
+│ │ └───── Day of the month (1-31)
+│ └─────── Hour (0-23)
+└───────── Minute (0-59)
+```
+
+### Common Cron Expression Examples
+
+| Expression   | Description                             |
+|--------------|-----------------------------------------|
+| `* * * * *`  | Every minute                            |
+| `0 * * * *`  | Every hour, at minute 0                 |
+| `0 0 * * *`  | Every day at midnight                   |
+| `0 12 * * *` | Every day at noon                       |
+| `0 0 * * 1`  | Every Monday at midnight                |
+| `0 0 1 * *`  | First day of every month at midnight    |
+| `*/15 * * * *` | Every 15 minutes                      |
+| `0 9-17 * * 1-5` | Every hour from 9 AM to 5 PM, Monday to Friday |
+
+## Best Practices
+
+1. **Name cron steps clearly** to indicate their frequency and purpose
+2. **Consider time zones** - cron jobs run in the server's local time zone
+3. **Handle failures gracefully** - implement retries or error notifications
+4. **Add detailed logging** for easier debugging
+5. **Use appropriate intervals** - avoid scheduling too many frequent jobs
+6. **Emit events** rather than implementing complex logic directly in the cron handler
+7. **Test thoroughly** with a shorter schedule during development

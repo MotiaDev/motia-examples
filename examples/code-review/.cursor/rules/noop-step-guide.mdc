@@ -1,0 +1,199 @@
+---
+description: 
+globs: steps/**/*.ts
+alwaysApply: false
+---
+# NOOP Step Implementation Guide
+
+NOOP (No Operation) Steps are special steps used to:
+1. Model external processes, webhooks and integrations
+2. Represent human-in-the-loop activities
+3. Create custom visualizations in the workbench
+4. Test flows during development
+
+NOOP steps don't execute business logic but help visualize and design the flow of events in your application.
+
+> **Note:** Currently, NOOP steps are only supported in TypeScript and JavaScript.
+
+## NOOP Step Structure
+
+NOOP steps require two files with the same base name:
+- `stepName.step.ts` - Contains the step configuration
+- `stepName.step.tsx` - Contains the UI component (optional)
+
+### Configuration File (.ts/.js)
+
+```typescript
+// TypeScript: externalWebhook.step.ts
+import { NoopConfig } from 'motia'
+
+export const config: NoopConfig = {
+  type: 'noop',
+  name: 'External Webhook',
+  description: 'Represents an external payment webhook',
+  virtualSubscribes: ['payment.initiated'], // Events this step virtually subscribes to
+  virtualEmits: ['payment.confirmed'], // Events this step virtually emits
+  flows: ['payment-flow']
+}
+```
+
+```javascript
+// JavaScript: externalWebhook.step.js
+const config = {
+  type: 'noop',
+  name: 'External Webhook',
+  description: 'Represents an external payment webhook',
+  virtualSubscribes: ['payment.initiated'],
+  virtualEmits: ['payment.confirmed'],
+  flows: ['payment-flow']
+}
+
+module.exports = { config }
+```
+
+### UI Component File (.tsx/.jsx)
+
+```tsx
+// TypeScript: externalWebhook.step.tsx
+import React from 'react'
+import { BaseHandle, Position } from 'motia/workbench'
+
+export default function ExternalWebhook() {
+  return (
+    <div className="p-4 bg-gray-800 rounded-lg border border-gray-600 text-white">
+      <div className="text-sm font-medium">External Payment Webhook</div>
+      <p className="text-xs mt-1 text-gray-300">
+        Waits for payment confirmation from payment provider
+      </p>
+      <BaseHandle type="target" position={Position.Top} />
+      <BaseHandle type="source" position={Position.Bottom} />
+    </div>
+  )
+}
+```
+
+```jsx
+// JavaScript: externalWebhook.step.jsx
+import React from 'react'
+import { BaseHandle, Position } from 'motia/workbench'
+
+export default function ExternalWebhook() {
+  return (
+    <div className="p-4 bg-gray-800 rounded-lg border border-gray-600 text-white">
+      <div className="text-sm font-medium">External Payment Webhook</div>
+      <p className="text-xs mt-1 text-gray-300">
+        Waits for payment confirmation from payment provider
+      </p>
+      <BaseHandle type="target" position={Position.Top} />
+      <BaseHandle type="source" position={Position.Bottom} />
+    </div>
+  )
+}
+```
+
+## Common NOOP Step Use Cases
+
+### External API Integration
+
+```typescript
+// externalApi.step.ts
+import { NoopConfig } from 'motia'
+
+export const config: NoopConfig = {
+  type: 'noop',
+  name: 'External API',
+  description: 'Calls third-party API to verify user identity',
+  virtualSubscribes: ['user.registration.started'],
+  virtualEmits: ['user.identity.verified'],
+  flows: ['user-registration']
+}
+```
+
+### Human Approval Step
+
+```typescript
+// managerApproval.step.ts
+import { NoopConfig } from 'motia'
+
+export const config: NoopConfig = {
+  type: 'noop',
+  name: 'Manager Approval',
+  description: 'Waits for manager to approve high-value expense',
+  virtualSubscribes: ['expense.submitted'],
+  virtualEmits: ['expense.approved', 'expense.rejected'],
+  flows: ['expense-approval']
+}
+```
+
+### Webhook Processing
+
+```typescript
+// githubWebhook.step.ts
+import { NoopConfig } from 'motia'
+
+export const config: NoopConfig = {
+  type: 'noop',
+  name: 'GitHub Webhook',
+  description: 'Receives webhooks from GitHub',
+  virtualSubscribes: [],
+  virtualEmits: ['github.push', 'github.pullRequest'],
+  flows: ['cicd-pipeline']
+}
+```
+
+## UI Component Design Best Practices
+
+### Using BaseHandle Components
+
+Always include `BaseHandle` components to define connection points:
+
+```tsx
+<BaseHandle type="target" position={Position.Top} />    // Input connection
+<BaseHandle type="source" position={Position.Bottom} /> // Output connection
+```
+
+### UI Styling Guidelines
+
+1. Use Tailwind CSS classes for styling
+2. Follow standard flow direction (top-to-bottom)
+3. Use semantic colors to indicate status
+4. Keep components responsive
+
+### Interactive Components
+
+Add interactivity to test the workflow:
+
+```tsx
+export default function TestWebhook() {
+  return (
+    <div className="p-4 bg-gray-800 rounded-lg text-white">
+      <div className="text-sm font-medium">Payment Webhook</div>
+      <button 
+        onClick={() => {
+          fetch('/api/simulate-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event: 'payment_confirmed' }),
+          })
+        }}
+        className="px-3 py-1 mt-2 bg-blue-600 rounded text-xs"
+      >
+        Simulate Webhook
+      </button>
+      <BaseHandle type="target" position={Position.Top} />
+      <BaseHandle type="source" position={Position.Bottom} />
+    </div>
+  )
+}
+```
+
+## Best Practices
+
+1. Name NOOP steps clearly to indicate their purpose
+2. Document exactly what external process they represent
+3. Use semantic colors to indicate different types of external processes
+4. Include interactive elements to simulate the external process
+5. Keep UI components minimal and focused
+6. Always include handle components for proper flow visualization
+7. Use consistent naming conventions for virtual events
+8. Group related external processes in the same flow for clarity

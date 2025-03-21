@@ -1,0 +1,177 @@
+---
+description: 
+globs: steps/**/*.ts
+alwaysApply: false
+---
+# Event Step Implementation Guide
+
+Event Steps are the most common step type in Motia. They react to subscribed events, process data, and emit new events.
+
+## Event Step Configuration
+
+```typescript
+// TypeScript
+import { EventConfig, StepHandler } from 'motia'
+import { z } from 'zod'
+
+const inputSchema = z.object({
+  message: z.string()
+})
+
+export const config: EventConfig<typeof inputSchema> = {
+  type: 'event',
+  name: 'ProcessMessage', // Descriptive name
+  description: 'Processes incoming messages and transforms them',
+  subscribes: ['message.received'], // Topics to listen for
+  emits: ['message.processed'], // Topics to emit
+  input: inputSchema, // For TS/JS validation only
+  flows: ['message-flow'] // Flow this step belongs to
+}
+```
+
+```javascript
+// JavaScript
+const { z } = require('zod')
+
+const inputSchema = z.object({
+  message: z.string()
+})
+
+exports.config = {
+  type: 'event',
+  name: 'ProcessMessage',
+  description: 'Processes incoming messages and transforms them',
+  subscribes: ['message.received'],
+  emits: ['message.processed'],
+  input: inputSchema,
+  flows: ['message-flow']
+}
+```
+
+```python
+# Python
+config = {
+    'type': 'event',
+    'name': 'ProcessMessage',
+    'description': 'Processes incoming messages and transforms them',
+    'subscribes': ['message.received'],
+    'emits': ['message.processed'],
+    'flows': ['message-flow']
+}
+```
+
+```ruby
+# Ruby
+def config
+  {
+    type: 'event',
+    name: 'ProcessMessage',
+    description: 'Processes incoming messages and transforms them',
+    subscribes: ['message.received'],
+    emits: ['message.processed'],
+    flows: ['message-flow']
+  }
+end
+```
+
+## Event Step Handler
+
+### TypeScript
+
+```typescript
+export const handler: StepHandler<typeof config> = async (input, { emit, logger, state, traceId }) => {
+  logger.info('Processing message', { message: input.message })
+  
+  // Business logic here
+  const processedMessage = `Processed: ${input.message}`
+  
+  // Persist state if needed
+  await state.set(traceId, 'lastMessage', processedMessage)
+  
+  // Emit new event
+  await emit({
+    topic: 'message.processed',
+    data: {
+      originalMessage: input.message,
+      processedMessage
+    }
+  })
+}
+```
+
+### JavaScript
+
+```javascript
+exports.handler = async (input, { emit, logger, state, traceId }) => {
+  logger.info('Processing message', { message: input.message })
+  
+  // Business logic here
+  const processedMessage = `Processed: ${input.message}`
+  
+  // Persist state if needed
+  await state.set(traceId, 'lastMessage', processedMessage)
+  
+  // Emit new event
+  await emit({
+    topic: 'message.processed',
+    data: {
+      originalMessage: input.message,
+      processedMessage
+    }
+  })
+}
+```
+
+### Python
+
+```python
+async def handler(input, ctx):
+    ctx.logger.info('Processing message', {'message': input.get('message')})
+    
+    # Business logic here
+    processed_message = f"Processed: {input.get('message')}"
+    
+    # Persist state if needed
+    await ctx.state.set(ctx.trace_id, 'last_message', processed_message)
+    
+    # Emit new event
+    await ctx.emit({
+        'topic': 'message.processed',
+        'data': {
+            'original_message': input.get('message'),
+            'processed_message': processed_message
+        }
+    })
+```
+
+### Ruby
+
+```ruby
+def handler(input, ctx)
+  ctx.logger.info('Processing message', {message: input[:message]})
+  
+  # Business logic here
+  processed_message = "Processed: #{input[:message]}"
+  
+  # Persist state if needed
+  ctx.state.set(ctx.trace_id, 'last_message', processed_message)
+  
+  # Emit new event
+  ctx.emit({
+    topic: 'message.processed',
+    data: {
+      original_message: input[:message],
+      processed_message: processed_message
+    }
+  })
+end
+```
+
+## Best Practices
+
+1. Use descriptive topic names, preferably with a hierarchical structure (e.g., `order.created`, `payment.processed`)
+2. Keep steps focused on a single responsibility
+3. Use appropriate error handling
+4. Add detailed logs for observability
+5. Use state management for data that needs to persist between events
+6. Always include input validation for TS/JS using zod
