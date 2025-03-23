@@ -1,0 +1,18 @@
+[run]
+omit = 
+    */site-packages/*
+    */dist-packages/*
+    */test*
+    */venv/*
+    .coverage
+    */config/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError
+    if __name__ == .__main__.:    
+    pass
+    raise ImportError
+    @tool

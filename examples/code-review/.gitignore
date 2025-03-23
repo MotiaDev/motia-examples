@@ -1,0 +1,13 @@
+node_modules/
+.motia/
+dist/
+*.log
+.env
+coverage/
+.cursor/
+.bak/
+__pycache__/
+.coverage
+
+Review.md
+ERROR-REPORT.md
