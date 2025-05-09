@@ -1,0 +1,68 @@
+{
+  "documentation-guardian": {
+    "steps/code-change-detector.step.js": {
+      "x": 472.5,
+      "y": 72.9139849550561
+    },
+    "steps/doc-analyzer.step.py": {
+      "x": 13,
+      "y": 380
+    },
+    "steps/doc-generator.step.py": {
+      "x": 8,
+      "y": 556
+    },
+    "steps/doc-integrator.step.js": {
+      "x": -205.9401755490663,
+      "y": 957.1519240460285
+    },
+    "steps/file-content-fetcher.step.ts": {
+      "x": 185.8612135009146,
+      "y": 255.47862912019843
+    },
+    "steps/github-webhook-receiver.step.js": {
+      "x": 96.5,
+      "y": 0
+    },
+    "steps/human-review-ui.step.ts": {
+      "x": 425.31976744186045,
+      "y": 672.4669025952142
+    },
+    "steps/workflow-connector.step.js": {
+      "x": 18,
+      "y": 556
+    },
+    "steps/doc-analyzer.step.ts": {
+      "x": 501,
+      "y": 396
+    },
+    "steps/doc-generator.step.ts": {
+      "x": 140,
+      "y": 466
+    },
+    "steps/webhook-debug.step.js": {
+      "x": 292,
+      "y": 204
+    },
+    "steps/human-transfer-file-with-docs.step.ts": {
+      "x": 10.618046663549762,
+      "y": 1261.5239920473623
+    },
+    "steps/doc-integrator.step.ts": {
+      "x": 431,
+      "y": 850
+    },
+    "steps/transfer-file.step.js": {
+      "x": 278,
+      "y": 1385
+    },
+    "steps/human-transfer.step.ts": {
+      "x": 213,
+      "y": 996
+    },
+    "steps/changes-approved-rejected.step.js": {
+      "x": 131.5,
+      "y": 700
+    }
+  }
+}
