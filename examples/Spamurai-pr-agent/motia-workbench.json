@@ -1,0 +1,48 @@
+{
+  "default": {
+    "steps/api.step.ts": {
+      "x": -48.71748705705531,
+      "y": 248.20848347285525
+    },
+    "steps/noop.step.ts": {
+      "x": 46.5,
+      "y": 0
+    },
+    "steps/one.step.ts": {
+      "x": 18,
+      "y": 422
+    },
+    "steps/two.step.ts": {
+      "x": 8,
+      "y": 598
+    }
+  },
+  "github-pr-management": {
+    "steps/pr-webhook.step.ts": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "github-pr-agent": {
+    "steps/pr-webhook.step.ts": {
+      "x": 341.5431393978345,
+      "y": -168.23422312961276
+    },
+    "steps/comment.step.ts": {
+      "x": 503.8598396042783,
+      "y": 195.8416474362083
+    },
+    "steps/spam-detection.step.ts": {
+      "x": -42.33688551484213,
+      "y": 233.47734333436784
+    },
+    "steps/noop.step.ts": {
+      "x": 373.8544907526998,
+      "y": -391.8040098448635
+    },
+    "steps/pr-closer.step.ts": {
+      "x": 819.2177976864547,
+      "y": 40.78356939808425
+    }
+  }
+}
