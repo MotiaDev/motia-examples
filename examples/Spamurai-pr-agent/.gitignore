@@ -1,0 +1,10 @@
+node_modules
+python_modules
+.venv
+venv
+.motia
+.mermaid
+dist
+*.pyc
+.early.coverage
+.env
