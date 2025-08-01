@@ -1,0 +1,40 @@
+{
+  "name": "motia-image-resizer",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "dev:debug": "motia dev --verbose",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:storage": "node scripts/test-storage-connection.js"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.857.0",
+    "@aws-sdk/s3-request-presigner": "^3.857.0",
+    "@types/multer": "^2.0.0",
+    "autoprefixer": "^10.4.21",
+    "dotenv": "^17.2.1",
+    "motia": "^0.5.2-beta.102-976525",
+    "multer": "^2.0.2",
+    "sharp": "^0.34.3",
+    "tailwindcss": "^4.1.11",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.23",
+    "@types/supertest": "^6.0.2",
+    "@vitest/ui": "^1.6.0",
+    "supertest": "^6.3.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "vitest": "^1.6.0"
+  }
+}
