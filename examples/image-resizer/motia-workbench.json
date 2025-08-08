@@ -1,0 +1,27 @@
+[
+  {
+    "id": "image-processing",
+    "config": {
+      "steps/upload-image.step.ts": {
+        "x": 410,
+        "y": 0
+      },
+      "steps/mobile-resize.step.ts": {
+        "x": 0,
+        "y": 265
+      },
+      "steps/lowquality-resize.step.ts": {
+        "x": 410,
+        "y": 255
+      },
+      "steps/desktop-resize.step.ts": {
+        "x": 820,
+        "y": 265
+      },
+      "steps/completion-tracker.step.ts": {
+        "x": 410,
+        "y": 477
+      }
+    }
+  }
+]
