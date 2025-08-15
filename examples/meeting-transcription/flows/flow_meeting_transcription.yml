@@ -1,0 +1,47 @@
+name: Meeting Transcription Flow
+description: >
+  A complete meeting transcription workflow that demonstrates Motia's core concepts:
+  - API endpoints for receiving requests
+  - Event-driven processing
+  - Real-time streaming updates
+  - Error handling
+  - Type safety with Zod schemas
+
+steps:
+  - name: MeetingTranscriptionAPI
+    description: API endpoint that receives transcription requests
+    type: api
+    path: /transcribe-meeting
+    method: POST
+    emits: ['meeting-transcription']
+    flows: ['meeting-transcription']
+
+  - name: MeetingTranscriptionProcessor
+    description: Event handler that processes transcription requests
+    type: event
+    subscribes: ['meeting-transcription']
+    emits: ['transcription-completed', 'transcription-failed']
+    flows: ['meeting-transcription']
+    streams: ['meetingTranscription']
+
+outputs:
+  transcription_count: ${{ steps.MeetingTranscriptionProcessor.completedCount }}
+  error_count: ${{ steps.MeetingTranscriptionProcessor.errorCount }}
+
+streams:
+  - name: meetingTranscription
+    description: Real-time updates during transcription processing
+    schema:
+      status: ['uploading', 'transcribing', 'processing', 'completed', 'failed']
+      progress: number
+      filename: string
+      duration: number
+      transcript: string
+      summary: string
+      actionItems: [string]
+      participants: [string]
+      error: string
+      timestamp: string
+      localWhisperStatus: string
+      whisperModel: string
+      processingTime: number 

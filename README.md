@@ -369,6 +369,22 @@ Each example includes its own README with detailed setup instructions. Generally
 4. Configure environment variables
 5. Run the agent with Motia
 
+### Meeting Transcription Example
+
+A comprehensive example demonstrating local, privacy-friendly meeting audio processing using Motia, Whisper, and Streamlit.
+
+**Key Features:**
+
+- Complete Motia workflow from audio input to structured output
+- Local AI processing with privacy-first approach
+- Multiple step types (API, Event, Custom)
+- Real-world meeting transcription with action item extraction
+- Cross-platform UI with Streamlit
+
+**Technologies:** TypeScript, Python, Whisper, Streamlit, Motia
+
+[View Example →](examples/meeting-transcription/)
+
 ## 🤝 Contributing
 
 We welcome contributions! If you've built an interesting agent with Motia, please share it by following our [contribution guidelines](CONTRIBUTING.md).

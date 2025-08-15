@@ -1,0 +1,37 @@
+{
+  "name": "motia-meeting-transcription-example",
+  "description": "A complete example of a Motia backend demonstrating API endpoints, event-driven processing, and real-time streaming for meeting transcription",
+  "version": "1.0.0",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "dev:debug": "motia dev --verbose",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "start": "motia start",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia",
+    "example",
+    "meeting-transcription",
+    "real-time",
+    "streaming",
+    "api",
+    "event-driven"
+  ],
+  "author": "Motia Team",
+  "license": "MIT",
+  "dependencies": {
+    "motia": "^0.5.8-beta.116",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

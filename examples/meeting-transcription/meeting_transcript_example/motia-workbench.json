@@ -1,0 +1,98 @@
+[
+  {
+    "id": "default",
+    "config": {
+      "steps/00-noop.step.ts": {
+        "x": -507,
+        "y": 111,
+        "sourceHandlePosition": "right"
+      },
+      "steps/01-api.step.ts": {
+        "x": -281,
+        "y": 94,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/02-test-state.step.ts": {
+        "x": 60,
+        "y": 36,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/03-check-state-change.step.ts": {
+        "x": 78,
+        "y": 199,
+        "targetHandlePosition": "top"
+      }
+    }
+  },
+  {
+    "id": "HelloWorld",
+    "config": {
+      "steps/hello-world.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "data-processing",
+    "config": {
+      "steps/04-data-processor.step.ts": {
+        "x": 205,
+        "y": 264
+      },
+      "steps/05-data-validator.step.ts": {
+        "x": 196,
+        "y": 460
+      },
+      "steps/06-data-storage.step.ts": {
+        "x": 410,
+        "y": 686
+      },
+      "steps/07-data-api.step.ts": {
+        "x": 197,
+        "y": 0
+      },
+      "steps/10-error-handler.step.ts": {
+        "x": 0,
+        "y": 676
+      }
+    }
+  },
+  {
+    "id": "simple-processing",
+    "config": {
+      "steps/11-simple-js.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "error-handling",
+    "config": {
+      "steps/10-error-handler.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "meeting-transcription",
+    "config": {
+      "steps/meeting-transcription-processor.step.ts": {
+        "x": 0,
+        "y": 284
+      },
+      "steps/meeting-transcription-api.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/hello-world.step.js": {
+        "x": 410,
+        "y": 0
+      }
+    }
+  }
+]
