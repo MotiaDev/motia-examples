@@ -1,0 +1,38 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/javascript/create-pet.step.js": {
+        "x": -11,
+        "y": -24
+      }
+    }
+  },
+  {
+    "id": "typescript-tutorial",
+    "config": {
+      "steps/typescript/create-pet.step.ts": {
+        "x": 4,
+        "y": -5
+      }
+    }
+  },
+  {
+    "id": "javascript-tutorial",
+    "config": {
+      "steps/javascript/create-pet.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "python-tutorial",
+    "config": {
+      "steps/python/create_pet_step.py": {
+        "x": -311,
+        "y": -13
+      }
+    }
+  }
+]
