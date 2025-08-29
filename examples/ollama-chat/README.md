@@ -1,7 +1,7 @@
 # Ollama Chat Example
 
 A minimal example demonstrating **real-time AI streaming** and **conversation state management** using the Motia framework with **Ollama**.
-![streaming-ai-chatbot](docs/images/streaming-ai-chatbot.gif)
+
 
 ## 🚀 Features
 
@@ -18,7 +18,7 @@ ollama-chat/
 ├── steps/
 │   ├── conversation.stream.ts    # Real-time conversation state
 │   ├── chat-api.step.ts         # Simple chat API endpoint  
-│   └── ai-response.step.ts      # Ollama streaming response handler
+│   └── ollama-response.step.ts      # Ollama streaming response handler
 ├── package.json                 # Dependencies (includes ollama package)
 ├── tsconfig.json               # TypeScript configuration
 └── README.md                    # This file
