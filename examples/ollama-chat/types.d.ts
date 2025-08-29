@@ -12,7 +12,7 @@ declare module 'motia' {
   }
 
   type Handlers = {
-    'ChatApi': ApiRouteHandler<{ message: string; conversationId?: string }, ApiResponse<200, { message: string; from: 'user' | 'assistant'; status: 'created' | 'streaming' | 'completed'; timestamp: string }>, { topic: 'chat-message'; data: { message: string; conversationId: string; assistantMessageId: string } }>
     'AiResponse': EventHandler<{ message: string; conversationId: string; assistantMessageId: string }, never>
+    'ChatApi': ApiRouteHandler<{ message: string; conversationId?: string }, ApiResponse<200, { message: string; from: 'user' | 'assistant'; status: 'created' | 'streaming' | 'completed'; timestamp: string }>, { topic: 'chat-message'; data: { message: string; conversationId: string; assistantMessageId: string } }>
   }
 }
