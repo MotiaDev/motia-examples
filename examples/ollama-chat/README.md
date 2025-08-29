@@ -1,11 +1,12 @@
-# Streaming AI Chatbot
+# Ollama Chat Example
 
-A minimal example demonstrating **real-time AI streaming** and **conversation state management** using the Motia framework.
+A minimal example demonstrating **real-time AI streaming** and **conversation state management** using the Motia framework with **Ollama**.
 ![streaming-ai-chatbot](docs/images/streaming-ai-chatbot.gif)
 
 ## 🚀 Features
 
-- **Real-time AI Streaming**: Token-by-token response generation using OpenAI's streaming API
+- **Real-time AI Streaming**: Token-by-token response generation using Ollama's streaming API
+- **Local AI Models**: Run powerful AI models locally with Ollama (Llama 3.1, CodeLlama, Mistral, etc.)
 - **Live State Management**: Conversation state updates in real-time with message history
 - **Event-driven Architecture**: Clean API → Event → Streaming Response flow
 - **Minimal Complexity**: Maximum impact with just 3 core files
@@ -13,12 +14,12 @@ A minimal example demonstrating **real-time AI streaming** and **conversation st
 ## 📁 Architecture
 
 ```
-streaming-ai-chatbot/
+ollama-chat/
 ├── steps/
 │   ├── conversation.stream.ts    # Real-time conversation state
 │   ├── chat-api.step.ts         # Simple chat API endpoint  
-│   └── ai-response.step.ts      # Streaming AI response handler
-├── package.json                 # Dependencies
+│   └── ai-response.step.ts      # Ollama streaming response handler
+├── package.json                 # Dependencies (includes ollama package)
 ├── tsconfig.json               # TypeScript configuration
 └── README.md                    # This file
 ```
@@ -30,7 +31,7 @@ streaming-ai-chatbot/
 ```bash
 # Clone the repository
 git clone https://github.com/MotiaDev/motia-examples.git
-cd motia-examples/streaming-ai-chatbot
+cd motia-examples/examples/ollama-chat
 
 # Install dependencies
 npm install
@@ -39,10 +40,18 @@ npm install
 npm run dev
 ```
 
-### Configure OpenAI API
+### Prerequisites
+
+1. **Install Ollama**: Download and install from [ollama.ai](https://ollama.ai)
+2. **Pull a model**: Install a model like Llama 3.1
+   ```bash
+   ollama pull llama3.1
+   ```
+
+### Configure Ollama
    ```bash
    cp .env.example .env
-   # Edit .env and add your OpenAI API key
+   # Edit .env to configure Ollama host and model (defaults should work for local setup)
    ```
 
 **Open Motia Workbench**:
@@ -86,16 +95,22 @@ The conversation state stream provides live updates as the AI generates response
 
 ## 🎯 Key Concepts Demonstrated
 
-### 1. **Streaming API Integration**
+### 1. **Ollama Streaming Integration**
 ```typescript
-const stream = await openai.chat.completions.create({
-  model: 'gpt-4o-mini',
+const ollama = new Ollama({
+  host: process.env.OLLAMA_HOST || 'http://localhost:11434'
+})
+
+const stream = await ollama.chat({
+  model: process.env.OLLAMA_MODEL || 'llama3.1',
   messages: [...],
   stream: true, // Enable streaming
 })
 
 for await (const chunk of stream) {
   // Update state with each token
+  const content = chunk.message?.content || ''
+  fullResponse += content
   await streams.conversation.set(conversationId, messageId, {
     message: fullResponse,
     status: 'streaming',
@@ -135,23 +150,35 @@ export const config: EventConfig = {
 
 ## 🌟 Why This Example Matters
 
-This example showcases Motia's power in just **3 files**:
+This example showcases Motia's power with **local AI models** in just **3 files**:
 
+- **Local AI Integration**: Run powerful AI models locally with Ollama - no API keys required
 - **Effortless streaming**: Real-time AI responses with automatic state updates
 - **Type-safe events**: End-to-end type safety from API to event handlers
 - **Built-in state management**: No external state libraries needed
+- **Privacy-focused**: All AI processing happens locally on your machine
 - **Scalable architecture**: Event-driven design that grows with your needs
 
-Perfect for demonstrating how Motia makes complex real-time applications simple and maintainable.
+Perfect for demonstrating how Motia makes complex real-time applications simple and maintainable while keeping AI processing private and local.
 
 ## 🔑 Environment Variables
 
-- `OPENAI_API_KEY`: Your OpenAI API key (required)
-- `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint URL (optional)
-- `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key (optional)
+- `OLLAMA_HOST`: Ollama server host (default: `http://localhost:11434`)
+- `OLLAMA_MODEL`: Model to use (default: `llama3.1`)
+
+### Available Models
+
+You can use any model installed in Ollama. Popular options include:
+- `llama3.1`: General purpose conversational AI
+- `codellama`: Specialized for code generation and programming
+- `mistral`: Fast and efficient model
+- `phi3`: Microsoft's compact model
+
+Install models with: `ollama pull <model-name>`
 
 ## 📝 Notes
 
-- Azure OpenAI integration code is included but commented out for demo purposes
-- The example uses `gpt-4o-mini` model for cost-effective responses
+- Requires Ollama to be running locally on your machine
+- The example uses `llama3.1` model by default for balanced performance and quality
 - All conversation data is stored in Motia's built-in state management
+- No API keys or external services required - everything runs locally

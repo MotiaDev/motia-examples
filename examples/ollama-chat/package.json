@@ -1,6 +1,6 @@
 {
-  "name": "streaming-ai-chatbot",
-  "description": "Minimal streaming AI chatbot demonstrating real-time responses and state management",
+  "name": "ollama-chat",
+  "description": "Minimal Ollama chat example demonstrating real-time streaming and state management with local AI models",
   "scripts": {
     "postinstall": "motia install",
     "dev": "motia dev",
@@ -14,7 +14,8 @@
     "streaming",
     "ai",
     "chatbot",
-    "openai"
+    "ollama",
+    "local-ai"
   ],
   "dependencies": {
     "dotenv": "^16.5.0",
