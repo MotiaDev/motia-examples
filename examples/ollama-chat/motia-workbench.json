@@ -1,0 +1,17 @@
+[
+  {
+    "id": "chat",
+    "config": {
+      "steps/chat-api.step.ts": {
+        "x": -491,
+        "y": 60,
+        "sourceHandlePosition": "right"
+      },
+      "steps/ai-response.step.ts": {
+        "x": -159,
+        "y": 94,
+        "targetHandlePosition": "left"
+      }
+    }
+  }
+]
