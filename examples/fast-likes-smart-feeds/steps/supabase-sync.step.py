@@ -1,13 +1,6 @@
 from typing import Dict, Any
 import os
-
-# Optional import - will be handled gracefully if not available
-try:
-    from supabase import create_client, Client
-    SUPABASE_AVAILABLE = True
-except ImportError:
-    SUPABASE_AVAILABLE = False
-    Client = None
+from supabase import create_client, Client
 
 # Configuration for the step
 config = {
@@ -21,14 +14,11 @@ config = {
 
 # Initialize Supabase client
 def get_supabase_client():
-    if not SUPABASE_AVAILABLE:
-        return None
-        
     url = os.environ.get('SUPABASE_URL')
     key = os.environ.get('SUPABASE_ANON_KEY')
     
     if not url or not key:
-        return None
+        raise ValueError("SUPABASE_URL and SUPABASE_ANON_KEY environment variables are required")
     
     return create_client(url, key)
 
@@ -70,18 +60,6 @@ async def handler(event: Dict[str, Any], context: Any) -> None:
         try:
             # Initialize Supabase client
             supabase = get_supabase_client()
-            
-            if not supabase:
-                context.logger.info(
-                    '⚠️ Supabase not available - skipping database sync',
-                    {
-                        'postId': post_id,
-                        'userId': user_id,
-                        'traceId': trace_id,
-                        'reason': 'supabase_not_configured'
-                    }
-                )
-                return
             
             # Prepare like data for database
             like_data = {
