@@ -1,0 +1,20 @@
+# Python dependencies for the micro-actions-like-feed event steps
+
+# Essential testing framework
+pytest>=7.0.0
+
+# Optional: For test coverage reporting
+pytest-cov>=4.0.0
+
+# Optional: For parallel test execution
+pytest-xdist>=3.0.0
+
+# Note: The basic step files (notify-owner, update-feed) only use built-in Python libraries.
+# Real-time integration steps are optional and will gracefully handle missing dependencies.
+
+# Optional real-time integrations (install only if you want to use them):
+# supabase>=2.0.0
+firebase-admin>=6.0.0
+# websockets>=11.0.0
+# httpx>=0.24.0
+python-dotenv>=1.0.0
