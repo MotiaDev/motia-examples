@@ -1,0 +1,33 @@
+{
+  "name": "ollama-chat",
+  "description": "Minimal Ollama chat example demonstrating real-time streaming and state management with local AI models",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "dev:debug": "motia dev --verbose",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia",
+    "streaming",
+    "ai",
+    "chatbot",
+    "ollama",
+    "local-ai"
+  ],
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "motia": "^0.5.5-beta.113",
+    "ollama": "^0.5.17",
+    "openai": "^5.7.0",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.23",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
