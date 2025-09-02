@@ -310,34 +310,6 @@ When you make a successful API call, you should see this complete log sequence:
 
 ## 🛠️ Development
 
-### Project Structure
-
-```
-├── steps/                            # Core implementation
-│   ├── like-api.step.ts              # TypeScript API endpoint
-│   ├── enqueue-side-effects.step.py  # Python event orchestrator
-│   ├── notify-owner.step.py          # Python notification handler
-│   ├── update-feed.step.py           # Python feed update handler
-│   ├── firebase-notification.step.py # Firebase push notifications
-│   ├── supabase-sync.step.py         # Database synchronization
-│   ├── schemas.ts                    # Event schemas and types
-│   └── *.test.*                      # Unit tests
-├── .kiro/specs/micro-actions-like-feed/
-│   ├── requirements.md               # System requirements
-│   ├── design.md                     # Architecture design
-│   └── tasks.md                      # Implementation tasks
-├── python_modules/                   # Python dependencies (like node_modules)
-│   ├── firebase_admin/               # Firebase Admin SDK
-│   ├── dotenv/                       # Environment variable support
-│   └── ...                           # Other Python packages
-├── node_modules/                     # Node.js dependencies
-├── requirements.txt                  # Python dependencies list
-├── package.json                      # Node.js dependencies list
-├── google-services.json              # Firebase service account
-├── .env                              # Environment configuration
-└── README.md                         # This file
-```
-
 ### Available Scripts
 
 ```bash
