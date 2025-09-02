@@ -461,11 +461,11 @@ MIT License - see [LICENSE](LICENSE) file for details
 ### Git Repository
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/micro-actions-like-feed.git
+git clone https://github.com/motiadev/motia-examples/examples/micro-actions-like-feed.git
 cd micro-actions-like-feed
 
 # Or using SSH
-git clone git@github.com:your-username/micro-actions-like-feed.git
+git clone git@github.com:motiadev/motia-examples/examples/micro-actions-like-feed.git
 ```
 
 ### Related Documentation
