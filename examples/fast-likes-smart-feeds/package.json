@@ -1,0 +1,30 @@
+{
+  "name": ".",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "dev:debug": "motia dev --verbose",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@supabase/supabase-js": "^2.55.0",
+    "motia": "^0.5.9-beta.117",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "@vitest/ui": "^3.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.4"
+  }
+}
