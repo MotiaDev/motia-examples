@@ -1,0 +1,41 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "content-moderation",
+    "config": {
+      "steps/slack-notifier.step.ts": {
+        "x": 593,
+        "y": 399
+      },
+      "steps/content-submit-api.step.ts": {
+        "x": -485,
+        "y": -127
+      },
+      "steps/content-router.step.ts": {
+        "x": 709,
+        "y": 118
+      },
+      "steps/content-analyzer.step.ts": {
+        "x": 324,
+        "y": -130
+      },
+      "steps/slack-webhook.step.ts": {
+        "x": 55,
+        "y": 382
+      },
+      "steps/action-executor.step.ts": {
+        "x": -544,
+        "y": 257
+      }
+    }
+  }
+]

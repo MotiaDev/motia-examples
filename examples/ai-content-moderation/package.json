@@ -1,0 +1,26 @@
+{
+  "name": ".",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "dev:debug": "motia dev --verbose",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@slack/web-api": "^7.10.0",
+    "motia": "^0.6.1-beta.124",
+    "openai": "^5.16.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
