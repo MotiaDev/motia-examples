@@ -46,13 +46,6 @@ interface ResearchSummary {
 }
 
 export const handler: Handlers['Ollama Analyze Content'] = async (input, { traceId, logger, state, emit }) => {
-  // Check if this event is for Ollama flow
-  const provider = await state.get<string>(traceId, 'provider');
-  if (provider !== 'ollama') {
-    logger.info('Skipping Ollama analysis - not an Ollama research flow');
-    return;
-  }
-
   logger.info('Analyzing extracted content using Ollama', {
     contentCount: input.extractedContents.length,
     depth: input.depth

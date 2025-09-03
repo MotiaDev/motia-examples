@@ -21,7 +21,7 @@ export const config: EventConfig = {
     label: 'Search results collected',
   }],
   input: inputSchema,
-  flows: ['research'],
+  flows: ['research', 'ollama-research'],
 }
 
 export const handler: Handlers['Web Search'] = async (input, { traceId, logger, state, emit }) => {

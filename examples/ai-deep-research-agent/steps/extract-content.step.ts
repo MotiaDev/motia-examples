@@ -32,7 +32,7 @@ export const config: EventConfig = {
     label: 'Content extracted',
   }],
   input: inputSchema,
-  flows: ['research'],
+  flows: ['research', 'ollama-research'],
 }
 
 export const handler: Handlers['Extract Web Content'] = async (input, { traceId, logger, state, emit }) => {

@@ -33,13 +33,6 @@ export const config: EventConfig = {
 }
 
 export const handler: Handlers['Ollama Follow-up Research'] = async (input, { traceId, logger, state, emit }) => {
-  // Check if this event is for Ollama flow
-  const provider = await state.get<string>(traceId, 'provider');
-  if (provider !== 'ollama') {
-    logger.info('Skipping Ollama follow-up research - not an Ollama research flow');
-    return;
-  }
-
   logger.info('Processing follow-up research queries using Ollama', {
     queriesCount: input.followUpQueries.length,
     depth: input.depth,

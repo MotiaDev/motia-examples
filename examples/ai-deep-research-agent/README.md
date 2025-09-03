@@ -232,11 +232,15 @@ Response:
 }
 ```
 
-## Event Flow
+## Workflow Architecture
 
-The research process follows different event flows depending on the AI provider:
+The system now supports **two completely parallel research workflows** with identical structure:
 
-### OpenAI Flow:
+### Shared Components:
+- **Web Search & Content Extraction**: Both workflows use the same Firecrawl-powered web search and content extraction
+- **Status & Report APIs**: Both workflows share the same status checking and report retrieval endpoints
+
+### OpenAI Workflow:
 ```
 research-api → research-started → generate-queries → search-queries-generated → search-web → 
 search-results-collected → extract-content → content-extracted → analyze-content → 
@@ -244,13 +248,19 @@ search-results-collected → extract-content → content-extracted → analyze-c
 [compile-report OR follow-up-research → search-queries-generated] → report-completed
 ```
 
-### Ollama Flow:
+### Ollama Workflow:
 ```
 ollama-research-api → ollama-research-started → ollama-generate-queries → search-queries-generated → search-web → 
 search-results-collected → extract-content → content-extracted → ollama-analyze-content → 
 [analysis-completed OR follow-up-research-needed] → 
 [ollama-compile-report OR ollama-follow-up-research → search-queries-generated] → report-completed
 ```
+
+### Key Benefits:
+- **Independent Operation**: Both workflows can run simultaneously without interference
+- **Shared Infrastructure**: Web search and content extraction are shared for efficiency
+- **Identical Structure**: Same workflow pattern, different AI providers
+- **Unified APIs**: Same status and report endpoints work for both workflows
 
 ## Technologies Used
 
