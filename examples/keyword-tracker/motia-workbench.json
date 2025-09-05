@@ -1,0 +1,48 @@
+{
+  "default": {
+    "steps/noop.step.ts": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "numbers": {
+    "steps/fetchMentions.step.ts": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "keywords": {
+    "steps/fetchMentions.step.ts": {
+      "x": -124.5,
+      "y": -127
+    },
+    "steps/redditMentions.step.ts": {
+      "x": 0,
+      "y": 0
+    },
+    "steps/redditMotiaMentions.step.ts": {
+      "x": 195.80241875505533,
+      "y": -575.3323850086207
+    },
+    "steps/validateMentions.step.ts": {
+      "x": 0,
+      "y": 0
+    },
+    "steps/validateMotiaMentions.step.ts": {
+      "x": 288.32942567988584,
+      "y": -355.1972032557236
+    },
+    "steps/noop.step.ts": {
+      "x": 225.77284282643257,
+      "y": -1015.2376732753329
+    },
+    "steps/api.step.ts": {
+      "x": 651.8813375258248,
+      "y": -625.2446478941085
+    },
+    "steps/start.step.ts": {
+      "x": -185.1097002231416,
+      "y": -1342.0128489902577
+    }
+  }
+}
