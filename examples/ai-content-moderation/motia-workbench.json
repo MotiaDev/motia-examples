@@ -29,28 +29,36 @@
     "id": "content-moderation",
     "config": {
       "steps/06-action-executor.step.ts": {
-        "x": 1714,
-        "y": 30
+        "x": 1716,
+        "y": 12
       },
       "steps/05-slack-webhook.step.ts": {
-        "x": 1317,
-        "y": 2
+        "x": 1243,
+        "y": -23,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
       },
       "steps/04-slack-notifier.step.ts": {
-        "x": 930,
-        "y": 43
+        "x": 816,
+        "y": 12,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
       },
       "steps/03-content-router.step.ts": {
-        "x": 423,
-        "y": 41
+        "x": 367,
+        "y": 12,
+        "sourceHandlePosition": "right"
       },
       "steps/02-content-analyzer.step.ts": {
-        "x": 8,
-        "y": 39
+        "x": -55,
+        "y": 12,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
       },
       "steps/01-content-submit.step.ts": {
-        "x": -483,
-        "y": 11
+        "x": -528,
+        "y": -23,
+        "sourceHandlePosition": "right"
       }
     }
   }

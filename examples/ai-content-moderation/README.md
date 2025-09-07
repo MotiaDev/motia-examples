@@ -2,6 +2,8 @@
 
 A complete content moderation system built with [Motia](https://motia.dev) that combines AI analysis with human review via Slack integration.
 
+![Content Moderator](examples/ai-content-moderation/assets/workflow.png)
+
 ## Overview
 
 This system processes user-generated content (text and images) through AI analysis and routes uncertain content to human moderators via interactive Slack messages. Content with high confidence scores is automatically approved or rejected, while borderline content requires human review.
