@@ -2,7 +2,7 @@
 
 A complete content moderation system built with [Motia](https://motia.dev) that combines AI analysis with human review via Slack integration.
 
-![Content Moderator](examples/ai-content-moderation/assets/workflow.png)
+![Content Moderator](assets/workflow.png)
 
 ## Overview
 
