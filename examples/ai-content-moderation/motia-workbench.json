@@ -1,0 +1,65 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "content-moderation",
+    "config": {
+      "steps/06-action-executor.step.ts": {
+        "x": 1716,
+        "y": 12
+      },
+      "steps/05-slack-webhook.step.ts": {
+        "x": 1243,
+        "y": -23,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/04-slack-notifier.step.ts": {
+        "x": 816,
+        "y": 12,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/03-content-router.step.ts": {
+        "x": 367,
+        "y": 12,
+        "sourceHandlePosition": "right"
+      },
+      "steps/02-content-analyzer.step.ts": {
+        "x": -55,
+        "y": 12,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/01-content-submit.step.ts": {
+        "x": -528,
+        "y": -23,
+        "sourceHandlePosition": "right"
+      }
+    }
+  }
+]
