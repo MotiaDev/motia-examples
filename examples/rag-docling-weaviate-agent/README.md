@@ -15,12 +15,45 @@ This example builds a retrieval‑augmented pipeline: it ingests PDFs, chunks th
 
 ## Prerequisites
 
+### Option 1: Docker (Recommended)
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+- [OpenAI API key](https://openai.com/api/)
+
+### Option 2: Local Development
 - Node.js 18+
 - Python 3.10+
 - [Weaviate instance](https://weaviate.io/docs/installation.html)
 - [OpenAI API key](https://openai.com/api/)
 
 ## Setup
+
+### Docker Setup (Recommended)
+
+1. Clone the repository and navigate to the project directory.
+
+2. Create a `.env` file in the root directory:
+```bash
+cp .env.example .env
+```
+
+3. Edit the `.env` file and add your OpenAI API key:
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+4. Start the services using Docker Compose:
+```bash
+docker-compose up --build
+```
+
+This will start:
+- **RAG Application** on `http://localhost:3000`
+- **Weaviate Vector Database** on `http://localhost:8080`
+- **Weaviate Console UI** on `http://localhost:3001`
+
+5. The application will be ready when you see logs indicating all services are healthy.
+
+### Local Development Setup
 
 1. Initialize the Node.js and Python dependencies:
 ```bash
@@ -36,6 +69,22 @@ WEAVIATE_API_KEY=your_weaviate_api_key
 
 ## Development
 
+### Docker Development
+```bash
+# Start services in development mode
+docker-compose up --build
+
+# View logs
+docker-compose logs -f rag-app
+
+# Stop services
+docker-compose down
+
+# Rebuild and restart
+docker-compose up --build --force-recreate
+```
+
+### Local Development
 Start the development server:
 ```bash
 npm run dev
@@ -81,7 +130,17 @@ The project follows a modular structure aligned with Motia Framework conventions
 - `POST /api/rag/query`: Submit questions about the documents
 
 ### Example calls
-From this directory, the ingestion step accepts relative or absolute folder paths. Both of these work:
+
+#### Docker Environment
+When using Docker, the PDFs are mounted at `/app/docs/pdfs`:
+```bash
+curl -X POST http://localhost:3000/api/rag/process-pdfs \
+  -H "Content-Type: application/json" \
+  -d '{"folderPath":"docs/pdfs"}'
+```
+
+#### Local Development
+From this directory, the ingestion step accepts relative or absolute folder paths:
 ```bash
 curl -X POST http://localhost:3000/api/rag/process-pdfs \
   -H "Content-Type: application/json" \
@@ -92,6 +151,7 @@ curl -X POST http://localhost:3000/api/rag/process-pdfs \
   -d '{"folderPath":"/absolute/path/to/rag-docling-weaviate-agent/docs/pdfs"}'
 ```
 
+#### Query Examples
 Query after you see batch insert logs:
 ```bash
 curl -X POST http://localhost:3000/api/rag/query \
@@ -102,6 +162,70 @@ curl -X POST http://localhost:3000/api/rag/query \
 ![query-output](docs/images/query-output.png)
 
 If you paste a repo‑relative path like `examples/rag-docling-weaviate-agent/docs/pdfs` while you are already inside this example, the step automatically normalizes it to avoid ENOENT errors.
+
+## Docker Services
+
+The Docker Compose setup includes:
+
+### Main Services
+- **rag-app**: The main RAG application (Node.js + Python)
+- **weaviate**: Vector database for storing document embeddings
+- **weaviate-ui**: Web interface for Weaviate database management
+
+### Volumes
+- **weaviate_data**: Persistent storage for Weaviate database
+- **./docs**: Read-only mount for PDF documents
+- **./logs**: Application logs directory
+
+### Networks
+- **rag-network**: Internal network for service communication
+
+## Troubleshooting
+
+### Docker Issues
+
+**Services won't start:**
+```bash
+# Check service status
+docker-compose ps
+
+# View logs
+docker-compose logs rag-app
+docker-compose logs weaviate
+```
+
+**Weaviate connection issues:**
+```bash
+# Check if Weaviate is healthy
+curl http://localhost:8080/v1/.well-known/ready
+
+# Restart Weaviate service
+docker-compose restart weaviate
+```
+
+**Application build issues:**
+```bash
+# Clean rebuild
+docker-compose down -v
+docker-compose build --no-cache
+docker-compose up
+```
+
+### Common Issues
+
+**PDF processing fails:**
+- Ensure PDFs are in the `docs/pdfs` directory
+- Check that the folderPath in API calls matches the mounted path
+- Verify file permissions on PDF files
+
+**OpenAI API errors:**
+- Verify your OpenAI API key is correct in `.env`
+- Check your OpenAI account has sufficient credits
+- Ensure API key has proper permissions
+
+**Memory issues:**
+- Increase Docker memory limits in Docker Desktop settings
+- Monitor resource usage: `docker stats`
 
 ## License
 

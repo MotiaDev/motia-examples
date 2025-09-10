@@ -1,0 +1,78 @@
+# Multi-stage build for RAG Docling Weaviate Agent
+FROM node:18-slim AS base
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY requirements.txt ./
+
+# Install Node.js dependencies (skip prepare script that has shell issues)
+RUN npm ci --only=production --ignore-scripts
+
+# Create symlink for python command (required by some tools)
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# Create Python virtual environment and install Python dependencies
+RUN python3 -m venv python_modules && \
+    /bin/bash -c "source python_modules/bin/activate && pip install --no-cache-dir -r requirements.txt"
+
+# Copy source code
+COPY . .
+
+# Generate types and build the application (with Python environment activated)
+RUN /bin/bash -c "source python_modules/bin/activate && npx motia generate-types"
+RUN /bin/bash -c "source python_modules/bin/activate && npx motia build"
+
+# Production stage
+FROM node:18-slim AS production
+
+# Install system dependencies for production
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create symlink for python command (required by some tools)
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+WORKDIR /app
+
+# Copy built application from base stage
+COPY --from=base /app/node_modules ./node_modules
+COPY --from=base /app/python_modules ./python_modules
+COPY --from=base /app/dist ./dist
+COPY --from=base /app/package*.json ./
+COPY --from=base /app/requirements.txt ./
+COPY --from=base /app/motia-workbench.json ./
+COPY --from=base /app/tsconfig.json ./
+COPY --from=base /app/types ./types
+COPY --from=base /app/steps ./steps
+COPY --from=base /app/docs ./docs
+
+# Create non-root user
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN chown -R appuser:appuser /app
+USER appuser
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/health || exit 1
+
+# Start the application
+CMD ["/bin/bash", "-c", "source python_modules/bin/activate && npm start"]
