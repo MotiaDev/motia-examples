@@ -43,6 +43,53 @@ If you prefer to use Ollama instead of OpenAI:
 
 ## Setup
 
+### Option 1: Docker Setup (Recommended)
+
+1. Clone this repository:
+```bash
+git clone <repository-url>
+cd ai_deep_research_agent
+```
+
+2. Copy the Docker environment file and configure your API keys:
+```bash
+cp .env.docker .env
+```
+
+3. Edit the `.env` file with your API keys:
+```bash
+# Required
+OPENAI_API_KEY=your-openai-api-key-here
+FIRECRAWL_API_KEY=your-firecrawl-api-key-here
+
+# Ollama is automatically configured for Docker
+OLLAMA_HOST=http://ollama:11434
+OLLAMA_MODEL=llama3.1
+```
+
+4. Start the application with Docker Compose:
+```bash
+docker-compose up -d
+```
+
+5. Wait for Ollama to start and pull the model:
+```bash
+# Check if Ollama is ready
+docker-compose logs ollama
+
+# Pull the Llama model (this may take a few minutes)
+docker-compose exec ollama ollama pull llama3.1
+```
+
+6. Access the Motia Workbench in your browser at `http://localhost:3000`
+
+7. To stop the application:
+```bash
+docker-compose down
+```
+
+### Option 2: Local Development Setup
+
 1. Clone this repository:
 ```
 git clone <repository-url>
@@ -262,6 +309,45 @@ search-results-collected → extract-content → content-extracted → ollama-an
 - **Identical Structure**: Same workflow pattern, different AI providers
 - **Unified APIs**: Same status and report endpoints work for both workflows
 
+## Docker Configuration
+
+The project includes a complete Docker setup with the following services:
+
+### Services Included:
+- **ai-research-agent**: Main application service
+- **ollama**: Local LLM service for AI processing
+- **Optional Firecrawl**: Self-hosted Firecrawl instance (commented out by default)
+
+### Docker Commands:
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+
+# Rebuild and start
+docker-compose up --build -d
+
+# Pull Ollama model
+docker-compose exec ollama ollama pull llama3.1
+
+# List available models
+docker-compose exec ollama ollama list
+```
+
+### Docker Environment Variables:
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `FIRECRAWL_API_KEY`: Your Firecrawl API key
+- `OLLAMA_HOST`: Automatically set to `http://ollama:11434`
+- `OLLAMA_MODEL`: Model to use (default: `llama3.1`)
+
+### GPU Support:
+If you have an NVIDIA GPU, uncomment the GPU configuration in `docker-compose.yml` to enable GPU acceleration for Ollama.
+
 ## Technologies Used
 
 - **Motia Framework**: Event-driven architecture for workflow orchestration
@@ -271,6 +357,7 @@ search-results-collected → extract-content → content-extracted → ollama-an
 - **Firecrawl**: Web search and content extraction API
 - **TypeScript**: Type-safe development
 - **Zod**: Runtime validation for API requests and responses
+- **Docker**: Containerization and service orchestration
 
 ## License
 
