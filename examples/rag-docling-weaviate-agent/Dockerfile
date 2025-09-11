@@ -60,6 +60,7 @@ COPY --from=base /app/requirements.txt ./
 COPY --from=base /app/motia-workbench.json ./
 COPY --from=base /app/tsconfig.json ./
 COPY --from=base /app/types ./types
+COPY --from=base /app/utils ./utils
 COPY --from=base /app/steps ./steps
 COPY --from=base /app/docs ./docs
 
