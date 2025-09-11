@@ -28,6 +28,57 @@ A powerful research assistant that performs comprehensive web research on any to
 
 [View Example →](examples/ai-deep-research-agent)
 
+## 🌟 Production-Ready Cloud Examples
+
+### ⭐ GitHub Stars Counter
+
+A **real-time GitHub stars counter** showcasing production-ready deployment capabilities - this exact implementation powers the live star count on the Motia website!
+
+![Live Stars Counter](https://github.com/MotiaDev/github-stars-counter/raw/main/public/motia-star.gif)
+
+**Key Features:**
+- **Real-Time Updates:** Instant star count updates across all connected clients using Motia Streams
+- **Production Security:** GitHub webhook signature verification and request validation
+- **One-Click Deployment:** Deploy instantly to Motia Cloud with built-in monitoring
+- **Type-Safe Development:** Full TypeScript support with auto-generated types
+- **Minimal Code:** Built with just 2 simple steps - webhook handler and real-time stream
+
+**Technologies:** TypeScript, GitHub Webhooks, Motia Streams
+
+**🚀 Live Demo:** [See it running on Motia.dev](https://motia.dev)
+
+[View Source Code →](https://github.com/MotiaDev/github-stars-counter)
+
+### 🏆 ChessArena AI - LLM Chess Leaderboard
+
+An advanced **AI chess battleground** where language models compete in real-time, evaluated by Stockfish for move-by-move quality analysis.
+
+![ChessArena AI Demo](https://github.com/MotiaDev/chessarena-ai/raw/main/public/images/chessarena.gif)
+
+
+**Key Features:**
+- **Multi-LLM Competition:** Multiple AI models compete simultaneously with live leaderboards  
+- **Move-by-Move Evaluation:** Stockfish engine analyzes every move for quality scoring
+- **Real-Time Streaming:** Live game updates using Motia Streams architecture
+- **Advanced Analytics:** Comprehensive statistics tracking blunders, accuracy, and insights
+- **Production Scalability:** Built for high-throughput concurrent games
+
+**Evaluation System:**
+- Every move scored against Stockfish recommendations
+- Centipawn loss tracking for precise skill measurement  
+- Blunder detection (>100 centipawn swings)
+- Quality-based leaderboards over simple win/loss ratios
+
+**Technologies:** TypeScript, Python, Stockfish Engine, OpenAI, Motia Streams
+
+**🎯 Live Platform:** [ChessArena.ai](https://chessarena.ai)
+
+[View Source Code →](https://github.com/MotiaDev/chessarena-ai)
+
+---
+
+*Both examples demonstrate Motia's power for building production-ready, real-time applications that scale in the cloud with minimal infrastructure complexity.*
+
 ### Finance Agent
 
 A powerful event-driven financial analysis workflow built with Motia that combines web search, financial data, and AI analysis to provide comprehensive investment insights.
