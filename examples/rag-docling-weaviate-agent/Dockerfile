@@ -18,7 +18,8 @@ COPY package*.json ./
 COPY requirements.txt ./
 
 # Install Node.js dependencies (skip prepare script that has shell issues)
-RUN npm ci --only=production --ignore-scripts
+# RUN npm ci --only=production --ignore-scripts
+RUN npm install
 
 # Create symlink for python command (required by some tools)
 RUN ln -s /usr/bin/python3 /usr/bin/python
@@ -63,8 +64,17 @@ COPY --from=base /app/steps ./steps
 COPY --from=base /app/docs ./docs
 
 # Create non-root user
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN groupadd -r appuser && useradd -r -g appuser -m appuser
 RUN chown -R appuser:appuser /app
+
+# Create and set permissions for Hugging Face cache directory
+RUN mkdir -p /app/.cache/huggingface && chown -R appuser:appuser /app/.cache
+
+# Set Hugging Face environment variables to use our cache directory
+ENV HF_HOME=/app/.cache/huggingface
+ENV TRANSFORMERS_CACHE=/app/.cache/huggingface
+ENV HF_HUB_CACHE=/app/.cache/huggingface
+
 USER appuser
 
 # Expose port
