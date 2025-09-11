@@ -1,0 +1,39 @@
+[
+  {
+    "id": "micro-actions-like-feed",
+    "config": {
+      "steps/like-api.step.ts": {
+        "x": 100,
+        "y": 50,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      },
+      "steps/enqueue-side-effects.step.py": {
+        "x": 100,
+        "y": 200,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      },
+      "steps/notify-owner.step.py": {
+        "x": -200,
+        "y": 400,
+        "targetHandlePosition": "top"
+      },
+      "steps/update-feed.step.py": {
+        "x": 0,
+        "y": 400,
+        "targetHandlePosition": "top"
+      },
+      "steps/supabase-sync.step.py": {
+        "x": 200,
+        "y": 400,
+        "targetHandlePosition": "top"
+      },
+      "steps/firebase-notification.step.py": {
+        "x": 400,
+        "y": 400,
+        "targetHandlePosition": "top"
+      }
+    }
+  }
+]

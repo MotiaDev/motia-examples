@@ -1,0 +1,17 @@
+[
+  {
+    "id": "chat",
+    "config": {
+      "steps/ollama-response.step.ts": {
+        "x": 13,
+        "y": 98,
+        "targetHandlePosition": "left"
+      },
+      "steps/chat-api.step.ts": {
+        "x": -491,
+        "y": 60,
+        "sourceHandlePosition": "right"
+      }
+    }
+  }
+]
