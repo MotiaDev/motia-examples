@@ -1,7 +1,7 @@
 import { ApiRouteConfig, Handlers } from 'motia';
-import weaviate from 'weaviate-client';
 import { RAGResponse } from '../../types/index';
 import { z } from 'zod';
+import { createWeaviateClient } from '../../utils/weaviate-client';
 
 export const config: ApiRouteConfig = {
   type: 'api',
@@ -21,14 +21,8 @@ export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) 
 
   logger.info('Processing RAG query', { query, limit });
 
-  // Initialize Weaviate client
-  const client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_URL!, {
-    authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY!),
-    headers: {
-      'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY!,
-      //"X-OpenAI-Organization": process.env.OPENAI_ORGANIZATION!,
-    },
-  });
+  // Initialize Weaviate client (automatically detects local vs cloud)
+  const client = await createWeaviateClient();
 
   try {
     // Get collection reference
