@@ -12,22 +12,6 @@ For detailed tutorials and guided walkthroughs of these examples, visit our comp
 
 ## 🗂 Examples
 
-### AI Deep Research Agent
-
-A powerful research assistant that performs comprehensive web research on any topic or question, providing in-depth analysis and reports.
-
-![Finance Agent](examples/ai-deep-research-agent/docs/deep-research.png)
-
-**Key Features:**
-- Deep Web Research: Searches the web, extracts content, and synthesizes findings
-- Iterative Research Process: Supports multiple research depths for comprehensive exploration
-- API Endpoints: REST API for initiating research and retrieving reports
-- Parallel Processing: Efficiently processes search results and content extraction
-
-**Technologies:** TypeScript, OpenAI, Firecrawl API
-
-[View Example →](examples/ai-deep-research-agent)
-
 ## 🌟 Production-Ready Cloud Examples
 
 ### ⭐ GitHub Stars Counter
@@ -78,6 +62,22 @@ An advanced **AI chess battleground** where language models compete in real-time
 ---
 
 *Both examples demonstrate Motia's power for building production-ready, real-time applications that scale in the cloud with minimal infrastructure complexity.*
+
+### AI Deep Research Agent
+
+A powerful research assistant that performs comprehensive web research on any topic or question, providing in-depth analysis and reports.
+
+![Finance Agent](examples/ai-deep-research-agent/docs/deep-research.png)
+
+**Key Features:**
+- Deep Web Research: Searches the web, extracts content, and synthesizes findings
+- Iterative Research Process: Supports multiple research depths for comprehensive exploration
+- API Endpoints: REST API for initiating research and retrieving reports
+- Parallel Processing: Efficiently processes search results and content extraction
+
+**Technologies:** TypeScript, OpenAI, Firecrawl API
+
+[View Example →](examples/ai-deep-research-agent)
 
 ### Finance Agent
 
