@@ -14,25 +14,6 @@ For detailed tutorials and guided walkthroughs of these examples, visit our comp
 
 ## 🌟 Production-Ready Cloud Examples
 
-### ⭐ GitHub Stars Counter
-
-A **real-time GitHub stars counter** showcasing production-ready deployment capabilities - this exact implementation powers the live star count on the Motia website!
-
-![Live Stars Counter](https://github.com/MotiaDev/github-stars-counter/raw/main/public/motia-star.gif)
-
-**Key Features:**
-- **Real-Time Updates:** Instant star count updates across all connected clients using Motia Streams
-- **Production Security:** GitHub webhook signature verification and request validation
-- **One-Click Deployment:** Deploy instantly to Motia Cloud with built-in monitoring
-- **Type-Safe Development:** Full TypeScript support with auto-generated types
-- **Minimal Code:** Built with just 2 simple steps - webhook handler and real-time stream
-
-**Technologies:** TypeScript, GitHub Webhooks, Motia Streams
-
-**🚀 Live Demo:** [See it running on Motia.dev](https://motia.dev)
-
-[View Source Code →](https://github.com/MotiaDev/github-stars-counter)
-
 ### 🏆 ChessArena AI - LLM Chess Leaderboard
 
 An advanced **AI chess battleground** where language models compete in real-time, evaluated by Stockfish for move-by-move quality analysis.
@@ -58,6 +39,25 @@ An advanced **AI chess battleground** where language models compete in real-time
 **🎯 Live Platform:** [ChessArena.ai](https://chessarena.ai)
 
 [View Source Code →](https://github.com/MotiaDev/chessarena-ai)
+
+### ⭐ GitHub Stars Counter
+
+A **real-time GitHub stars counter** showcasing production-ready deployment capabilities - this exact implementation powers the live star count on the Motia website!
+
+![Live Stars Counter](https://github.com/MotiaDev/github-stars-counter/raw/main/public/motia-star.gif)
+
+**Key Features:**
+- **Real-Time Updates:** Instant star count updates across all connected clients using Motia Streams
+- **Production Security:** GitHub webhook signature verification and request validation
+- **One-Click Deployment:** Deploy instantly to Motia Cloud with built-in monitoring
+- **Type-Safe Development:** Full TypeScript support with auto-generated types
+- **Minimal Code:** Built with just 2 simple steps - webhook handler and real-time stream
+
+**Technologies:** TypeScript, GitHub Webhooks, Motia Streams
+
+**🚀 Live Demo:** [See it running on Motia.dev](https://motia.dev)
+
+[View Source Code →](https://github.com/MotiaDev/github-stars-counter)
 
 ---
 
