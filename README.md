@@ -79,6 +79,34 @@ A powerful research assistant that performs comprehensive web research on any to
 
 [View Example →](examples/ai-deep-research-agent)
 
+### AI Hedge Fund - Comprehensive Financial Analysis Workflow
+
+A sophisticated multi-agent financial analysis system that combines parallel processing, real-time market data, and specialized AI agents for comprehensive investment insights.
+
+![AI Hedge Fund Workflow](examples/ai-hedgefund/public/aihedgefund-workflow.png)
+
+**Key Features:**
+- **Multi-Agent Architecture**: 4 specialized AI analysts (Fundamental, Portfolio, Risk, Technical) running in parallel
+- **Real-Time Market Data**: Integration with Alpha Vantage and Yahoo Finance APIs
+- **Web Research Integration**: Automated web search for latest market news and analysis
+- **Production-Ready Deployment**: Complete Docker containerization with docker-compose
+- **State Management**: Persistent data storage across workflow steps with trace isolation
+- **Interactive UI**: Custom React components for query input and result visualization
+- **Comprehensive Analysis**: Generates detailed reports covering all aspects of investment analysis
+
+**Architecture Highlights:**
+- Parallel processing for maximum efficiency
+- Error handling with graceful degradation
+- TypeScript with full type safety and Zod validation
+- Nebius AI integration for advanced analysis capabilities
+- RESTful API endpoints for external integration
+
+**Technologies:** TypeScript, Nebius AI, Alpha Vantage API, Yahoo Finance, Serper API, Docker
+
+**🐳 Production Deployment:** Includes complete Docker setup with environment configuration
+
+[View Example →](examples/ai-hedgefund)
+
 ### Finance Agent
 
 A powerful event-driven financial analysis workflow built with Motia that combines web search, financial data, and AI analysis to provide comprehensive investment insights.
