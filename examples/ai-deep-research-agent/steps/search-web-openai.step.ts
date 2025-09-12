@@ -13,19 +13,19 @@ const inputSchema = z.object({
 
 export const config: EventConfig = {
   type: 'event',
-  name: 'Web Search',
-  description: 'Perform web searches using Firecrawl',
-  subscribes: ['search-queries-generated'],
+  name: 'Web Search (OpenAI)',
+  description: 'Perform web searches using Firecrawl for OpenAI workflow',
+  subscribes: ['openai-search-queries-generated'],
   emits: [{
-    topic: 'search-results-collected',
+    topic: 'openai-search-results-collected',
     label: 'Search results collected',
   }],
   input: inputSchema,
-  flows: ['research', 'ollama-research'],
+  flows: ['research'],
 }
 
-export const handler: Handlers['Web Search'] = async (input, { traceId, logger, state, emit }) => {
-  logger.info('Performing web searches', { 
+export const handler: Handlers['Web Search (OpenAI)'] = async (input, { traceId, logger, state, emit }) => {
+  logger.info('Performing web searches for OpenAI workflow', { 
     numberOfQueries: input.searchQueries.length,
     depth: input.depth 
   })
@@ -57,7 +57,7 @@ export const handler: Handlers['Web Search'] = async (input, { traceId, logger, 
   
   // Emit event with the collected search results
   await emit({
-    topic: 'search-results-collected',
+    topic: 'openai-search-results-collected',
     data: {
       searchResults,
       requestId: input.requestId,
@@ -65,4 +65,4 @@ export const handler: Handlers['Web Search'] = async (input, { traceId, logger, 
       depth: input.depth
     }
   })
-} 
+}

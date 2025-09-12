@@ -24,12 +24,12 @@ export const config: EventConfig = {
   type: 'event',
   name: 'Ollama Analyze Content',
   description: 'Analyze extracted content using Ollama LLM and generate research summary',
-  subscribes: ['content-extracted'],
+  subscribes: ['ollama-content-extracted'],
   emits: [{
-    topic: 'analysis-completed',
+    topic: 'ollama-analysis-completed',
     label: 'Analysis completed',
   }, {
-    topic: 'follow-up-research-needed',
+    topic: 'ollama-follow-up-research-needed',
     label: 'Follow-up research needed',
   }],
   input: inputSchema,
@@ -107,7 +107,7 @@ export const handler: Handlers['Ollama Analyze Content'] = async (input, { trace
 
       // Emit event for follow-up research
       await emit({
-        topic: 'follow-up-research-needed',
+        topic: 'ollama-follow-up-research-needed',
         data: {
           followUpQueries: safeResponse.followUpQueries,
           requestId: input.requestId,
@@ -124,7 +124,7 @@ export const handler: Handlers['Ollama Analyze Content'] = async (input, { trace
     } else {
       // Emit event for completion
       await emit({
-        topic: 'analysis-completed',
+        topic: 'ollama-analysis-completed',
         data: {
           analysis: {
             summary: safeResponse.summary,

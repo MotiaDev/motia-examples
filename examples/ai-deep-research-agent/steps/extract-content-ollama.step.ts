@@ -24,19 +24,19 @@ const inputSchema = z.object({
 
 export const config: EventConfig = {
   type: 'event',
-  name: 'Extract Web Content',
-  description: 'Extract content from web pages using Firecrawl',
-  subscribes: ['search-results-collected'],
+  name: 'Extract Web Content (Ollama)',
+  description: 'Extract content from web pages using Firecrawl for Ollama workflow',
+  subscribes: ['ollama-search-results-collected'],
   emits: [{
-    topic: 'content-extracted',
-    label: 'Content extracted',
+    topic: 'ollama-content-extracted',
+    label: 'Content extracted for Ollama',
   }],
   input: inputSchema,
-  flows: ['research', 'ollama-research'],
+  flows: ['ollama-research'],
 }
 
-export const handler: Handlers['Extract Web Content'] = async (input, { traceId, logger, state, emit }) => {
-  logger.info('Extracting content from web pages', {
+export const handler: Handlers['Extract Web Content (Ollama)'] = async (input, { traceId, logger, state, emit }) => {
+  logger.info('Extracting content from web pages for Ollama workflow', {
     numberOfQueries: input.searchResults.length,
     depth: input.depth
   })
@@ -62,9 +62,9 @@ export const handler: Handlers['Extract Web Content'] = async (input, { traceId,
     // Store the extracted content in state
     await state.set(traceId, `extractedContent-depth-${input.depth}`, extractedContents)
     
-    // Emit event with the extracted content
+    // Emit event with the extracted content specifically for Ollama workflow
     await emit({
-      topic: 'content-extracted',
+      topic: 'ollama-content-extracted',
       data: {
         extractedContents,
         requestId: input.requestId,
@@ -73,7 +73,7 @@ export const handler: Handlers['Extract Web Content'] = async (input, { traceId,
       }
     })
   } catch (error) {
-    logger.error('Failed to extract content', { error: error.message })
+    logger.error('Failed to extract content for Ollama workflow', { error: error.message })
     throw error
   }
-} 
+}

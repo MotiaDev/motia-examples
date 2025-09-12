@@ -24,9 +24,9 @@ export const config: EventConfig = {
   type: 'event',
   name: 'Ollama Compile Research Report',
   description: 'Compile final research report using Ollama LLM with all findings',
-  subscribes: ['analysis-completed'],
+  subscribes: ['ollama-analysis-completed'],
   emits: [{
-    topic: 'report-completed',
+    topic: 'ollama-report-completed',
     label: 'Report completed',
   }],
   input: inputSchema,
@@ -121,7 +121,7 @@ export const handler: Handlers['Ollama Compile Research Report'] = async (input,
 
     // Emit event for report completion
     await (emit as any)({
-      topic: 'report-completed',
+      topic: 'ollama-report-completed',
       data: {
         report: reportWithMetadata,
         requestId: input.requestId,

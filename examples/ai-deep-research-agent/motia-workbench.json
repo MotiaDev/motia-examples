@@ -6,7 +6,7 @@
         "x": -52,
         "y": 48
       },
-      "steps/search-web.step.ts": {
+      "steps/search-web-openai.step.ts": {
         "x": 862,
         "y": 286,
         "sourceHandlePosition": "right",
@@ -33,11 +33,9 @@
         "sourceHandlePosition": "bottom",
         "targetHandlePosition": "top"
       },
-      "steps/extract-content.step.ts": {
-        "x": 1469,
-        "y": 280,
-        "sourceHandlePosition": "right",
-        "targetHandlePosition": "left"
+      "steps/extract-content-openai.step.ts": {
+        "x": 1390,
+        "y": 420
       },
       "steps/compile-report.step.ts": {
         "x": 1217,
@@ -58,20 +56,18 @@
         "x": -52,
         "y": 48
       },
-      "steps/search-web.step.ts": {
-        "x": 862,
-        "y": 286,
-        "sourceHandlePosition": "right",
-        "targetHandlePosition": "left"
+      "steps/search-web-ollama.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/report-api.step.ts": {
+        "x": -44,
+        "y": -198
       },
       "steps/ollama-research-api.step.ts": {
         "x": -358,
         "y": 264,
         "sourceHandlePosition": "right"
-      },
-      "steps/report-api.step.ts": {
-        "x": -44,
-        "y": -198
       },
       "steps/ollama-generate-queries.step.ts": {
         "x": 268,
@@ -80,16 +76,10 @@
         "targetHandlePosition": "left"
       },
       "steps/ollama-follow-up-research.step.ts": {
-        "x": 553,
-        "y": -40,
+        "x": 607,
+        "y": -132,
         "sourceHandlePosition": "bottom",
         "targetHandlePosition": "top"
-      },
-      "steps/extract-content.step.ts": {
-        "x": 1469,
-        "y": 280,
-        "sourceHandlePosition": "right",
-        "targetHandlePosition": "left"
       },
       "steps/ollama-compile-report.step.ts": {
         "x": 1217,
@@ -100,6 +90,10 @@
         "y": 270,
         "sourceHandlePosition": "right",
         "targetHandlePosition": "left"
+      },
+      "steps/extract-content-ollama.step.ts": {
+        "x": 1399,
+        "y": 433
       }
     }
   }

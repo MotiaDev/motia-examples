@@ -23,9 +23,9 @@ export const config: EventConfig = {
   type: 'event',
   name: 'Ollama Follow-up Research',
   description: 'Process follow-up research queries for deeper investigation using Ollama',
-  subscribes: ['follow-up-research-needed'],
+  subscribes: ['ollama-follow-up-research-needed'],
   emits: [{
-    topic: 'search-queries-generated',
+    topic: 'ollama-search-queries-generated',
     label: 'Search queries generated',
   }],
   input: inputSchema,
@@ -45,7 +45,7 @@ export const handler: Handlers['Ollama Follow-up Research'] = async (input, { tr
     
     // Pass the follow-up queries directly to the search step with provider information
     await emit({
-      topic: 'search-queries-generated',
+      topic: 'ollama-search-queries-generated',
       data: {
         searchQueries: input.followUpQueries,
         requestId: input.requestId,

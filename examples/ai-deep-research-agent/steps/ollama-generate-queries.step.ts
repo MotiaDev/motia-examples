@@ -21,7 +21,7 @@ export const config: EventConfig = {
   description: 'Generate search queries using Ollama LLM based on the research topic',
   subscribes: ['ollama-research-started'],
   emits: [{
-    topic: 'search-queries-generated',
+    topic: 'ollama-search-queries-generated',
     label: 'Search queries generated',
   }],
   input: inputSchema,
@@ -62,7 +62,7 @@ export const handler: Handlers['Ollama Generate Search Queries'] = async (input,
 
     // Emit event with the generated queries
     await emit({
-      topic: 'search-queries-generated',
+      topic: 'ollama-search-queries-generated',
       data: {
         searchQueries,
         requestId: input.requestId,

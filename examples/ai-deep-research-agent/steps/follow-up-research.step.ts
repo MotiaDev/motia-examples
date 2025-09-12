@@ -22,9 +22,9 @@ export const config: EventConfig = {
   type: 'event',
   name: 'Follow-up Research',
   description: 'Process follow-up research queries for deeper investigation',
-  subscribes: ['follow-up-research-needed'],
+  subscribes: ['openai-follow-up-research-needed'],
   emits: [{
-    topic: 'search-queries-generated',
+    topic: 'openai-search-queries-generated',
     label: 'Search queries generated',
   }],
   input: inputSchema,
@@ -43,7 +43,7 @@ export const handler: Handlers['Follow-up Research'] = async (input, { traceId, 
     
     // Pass the follow-up queries directly to the search step
     await emit({
-      topic: 'search-queries-generated',
+      topic: 'openai-search-queries-generated',
       data: {
         searchQueries: input.followUpQueries,
         requestId: input.requestId,
