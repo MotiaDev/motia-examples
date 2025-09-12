@@ -5,10 +5,10 @@ import { z } from 'zod';
 export const config: EventConfig = {
   type: 'event',
   name: 'init-chromadb',
-  subscribes: ['rag.read.pdfs'],
+  subscribes: ['rag.read.pdfs.chromadb'],
   emits: [],
   flows: ['rag-workflow'],
-  // Must match the schema of other subscribers to 'rag.read.pdfs'
+  // Must match the schema of other subscribers to 'rag.read.pdfs.chromadb'
   input: z.object({
     folderPath: z.string(),
   }),

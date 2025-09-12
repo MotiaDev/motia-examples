@@ -11,8 +11,8 @@ const InputSchema = z.object({
 export const config: EventConfig = {
   type: 'event',
   name: 'load-chromadb',
-  subscribes: ['rag.chunks.ready'],
-  emits: [{ topic: 'rag.chunks.loaded', label: 'Chunks loaded in ChromaDB' }],
+  subscribes: ['rag.chunks.ready.chromadb'],
+  emits: [{ topic: 'rag.chunks.loaded.chromadb', label: 'Chunks loaded in ChromaDB' }],
   flows: ['rag-workflow'],
   input: InputSchema,
 };
@@ -94,7 +94,7 @@ export const handler: Handlers['load-chromadb'] = async (
       logger.info(`Inserted batch ${i / batchSize + 1}`, { count: batch.length });
     }
 
-    await emit({ topic: 'rag.chunks.loaded', data: { count: chunks.length } });
+    await emit({ topic: 'rag.chunks.loaded.chromadb', data: { count: chunks.length } });
   } catch (error) {
     logger.error('Error in load-chromadb step', { error });
     throw error;

@@ -6,7 +6,7 @@ export const config: ApiRouteConfig = {
   name: 'api-process-pdfs-chromadb',
   path: '/api/rag/process-pdfs-chromadb',
   method: 'POST',
-  emits: [{ topic: 'rag.read.pdfs' }],
+  emits: [{ topic: 'rag.read.pdfs.chromadb' }],
   flows: ['rag-workflow'],
   bodySchema: z.object({
     folderPath: z.string(),
@@ -22,7 +22,7 @@ export const handler: Handlers['api-process-pdfs-chromadb'] = async (
   logger.info('Starting PDF processing workflow for ChromaDB', { folderPath });
 
   await emit({
-    topic: 'rag.read.pdfs',
+    topic: 'rag.read.pdfs.chromadb',
     data: { folderPath },
   });
 
