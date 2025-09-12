@@ -13,6 +13,8 @@ services:
       - NODE_ENV=production
       - WEAVIATE_URL=http://weaviate:8080
       - WEAVIATE_API_KEY=${WEAVIATE_API_KEY:-}
+      - CHROMADB_HOST=chromadb
+      - CHROMADB_PORT=8000
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       # Hugging Face cache configuration
       - HF_HOME=/app/.cache/huggingface
@@ -26,7 +28,7 @@ services:
       # Mount logs directory
       - ./logs:/app/logs
       # Mount Hugging Face cache directory for persistence
-      - hf_cache:/app/.cache/huggingface
+      - ./hf_cache:/app/.cache/huggingface
     # depends_on:
       # weaviate:
         # condition: service_healthy
@@ -58,7 +60,7 @@ services:
       # OpenAI configuration
       OPENAI_APIKEY: ${OPENAI_API_KEY}
     volumes:
-      - weaviate_data:/var/lib/weaviate
+      - ./weaviate_data:/var/lib/weaviate
     restart: on-failure:0
     # healthcheck:
     #   test: ["CMD", "curl", "-f", "http://localhost:8080/v1/.well-known/ready"]
@@ -83,8 +85,31 @@ services:
     networks:
       - rag-network
 
+  # ChromaDB vector database
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+      - ANONYMIZED_TELEMETRY=false
+    volumes:
+      - ./chromadb_data:/chroma/chroma
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - rag-network
+
 volumes:
   weaviate_data:
+    driver: local
+  chromadb_data:
     driver: local
   hf_cache:
     driver: local

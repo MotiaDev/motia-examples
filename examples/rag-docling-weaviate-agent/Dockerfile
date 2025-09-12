@@ -1,4 +1,4 @@
-# Multi-stage build for RAG Docling Weaviate Agent
+# Multi-stage build for RAG Docling Vector Agent (Weaviate + ChromaDB)
 FROM node:18-slim AS base
 
 # Install system dependencies
@@ -17,9 +17,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY requirements.txt ./
 
-# Install Node.js dependencies (skip prepare script that has shell issues)
-# RUN npm ci --only=production --ignore-scripts
-RUN npm install
+# Install Node.js dependencies 
+RUN npm install --omit=dev
 
 # Create symlink for python command (required by some tools)
 RUN ln -s /usr/bin/python3 /usr/bin/python
