@@ -95,7 +95,7 @@ services:
       - CHROMA_SERVER_HTTP_PORT=8000
       - ANONYMIZED_TELEMETRY=false
     volumes:
-      - ./chromadb_data:/chroma/chroma
+      - ./chromadb_data:/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
