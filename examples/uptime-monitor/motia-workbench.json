@@ -1,0 +1,94 @@
+[
+  {
+    "id": "default",
+    "config": {
+      "steps/03-check-state-change.step.ts": {
+        "x": 20,
+        "y": 636
+      },
+      "steps/02-test-state.step.ts": {
+        "x": 0,
+        "y": 426
+      },
+      "steps/01-api.step.ts": {
+        "x": 17,
+        "y": 188
+      },
+      "steps/00-noop.step.ts": {
+        "x": 57,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "uptime-monitor",
+    "config": {
+      "steps/track-status.step.js": {
+        "x": 13,
+        "y": 218
+      },
+      "steps/send-alerts.step.js": {
+        "x": 15,
+        "y": 408
+      },
+      "steps/check-websites.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "StatusTracking",
+    "config": {
+      "steps/status-tracker.step.js": {
+        "x": -47,
+        "y": 59
+      }
+    }
+  },
+  {
+    "id": "API",
+    "config": {
+      "steps/api-status.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "Alerting",
+    "config": {
+      "steps/alerter.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "Dashboard",
+    "config": {
+      "steps/dashboard.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "System",
+    "config": {
+      "steps/health.step.js": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "Monitor",
+    "config": {
+      "steps/monitor.step.js": {
+        "x": 683,
+        "y": -6
+      }
+    }
+  }
+]
