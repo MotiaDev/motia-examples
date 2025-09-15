@@ -1,0 +1,104 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Final Action Executor",
+    "description": "Event step that executes final moderation decisions and updates all stakeholders.",
+    "lines": ["15-23"]
+  },
+  {
+    "id": "input-schema",
+    "title": "Decision Schema",
+    "description": "Schema that accepts human review decisions with moderator information and Slack message details.",
+    "lines": ["5-13"]
+  },
+  {
+    "id": "slack-client-init",
+    "title": "Slack Client Updates",
+    "description": "Initializes Slack client to update original messages with final decision status.",
+    "lines": ["26"]
+  },
+  {
+    "id": "submission-retrieval",
+    "title": "Submission Lookup",
+    "description": "Retrieves complete submission data from state for final action execution.",
+    "lines": ["46-53"]
+  },
+  {
+    "id": "content-action-execution",
+    "title": "Action Execution",
+    "description": "Executes the actual moderation decision by calling the content action handler.",
+    "lines": ["56"]
+  },
+  {
+    "id": "content-actions",
+    "title": "Integration Points",
+    "description": "Placeholder functions where you would integrate with your platform's content management system.",
+    "lines": ["105-143"]
+  },
+  {
+    "id": "approved-action",
+    "title": "Publishing Logic",
+    "description": "For approved content, this would publish the content to your platform.",
+    "lines": ["118-122"]
+  },
+  {
+    "id": "rejected-action",
+    "title": "Blocking Logic",
+    "description": "For rejected content, this would block or remove the content from your platform.",
+    "lines": ["124-128"]
+  },
+  {
+    "id": "escalated-action",
+    "title": "Escalation Logic",
+    "description": "For escalated content, this would move content to senior review queue.",
+    "lines": ["130-138"]
+  },
+  {
+    "id": "slack-message-update",
+    "title": "Status Update",
+    "description": "Updates the original Slack message to show final decision status and completion details.",
+    "lines": ["59-66"]
+  },
+  {
+    "id": "message-update-blocks",
+    "title": "Message Structure",
+    "description": "Creates updated Slack message blocks showing final status with decision, reviewer, and completion time.",
+    "lines": ["158-207"]
+  },
+  {
+    "id": "escalation-notification",
+    "title": "Escalation Workflow",
+    "description": "For escalated decisions, sends new notification to senior review channel with context.",
+    "lines": ["78-80"]
+  },
+  {
+    "id": "escalation-message",
+    "title": "Senior Review Message",
+    "description": "Creates comprehensive escalation message for senior moderators with original context and new action buttons.",
+    "lines": ["214-292"]
+  },
+  {
+    "id": "final-state-update",
+    "title": "Workflow Completion",
+    "description": "Updates final state to mark the moderation workflow as completed with all decision details.",
+    "lines": ["69-75"]
+  },
+  {
+    "id": "status-helpers",
+    "title": "Status Display Helpers",
+    "description": "Helper functions that generate appropriate emojis and text for different decision outcomes.",
+    "lines": ["294-318"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Handling",
+    "description": "Handles execution failures gracefully and marks workflow as failed in state for debugging.",
+    "lines": ["88-102"]
+  },
+  {
+    "id": "logger",
+    "title": "Completion Logging",
+    "description": "Logs successful workflow completion and any execution errors for monitoring and debugging.",
+    "lines": ["42", "82-87"]
+  }
+]

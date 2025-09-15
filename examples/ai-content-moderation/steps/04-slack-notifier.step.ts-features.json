@@ -1,0 +1,98 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step that handles Slack notifications for human review with virtual events for button interactions.",
+    "lines": ["15-25"]
+  },
+  {
+    "id": "slack-client-init",
+    "title": "Slack Client Initialization",
+    "description": "Initializes Slack Web API client using bot token from environment variables.",
+    "lines": ["28"]
+  },
+  {
+    "id": "state-retrieval",
+    "title": "Original Data Retrieval",
+    "description": "Retrieves original submission data from state to access text content and image URLs for display.",
+    "lines": ["51-54"]
+  },
+  {
+    "id": "state-update",
+    "title": "Submission State Update",
+    "description": "Updates submission state with routing decision and combines with original submission data.",
+    "lines": ["57-71"]
+  },
+  {
+    "id": "auto-decision-handling",
+    "title": "Auto-Decision Processing",
+    "description": "For automatic decisions, logs the outcome and marks as completed without Slack notification.",
+    "lines": ["74-102"]
+  },
+  {
+    "id": "channel-selection",
+    "title": "Channel Prioritization",
+    "description": "Routes content to different Slack channels based on risk level: urgent, escalated, or normal moderation.",
+    "lines": ["105", "255-263"]
+  },
+  {
+    "id": "slack-message-structure",
+    "title": "Interactive Slack Message",
+    "description": "Creates rich Slack message with content preview, risk assessment, and interactive action buttons.",
+    "lines": ["108-203"]
+  },
+  {
+    "id": "message-header",
+    "title": "Message Header",
+    "description": "Dynamic header that shows priority level based on risk score (High, Normal, Low).",
+    "lines": ["111-117"]
+  },
+  {
+    "id": "content-metadata",
+    "title": "Content Metadata Display",
+    "description": "Shows submission ID, risk score, confidence level, and timestamp in structured format.",
+    "lines": ["118-138"]
+  },
+  {
+    "id": "text-content-display",
+    "title": "Text Content Preview",
+    "description": "Conditionally displays text content in code blocks if present in the submission.",
+    "lines": ["147-157"]
+  },
+  {
+    "id": "image-content-display",
+    "title": "Image Content Display",
+    "description": "Conditionally displays image content inline if image URL is present in the submission.",
+    "lines": ["159-167"]
+  },
+  {
+    "id": "action-buttons",
+    "title": "Interactive Action Buttons",
+    "description": "Three action buttons (Approve, Reject, Escalate) with JSON payloads for webhook processing.",
+    "lines": ["168-201"]
+  },
+  {
+    "id": "message-state-update",
+    "title": "Message State Tracking",
+    "description": "Stores Slack message details (channel, timestamp) in state for webhook handler access.",
+    "lines": ["206-222"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Notification Error Handling",
+    "description": "Handles Slack API errors gracefully and marks submissions as notification_failed in state.",
+    "lines": ["229-252"]
+  },
+  {
+    "id": "priority-titles",
+    "title": "Priority Title Generation",
+    "description": "Helper function that generates appropriate priority titles with emojis based on risk scores.",
+    "lines": ["265-273"]
+  },
+  {
+    "id": "logger",
+    "title": "Slack Logging",
+    "description": "Comprehensive logging for Slack operations including message sending and error tracking.",
+    "lines": ["44-48", "224-228"]
+  }
+]

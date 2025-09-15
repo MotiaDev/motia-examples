@@ -1,0 +1,86 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step that subscribes to content submissions and performs AI analysis using OpenAI APIs.",
+    "lines": ["14-22"]
+  },
+  {
+    "id": "input-schema",
+    "title": "Input Schema",
+    "description": "Defines the expected structure of content submission data received from the content.submitted topic.",
+    "lines": ["5-12", "20"]
+  },
+  {
+    "id": "openai-initialization",
+    "title": "OpenAI Initialization",
+    "description": "Initializes OpenAI client with API key for content analysis using moderation and vision APIs.",
+    "lines": ["36-38"]
+  },
+  {
+    "id": "text-analysis",
+    "title": "Text Analysis",
+    "description": "Uses OpenAI Moderation API to analyze text content for toxicity, harassment, violence, and other harmful content.",
+    "lines": ["46-66"]
+  },
+  {
+    "id": "text-moderation-api",
+    "title": "Moderation API Call",
+    "description": "Calls OpenAI's moderation endpoint to get toxicity scores and flagged categories for text content.",
+    "lines": ["49-51"]
+  },
+  {
+    "id": "text-analysis-processing",
+    "title": "Text Processing",
+    "description": "Processes moderation results to extract toxicity scores, flagged categories, and confidence levels.",
+    "lines": ["53-66"]
+  },
+  {
+    "id": "image-analysis",
+    "title": "Image Analysis",
+    "description": "Uses GPT-4 Vision to analyze images for inappropriate visual content including violence, sexual content, and hate symbols.",
+    "lines": ["78-132"]
+  },
+  {
+    "id": "vision-api-prompt",
+    "title": "Vision API Prompt",
+    "description": "Structured prompt that instructs GPT-4 Vision to analyze images for specific types of inappropriate content.",
+    "lines": ["84-111"]
+  },
+  {
+    "id": "vision-api-call",
+    "title": "Vision API Call",
+    "description": "Makes API call to GPT-4 Vision with the image and moderation prompt, requesting structured JSON response.",
+    "lines": ["81-111"]
+  },
+  {
+    "id": "image-analysis-processing",
+    "title": "Image Processing",
+    "description": "Processes vision API response to extract safety scores, unsafe flags, and content categories.",
+    "lines": ["113-132"]
+  },
+  {
+    "id": "score-calculation",
+    "title": "Score Calculation",
+    "description": "Combines text and image analysis scores to determine overall risk level and recommendation.",
+    "lines": ["134-137"]
+  },
+  {
+    "id": "recommendation-logic",
+    "title": "Recommendation Logic",
+    "description": "Applies threshold-based logic to determine whether content should be approved, reviewed, or rejected.",
+    "lines": ["139-146"]
+  },
+  {
+    "id": "state-management",
+    "title": "State Persistence",
+    "description": "Stores original submission data in state for access by downstream steps in the moderation workflow.",
+    "lines": ["148-156"]
+  },
+  {
+    "id": "analysis-event-emission",
+    "title": "Event Emission",
+    "description": "Emits content.analyzed event with AI analysis results, scores, and recommendations for routing decisions.",
+    "lines": ["158-168"]
+  }
+]

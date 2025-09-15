@@ -1,0 +1,92 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "API endpoint that handles Slack interactive button responses with virtual subscriptions for button clicks.",
+    "lines": ["10-22"]
+  },
+  {
+    "id": "webhook-schema",
+    "title": "Input Schema",
+    "description": "Simple schema that accepts Slack's payload parameter containing button interaction data.",
+    "lines": ["6-8"]
+  },
+  {
+    "id": "request-logging",
+    "title": "Request Debugging",
+    "description": "Comprehensive logging of webhook headers and payload for debugging Slack integration issues.",
+    "lines": ["29-40"]
+  },
+  {
+    "id": "signature-verification",
+    "title": "Security Verification",
+    "description": "Verifies Slack request signatures to ensure webhooks are authentic (bypassed in demo for testing).",
+    "lines": ["42-60", "223-229"]
+  },
+  {
+    "id": "payload-parsing",
+    "title": "Payload Processing",
+    "description": "Parses Slack's JSON payload to extract user information and button action details.",
+    "lines": ["63-64"]
+  },
+  {
+    "id": "action-validation",
+    "title": "Action Validation",
+    "description": "Validates that the webhook contains valid block_actions with button interaction data.",
+    "lines": ["66-71"]
+  },
+  {
+    "id": "action-extraction",
+    "title": "Action Extraction",
+    "description": "Extracts submission ID and moderator action from the button's JSON value payload.",
+    "lines": ["73-76"]
+  },
+  {
+    "id": "submission-retrieval",
+    "title": "Submission Lookup",
+    "description": "Retrieves submission data from state to validate the request and get context information.",
+    "lines": ["86-96"]
+  },
+  {
+    "id": "action-mapping",
+    "title": "Decision Mapping",
+    "description": "Maps Slack button actions (approve, reject, escalate) to moderation decisions and target channels.",
+    "lines": ["102-122"]
+  },
+  {
+    "id": "state-update",
+    "title": "Review State Update",
+    "description": "Updates submission state with moderator decision, reviewer information, and timestamp.",
+    "lines": ["125-133"]
+  },
+  {
+    "id": "final-event-emission",
+    "title": "Review Completion",
+    "description": "Emits content.reviewed event to trigger final action execution with decision details.",
+    "lines": ["136-147"]
+  },
+  {
+    "id": "slack-response",
+    "title": "Slack Response",
+    "description": "Returns formatted response to Slack confirming the moderator's action with timestamp.",
+    "lines": ["156-168"]
+  },
+  {
+    "id": "response-formatting",
+    "title": "Response Formatting",
+    "description": "Helper function that generates appropriate response messages for each type of moderator action.",
+    "lines": ["244-261"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Handling",
+    "description": "Comprehensive error handling that ensures webhook failures don't break the moderation workflow.",
+    "lines": ["169-178"]
+  },
+  {
+    "id": "logger",
+    "title": "Webhook Logging",
+    "description": "Detailed logging of button clicks, user actions, and webhook processing for audit trails.",
+    "lines": ["78-83", "149-153"]
+  }
+]

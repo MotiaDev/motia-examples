@@ -1,0 +1,68 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step that routes content based on AI analysis confidence scores to determine auto-action vs human review.",
+    "lines": ["28-37"]
+  },
+  {
+    "id": "input-schema",
+    "title": "Input Schema",
+    "description": "Complex schema that accepts AI analysis results including text analysis, image analysis, scores, and error states.",
+    "lines": ["4-26", "35"]
+  },
+  {
+    "id": "confidence-thresholds",
+    "title": "Confidence Thresholds",
+    "description": "Configurable thresholds that determine auto-approval (≤5%), auto-rejection (≥95%), or human review (5-95%).",
+    "lines": ["87-127"]
+  },
+  {
+    "id": "auto-approval-logic",
+    "title": "Auto-Approval Logic",
+    "description": "Very low risk content (≤5%) is automatically approved without human intervention.",
+    "lines": ["109-113"]
+  },
+  {
+    "id": "auto-rejection-logic",
+    "title": "Auto-Rejection Logic",
+    "description": "Very high risk content (≥95%) is automatically rejected without human intervention.",
+    "lines": ["114-118"]
+  },
+  {
+    "id": "human-review-logic",
+    "title": "Human Review Routing",
+    "description": "Uncertain content (5-95% risk) is routed to human moderators for review via Slack.",
+    "lines": ["119-127"]
+  },
+  {
+    "id": "decision-variables",
+    "title": "Decision Variables",
+    "description": "Local variables that track the routing decision, confidence level, reason, and whether it's an automatic decision.",
+    "lines": ["82-85"]
+  },
+  {
+    "id": "reason-generation",
+    "title": "Reason Generation",
+    "description": "Helper function that generates human-readable explanations for routing decisions based on analysis results.",
+    "lines": ["150-167"]
+  },
+  {
+    "id": "routing-event-emission",
+    "title": "Routing Decision Event",
+    "description": "Emits content.needsReview event with routing decision and confidence information for the Slack notifier.",
+    "lines": ["129-140"]
+  },
+  {
+    "id": "confidence-calculation",
+    "title": "Confidence Calculation",
+    "description": "Calculates confidence levels differently for auto-decisions vs human review needs.",
+    "lines": ["90", "95", "101", "111", "116", "122"]
+  },
+  {
+    "id": "logger",
+    "title": "Decision Logging",
+    "description": "Logs routing decisions with submission ID, decision type, and confidence levels for audit trails.",
+    "lines": ["142-148"]
+  }
+]
