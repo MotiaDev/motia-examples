@@ -96,7 +96,7 @@ curl -X POST http://localhost:3000/content/submit \
   -H "Content-Type: application/json" \
   -d '{
     "text": "Check out this image",
-    "imageUrl": "https://example.com/image.jpg",
+    "imageUrl": "https://cdn.britannica.com/16/234216-050-C66F8665/beagle-hound-dog.jpg",
     "userId": "user123",
     "platform": "web"
   }'
@@ -114,6 +114,10 @@ curl -X POST http://localhost:3000/content/submit \
 2. Enable Interactive Components and set webhook URL to: `https://your-domain.com/slack/webhook`
 3. Install the app to your workspace
 4. Configure channel environment variables
+
+### Example Slack Output
+
+![Slack Output](assets/slack-output.png)
 
 ## Project Structure
 
