@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # Main application service - Production configuration
+  ai-research-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.1}
+      - FIRECRAWL_API_URL=${FIRECRAWL_API_URL}
+      - FIRECRAWL_CONCURRENCY_LIMIT=${FIRECRAWL_CONCURRENCY_LIMIT:-2}
+    depends_on:
+      - ollama
+    networks:
+      - research-network
+    restart: unless-stopped
+    # Production optimizations
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+  # Ollama service for local LLM - Production configuration
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      # Persist Ollama models
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_ORIGINS=*
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - research-network
+    restart: unless-stopped
+    # Production optimizations
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 2G
+    # GPU support for production (uncomment if you have NVIDIA GPU)
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 8G
+    #     reservations:
+    #       memory: 4G
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # Nginx reverse proxy for production
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # Add SSL certificates if needed
+      # - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - ai-research-agent
+    networks:
+      - research-network
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
+    driver: local
+
+networks:
+  research-network:
+    driver: bridge

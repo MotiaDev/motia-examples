@@ -23,9 +23,9 @@ export const config: EventConfig = {
   type: 'event',
   name: 'Compile Research Report',
   description: 'Compile final research report with all findings',
-  subscribes: ['analysis-completed'],
+  subscribes: ['openai-analysis-completed'],
   emits: [{
-    topic: 'report-completed',
+    topic: 'openai-report-completed',
     label: 'Report completed',
   }],
   input: inputSchema,
@@ -82,7 +82,7 @@ export const handler: Handlers['Compile Research Report'] = async (input, { trac
 
     // Emit event for report completion
     await emit({
-      topic: 'report-completed',
+      topic: 'openai-report-completed',
       data: {
         report: parsedResponse,
         requestId: input.requestId,

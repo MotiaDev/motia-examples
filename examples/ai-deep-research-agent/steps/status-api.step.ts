@@ -14,7 +14,7 @@ export const config: ApiRouteConfig = {
   method: 'GET',
   emits: [],
   bodySchema: inputSchema,
-  flows: ['research'],
+  flows: ['research', 'ollama-research'],
 }
 
 export const handler: Handlers['Research Status API'] = async (req, { logger, state }) => {

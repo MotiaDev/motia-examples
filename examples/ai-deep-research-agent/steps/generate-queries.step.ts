@@ -18,7 +18,7 @@ export const config: EventConfig = {
   description: 'Generate search queries based on the research topic',
   subscribes: ['research-started'],
   emits: [{
-    topic: 'search-queries-generated',
+    topic: 'openai-search-queries-generated',
     label: 'Search queries generated',
   }],
   input: inputSchema,
@@ -46,7 +46,7 @@ export const handler: Handlers['Generate Search Queries'] = async (input, { trac
 
     // Emit event with the generated queries
     await emit({
-      topic: 'search-queries-generated',
+      topic: 'openai-search-queries-generated',
       data: {
         searchQueries,
         requestId: input.requestId,

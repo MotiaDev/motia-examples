@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # Main application service
+  ai-research-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+      # - OLLAMA_HOST=http://ollama:11434
+      # - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.1}
+      - FIRECRAWL_API_URL=${FIRECRAWL_API_URL}
+      - FIRECRAWL_CONCURRENCY_LIMIT=${FIRECRAWL_CONCURRENCY_LIMIT:-2}
+    volumes:
+      # Mount the source code for development (remove in production)
+      - .:/app
+      - /app/node_modules
+    # depends_on:
+      # - ollama
+    networks:
+      - research-network
+    restart: unless-stopped
+
+  # Ollama service for local LLM
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     # Persist Ollama models
+  #     - ollama_data:/root/.ollama
+  #   environment:
+  #     - OLLAMA_ORIGINS=*
+  #   networks:
+  #     - research-network
+  #   restart: unless-stopped
+  #   # GPU support (uncomment if you have NVIDIA GPU)
+  #   # deploy:
+  #   #   resources:
+  #   #     reservations:
+  #   #       devices:
+  #   #         - driver: nvidia
+  #   #           count: 1
+  #   #           capabilities: [gpu]
+
+  # Optional: Firecrawl service (if you want to run your own instance)
+  # Uncomment this section if you want to run Firecrawl locally
+  # firecrawl:
+  #   image: mendableai/firecrawl:latest
+  #   ports:
+  #     - "3002:3002"
+  #   environment:
+  #     - REDIS_URL=redis://redis:6379
+  #     - PLAYWRIGHT_MICROSERVICE_URL=http://playwright-service:3000
+  #   depends_on:
+  #     - redis
+  #     - playwright-service
+  #   networks:
+  #     - research-network
+  #   restart: unless-stopped
+
+  # redis:
+  #   image: redis:alpine
+  #   networks:
+  #     - research-network
+  #   restart: unless-stopped
+
+  # playwright-service:
+  #   image: browserless/chrome:latest
+  #   ports:
+  #     - "3001:3000"
+  #   environment:
+  #     - CONNECTION_TIMEOUT=60000
+  #   networks:
+  #     - research-network
+  #   restart: unless-stopped
+
+volumes:
+  ollama_data:
+    driver: local
+
+networks:
+  research-network:
+    driver: bridge

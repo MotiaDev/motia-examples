@@ -23,12 +23,12 @@ export const config: EventConfig = {
   type: 'event',
   name: 'Analyze Content',
   description: 'Analyze extracted content and generate research summary',
-  subscribes: ['content-extracted'],
+  subscribes: ['openai-content-extracted'],
   emits: [{
-    topic: 'analysis-completed',
+    topic: 'openai-analysis-completed',
     label: 'Analysis completed',
   }, {
-    topic: 'follow-up-research-needed',
+    topic: 'openai-follow-up-research-needed',
     label: 'Follow-up research needed',
   }],
   input: inputSchema,
@@ -87,7 +87,7 @@ export const handler: Handlers['Analyze Content'] = async (input, { traceId, log
 
       // Emit event for follow-up research
       await emit({
-        topic: 'follow-up-research-needed',
+        topic: 'openai-follow-up-research-needed',
         data: {
           followUpQueries: parsedResponse.followUpQueries,
           requestId: input.requestId,
@@ -103,7 +103,7 @@ export const handler: Handlers['Analyze Content'] = async (input, { traceId, log
     } else {
       // Emit event for completion
       await emit({
-        topic: 'analysis-completed',
+        topic: 'openai-analysis-completed',
         data: {
           analysis: {
             summary: parsedResponse.summary,
