@@ -5,8 +5,8 @@ import { createWeaviateClient } from '../../utils/weaviate-client';
 
 export const config: ApiRouteConfig = {
   type: 'api',
-  name: 'api-query-rag',
-  path: '/api/rag/query',
+  name: 'api-query-weaviate',
+  path: '/api/rag/query-weaviate',
   method: 'POST',
   emits: ['rag.query.completed'],
   flows: ['rag-workflow'],
@@ -16,10 +16,10 @@ export const config: ApiRouteConfig = {
   }),
 };
 
-export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) => {
+export const handler: Handlers['api-query-weaviate'] = async (req, { logger, emit }) => {
   const { query, limit } = req.body;
 
-  logger.info('Processing RAG query', { query, limit });
+  logger.info('Processing RAG query with Weaviate', { query, limit });
 
   // Initialize Weaviate client (automatically detects local vs cloud)
   const client = await createWeaviateClient();
@@ -79,7 +79,7 @@ export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) 
       error,
       url: process.env.WEAVIATE_URL,
       collection: 'Books',
-      hint: 'Ensure the Books collection exists and documents are loaded via /api/rag/process-pdfs or /api/rag/process-documents before querying.'
+      hint: 'Ensure the Books collection exists and documents are loaded via /api/rag/process-pdfs or /api/rag/process-documents before querying with /api/rag/query-weaviate.'
     });
     return {
       status: 500,

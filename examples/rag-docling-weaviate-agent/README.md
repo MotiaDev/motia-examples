@@ -144,14 +144,12 @@ The project follows a modular structure aligned with Motia Framework conventions
 ### Weaviate Endpoints
 - `POST /api/rag/process-pdfs`: Start processing PDF documents (Weaviate)
 - `POST /api/rag/process-documents`: Start processing multiple document types (PDF, MD, HTML, TXT) (Weaviate)
-- `POST /api/rag/query`: Submit questions about the documents (Weaviate)
-- `POST /api/rag/query-documents`: Submit questions about documents (includes file type metadata) (Weaviate)
+- `POST /api/rag/query-weaviate`: Query all document types through Weaviate
 
 ### ChromaDB Endpoints
 - `POST /api/rag/process-pdfs-chromadb`: Start processing PDF documents (ChromaDB)
 - `POST /api/rag/process-documents-chromadb`: Start processing multiple document types (PDF, MD, HTML, TXT) (ChromaDB)
-- `POST /api/rag/query-chromadb`: Submit questions about the documents (ChromaDB)
-- `POST /api/rag/query-documents-chromadb`: Submit questions about documents (includes file type metadata) (ChromaDB)
+- `POST /api/rag/query-chromadb`: Query all document types through ChromaDB
 
 ### Supported File Types
 - **PDF** (.pdf) - Processed with Docling
@@ -212,30 +210,16 @@ curl -X POST http://localhost:3000/api/rag/process-pdfs-chromadb \
 #### Query Examples
 Query after you see batch insert logs:
 
-**Query documents (Weaviate):**
+**Query all document types (Weaviate):**
 ```bash
-curl -X POST http://localhost:3000/api/rag/query \
+curl -X POST http://localhost:3000/api/rag/query-weaviate \
   -H "Content-Type: application/json" \
   -d '{"query":"What are these documents about?","limit":3}'
 ```
 
-**Query documents with file type metadata (Weaviate):**
-```bash
-curl -X POST http://localhost:3000/api/rag/query-documents \
-  -H "Content-Type: application/json" \
-  -d '{"query":"What are these documents about?","limit":3}'
-```
-
-**Query documents (ChromaDB):**
+**Query all document types (ChromaDB):**
 ```bash
 curl -X POST http://localhost:3000/api/rag/query-chromadb \
-  -H "Content-Type: application/json" \
-  -d '{"query":"What are these documents about?","limit":3}'
-```
-
-**Query documents with file type metadata (ChromaDB):**
-```bash
-curl -X POST http://localhost:3000/api/rag/query-documents-chromadb \
   -H "Content-Type: application/json" \
   -d '{"query":"What are these documents about?","limit":3}'
 ```
