@@ -26,6 +26,8 @@ declare module 'motia' {
     'init-chromadb': EventHandler<{ folderPath: string }, never>
     'api-query-rag': ApiRouteHandler<{ query: string; limit?: number }, unknown, never>
     'api-query-rag-chromadb': ApiRouteHandler<{ query: string; limit?: number }, unknown, never>
+    'api-query-documents': ApiRouteHandler<{ query: string; limit?: number }, unknown, never>
+    'api-query-documents-chromadb': ApiRouteHandler<{ query: string; limit?: number }, unknown, never>
     'api-process-pdfs': ApiRouteHandler<{ folderPath: string }, unknown, { topic: 'rag.read.pdfs'; data: { folderPath: string } }>
     'api-process-pdfs-chromadb': ApiRouteHandler<{ folderPath: string }, unknown, { topic: 'rag.read.pdfs.chromadb'; data: { folderPath: string } }>
     'api-process-documents': ApiRouteHandler<{ folderPath: string }, unknown, { topic: 'rag.read.documents'; data: { folderPath: string } }>

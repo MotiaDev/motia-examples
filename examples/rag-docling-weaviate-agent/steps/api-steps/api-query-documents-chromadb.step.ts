@@ -6,8 +6,8 @@ import { z } from 'zod';
 
 export const config: ApiRouteConfig = {
   type: 'api',
-  name: 'api-query-rag-chromadb',
-  path: '/api/rag/query-chromadb',
+  name: 'api-query-documents-chromadb',
+  path: '/api/rag/query-documents-chromadb',
   method: 'POST',
   emits: ['rag.query.completed'],
   flows: ['rag-workflow'],
@@ -64,10 +64,10 @@ const generateAnswer = async (query: string, context: string) => {
   return response.choices[0]?.message?.content || 'No answer generated';
 };
 
-export const handler: Handlers['api-query-rag-chromadb'] = async (req, { logger, emit }) => {
+export const handler: Handlers['api-query-documents-chromadb'] = async (req, { logger, emit }) => {
   const { query, limit } = req.body;
 
-  logger.info('Processing RAG query with ChromaDB', { query, limit });
+  logger.info('Processing RAG query for documents with ChromaDB', { query, limit });
 
   // Initialize ChromaDB client
   const client = getChromaClient();
@@ -124,7 +124,7 @@ export const handler: Handlers['api-query-rag-chromadb'] = async (req, { logger,
       host: process.env.CHROMADB_HOST,
       port: process.env.CHROMADB_PORT,
       collection: COLLECTION_NAME,
-      hint: 'Ensure the books collection exists and documents are loaded via /api/rag/process-pdfs-chromadb or /api/rag/process-documents-chromadb before querying.'
+      hint: 'Ensure the books collection exists and documents are loaded via /api/rag/process-documents-chromadb before querying.'
     });
     return {
       status: 500,

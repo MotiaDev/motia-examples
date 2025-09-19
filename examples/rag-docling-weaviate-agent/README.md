@@ -1,15 +1,16 @@
-# PDF RAG Agent (Motia + Docling + Vector Databases)
+# Multi-Format Document RAG Agent (Motia + Docling + Vector Databases)
 
-This example builds a retrieval‑augmented pipeline: it ingests PDFs, chunks them with Docling, stores the chunks in vector databases (Weaviate or ChromaDB), and answers questions using Motia's event‑driven workflow.
+This example builds a retrieval‑augmented pipeline: it ingests multiple document types (PDF, Markdown, HTML, TXT), chunks them with Docling and custom processors, stores the chunks in vector databases (Weaviate or ChromaDB), and answers questions using Motia's event‑driven workflow.
 
 ![rag-example](docs/images/rag-example.gif)
 
 ## Key Features
 
-- PDF document processing and chunking
+- Multi-format document processing (PDF, Markdown, HTML, TXT)
 - Built with [Motia Framework](https://github.com/motiadev/motia) for event-driven Architecture
 - Vector storage using [Weaviate](https://weaviate.io/) or [ChromaDB](https://www.trychroma.com/)
-- [Docling](https://github.com/docling-project/docling) for PDF parsing and hybrid chunking
+- [Docling](https://github.com/docling-project/docling) for document parsing and hybrid chunking
+- Custom text processor for TXT files
 - Question answering using RAG pattern
 - [OpenAI](https://openai.com/) integration for embeddings and text generation
 
@@ -131,7 +132,7 @@ The project follows a modular structure aligned with Motia Framework conventions
 
 ## How it Works
 
-1. **Document Processing**: The system processes the PDF using Docling and HybridChunker to split it into chunks
+1. **Document Processing**: The system processes documents using Docling (for PDF, MD, HTML) and custom text processor (for TXT) with HybridChunker to split them into chunks
 1. **Vector Storage**: Text chunks are embedded using OpenAI embeddings and stored in Weaviate or ChromaDB
 1. **Query Processing**: User queries are processed using RAG:
    - Query is embedded and similar chunks are retrieved from the vector database
@@ -142,27 +143,51 @@ The project follows a modular structure aligned with Motia Framework conventions
 
 ### Weaviate Endpoints
 - `POST /api/rag/process-pdfs`: Start processing PDF documents (Weaviate)
+- `POST /api/rag/process-documents`: Start processing multiple document types (PDF, MD, HTML, TXT) (Weaviate)
 - `POST /api/rag/query`: Submit questions about the documents (Weaviate)
+- `POST /api/rag/query-documents`: Submit questions about documents (includes file type metadata) (Weaviate)
 
 ### ChromaDB Endpoints
 - `POST /api/rag/process-pdfs-chromadb`: Start processing PDF documents (ChromaDB)
+- `POST /api/rag/process-documents-chromadb`: Start processing multiple document types (PDF, MD, HTML, TXT) (ChromaDB)
 - `POST /api/rag/query-chromadb`: Submit questions about the documents (ChromaDB)
+- `POST /api/rag/query-documents-chromadb`: Submit questions about documents (includes file type metadata) (ChromaDB)
+
+### Supported File Types
+- **PDF** (.pdf) - Processed with Docling
+- **Markdown** (.md) - Processed with Docling
+- **HTML** (.html, .htm) - Processed with Docling
+- **Text** (.txt) - Processed with custom text processor
 
 ### Example calls
 
 #### Docker Environment
-When using Docker, the PDFs are mounted at `/app/docs/pdfs`:
+When using Docker, the documents are mounted at `/app/docs/pdfs`:
 
-For Weaviate:
+**Process PDFs only (Weaviate):**
 ```bash
 curl -X POST http://localhost:3000/api/rag/process-pdfs \
   -H "Content-Type: application/json" \
   -d '{"folderPath":"docs/pdfs"}'
 ```
 
-For ChromaDB:
+**Process all document types (Weaviate):**
+```bash
+curl -X POST http://localhost:3000/api/rag/process-documents \
+  -H "Content-Type: application/json" \
+  -d '{"folderPath":"docs/pdfs"}'
+```
+
+**Process PDFs only (ChromaDB):**
 ```bash
 curl -X POST http://localhost:3000/api/rag/process-pdfs-chromadb \
+  -H "Content-Type: application/json" \
+  -d '{"folderPath":"docs/pdfs"}'
+```
+
+**Process all document types (ChromaDB):**
+```bash
+curl -X POST http://localhost:3000/api/rag/process-documents-chromadb \
   -H "Content-Type: application/json" \
   -d '{"folderPath":"docs/pdfs"}'
 ```
@@ -187,18 +212,32 @@ curl -X POST http://localhost:3000/api/rag/process-pdfs-chromadb \
 #### Query Examples
 Query after you see batch insert logs:
 
-For Weaviate:
+**Query documents (Weaviate):**
 ```bash
 curl -X POST http://localhost:3000/api/rag/query \
   -H "Content-Type: application/json" \
-  -d '{"query":"What are these pdfs about?","limit":3}'
+  -d '{"query":"What are these documents about?","limit":3}'
 ```
 
-For ChromaDB:
+**Query documents with file type metadata (Weaviate):**
+```bash
+curl -X POST http://localhost:3000/api/rag/query-documents \
+  -H "Content-Type: application/json" \
+  -d '{"query":"What are these documents about?","limit":3}'
+```
+
+**Query documents (ChromaDB):**
 ```bash
 curl -X POST http://localhost:3000/api/rag/query-chromadb \
   -H "Content-Type: application/json" \
-  -d '{"query":"What are these pdfs about?","limit":3}'
+  -d '{"query":"What are these documents about?","limit":3}'
+```
+
+**Query documents with file type metadata (ChromaDB):**
+```bash
+curl -X POST http://localhost:3000/api/rag/query-documents-chromadb \
+  -H "Content-Type: application/json" \
+  -d '{"query":"What are these documents about?","limit":3}'
 ```
 
 ![query-output](docs/images/query-output.png)
