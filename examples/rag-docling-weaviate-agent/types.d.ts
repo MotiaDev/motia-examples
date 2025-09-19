@@ -14,8 +14,12 @@ declare module 'motia' {
   type Handlers = {
     'read-pdfs': EventHandler<{ folderPath: string }, never>
     'read-pdfs-chromadb': EventHandler<{ folderPath: string }, never>
+    'read-documents': EventHandler<{ folderPath: string }, never>
+    'read-documents-chromadb': EventHandler<{ folderPath: string }, never>
     'process-pdfs': EventHandler<never, { topic: 'rag.chunks.ready'; data: { stateKey: string } }>
     'process-pdfs-chromadb': EventHandler<never, { topic: 'rag.chunks.ready.chromadb'; data: { stateKey: string } }>
+    'process-documents': EventHandler<never, { topic: 'rag.chunks.ready'; data: { stateKey: string } }>
+    'process-documents-chromadb': EventHandler<never, { topic: 'rag.chunks.ready.chromadb'; data: { stateKey: string } }>
     'load-weaviate': EventHandler<{ stateKey: string }, never>
     'load-chromadb': EventHandler<{ stateKey: string }, never>
     'init-weaviate': EventHandler<{ folderPath: string }, never>
@@ -24,5 +28,7 @@ declare module 'motia' {
     'api-query-rag-chromadb': ApiRouteHandler<{ query: string; limit?: number }, unknown, never>
     'api-process-pdfs': ApiRouteHandler<{ folderPath: string }, unknown, { topic: 'rag.read.pdfs'; data: { folderPath: string } }>
     'api-process-pdfs-chromadb': ApiRouteHandler<{ folderPath: string }, unknown, { topic: 'rag.read.pdfs.chromadb'; data: { folderPath: string } }>
+    'api-process-documents': ApiRouteHandler<{ folderPath: string }, unknown, { topic: 'rag.read.documents'; data: { folderPath: string } }>
+    'api-process-documents-chromadb': ApiRouteHandler<{ folderPath: string }, unknown, { topic: 'rag.read.documents.chromadb'; data: { folderPath: string } }>
   }
 }
