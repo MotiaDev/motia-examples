@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PromptBox } from '@/components/ui/chatgpt-prompt-input';
 import { ChatHistory } from '@/components/chat-history';
-import { MarkdownMessage } from '@/components/markdown-message'; // New import
+import { MarkdownMessage } from '@/components/markdown-message';
+import { ThemeToggle } from '@/components/theme-toggle'; // New import
 import { apiClient } from '@/lib/api';
 import { streamClient } from '@/lib/stream';
 
@@ -253,8 +254,11 @@ export function ChatInterface() {
         <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
           AI Chat Assistant
         </h1>
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          {conversationId ? `ID: ${conversationId.slice(0, 8)}...` : 'New conversation'}
+        <div className="flex items-center gap-4">
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            {conversationId ? `ID: ${conversationId.slice(0, 8)}...` : 'New conversation'}
+          </div>
+          <ThemeToggle />
         </div>
       </div>
 
@@ -262,9 +266,28 @@ export function ChatInterface() {
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 ? (
           <div className="text-center text-gray-500 dark:text-gray-400 mt-12">
-            <div className="text-6xl mb-4">🤖</div>
-            <h3 className="text-lg font-medium mb-2">Welcome to AI Chat</h3>
-            <p>Start a conversation by typing a message below.</p>
+            <div className="flex items-center justify-center mb-4">
+              <img 
+                src="/docs/images/48x48 blue_ICON.png" 
+                alt="Motia Logo" 
+                className="w-12 h-12 mr-3"
+              />
+            </div>
+            <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">
+              Welcome to AI Assistant
+            </h3>
+            <p className="mb-4">
+              Powered by{' '}
+              <a 
+                href="https://github.com/motiadev/motia" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium underline"
+              >
+                Motia
+              </a>
+            </p>
+            <p className="text-sm">Start a conversation by typing a message below.</p>
           </div>
         ) : (
           <>
