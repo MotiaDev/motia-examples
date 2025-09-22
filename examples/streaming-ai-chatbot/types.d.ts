@@ -11,7 +11,8 @@ declare module 'motia' {
     'conversation': MotiaStream<{ message: string; from: 'user' | 'assistant'; status: 'created' | 'streaming' | 'completed'; timestamp: string }>
   }
 
-  type Handlers = {
+  interface Handlers {
+    'ConversationApi': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { messages: Record<string, { message: string; from: 'user' | 'assistant'; status: 'created' | 'streaming' | 'completed'; timestamp: string }> }> | ApiResponse<404, { error: string }>, never>
     'ChatApi': ApiRouteHandler<{ message: string; conversationId?: string }, ApiResponse<200, { message: string; from: 'user' | 'assistant'; status: 'created' | 'streaming' | 'completed'; timestamp: string }>, { topic: 'chat-message'; data: { message: string; conversationId: string; assistantMessageId: string } }>
     'AiResponse': EventHandler<{ message: string; conversationId: string; assistantMessageId: string }, never>
   }
