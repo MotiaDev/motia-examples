@@ -57,7 +57,9 @@ export function MarkdownMessage({ content, className = '' }: MarkdownMessageProp
               {children}
             </blockquote>
           ),
-          code: ({ inline, className, children, ...props }) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          code: (props: any) => {
+            const { inline, className, children, ...otherProps } = props;
             const match = /language-(\w+)/.exec(className || '');
             const language = match ? match[1] : '';
             
@@ -65,7 +67,7 @@ export function MarkdownMessage({ content, className = '' }: MarkdownMessageProp
               return (
                 <code 
                   className="bg-gray-100 dark:bg-gray-800 text-red-600 dark:text-red-400 px-1.5 py-0.5 rounded text-sm font-mono"
-                  {...props}
+                  {...otherProps}
                 >
                   {children}
                 </code>
@@ -80,7 +82,7 @@ export function MarkdownMessage({ content, className = '' }: MarkdownMessageProp
                   </div>
                 )}
                 <pre className={`${language ? 'rounded-t-none' : 'rounded'} bg-gray-900 dark:bg-gray-800 p-4 overflow-x-auto`}>
-                  <code className={`text-gray-100 text-sm font-mono ${className}`} {...props}>
+                  <code className={`text-gray-100 text-sm font-mono ${className}`} {...otherProps}>
                     {children}
                   </code>
                 </pre>
