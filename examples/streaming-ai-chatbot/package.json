@@ -3,11 +3,15 @@
   "description": "Minimal streaming AI chatbot demonstrating real-time responses and state management",
   "scripts": {
     "postinstall": "motia install",
-    "dev": "motia dev",
-    "dev:debug": "motia dev --verbose",
+    "dev": "motia dev --port 3001",
+    "dev:debug": "motia dev --verbose --port 3001",
+    "dev:full": "./start-dev.sh",
+    "frontend:install": "cd frontend && npm install",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
     "generate-types": "motia generate-types",
     "build": "motia build",
-    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid && cd frontend && rm -rf .next node_modules"
   },
   "keywords": [
     "motia",
@@ -18,7 +22,7 @@
   ],
   "dependencies": {
     "dotenv": "^16.5.0",
-    "motia": "^0.5.5-beta.113",
+    "motia": "^0.7.2-beta.134",
     "openai": "^5.7.0",
     "zod": "^3.25.67"
   },
