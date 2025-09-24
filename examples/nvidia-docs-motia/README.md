@@ -1,12 +1,3 @@
-<h3 align="center">
-  <a name="readme-top"></a>
-  <img
-    src="https://www.motia.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FlogoFull.a0c32ce7.png&w=3840&q=75&dpl=dpl_GGJLB5WgEgatAYFJpjVH9naiBMGv"
-    style="max-width: 100%; height: auto; width: auto; max-height: 160px;"
-    alt="Motia Logo"
-  >
-</h3>
-
 <div align="center">
 
   <h1>AI Documentation Generator (NVIDIA NIM + Motia)</h1>
