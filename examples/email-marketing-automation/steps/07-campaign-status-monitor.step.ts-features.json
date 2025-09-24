@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cron-configuration",
+    "title": "Cron Step Configuration",
+    "description": "Scheduled cron job that runs every 10 minutes to monitor campaign health, performance, and generate alerts for issues.",
+    "lines": ["49-57"]
+  },
+  {
+    "id": "campaign-health-monitoring",
+    "title": "Campaign Health Analysis",
+    "description": "Monitors active campaigns and calculates health scores based on delivery rates, bounce rates, and processing time.",
+    "lines": ["88-94", "155-258"]
+  },
+  {
+    "id": "alert-generation",
+    "title": "Alert Generation System",
+    "description": "Generates alerts for low delivery rates, high bounce rates, slow processing, and other campaign issues with severity levels.",
+    "lines": ["176-241"]
+  },
+  {
+    "id": "health-reports",
+    "title": "Health Report Generation",
+    "description": "Generates comprehensive health reports for each campaign with metrics and system health scores.",
+    "lines": ["101-108", "260-306"]
+  },
+  {
+    "id": "stuck-campaign-detection",
+    "title": "Stuck Campaign Detection",
+    "description": "Detects campaigns stuck in processing for extended periods and marks them as failed if necessary.",
+    "lines": ["111-112", "308-347"]
+  },
+  {
+    "id": "completion-tracking",
+    "title": "Campaign Completion Tracking",
+    "description": "Updates campaign completion status and handles campaign lifecycle management with proper state transitions.",
+    "lines": ["114-115", "349-384"]
+  }
+]

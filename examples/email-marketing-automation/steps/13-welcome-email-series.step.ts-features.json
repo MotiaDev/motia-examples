@@ -1,0 +1,38 @@
+[
+  {
+    "id": "event-configuration",
+    "title": "Event Step Configuration",
+    "description": "Event-driven step that manages welcome email sequences with multiple trigger types for comprehensive onboarding workflows.",
+    "lines": ["40-63"]
+  },
+  {
+    "id": "sequence-management",
+    "title": "Welcome Sequence Management",
+    "description": "Creates and manages welcome email sequences with step tracking, timing, and completion status for new user onboarding.",
+    "lines": ["77-94", "139-166"]
+  },
+  {
+    "id": "sequence-triggers",
+    "title": "Sequence Trigger Processing",
+    "description": "Processes different sequence triggers (start, progression, timer) with appropriate email sending and scheduling logic.",
+    "lines": ["110-129"]
+  },
+  {
+    "id": "email-scheduling",
+    "title": "Email Scheduling Logic",
+    "description": "Schedules welcome emails with appropriate delays and handles engagement-based progression for optimal user experience.",
+    "lines": ["168-191", "329-356"]
+  },
+  {
+    "id": "content-generation",
+    "title": "Welcome Email Content Generation",
+    "description": "Generates personalized welcome email content with step-specific templates and user data integration.",
+    "lines": ["276-327", "389-420", "422-482"]
+  },
+  {
+    "id": "sequence-completion",
+    "title": "Sequence Completion Tracking",
+    "description": "Tracks sequence completion with engagement metrics and emits completion events for analytics and follow-up campaigns.",
+    "lines": ["204-207", "358-387"]
+  }
+]

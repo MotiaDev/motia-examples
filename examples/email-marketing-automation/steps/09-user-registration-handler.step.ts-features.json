@@ -1,0 +1,38 @@
+[
+  {
+    "id": "event-configuration",
+    "title": "Event Step Configuration",
+    "description": "Event-driven step that subscribes to 'user-registered' and processes new user registrations with comprehensive onboarding workflows.",
+    "lines": ["34-56"]
+  },
+  {
+    "id": "user-profile-creation",
+    "title": "User Profile Creation",
+    "description": "Creates comprehensive user profiles with preferences, metadata, and segmentation data for new registrations.",
+    "lines": ["76-95", "98-105"]
+  },
+  {
+    "id": "user-segmentation",
+    "title": "User Segmentation Updates",
+    "description": "Updates user segment counts and tracking for analytics and campaign targeting with source-based segmentation.",
+    "lines": ["107-108", "164-204"]
+  },
+  {
+    "id": "welcome-sequence",
+    "title": "Welcome Email Sequence",
+    "description": "Initiates welcome email sequences for new users with personalized content and multi-step onboarding campaigns.",
+    "lines": ["110-111", "206-253"]
+  },
+  {
+    "id": "referral-tracking",
+    "title": "Referral Campaign Detection",
+    "description": "Detects referral sources and triggers appropriate thank you campaigns for users coming from referral programs.",
+    "lines": ["113-114", "255-289"]
+  },
+  {
+    "id": "analytics-tracking",
+    "title": "Registration Analytics",
+    "description": "Tracks registration analytics with daily metrics, source breakdown, and engagement tracking for business intelligence.",
+    "lines": ["116-117", "291-365"]
+  }
+]

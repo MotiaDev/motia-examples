@@ -1,0 +1,93 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "email-automation",
+    "config": {
+      "steps/15-daily-analytics-report.step.ts": {
+        "x": 825,
+        "y": -101
+      },
+      "steps/14-behavioral-trigger-engine.step.ts": {
+        "x": 749,
+        "y": 216
+      },
+      "steps/13-welcome-email-series.step.ts": {
+        "x": 1343,
+        "y": 601
+      },
+      "steps/12-user-activity-tracker.step.ts": {
+        "x": 209,
+        "y": 384
+      },
+      "steps/11-unsubscribe-handler.step.ts": {
+        "x": 188,
+        "y": -2
+      },
+      "steps/10-user-preference-update.step.ts": {
+        "x": -279,
+        "y": 162
+      },
+      "steps/09-user-registration-handler.step.ts": {
+        "x": 350,
+        "y": 814
+      },
+      "steps/08-webhook-handler.step.ts": {
+        "x": -346,
+        "y": 668
+      },
+      "steps/07-campaign-status-monitor.step.ts": {
+        "x": 0,
+        "y": 946
+      },
+      "steps/06-email-analytics-tracker.step.ts": {
+        "x": 2285,
+        "y": 97
+      },
+      "steps/05-email-scheduler.step.ts": {
+        "x": 1199,
+        "y": 849
+      },
+      "steps/04-email-delivery.step.ts": {
+        "x": 2019,
+        "y": 807
+      },
+      "steps/02-user-segmentation.step.ts": {
+        "x": 350,
+        "y": 1200
+      },
+      "steps/01-create-campaign.step.ts": {
+        "x": -383,
+        "y": 1135
+      },
+      "steps/03-content-personalization_step.py": {
+        "x": 967,
+        "y": 1225
+      }
+    }
+  }
+]

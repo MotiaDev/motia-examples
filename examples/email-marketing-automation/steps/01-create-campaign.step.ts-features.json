@@ -1,0 +1,44 @@
+[
+  {
+    "id": "api-configuration",
+    "title": "API Endpoint Configuration",
+    "description": "POST endpoint at /campaigns for creating new email campaigns with comprehensive validation schema.",
+    "lines": ["5-36"]
+  },
+  {
+    "id": "request-validation",
+    "title": "Request Body Schema",
+    "description": "Zod schema validation for campaign data including name, subject, template, target audience, and scheduling options.",
+    "lines": ["13-20"]
+  },
+  {
+    "id": "response-schema",
+    "title": "Response Schema Definition",
+    "description": "Type-safe response schemas for both success (200) and error (400) responses with proper typing.",
+    "lines": ["21-34"]
+  },
+  {
+    "id": "campaign-creation",
+    "title": "Campaign Object Creation",
+    "description": "Creates campaign object with status logic, metrics initialization, and proper data structure.",
+    "lines": ["54-70"]
+  },
+  {
+    "id": "appwrite-integration",
+    "title": "Database Storage",
+    "description": "Stores campaign in Appwrite database and retrieves generated ID and creation timestamp.",
+    "lines": ["72-75"]
+  },
+  {
+    "id": "event-emission",
+    "title": "Workflow Trigger",
+    "description": "Emits 'campaign-created' event to trigger the email automation workflow with campaign data.",
+    "lines": ["84-96"]
+  },
+  {
+    "id": "success-response",
+    "title": "Success Response",
+    "description": "Returns campaign details including ID, name, status, creation time, and trace ID for tracking.",
+    "lines": ["98-108"]
+  }
+]

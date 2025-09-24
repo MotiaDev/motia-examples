@@ -1,0 +1,32 @@
+[
+  {
+    "id": "event-configuration",
+    "title": "Event Step Configuration",
+    "description": "Python event step that subscribes to 'users-segmented' and emits 'content-personalized' for AI-powered content personalization.",
+    "lines": ["5-34"]
+  },
+  {
+    "id": "personalization-logic",
+    "title": "Content Personalization Logic",
+    "description": "Core personalization logic that processes each recipient and applies AI-powered or basic personalization based on user preferences.",
+    "lines": ["54-83"]
+  },
+  {
+    "id": "ai-personalization",
+    "title": "AI-Powered Personalization",
+    "description": "Advanced AI personalization functions for subject lines and content based on user metadata, VIP status, and purchase history.",
+    "lines": ["132-155", "157-214"]
+  },
+  {
+    "id": "state-storage",
+    "title": "Personalized Content Storage",
+    "description": "Stores personalized emails in Motia state and emits event to continue the email automation workflow.",
+    "lines": ["95-96", "103-113"]
+  },
+  {
+    "id": "user-segmentation",
+    "title": "User Segmentation Logic",
+    "description": "Helper function to determine if user is new based on signup date for targeted personalization.",
+    "lines": ["216-225"]
+  }
+]

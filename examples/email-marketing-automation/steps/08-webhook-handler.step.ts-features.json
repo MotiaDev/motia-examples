@@ -1,0 +1,38 @@
+[
+  {
+    "id": "api-configuration",
+    "title": "Webhook API Configuration",
+    "description": "POST endpoint at /webhooks/:source that accepts webhooks from various email services and external systems with comprehensive event handling.",
+    "lines": ["31-71"]
+  },
+  {
+    "id": "webhook-verification",
+    "title": "Webhook Signature Verification",
+    "description": "Verifies webhook authenticity using cryptographic signatures for different email service providers (SendGrid, Resend, Mailgun, Stripe).",
+    "lines": ["94-99", "205-246"]
+  },
+  {
+    "id": "multi-provider-processing",
+    "title": "Multi-Provider Webhook Processing",
+    "description": "Processes webhooks from different email service providers with provider-specific event mapping and data extraction.",
+    "lines": ["127-152", "281-350"]
+  },
+  {
+    "id": "email-event-mapping",
+    "title": "Email Event Mapping",
+    "description": "Maps provider-specific events to standardized email events (delivered, opened, clicked, bounced, unsubscribed) for consistent processing.",
+    "lines": ["482-516", "533-566"]
+  },
+  {
+    "id": "external-integration",
+    "title": "External System Integration",
+    "description": "Handles webhooks from external systems like Appwrite (user registration) and Stripe (payment events) for cross-platform integration.",
+    "lines": ["386-422", "424-453"]
+  },
+  {
+    "id": "webhook-audit",
+    "title": "Webhook Audit Trail",
+    "description": "Stores webhook events for audit purposes and emits processing events for monitoring and compliance tracking.",
+    "lines": ["111-123", "154-169"]
+  }
+]
