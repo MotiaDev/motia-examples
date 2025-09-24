@@ -1,0 +1,27 @@
+[
+  {
+    "id": "nvidia-doc-flow",
+    "config": {
+      "steps/write_docs.step.ts": {
+        "x": 321,
+        "y": 10
+      },
+      "steps/render_mermaid.step.ts": {
+        "x": 1080,
+        "y": 10
+      },
+      "steps/qa_review.step.ts": {
+        "x": 700,
+        "y": 0
+      },
+      "steps/generate_tests.step.ts": {
+        "x": 1455,
+        "y": 9
+      },
+      "steps/analyze_repo.step.ts": {
+        "x": -58,
+        "y": 10
+      }
+    }
+  }
+]

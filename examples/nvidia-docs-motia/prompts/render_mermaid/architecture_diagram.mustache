@@ -1,0 +1,23 @@
+Create a Mermaid architecture diagram for this repository.
+
+Repository: {{repoUrl}}
+Primary Language: {{primaryLanguage}}
+File Types: {{fileTypes}}
+Has Tests: {{#hasTests}}Yes{{/hasTests}}{{^hasTests}}No{{/hasTests}}
+Has Package.json: {{#hasPackageJson}}Yes{{/hasPackageJson}}{{^hasPackageJson}}No{{/hasPackageJson}}
+Has Dockerfile: {{#hasDockerfile}}Yes{{/hasDockerfile}}{{^hasDockerfile}}No{{/hasDockerfile}}
+
+Generate a Mermaid flowchart diagram showing:
+1. Main components/modules
+2. Data flow between components
+3. External dependencies
+4. User interactions
+
+Use Mermaid flowchart syntax (flowchart TD or LR). Make it clear and informative.
+Only return the Mermaid code, no explanations.
+
+Example format:
+flowchart TD
+    A[User] --> B[Frontend]
+    B --> C[API Gateway]
+    C --> D[Backend Services]

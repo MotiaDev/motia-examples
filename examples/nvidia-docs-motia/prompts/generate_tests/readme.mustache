@@ -1,0 +1,118 @@
+# {{repoName}} - Generated Test Cases
+
+> 🧪 Comprehensive test suite generated automatically for {{repoUrl}}
+
+## Overview
+
+This directory contains **{{totalTests}} test cases** across **{{totalTestSuites}} test suites** covering multiple testing levels:
+
+## Test Statistics
+
+- **Total Test Cases**: {{totalTests}}
+- **Languages Covered**: {{languagesList}}
+- **Frameworks Used**: {{frameworksList}}
+- **Test Types**: Unit, Integration, End-to-End
+
+## Test Structure
+
+{{#hasUnitTests}}
+### 🔬 Unit Tests ({{unitTestsCount}} tests)
+
+{{#unitTests}}
+- **{{filename}}** ({{language}}/{{framework}})
+  - {{description}}
+  - {{test_count}} test cases
+
+{{/unitTests}}
+{{/hasUnitTests}}
+
+{{#hasIntegrationTests}}
+### 🔗 Integration Tests ({{integrationTestsCount}} tests)
+
+{{#integrationTests}}
+- **{{filename}}** ({{language}}/{{framework}})
+  - {{description}}
+  - {{test_count}} test cases
+
+{{/integrationTests}}
+{{/hasIntegrationTests}}
+
+{{#hasE2eTests}}
+### 🌐 End-to-End Tests ({{e2eTestsCount}} tests)
+
+{{#e2eTests}}
+- **{{filename}}** ({{language}}/{{framework}})
+  - {{description}}
+  - {{test_count}} test cases
+
+{{/e2eTests}}
+{{/hasE2eTests}}
+
+## How to Run Tests
+
+### Prerequisites
+Install dependencies based on your project
+npm install # For Node.js/TypeScript projects
+pip install -r requirements.txt # For Python projects
+
+text
+
+### Running Tests
+
+#### Unit Tests
+Jest (TypeScript/JavaScript)
+npm test unit/
+
+Pytest (Python)
+pytest unit/
+
+JUnit (Java)
+mvn test
+
+text
+
+#### Integration Tests
+Jest
+npm test integration/
+
+Pytest
+pytest integration/
+
+text
+
+#### E2E Tests
+Playwright
+npx playwright test e2e/
+
+Or run with UI
+npx playwright test --ui
+
+text
+
+## Test Coverage
+
+These generated tests aim to provide comprehensive coverage including:
+
+- ✅ **Happy Path Testing** - Normal execution scenarios
+- ✅ **Edge Case Testing** - Boundary conditions and limits
+- ✅ **Error Handling** - Exception scenarios and error states
+- ✅ **Integration Testing** - Module interactions and data flow
+- ✅ **End-to-End Testing** - Complete user workflows
+
+## Customization
+
+The generated tests provide a solid foundation. Consider customizing them by:
+
+1. **Adding specific business logic tests**
+2. **Implementing actual API endpoints** in integration tests
+3. **Adding performance benchmarks**
+4. **Implementing visual regression tests**
+5. **Adding accessibility testing**
+
+## Generated Information
+
+- **Repository**: {{repoUrl}}
+- **Generated On**: {{generatedOn}}
+- **Generator**: NVIDIA-powered test generation system
+
+*These test cases were automatically generated based on repository analysis and best practices for comprehensive software testing.*
