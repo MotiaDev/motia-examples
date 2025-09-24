@@ -1,7 +1,7 @@
-import weaviate from 'weaviate-client';
 import { DocumentChunkType } from '../../types/index';
 import { z } from 'zod';
 import { EventConfig, Handlers } from 'motia';
+import { createWeaviateClient } from '../../utils/weaviate-client';
 
 const InputSchema = z.object({
   stateKey: z.string(),
@@ -28,15 +28,9 @@ export const handler: Handlers['load-weaviate'] = async (
 
   logger.info('Retrieved chunks from state', { count: chunks.length });
 
-  // Initialize Weaviate client
+  // Initialize Weaviate client (automatically detects local vs cloud)
   logger.info('Initializing Weaviate client');
-  const client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_URL!, {
-    authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY!),
-    headers: {
-      'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY!,
-      //"X-OpenAI-Organization": process.env.OPENAI_ORGANIZATION!,
-    },
-  });
+  const client = await createWeaviateClient();
 
   try {
     // Process chunks in batches
