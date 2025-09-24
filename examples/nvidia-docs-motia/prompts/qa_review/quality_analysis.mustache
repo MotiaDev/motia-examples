@@ -1,0 +1,23 @@
+You are a technical documentation quality analyst. Analyze this generated documentation and provide quality metrics.
+
+Repository: {{repoUrl}}
+Documentation to analyze:
+{{documentationPreview}}...
+
+Evaluate the documentation on:
+1. Completeness (0-100): Are all sections complete and not truncated?
+2. Clarity (0-100): Is the content clear and well-structured?
+3. Accuracy (0-100): Does the content make sense for the repository?
+
+Also identify:
+- Specific issues found (truncated sentences, unclear sections, etc.)
+- Recommended improvements
+
+Respond in this JSON format:
+{
+  "completeness_score": 85,
+  "clarity_score": 90,
+  "accuracy_score": 80,
+  "issues_found": ["Overview section is truncated", "Missing installation steps"],
+  "improvements_made": ["Need to complete truncated sections", "Add more specific examples"]
+}

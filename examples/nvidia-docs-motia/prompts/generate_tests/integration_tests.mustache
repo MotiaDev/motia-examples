@@ -1,0 +1,25 @@
+Generate integration tests for this {{language}} repository using {{framework}}.
+
+Repository: {{repoUrl}}
+Language: {{language}}
+Testing Framework: {{framework}}
+Has API Components: {{#hasApi}}Yes{{/hasApi}}{{^hasApi}}No{{/hasApi}}
+Has Database Components: {{#hasDatabase}}Yes{{/hasDatabase}}{{^hasDatabase}}No{{/hasDatabase}}
+Has Configuration: {{#hasConfig}}Yes{{/hasConfig}}{{^hasConfig}}No{{/hasConfig}}
+
+Create integration tests that cover:
+1. **Module Integration**: Test how different modules work together
+2. **API Integration**: Test API endpoints and responses (if applicable)
+3. **Database Integration**: Test database operations and connections (if applicable)
+4. **Configuration Integration**: Test configuration loading and validation
+5. **External Service Integration**: Mock external services and test interactions
+
+Generate {{framework}} integration tests with:
+- Test setup for integration scenarios
+- Real or mocked service interactions
+- Data flow testing between components
+- Configuration and environment testing
+- Error handling for integration failures
+
+Output only the complete, executable integration test code.
+Generate 8-15 comprehensive integration test cases.

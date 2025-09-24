@@ -1,0 +1,56 @@
+# {{repoName}} - Visual Diagrams
+
+> 📊 Auto-generated Mermaid diagrams for {{repoUrl}}
+
+## Available Diagrams
+
+{{#diagrams}}
+### {{index}}. {{title}}
+
+**Type**: {{typeCapitalized}}  
+**Description**: {{description}}  
+**File**: `{{filename}}`
+
+{{content}}
+
+---
+
+{{/diagrams}}
+
+## How to Use These Diagrams
+
+1. **View Online**: Copy the Mermaid code into [Mermaid Live Editor](https://mermaid.live/)
+2. **In Documentation**: Embed in Markdown using ```
+3. **Export Images**: Use Mermaid CLI to generate PNG/SVG files
+4. **Integration**: Include in README, wiki, or documentation sites
+
+## Installation and Setup
+
+To use these diagrams in your documentation:
+
+```bash
+# Install Mermaid CLI (optional)
+npm install -g @mermaid-js/mermaid-cli
+
+# Generate SVG from .mmd files
+mmdc -i diagram.mmd -o diagram.svg
+Diagram Types Generated
+Architecture: High-level system components and relationships
+
+Workflow: Development and usage processes
+
+Component: Module dependencies and interactions
+
+Dataflow: Data processing and transformation paths
+
+Directory: Repository folder structure visualization
+
+Generated on: {{generatedAt}}
+
+**To use this file:**
+
+1. Save this content as `prompts/render_mermaid/diagrams_index.mustache`
+2. Make sure the `{{#diagrams}}` section is properly closed with `{{/diagrams}}`
+3. The template will be processed by your Mermaid generation step to create a comprehensive README
+
+This template includes proper Mermaid code block formatting and will resolve the "Unclosed section" error you encountered! 🚀
