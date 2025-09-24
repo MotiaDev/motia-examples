@@ -5,10 +5,7 @@
   <p>
     An intelligent documentation generation system that automatically analyzes GitHub repositories and creates comprehensive documentation with architecture diagrams, code analysis, and test generation - powered by NVIDIA NIM LLMs.
   </p>
-
-  <a href="https://motia.dev">
-    <img src="https://img.shields.io/badge/Motia.dev-Low%20Code%20Flows-1e1e1e" alt="Motia.dev Badge" />
-  </a>
+  
   <a href="https://docs.nvidia.com/ai-enterprise/overview/">
     <img src="https://img.shields.io/badge/NVIDIA-NIM%20LLMs-76B900" alt="NVIDIA NIM Badge" />
   </a>
