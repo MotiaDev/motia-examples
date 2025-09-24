@@ -121,6 +121,8 @@ curl -X POST http://localhost:3000/analyze-repo \
 
 ## Architecture
 
+![Architecture Diagram](docs/image.png)
+
 The system follows an event-driven architecture:
 
 ```mermaid
