@@ -11,6 +11,7 @@ interface ScheduledCampaign {
 export const config: CronConfig = {
   type: "cron",
   cron: "*/5 * * * *", // Run every 5 minutes to check for scheduled campaigns
+  // cron: "*/10 * * * * *",
   name: "EmailScheduler",
   description: "Processes scheduled email campaigns when their time arrives",
   emits: ["content-personalized"],
@@ -30,6 +31,10 @@ export const handler: Handlers["EmailScheduler"] = async ({
       "scheduled_campaigns"
     );
 
+    logger.info(
+      "==========> scheduled campaigns <==========",
+      scheduledCampaigns
+    );
     if (!scheduledCampaigns || scheduledCampaigns.length === 0) {
       logger.info("No scheduled campaigns found");
       return;
@@ -80,10 +85,10 @@ export const handler: Handlers["EmailScheduler"] = async ({
           });
 
           // Update the main campaign status
-          const mainCampaign = await state.get(
+          const mainCampaign = (await state.get(
             "campaigns",
             campaign.campaignId
-          ) as any;
+          )) as any;
           if (mainCampaign) {
             mainCampaign.status = "processing";
             mainCampaign.triggeredAt = currentTime.toISOString();
@@ -137,7 +142,10 @@ export const handler: Handlers["EmailScheduler"] = async ({
         await state.set("scheduled_campaigns", campaign.campaignId, campaign);
 
         // Update main campaign status
-        const mainCampaign = await state.get("campaigns", campaign.campaignId) as any;
+        const mainCampaign = (await state.get(
+          "campaigns",
+          campaign.campaignId
+        )) as any;
         if (mainCampaign) {
           mainCampaign.status = "failed";
           mainCampaign.error = (campaign as any).error;
