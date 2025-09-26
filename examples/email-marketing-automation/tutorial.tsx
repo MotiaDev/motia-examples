@@ -405,7 +405,7 @@ export const steps: TutorialStep[] = [
         preferences.
         <br />
         <br />
-        💡 This Python step showcases multi-language support in Motia workflows.
+        This Python step showcases multi-language support in Motia workflows.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -564,7 +564,7 @@ export const steps: TutorialStep[] = [
         logic.
         <br />
         <br />
-        💡 The system supports both immediate delivery and scheduled campaigns.
+        The system supports both immediate delivery and scheduled campaigns.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -698,7 +698,7 @@ export const steps: TutorialStep[] = [
         system cleanliness by removing old campaign data.
         <br />
         <br />
-        💡 This demonstrates how cron steps handle time-based automation.
+        This demonstrates how cron steps handle time-based automation.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -828,7 +828,7 @@ export const steps: TutorialStep[] = [
         optimization.
         <br />
         <br />
-        💡 This step showcases real-time analytics and milestone detection.
+        This step showcases real-time analytics and milestone detection.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -934,7 +934,7 @@ export const steps: TutorialStep[] = [
         completion status with comprehensive alerting and health reporting.
         <br />
         <br />
-        💡 This demonstrates enterprise-grade monitoring and alerting systems.
+        This demonstrates enterprise-grade monitoring and alerting systems.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -1081,7 +1081,7 @@ export const steps: TutorialStep[] = [
         and metrics tracking while maintaining GDPR and CAN-SPAM compliance.
         <br />
         <br />
-        💡 This demonstrates enterprise-grade compliance and user preference
+        This demonstrates enterprise-grade compliance and user preference
         management.
       </p>
     ),
@@ -1231,7 +1231,7 @@ export const steps: TutorialStep[] = [
         engagement-based progression and personalized content generation.
         <br />
         <br />
-        💡 This demonstrates sophisticated email sequence automation and user
+        This demonstrates sophisticated email sequence automation and user
         onboarding.
       </p>
     ),
@@ -1383,7 +1383,7 @@ export const steps: TutorialStep[] = [
         maps provider-specific events to standardized internal events.
         <br />
         <br />
-        💡 This demonstrates enterprise-grade webhook processing and security.
+        This demonstrates enterprise-grade webhook processing and security.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -1470,7 +1470,7 @@ export const steps: TutorialStep[] = [
         recognition, and purchase readiness signals for automated marketing.
         <br />
         <br />
-        💡 This showcases advanced behavioral marketing automation.
+        This showcases advanced behavioral marketing automation.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -1596,7 +1596,7 @@ export const steps: TutorialStep[] = [
         feed into the behavioral trigger engine and segmentation system.
         <br />
         <br />
-        💡 This creates the data foundation for behavioral marketing.
+        This creates the data foundation for behavioral marketing.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -1661,7 +1661,7 @@ export const steps: TutorialStep[] = [
         provides executive-level reporting and anomaly detection.
         <br />
         <br />
-        💡 This showcases enterprise reporting and business intelligence.
+        This showcases enterprise reporting and business intelligence.
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
@@ -1727,7 +1727,7 @@ export const steps: TutorialStep[] = [
         action.
         <br />
         <br />
-        💡 Make sure your email provider credentials are configured for full
+        Make sure your email provider credentials are configured for full
         testing.
       </p>
     ),
