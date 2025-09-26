@@ -185,7 +185,6 @@ class AppwriteService {
         campaignData.id || ID.unique(),
         campaignData
       );
-      console.log("Campaign created:", response);
       return response as unknown as Campaign;
     } catch (error) {
       console.error("Error creating campaign:", error);

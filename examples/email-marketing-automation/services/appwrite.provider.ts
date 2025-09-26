@@ -82,19 +82,13 @@ class AppwriteMessagingProvider implements EmailProvider {
   // Helper method to create user if doesn't exist
   private async ensureUserExists(email: string): Promise<string> {
     try {
-      console.log(`[APPWRITE] Looking for user with email: ${email}`);
-
       // Try to find existing user by email using proper Query syntax
       const usersList = await this.users.list([Query.equal("email", email)]);
 
       if (usersList.users.length > 0) {
-        console.log(
-          `[APPWRITE] Found existing user: ${usersList.users[0].$id}`
-        );
         return usersList.users[0].$id;
       }
 
-      console.log(`[APPWRITE] Creating new user for: ${email}`);
       // User doesn't exist, create one
       const newUser = await this.users.create(
         ID.unique(), // userId
@@ -104,7 +98,6 @@ class AppwriteMessagingProvider implements EmailProvider {
         email.split("@")[0] // name - use part before @ as name
       );
 
-      console.log(`[APPWRITE] Created new user: ${newUser.$id}`);
       return newUser.$id;
     } catch (error) {
       console.error("Failed to ensure user exists:", error);

@@ -204,7 +204,6 @@ async function sendSingleEmail(
     };
 
     const result = await emailProvider.send(emailData);
-    console.log("result", result);
 
     if (result.success) {
       // Update email status in state
