@@ -1,0 +1,32 @@
+[
+  {
+    "id": "event-configuration",
+    "title": "Event Step Configuration",
+    "description": "Event-driven step that subscribes to multiple email events and tracks engagement analytics across the email automation system.",
+    "lines": ["41-72"]
+  },
+  {
+    "id": "email-metrics-tracking",
+    "title": "Email Metrics Management",
+    "description": "Creates and updates email metrics for individual emails, tracking status changes and event timestamps.",
+    "lines": ["89-135"]
+  },
+  {
+    "id": "campaign-analytics",
+    "title": "Campaign Analytics Update",
+    "description": "Updates campaign-level analytics with aggregated metrics and calculates performance rates (delivery, open, click rates).",
+    "lines": ["137-143", "185-274"]
+  },
+  {
+    "id": "engagement-milestones",
+    "title": "Engagement Milestone Detection",
+    "description": "Checks for engagement milestones and triggers milestone events when performance thresholds are reached.",
+    "lines": ["145-152", "276-340"]
+  },
+  {
+    "id": "analytics-emission",
+    "title": "Analytics Event Emission",
+    "description": "Emits analytics update events for dashboard updates and system monitoring with comprehensive metrics data.",
+    "lines": ["163-174"]
+  }
+]

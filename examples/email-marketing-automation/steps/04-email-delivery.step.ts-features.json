@@ -1,0 +1,38 @@
+[
+  {
+    "id": "event-configuration",
+    "title": "Event Step Configuration",
+    "description": "Event-driven step that subscribes to 'content-personalized' and handles email delivery with batch processing and rate limiting.",
+    "lines": ["34-47"]
+  },
+  {
+    "id": "scheduling-logic",
+    "title": "Campaign Scheduling Logic",
+    "description": "Checks if campaign is scheduled for future delivery and stores it for cron job processing, otherwise processes immediately.",
+    "lines": ["62-82"]
+  },
+  {
+    "id": "batch-processing",
+    "title": "Batch Email Processing",
+    "description": "Processes emails in batches with parallel execution and rate limiting to avoid overwhelming the email service.",
+    "lines": ["94-137"]
+  },
+  {
+    "id": "email-sending",
+    "title": "Individual Email Sending",
+    "description": "Sends individual emails through the email provider and updates email status in state with success/failure tracking.",
+    "lines": ["186-258"]
+  },
+  {
+    "id": "metrics-update",
+    "title": "Campaign Metrics Update",
+    "description": "Updates campaign status and metrics after email delivery completion with success/failure counts.",
+    "lines": ["139-143", "261-292"]
+  },
+  {
+    "id": "completion-event",
+    "title": "Campaign Completion",
+    "description": "Emits campaign completion event with delivery statistics and triggers next steps in the workflow.",
+    "lines": ["156-166"]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "event-configuration",
+    "title": "Event Step Configuration",
+    "description": "Event-driven step that processes behavioral triggers and initiates targeted email campaigns based on user behavior patterns.",
+    "lines": ["63-82"]
+  },
+  {
+    "id": "campaign-evaluation",
+    "title": "Campaign Condition Evaluation",
+    "description": "Evaluates behavioral campaigns against user conditions including engagement scores, purchase history, and cart values.",
+    "lines": ["122-129", "194-285"]
+  },
+  {
+    "id": "cooldown-management",
+    "title": "Campaign Cooldown Management",
+    "description": "Implements cooldown periods to prevent spam and ensures users don't receive the same campaign too frequently.",
+    "lines": ["134-143", "287-325"]
+  },
+  {
+    "id": "sequence-initiation",
+    "title": "Behavioral Sequence Initiation",
+    "description": "Creates behavioral email sequences with appropriate delays and personalized content based on trigger type and user data.",
+    "lines": ["145-153", "327-448"]
+  },
+  {
+    "id": "content-personalization",
+    "title": "Behavioral Content Generation",
+    "description": "Generates personalized email content for different behavioral triggers (cart abandonment, inactivity, high engagement, purchase ready).",
+    "lines": ["358-363", "489-544"]
+  },
+  {
+    "id": "campaign-tracking",
+    "title": "Campaign Trigger Tracking",
+    "description": "Tracks behavioral campaign triggers with comprehensive logging and event emission for analytics and monitoring.",
+    "lines": ["404-431"]
+  }
+]

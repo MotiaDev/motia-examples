@@ -1,0 +1,38 @@
+[
+  {
+    "id": "event-configuration",
+    "title": "Event Step Configuration",
+    "description": "Event-driven step that subscribes to 'campaign-created' and emits 'users-segmented' for the email automation workflow.",
+    "lines": ["27-45"]
+  },
+  {
+    "id": "user-segmentation",
+    "title": "User Segmentation Logic",
+    "description": "Core segmentation logic that fetches users from Appwrite and applies audience-specific filtering criteria.",
+    "lines": ["58-61", "131-188"]
+  },
+  {
+    "id": "state-management",
+    "title": "Campaign State Storage",
+    "description": "Stores segmented users in Motia state for campaign processing and updates campaign metrics in Appwrite.",
+    "lines": ["70", "72-85"]
+  },
+  {
+    "id": "event-emission",
+    "title": "Workflow Continuation",
+    "description": "Emits 'users-segmented' event with recipient data to trigger the next step in the email automation workflow.",
+    "lines": ["88-100"]
+  },
+  {
+    "id": "audience-filtering",
+    "title": "Audience-Specific Filtering",
+    "description": "Applies different filtering criteria based on target audience: new users, active users, VIP users, or all users.",
+    "lines": ["150-172"]
+  },
+  {
+    "id": "user-parsing",
+    "title": "User Data Parsing",
+    "description": "Parses user fields from Appwrite, handling JSON string conversion and providing fallback values for malformed data.",
+    "lines": ["190-226"]
+  }
+]

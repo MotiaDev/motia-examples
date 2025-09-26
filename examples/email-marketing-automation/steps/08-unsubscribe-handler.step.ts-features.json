@@ -1,0 +1,38 @@
+[
+  {
+    "id": "api-configuration",
+    "title": "Unsubscribe API Configuration",
+    "description": "GET endpoint at /unsubscribe for one-click unsubscribe requests with token validation and confirmation flow.",
+    "lines": ["44-68"]
+  },
+  {
+    "id": "token-validation",
+    "title": "Unsubscribe Token Validation",
+    "description": "Validates and decodes unsubscribe tokens with expiration checks and user verification for secure unsubscribe processing.",
+    "lines": ["144-155", "303-352"]
+  },
+  {
+    "id": "confirmation-flow",
+    "title": "Unsubscribe Confirmation Flow",
+    "description": "Implements two-step unsubscribe process with confirmation requirement to prevent accidental unsubscribes.",
+    "lines": ["186-199"]
+  },
+  {
+    "id": "unsubscribe-processing",
+    "title": "Unsubscribe Record Creation",
+    "description": "Creates comprehensive unsubscribe records with reason tracking, feedback collection, and compliance logging.",
+    "lines": ["201-219", "222-228"]
+  },
+  {
+    "id": "sequence-cancellation",
+    "title": "Email Sequence Cancellation",
+    "description": "Cancels active email sequences (welcome, behavioral) when users unsubscribe to respect their preferences immediately.",
+    "lines": ["230-231", "354-384"]
+  },
+  {
+    "id": "metrics-tracking",
+    "title": "Unsubscribe Metrics Tracking",
+    "description": "Tracks unsubscribe metrics by reason, campaign, and daily totals for business intelligence and campaign optimization.",
+    "lines": ["233-234", "386-444"]
+  }
+]

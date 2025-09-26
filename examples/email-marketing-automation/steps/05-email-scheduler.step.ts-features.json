@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cron-configuration",
+    "title": "Cron Step Configuration",
+    "description": "Scheduled cron job that runs every 5 minutes to check for scheduled campaigns and trigger them when ready.",
+    "lines": ["11-18"]
+  },
+  {
+    "id": "scheduled-campaign-check",
+    "title": "Scheduled Campaign Processing",
+    "description": "Retrieves all scheduled campaigns from state and checks if they're ready to be sent based on scheduled time.",
+    "lines": ["28-36", "47-81"]
+  },
+  {
+    "id": "campaign-triggering",
+    "title": "Campaign Trigger Logic",
+    "description": "Triggers scheduled campaigns by emitting 'content-personalized' event and updating campaign status to prevent duplicates.",
+    "lines": ["60-81"]
+  },
+  {
+    "id": "cleanup-logic",
+    "title": "Campaign Cleanup",
+    "description": "Cleans up old triggered campaigns and removes completed campaigns older than 24 hours to maintain state hygiene.",
+    "lines": ["99-112", "155-201"]
+  },
+  {
+    "id": "status-updates",
+    "title": "Campaign Status Management",
+    "description": "Updates main campaign status and handles failed campaigns with proper error tracking and state management.",
+    "lines": ["82-91", "122-147"]
+  }
+]
