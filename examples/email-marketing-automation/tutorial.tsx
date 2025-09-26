@@ -5,7 +5,7 @@ export const steps: TutorialStep[] = [
     title: "Email Marketing Automation Engine",
     image: {
       height: 200,
-      src: "https://github.com/MotiaDev/motia/raw/main/packages/docs/public/github-readme-banner.png",
+      src: "https://github.com/MotiaDev/motia-examples/blob/main/examples/ai-content-moderation/assets/workflow.png?raw=true",
     },
     description: () => (
       <p>
