@@ -33,40 +33,43 @@
         "y": -12
       },
       "steps/09-welcome-email-series.step.ts": {
-        "x": 230,
-        "y": -25
+        "x": -35,
+        "y": 141
       },
       "steps/08-unsubscribe-handler.step.ts": {
-        "x": -462,
-        "y": -101
+        "x": -1614,
+        "y": -43
       },
       "steps/07-campaign-status-monitor.step.ts": {
-        "x": -460,
-        "y": 254
+        "x": -1049,
+        "y": -4
       },
       "steps/06-email-analytics-tracker.step.ts": {
-        "x": 1636,
-        "y": 78
+        "x": 783,
+        "y": -395
       },
       "steps/05-email-scheduler.step.ts": {
-        "x": 634,
-        "y": 613
+        "x": 213,
+        "y": -797
       },
       "steps/04-email-delivery.step.ts": {
-        "x": 930,
-        "y": -448
+        "x": 143,
+        "y": -394
       },
       "steps/02-user-segmentation.step.ts": {
-        "x": -465,
-        "y": -433
+        "x": -1038,
+        "y": -393,
+        "targetHandlePosition": "left"
       },
       "steps/01-create-campaign.step.ts": {
-        "x": -1165,
-        "y": -455
+        "x": -1607,
+        "y": -428,
+        "sourceHandlePosition": "right"
       },
       "steps/03-content-personalization_step.py": {
-        "x": 126,
-        "y": -440
+        "x": -466,
+        "y": -393,
+        "targetHandlePosition": "left"
       }
     }
   }

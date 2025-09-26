@@ -66,7 +66,7 @@ export const handler: Handlers["WelcomeEmailSeries"] = async (
   input,
   { traceId, logger, state, emit }
 ) => {
-  logger.info("Step 13 – Processing welcome email sequence", {
+  logger.info("Step 09 – Processing welcome email sequence", {
     userId: input.userId,
     email: input.email,
     triggerType: input.triggerType,

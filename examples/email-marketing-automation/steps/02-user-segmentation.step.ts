@@ -85,7 +85,7 @@ export const handler: Handlers["UserSegmentation"] = async (
     }
 
     // Emit event with segmented users for next step
-    await emit({
+    await (emit as any)({
       topic: "users-segmented",
       data: {
         campaignId: input.campaignId,
@@ -112,7 +112,7 @@ export const handler: Handlers["UserSegmentation"] = async (
     });
 
     // Fallback to empty recipients on error
-    await emit({
+    await (emit as any)({
       topic: "users-segmented",
       data: {
         campaignId: input.campaignId,

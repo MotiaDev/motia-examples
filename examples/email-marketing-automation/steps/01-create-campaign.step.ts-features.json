@@ -13,7 +13,7 @@
   },
   {
     "id": "response-schema",
-    "title": "Response Schema Definition",
+    "title": "Response Schema",
     "description": "Type-safe response schemas for both success (200) and error (400) responses with proper typing.",
     "lines": ["21-34"]
   },

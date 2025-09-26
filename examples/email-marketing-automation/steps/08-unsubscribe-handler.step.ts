@@ -91,7 +91,7 @@ export const handler: Handlers["UnsubscribeHandler"] = async (
   const feedbackStr = Array.isArray(feedback) ? feedback[0] : feedback;
   const confirmStr = Array.isArray(confirm) ? confirm[0] : confirm;
 
-  logger.info("Step 11 – Processing unsubscribe request", {
+  logger.info("Step 08 – Processing unsubscribe request", {
     token: tokenStr ? tokenStr.substring(0, 20) + "..." : "none",
     reason: reasonStr,
     confirm: confirmStr,

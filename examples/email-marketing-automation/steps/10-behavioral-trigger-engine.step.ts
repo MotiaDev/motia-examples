@@ -85,7 +85,7 @@ export const handler: Handlers["BehavioralTriggerEngine"] = async (
   input,
   { traceId, logger, state, emit }
 ) => {
-  logger.info("Step 14 – Processing behavioral trigger", {
+  logger.info("Step 10 – Processing behavioral trigger", {
     userId: input.userId,
     triggerType: input.type,
     email: input.email,

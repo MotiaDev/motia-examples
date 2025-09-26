@@ -20,9 +20,8 @@ export const steps: TutorialStep[] = [
         preferences through an event-driven architecture.
         <br />
         <br />
-        💡 This example showcases advanced workflow orchestration,
-        multi-provider integrations, and enterprise-scale email automation
-        patterns.
+        This example showcases advanced workflow orchestration, multi-provider
+        integrations, and enterprise-scale email automation patterns.
       </p>
     ),
   },
@@ -120,6 +119,26 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
+    title: "Response Schema Definition",
+    description: () => (
+      <p>
+        The API defines comprehensive response schemas for both success (200)
+        and error (400) responses with proper TypeScript typing.
+        <br />
+        <br />
+        This ensures consistent API responses and provides clear error handling
+        for clients consuming the campaign creation endpoint.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("response-schema"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
     title: "Campaign Object Creation",
     description: () => (
       <p>
@@ -149,6 +168,15 @@ export const steps: TutorialStep[] = [
         <br />
         This provides persistent storage for campaign data and enables tracking
         across the entire email automation workflow.
+        <br />
+        <br />
+        <a
+          href="https://appwrite.io/docs/products/databases"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more about Appwrite Database
+        </a>
       </p>
     ),
     before: [
@@ -179,6 +207,27 @@ export const steps: TutorialStep[] = [
       },
     ],
   },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Success Response",
+    description: () => (
+      <p>
+        The API returns a comprehensive success response including campaign ID,
+        name, status, creation time, target audience, and trace ID for tracking.
+        <br />
+        <br />
+        This response provides immediate confirmation of campaign creation and
+        includes all necessary identifiers for monitoring the campaign through
+        the automation workflow.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("success-response"),
+      },
+    ],
+  },
 
   // User Segmentation
 
@@ -198,7 +247,7 @@ export const steps: TutorialStep[] = [
         capabilities.
         <br />
         <br />
-        💡 Proper segmentation is crucial for campaign effectiveness and
+        Proper segmentation is crucial for campaign effectiveness and
         compliance.
       </p>
     ),
@@ -240,6 +289,15 @@ export const steps: TutorialStep[] = [
         <br />
         The system supports filtering by user signup date, activity levels,
         subscription status, and custom user attributes for precise targeting.
+        <br />
+        <br />
+        <a
+          href="https://appwrite.io/docs/products/databases/query"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more about Appwrite Database Queries
+        </a>
       </p>
     ),
     before: [
@@ -260,12 +318,72 @@ export const steps: TutorialStep[] = [
         <br />
         This state management ensures that all campaign data persists throughout
         the automation workflow for reliable processing.
+        <br />
+        <br />
+        <a
+          href="https://appwrite.io/docs/products/users"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more about Appwrite User Management
+        </a>
       </p>
     ),
     before: [
       {
         type: "click",
         selector: workbenchXPath.flows.feature("state-management"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Audience-Specific Filtering",
+    description: () => (
+      <p>
+        The system applies different filtering criteria based on target audience
+        including new users, active users, VIP users, and custom segments.
+        <br />
+        <br />
+        Each audience type has specific filtering logic that considers user
+        signup dates, activity levels, purchase history, and engagement metrics
+        for precise targeting.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("audience-filtering"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "User Data Parsing",
+    description: () => (
+      <p>
+        User fields from Appwrite are parsed and converted from JSON strings to
+        proper data structures with fallback values for malformed data.
+        <br />
+        <br />
+        This robust parsing ensures that user data is properly structured for
+        segmentation logic and prevents errors from corrupted or incomplete user
+        records.
+        <br />
+        <br />
+        <a
+          href="https://appwrite.io/docs/products/users"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more about Appwrite User Data
+        </a>
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("user-parsing"),
       },
     ],
   },
@@ -318,6 +436,58 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
+    title: "Appwrite Storage Integration",
+    description: () => (
+      <p>
+        The system fetches email templates from Appwrite Storage with
+        comprehensive template mapping for different campaign types and fallback
+        mechanisms.
+        <br />
+        <br />
+        This integration enables dynamic template management and ensures
+        reliable template delivery with proper error handling and fallback
+        templates.
+        <br />
+        <br />
+        <a
+          href="https://appwrite.io/docs/products/storage"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more about Appwrite Storage
+        </a>
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("template-storage"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Content Personalization Logic",
+    description: () => (
+      <p>
+        The core personalization logic processes each recipient and applies
+        AI-powered or basic personalization based on user preferences and data.
+        <br />
+        <br />
+        The system handles both advanced AI personalization using language
+        models and rule-based personalization with fallback mechanisms for
+        reliability.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("personalization-logic"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
     title: "AI-Powered Personalization",
     description: () => (
       <p>
@@ -353,6 +523,27 @@ export const steps: TutorialStep[] = [
       {
         type: "click",
         selector: workbenchXPath.flows.feature("state-storage"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "User Segmentation Logic",
+    description: () => (
+      <p>
+        The system includes helper functions to determine if users are new based
+        on signup date for targeted personalization strategies.
+        <br />
+        <br />
+        This segmentation logic enables different personalization approaches for
+        new users versus existing users, ensuring appropriate messaging for each
+        user type.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("user-segmentation"),
       },
     ],
   },
@@ -433,12 +624,61 @@ export const steps: TutorialStep[] = [
         <br />
         The system tracks delivery success and failures, providing detailed
         analytics for campaign performance monitoring.
+        <br />
+        <br />
+        <a
+          href="https://appwrite.io/docs/products/messaging"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more about Appwrite Messaging
+        </a>
       </p>
     ),
     before: [
       {
         type: "click",
         selector: workbenchXPath.flows.feature("email-sending"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Campaign Metrics Update",
+    description: () => (
+      <p>
+        The system updates campaign status and metrics after email delivery
+        completion with comprehensive success and failure tracking.
+        <br />
+        <br />
+        This includes updating campaign completion status, calculating delivery
+        rates, and maintaining accurate performance metrics for reporting.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("metrics-update"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Campaign Completion",
+    description: () => (
+      <p>
+        The system emits campaign completion events with comprehensive delivery
+        statistics and triggers next steps in the workflow.
+        <br />
+        <br />
+        This ensures proper workflow orchestration and provides detailed
+        completion data for analytics and follow-up campaign processing.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("completion-event"),
       },
     ],
   },
@@ -462,6 +702,30 @@ export const steps: TutorialStep[] = [
       </p>
     ),
     before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Cron Step Configuration",
+    description: () => (
+      <p>
+        The Email Scheduler is configured as a cron job that runs every 5
+        minutes to check for scheduled campaigns and trigger them when ready.
+        <br />
+        <br />
+        This automated scheduling system ensures campaigns are delivered exactly
+        when marketers intend them to be sent without manual intervention.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("emailscheduler"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("cron-configuration"),
+      },
+    ],
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
@@ -489,6 +753,26 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
+    title: "Campaign Trigger Logic",
+    description: () => (
+      <p>
+        The system triggers scheduled campaigns by emitting content-personalized
+        events and updating campaign status to prevent duplicate processing.
+        <br />
+        <br />
+        This ensures that campaigns are triggered only once and maintains proper
+        state management throughout the email automation workflow.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("campaign-triggering"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
     title: "Campaign Cleanup",
     description: () => (
       <p>
@@ -504,6 +788,26 @@ export const steps: TutorialStep[] = [
       {
         type: "click",
         selector: workbenchXPath.flows.feature("cleanup-logic"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Campaign Status Management",
+    description: () => (
+      <p>
+        The system updates main campaign status and handles failed campaigns
+        with proper error tracking and state management.
+        <br />
+        <br />
+        This includes comprehensive status updates, error handling, and state
+        transitions to ensure reliable campaign processing and monitoring.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("status-updates"),
       },
     ],
   },
@@ -590,6 +894,475 @@ export const steps: TutorialStep[] = [
       {
         type: "click",
         selector: workbenchXPath.flows.feature("engagement-milestones"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Analytics Event Emission",
+    description: () => (
+      <p>
+        The system emits analytics update events for dashboard updates and
+        system monitoring with comprehensive metrics data.
+        <br />
+        <br />
+        This ensures real-time analytics updates and provides detailed metrics
+        for campaign performance monitoring and business intelligence.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("analytics-emission"),
+      },
+    ],
+  },
+
+  // Campaign Status Monitor
+
+  {
+    elementXpath: workbenchXPath.flows.node("campaignstatusmonitor"),
+    title: "Campaign Status Monitor",
+    description: () => (
+      <p>
+        The <b>Campaign Status Monitor</b> is a cron job that runs every 10
+        minutes to monitor campaign health, performance, and generate alerts for
+        issues.
+        <br />
+        <br />
+        It tracks delivery rates, bounce rates, processing times, and campaign
+        completion status with comprehensive alerting and health reporting.
+        <br />
+        <br />
+        💡 This demonstrates enterprise-grade monitoring and alerting systems.
+      </p>
+    ),
+    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Cron Step Configuration",
+    description: () => (
+      <p>
+        The Campaign Status Monitor is configured as a cron job that runs every
+        10 minutes to monitor campaign health and generate performance alerts.
+        <br />
+        <br />
+        This automated monitoring ensures proactive campaign management and
+        early detection of performance issues or system problems.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("campaignstatusmonitor"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("cron-configuration"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Campaign Health Analysis",
+    description: () => (
+      <p>
+        The system monitors active campaigns and calculates health scores based
+        on delivery rates, bounce rates, and processing time metrics.
+        <br />
+        <br />
+        This comprehensive health analysis provides real-time insights into
+        campaign performance and system health for proactive management.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("campaign-health-monitoring"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Alert Generation System",
+    description: () => (
+      <p>
+        The system generates alerts for low delivery rates, high bounce rates,
+        slow processing, and other campaign issues with severity levels.
+        <br />
+        <br />
+        This alerting system ensures that performance issues are detected early
+        and appropriate actions can be taken to maintain campaign effectiveness.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("alert-generation"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Health Report Generation",
+    description: () => (
+      <p>
+        The system generates comprehensive health reports for each campaign with
+        detailed metrics and system health scores.
+        <br />
+        <br />
+        These reports provide stakeholders with clear visibility into campaign
+        performance and system health for informed decision-making.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("health-reports"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Stuck Campaign Detection",
+    description: () => (
+      <p>
+        The system detects campaigns stuck in processing for extended periods
+        and marks them as failed if necessary to maintain system health.
+        <br />
+        <br />
+        This prevents system bottlenecks and ensures that problematic campaigns
+        are handled appropriately without affecting overall system performance.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("stuck-campaign-detection"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Campaign Completion Tracking",
+    description: () => (
+      <p>
+        The system tracks campaign completion status and handles campaign
+        lifecycle management with proper state transitions and completion
+        monitoring.
+        <br />
+        <br />
+        This ensures accurate campaign status tracking and proper completion
+        handling throughout the entire campaign lifecycle.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("completion-tracking"),
+      },
+    ],
+  },
+
+  // Unsubscribe Handler
+
+  {
+    elementXpath: workbenchXPath.flows.node("unsubscribehandler"),
+    title: "Unsubscribe Handler",
+    description: () => (
+      <p>
+        The <b>Unsubscribe Handler</b> processes one-click unsubscribe requests
+        and displays unsubscribe confirmation with comprehensive compliance
+        features.
+        <br />
+        <br />
+        It handles token validation, confirmation flows, sequence cancellation,
+        and metrics tracking while maintaining GDPR and CAN-SPAM compliance.
+        <br />
+        <br />
+        💡 This demonstrates enterprise-grade compliance and user preference
+        management.
+      </p>
+    ),
+    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Unsubscribe API Configuration",
+    description: () => (
+      <p>
+        The Unsubscribe Handler is configured as a GET endpoint at /unsubscribe
+        for one-click unsubscribe requests with token validation and
+        confirmation flow.
+        <br />
+        <br />
+        This API endpoint provides secure unsubscribe processing with
+        comprehensive validation and proper HTTP response handling.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("unsubscribehandler"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("api-configuration"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Unsubscribe Token Validation",
+    description: () => (
+      <p>
+        The system validates and decodes unsubscribe tokens with expiration
+        checks and user verification for secure unsubscribe processing.
+        <br />
+        <br />
+        This security layer ensures that only valid, non-expired tokens can be
+        used for unsubscribe requests, preventing unauthorized access.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("token-validation"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Unsubscribe Confirmation Flow",
+    description: () => (
+      <p>
+        The system implements a two-step unsubscribe process with confirmation
+        requirement to prevent accidental unsubscribes.
+        <br />
+        <br />
+        This user-friendly approach ensures that users intentionally unsubscribe
+        and provides a clear confirmation step for better user experience.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("confirmation-flow"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Unsubscribe Record Creation",
+    description: () => (
+      <p>
+        The system creates comprehensive unsubscribe records with reason
+        tracking, feedback collection, and compliance logging.
+        <br />
+        <br />
+        This ensures complete audit trails for compliance purposes and provides
+        valuable feedback for improving email marketing practices.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("unsubscribe-processing"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Email Sequence Cancellation",
+    description: () => (
+      <p>
+        When users unsubscribe, the system immediately cancels active email
+        sequences (welcome, behavioral) to respect their preferences.
+        <br />
+        <br />
+        This ensures that users are not contacted after unsubscribing and
+        maintains compliance with email marketing regulations and best
+        practices.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("sequence-cancellation"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Unsubscribe Metrics Tracking",
+    description: () => (
+      <p>
+        The system tracks unsubscribe metrics by reason, campaign, and daily
+        totals for business intelligence and campaign optimization.
+        <br />
+        <br />
+        This comprehensive tracking provides insights into unsubscribe patterns
+        and helps optimize email marketing strategies to reduce unsubscribe
+        rates.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("metrics-tracking"),
+      },
+    ],
+  },
+
+  // Welcome Email Series
+
+  {
+    elementXpath: workbenchXPath.flows.node("welcomeemailseries"),
+    title: "Welcome Email Series",
+    description: () => (
+      <p>
+        The <b>Welcome Email Series</b> manages comprehensive welcome email
+        sequences with step tracking, timing, and completion status for new user
+        onboarding.
+        <br />
+        <br />
+        It handles multiple trigger types (start, progression, timer) with
+        engagement-based progression and personalized content generation.
+        <br />
+        <br />
+        💡 This demonstrates sophisticated email sequence automation and user
+        onboarding.
+      </p>
+    ),
+    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Event Step Configuration",
+    description: () => (
+      <p>
+        The Welcome Email Series is configured as an event-driven step that
+        manages welcome email sequences with multiple trigger types for
+        comprehensive onboarding.
+        <br />
+        <br />
+        This configuration enables automatic sequence processing and supports
+        various trigger types for flexible welcome email automation.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("welcomeemailseries"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("event-configuration"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Welcome Sequence Management",
+    description: () => (
+      <p>
+        The system creates and manages welcome email sequences with step
+        tracking, timing, and completion status for new user onboarding.
+        <br />
+        <br />
+        This includes sequence creation, step progression, completion tracking,
+        and engagement monitoring for comprehensive user onboarding management.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("sequence-management"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Sequence Trigger Processing",
+    description: () => (
+      <p>
+        The system processes different sequence triggers (start, progression,
+        timer) with appropriate email sending and scheduling logic.
+        <br />
+        <br />
+        This flexible trigger system supports various onboarding scenarios and
+        ensures timely delivery of welcome emails based on user behavior and
+        timing.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("sequence-triggers"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Email Scheduling Logic",
+    description: () => (
+      <p>
+        The system schedules welcome emails with appropriate delays and handles
+        engagement-based progression for optimal user experience.
+        <br />
+        <br />
+        This intelligent scheduling ensures that users receive welcome emails at
+        optimal times and can progress faster through the sequence based on
+        engagement.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("email-scheduling"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Welcome Email Content Generation",
+    description: () => (
+      <p>
+        The system generates personalized welcome email content with
+        step-specific templates and user data integration.
+        <br />
+        <br />
+        This includes dynamic content generation based on user signup source,
+        preferences, and engagement history for highly personalized onboarding
+        experiences.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("content-generation"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Sequence Completion Tracking",
+    description: () => (
+      <p>
+        The system tracks sequence completion with engagement metrics and emits
+        completion events for analytics and follow-up campaigns.
+        <br />
+        <br />
+        This comprehensive tracking provides insights into onboarding
+        effectiveness and enables data-driven optimization of welcome email
+        sequences.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("sequence-completion"),
       },
     ],
   },
@@ -763,6 +1536,47 @@ export const steps: TutorialStep[] = [
       {
         type: "click",
         selector: workbenchXPath.flows.feature("content-personalization"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Behavioral Sequence Initiation",
+    description: () => (
+      <p>
+        The system creates behavioral email sequences with appropriate delays
+        and personalized content based on trigger type and user data.
+        <br />
+        <br />
+        This includes sequence creation, timing configuration, and personalized
+        content generation for sophisticated behavioral marketing automation.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("sequence-initiation"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Campaign Trigger Tracking",
+    description: () => (
+      <p>
+        The system tracks behavioral campaign triggers with comprehensive
+        logging and event emission for analytics and monitoring.
+        <br />
+        <br />
+        This provides detailed tracking of behavioral trigger events, campaign
+        performance, and user engagement for advanced analytics and
+        optimization.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("campaign-tracking"),
       },
     ],
   },
