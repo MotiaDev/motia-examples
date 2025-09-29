@@ -1,0 +1,76 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "email-automation",
+    "config": {
+      "steps/10-behavioral-trigger-engine.step.ts": {
+        "x": 1001,
+        "y": -12
+      },
+      "steps/09-welcome-email-series.step.ts": {
+        "x": -35,
+        "y": 141
+      },
+      "steps/08-unsubscribe-handler.step.ts": {
+        "x": -1614,
+        "y": -43
+      },
+      "steps/07-campaign-status-monitor.step.ts": {
+        "x": -1049,
+        "y": -4
+      },
+      "steps/06-email-analytics-tracker.step.ts": {
+        "x": 783,
+        "y": -395
+      },
+      "steps/05-email-scheduler.step.ts": {
+        "x": 213,
+        "y": -797
+      },
+      "steps/04-email-delivery.step.ts": {
+        "x": 143,
+        "y": -394
+      },
+      "steps/02-user-segmentation.step.ts": {
+        "x": -1038,
+        "y": -393,
+        "targetHandlePosition": "left"
+      },
+      "steps/01-create-campaign.step.ts": {
+        "x": -1607,
+        "y": -428,
+        "sourceHandlePosition": "right"
+      },
+      "steps/03-content-personalization_step.py": {
+        "x": -466,
+        "y": -393,
+        "targetHandlePosition": "left"
+      }
+    }
+  }
+]
