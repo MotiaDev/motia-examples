@@ -1,8 +1,43 @@
-node_modules
-python_modules
-.venv
-venv
-.motia
-.mermaid
-dist
-*.pyc
+# Dependencies
+node_modules/
+.pnpm-store/
+.npm
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Motia generated
+.motia/
+.mermaid/
+dist/
+
+# IDE files
+.cursorignore
+.cursor/
+*.code-workspace
+
+# Python cache files
+*/__pycache__/*
+*.py[cod]
+*.pyo
+
+# macOS system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+#vector data
+weaviate_data/
+chromadb_data/
+hf_cache/
