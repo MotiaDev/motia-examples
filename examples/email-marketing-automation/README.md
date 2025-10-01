@@ -2,6 +2,8 @@
 
 A comprehensive email marketing automation platform built with Motia and Appwrite, featuring AI-powered personalization, behavioral triggers, and scalable campaign management.
 
+![Motia Email Marketing System](./assets/motia-workbench.gif)
+
 ## Overview
 
 This project demonstrates building a complete email marketing automation system using Motia's event-driven architecture integrated with Appwrite as the backend service. The system handles campaign creation, user segmentation, AI-powered content personalization, email delivery, and analytics tracking.
