@@ -1,0 +1,57 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "ugc-generation",
+    "config": {
+      "steps/02-vision-analysis.step.ts": {
+        "x": 301,
+        "y": 34
+      },
+      "steps/01-image-upload.step.ts": {
+        "x": -62,
+        "y": -1
+      },
+      "steps/03-variant-generation.step.ts": {
+        "x": 674,
+        "y": 34
+      },
+      "steps/04-image-generation.step.ts": {
+        "x": 1032,
+        "y": 34
+      },
+      "steps/06-file-storage.step.ts": {
+        "x": 1803,
+        "y": 39
+      },
+      "steps/05-video-generation.step.ts": {
+        "x": 1400,
+        "y": 34
+      }
+    }
+  }
+]
