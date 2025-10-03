@@ -1,0 +1,13 @@
+[34m➜ [INFO][39m Activating Python environment 
+[34m➜ [INFO][39m Using Python [1m[36m<projectDir>/python_modules/bin/python[39m[22m
+[34m➜ [INFO][39m Site-packages path [1m[36m<projectDir>/python_modules/lib/python3.13/site-packages[39m[22m
+[32m➜ [CREATED][39m [1m[34mFlow[39m[22m [1m[36mrag-workflow[39m[22m created
+[32m➜ [CREATED][39m [1m[35mStep[39m[22m [90m(Event)[39m [1m[36msteps/event-steps/read-pdfs.step.ts[39m[22m created
+[32m➜ [CREATED][39m [1m[35mStep[39m[22m [90m(Event)[39m [1m[36msteps/event-steps/process-pdfs.step.py[39m[22m created
+[32m➜ [CREATED][39m [1m[35mStep[39m[22m [90m(Event)[39m [1m[36msteps/event-steps/load-weaviate.step.ts[39m[22m created
+[32m➜ [CREATED][39m [1m[35mStep[39m[22m [90m(Event)[39m [1m[36msteps/event-steps/init-weaviate.step.ts[39m[22m created
+[32m➜ [CREATED][39m [1m[35mStep[39m[22m [90m(API)[39m [1m[36msteps/api-steps/api-weaviate-health.step.ts[39m[22m created
+[32m➜ [CREATED][39m [1m[35mStep[39m[22m [90m(API)[39m [1m[36msteps/api-steps/api-query-rag.step.ts[39m[22m created
+[32m➜ [CREATED][39m [1m[35mStep[39m[22m [90m(API)[39m [1m[36msteps/api-steps/api-process-pdfs.step.ts[39m[22m created
+🚀 Server ready and listening on port 3000
+🔗 Open http://0.0.0.0:3000/ to open workbench 🛠️

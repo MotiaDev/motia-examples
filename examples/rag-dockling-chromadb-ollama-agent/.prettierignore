@@ -1,0 +1,11 @@
+node_modules
+.motia
+dist
+build
+coverage
+pnpm-lock.yaml
+.DS_Store 
+data/
+.venv/
+.mermaid/
+.cursor/
