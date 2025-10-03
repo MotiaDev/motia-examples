@@ -1,15 +1,16 @@
 import { z } from "zod";
 import { ApiRouteConfig, Handlers } from "motia";
+import axios from "axios";
 
 const ImageUploadInputSchema = z.object({
   numVariations: z.number().default(1),
-  // .describe("Number of image variations to generate"),
+  imageUrl: z.string().url(),
 });
 
 export const config: ApiRouteConfig = {
   type: "api",
   name: "ImageUploadAPI",
-  description: "Upload image and trigger UGC video generation workflow",
+  description: "Upload image URL and trigger UGC video generation workflow",
   path: "/ugc/upload",
   method: "POST",
   bodySchema: ImageUploadInputSchema,
@@ -21,39 +22,56 @@ export const handler: Handlers["ImageUploadAPI"] = async (
   req,
   { logger, emit }
 ) => {
-  const { numVariations } = req.body;
-  const variations = numVariations ?? 1;
-
-  // Use predefined image from assets folder
-  const imagePath = "./assets/caoatiso.jpg";
-  logger.info(`Image path: ${imagePath}`);
-
   const requestId = `ugc_${Date.now()}_${Math.random()
     .toString(36)
     .slice(2, 11)}`;
 
-  logger.info(`UGC workflow initiated with predefined image`, {
+  logger.info(`ImageUploadAPI Step – Starting image upload process`, {
     requestId,
-    imagePath,
-    numVariations,
+    body: req.body,
   });
 
-  await emit({
-    topic: "image.uploaded",
-    data: {
-      requestId,
-      imagePath,
-      numVariations: variations,
-      timestamp: new Date().toISOString(),
-    },
-  });
+  try {
+    const { imageUrl } = req.body;
+    const numVariations = req.body.numVariations ?? 1;
 
-  return {
-    status: 200,
-    body: {
-      message: "UGC workflow started",
+    logger.info(`Validating image URL`, { requestId, imageUrl });
+
+    // Validate URL is accessible
+    await axios.head(imageUrl, { timeout: 5000 });
+
+    logger.info(`Starting UGC workflow`, { requestId, numVariations });
+
+    await emit({
+      topic: "image.uploaded",
+      data: {
+        requestId,
+        imageUrl,
+        numVariations,
+        timestamp: new Date().toISOString(),
+      },
+    });
+
+    return {
+      status: 200,
+      body: {
+        message: "UGC workflow started",
+        requestId,
+        status: "processing",
+      },
+    };
+  } catch (error: any) {
+    logger.error(`Failed to process image URL`, {
       requestId,
-      status: "processing",
-    },
-  };
+      error: error.message,
+    });
+
+    return {
+      status: 400,
+      body: {
+        error: error.message || "Failed to validate image URL",
+        requestId,
+      },
+    };
+  }
 };

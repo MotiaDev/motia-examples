@@ -1,59 +1,10 @@
 import { z } from "zod";
 import { EventConfig, Handlers } from "motia";
-import * as fs from "fs";
 import axios from "axios";
-import fetch from "node-fetch";
-
-// Type definition for ImageKit response
-interface ImageKitResponse {
-  fileId: string;
-  name: string;
-  size: number;
-  versionInfo: {
-    id: string;
-    name: string;
-  };
-  filePath: string;
-  url: string;
-  fileType: string;
-  height: number;
-  width: number;
-  thumbnailUrl: string;
-  AITags: any;
-  description: any;
-}
-
-// Type definition for OpenAI Vision API response
-interface OpenAIVisionResponse {
-  id: string;
-  object: string;
-  created: number;
-  model: string;
-  choices: Array<{
-    index: number;
-    message: {
-      role: string;
-      content: string;
-      refusal?: any;
-      annotations?: any[];
-    };
-    logprobs?: any;
-    finish_reason: string;
-  }>;
-  usage: {
-    prompt_tokens: number;
-    completion_tokens: number;
-    total_tokens: number;
-    prompt_tokens_details: any;
-    completion_tokens_details: any;
-  };
-  service_tier: string;
-  system_fingerprint: string;
-}
 
 const VisionAnalysisInputSchema = z.object({
   requestId: z.string(),
-  imagePath: z.string(),
+  imageUrl: z.string().url(),
   numVariations: z.number(),
   timestamp: z.string(),
 });
@@ -61,7 +12,7 @@ const VisionAnalysisInputSchema = z.object({
 export const config: EventConfig = {
   type: "event",
   name: "VisionAnalysisStep",
-  description: "Read image, upload to ImageKit, and analyze with OpenAI Vision",
+  description: "Analyze image with OpenAI Vision",
   subscribes: ["image.uploaded"],
   emits: ["vision.analyzed"],
   input: VisionAnalysisInputSchema,
@@ -72,41 +23,11 @@ export const handler: Handlers["VisionAnalysisStep"] = async (
   input,
   { logger, emit }
 ) => {
-  const { requestId, imagePath, numVariations } = input;
+  const { requestId, imageUrl, numVariations } = input;
 
   try {
-    logger.info(`Starting vision analysis`, { requestId, imagePath });
+    logger.info(`Starting vision analysis`, { requestId, imageUrl });
 
-    // 1. Read image file from project
-    const imageBuffer = fs.readFileSync(imagePath);
-    logger.info(`Image file read successfully`, {
-      requestId,
-      size: imageBuffer.length,
-    });
-
-    // 2. Upload to ImageKit
-    const imagekitResponse = await axios.post(
-      "https://upload.imagekit.io/api/v1/files/upload",
-      {
-        file: imageBuffer,
-        fileName: "product-image.jpg",
-      },
-      {
-        headers: {
-          Authorization: `Basic ${Buffer.from(
-            process.env.IMAGEKIT_PRIVATE_KEY +
-              ":" +
-              process.env.IMAGEKIT_PASSWORD
-          ).toString("base64")}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    const imageUrl = imagekitResponse.data.url;
-
-    logger.info(`Image uploaded to ImageKit`, { requestId, imageUrl });
-
-    // 3. Analyze with OpenAI Vision
     const visionPrompt = `Analyze the given image and return ONLY a compact JSON object (no markdown code fences, no explanations). Use this exact schema and keys:
 
 {
@@ -169,7 +90,7 @@ Return only the JSON. Do not include markdown, YAML, comments, or extra text.`;
 
     const analysisText = visionResponse.data.choices[0].message.content;
 
-    // 4. Parse and normalize the JSON response
+    // Parse and normalize the JSON response
     const cleanedAnalysis = analysisText
       .replace(/^```(?:json)?/i, "")
       .replace(/```?$/i, "")
@@ -186,7 +107,7 @@ Return only the JSON. Do not include markdown, YAML, comments, or extra text.`;
       throw new Error("Invalid JSON response from vision analysis");
     }
 
-    // 5. Normalize and add defaults
+    // Normalize and add defaults
     const normalizedData = {
       brand_name: visionAnalysis.brand_name || "Unknown Brand",
       product: visionAnalysis.product || "Unknown Product",
@@ -222,7 +143,7 @@ Return only the JSON. Do not include markdown, YAML, comments, or extra text.`;
       data: {
         requestId,
         imageUrl,
-        originalImagePath: imagePath,
+        originalImagePath: imageUrl,
         numVariations,
         visionAnalysis: normalizedData,
         timestamp: new Date().toISOString(),

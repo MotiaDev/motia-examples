@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { EventConfig, Handlers } from "motia";
 import axios from "axios";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import FormData from "form-data";
 
 const ImageGenerationInputSchema = z.object({
   requestId: z.string(),
@@ -37,7 +39,7 @@ const ImageGenerationInputSchema = z.object({
 export const config: EventConfig = {
   type: "event",
   name: "ImageGenerationStep",
-  description: "Generate UGC-style images using Nano Banana API",
+  description: "Generate UGC-style images using Google Gemini",
   subscribes: ["variants.generated"],
   emits: ["image.generated"],
   input: ImageGenerationInputSchema,
@@ -58,23 +60,74 @@ export const handler: Handlers["ImageGenerationStep"] = async (
       lighting: variant.lighting,
     });
 
-    // Call Nano Banana API for image generation
-    const imageResponse = await axios.post(
-      "https://fal.run/fal-ai/nano-banana/edit",
+    // Initialize Gemini
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY!);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash-image-preview",
+    });
+
+    // Fetch and convert image to base64
+    const imgResponse = await axios.get(originalImageUrl, {
+      responseType: "arraybuffer",
+    });
+    const base64Image = Buffer.from(imgResponse.data).toString("base64");
+
+    // Generate image with Gemini
+    const result = await model.generateContent([
       {
-        prompt: variant.image_prompt,
-        image_urls: [originalImageUrl],
-        aspect_ratio: variant.aspect_ratio,
+        inlineData: {
+          data: base64Image,
+          mimeType: "image/jpeg",
+        },
       },
+      variant.image_prompt,
+    ]);
+
+    // Extract generated image
+    const candidates = result.response.candidates || [];
+    let imageData: string | null = null;
+    for (const candidate of candidates) {
+      for (const part of candidate.content?.parts || []) {
+        if (part.inlineData) {
+          imageData = part.inlineData.data;
+          break;
+        }
+      }
+      if (imageData) break;
+    }
+
+    if (!imageData) {
+      throw new Error("No image generated");
+    }
+
+    // Upload to ImageKit
+    const imageBuffer = Buffer.from(imageData, "base64");
+    const filename =
+      `${variant.product_info.brand_name}_v${variant.variant_id}.jpg`.replace(
+        /[^a-zA-Z0-9_-]/g,
+        "_"
+      );
+
+    const form = new FormData();
+    form.append("file", imageBuffer, filename);
+    form.append("fileName", filename);
+
+    const uploadResponse = await axios.post(
+      "https://upload.imagekit.io/api/v1/files/upload",
+      form,
       {
         headers: {
-          Authorization: `Key ${process.env.FAL_API_KEY}`,
-          "Content-Type": "application/json",
+          Authorization: `Basic ${Buffer.from(
+            process.env.IMAGEKIT_PRIVATE_KEY +
+              ":" +
+              process.env.IMAGEKIT_PASSWORD
+          ).toString("base64")}`,
+          ...form.getHeaders(),
         },
       }
     );
 
-    const generatedImageUrl = imageResponse.data.images[0].url;
+    const generatedImageUrl = uploadResponse.data.url;
 
     logger.info(`Image generated successfully`, {
       requestId,
@@ -94,13 +147,13 @@ export const handler: Handlers["ImageGenerationStep"] = async (
       },
     });
   } catch (error: any) {
+    console.log("error", error.response);
     logger.error(`Image generation failed`, {
       requestId,
       variantId: variant.variant_id,
       error: error.message,
     });
 
-    // Check if it's a rate limit or API error
     if (error.response) {
       logger.error(`API Error Details`, {
         requestId,

@@ -6,7 +6,7 @@ import FormData from "form-data";
 const FileStorageInputSchema = z.object({
   requestId: z.string(),
   variantId: z.number(),
-  videoUrl: z.string(),
+  videoPath: z.string(),
   generatedImageUrl: z.string(),
   variant: z.object({
     variant_id: z.number(),
@@ -35,11 +35,11 @@ export const handler: Handlers["FileStorageStep"] = async (
   input,
   { logger, emit, state }
 ) => {
-  const { requestId, variantId, videoUrl, generatedImageUrl, variant } = input;
+  const { requestId, variantId, videoPath, generatedImageUrl, variant } = input;
   logger.info(`File storage input`, {
     requestId,
     variantId,
-    videoUrl,
+    videoPath,
     generatedImageUrl,
     variant,
   });
@@ -54,20 +54,17 @@ export const handler: Handlers["FileStorageStep"] = async (
     logger.info(`Starting Box storage for variant ${variantId}`, {
       requestId,
       variantId,
-      videoUrl,
+      videoPath,
       imageUrl: generatedImageUrl,
     });
 
     const uploadedFiles = [];
 
-    // 1. Download and upload the video
-    if (videoUrl) {
+    // 1. Read video file and upload
+    if (videoPath) {
       try {
-        // Download video from URL
-        const videoResponse = await axios.get(videoUrl, {
-          responseType: "arraybuffer",
-        });
-        const videoBuffer = Buffer.from(videoResponse.data);
+        // Read video file
+        const videoBuffer = require("fs").readFileSync(videoPath);
 
         const videoFilename =
           `${variant.product_info.brand_name}_${variant.product_info.product}_video_v${variantId}.mp4`.replace(
@@ -106,7 +103,8 @@ export const handler: Handlers["FileStorageStep"] = async (
           boxFileId: videoFileInfo.id,
           filename: videoFilename,
           boxUrl: `https://app.box.com/file/${videoFileInfo.id}`,
-          originalUrl: videoUrl,
+          source: "file",
+          originalPath: videoPath,
         });
 
         logger.info(`Video uploaded to Box`, {
