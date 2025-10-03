@@ -1,12 +1,12 @@
 import { ApiRouteConfig, Handlers } from 'motia';
-import weaviate from 'weaviate-client';
 import { RAGResponse } from '../../types/index';
 import { z } from 'zod';
+import { createWeaviateClient } from '../../utils/weaviate-client';
 
 export const config: ApiRouteConfig = {
   type: 'api',
-  name: 'api-query-rag',
-  path: '/api/rag/query',
+  name: 'api-query-weaviate',
+  path: '/api/rag/query-weaviate',
   method: 'POST',
   emits: ['rag.query.completed'],
   flows: ['rag-workflow'],
@@ -16,19 +16,13 @@ export const config: ApiRouteConfig = {
   }),
 };
 
-export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) => {
+export const handler: Handlers['api-query-weaviate'] = async (req, { logger, emit }) => {
   const { query, limit } = req.body;
 
-  logger.info('Processing RAG query', { query, limit });
+  logger.info('Processing RAG query with Weaviate', { query, limit });
 
-  // Initialize Weaviate client
-  const client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_URL!, {
-    authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY!),
-    headers: {
-      'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY!,
-      //"X-OpenAI-Organization": process.env.OPENAI_ORGANIZATION!,
-    },
-  });
+  // Initialize Weaviate client (automatically detects local vs cloud)
+  const client = await createWeaviateClient();
 
   try {
     // Get collection reference
@@ -43,7 +37,7 @@ export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) 
         query,
         limit: limit,
         singlePrompt: `Answer the following question using only the provided context: ${query}`,
-        fields: ['text', 'title', 'source', 'page'],
+        fields: ['text', 'title', 'source', 'page', 'file_type'],
         // metadata: ['distance'],
       });
     } catch {
@@ -51,7 +45,7 @@ export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) 
       result = await (documentCollection as any).generate.nearText(
         query,
         { singlePrompt: `Answer the following question using only the provided context: ${query}` },
-        { limit, returnProperties: ['text', 'title', 'source', 'page'], returnMetadata: ['distance'] }
+        { limit, returnProperties: ['text', 'title', 'source', 'page', 'file_type'], returnMetadata: ['distance'] }
       );
     }
 
@@ -62,6 +56,7 @@ export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) 
       metadata: {
         source: (doc.properties?.source ?? doc.source ?? 'unknown') as string,
         page: Number(doc.properties?.page ?? doc.page ?? 1),
+        file_type: (doc.properties?.file_type ?? doc.file_type ?? 'unknown') as string,
       },
     }));
 
@@ -84,7 +79,7 @@ export const handler: Handlers['api-query-rag'] = async (req, { logger, emit }) 
       error,
       url: process.env.WEAVIATE_URL,
       collection: 'Books',
-      hint: 'Ensure the Books collection exists and data is loaded via /api/rag/process-pdfs before querying.'
+      hint: 'Ensure the Books collection exists and documents are loaded via /api/rag/process-pdfs or /api/rag/process-documents before querying with /api/rag/query-weaviate.'
     });
     return {
       status: 500,
