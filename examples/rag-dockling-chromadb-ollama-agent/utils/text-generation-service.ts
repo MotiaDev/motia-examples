@@ -77,7 +77,7 @@ export class TextGenerationService {
     const response = await this.openai.chat.completions.create({
       model: this.config.model,
       messages: messages as any,
-      max_tokens: this.config.maxTokens || 4096,
+      max_completion_tokens: this.config.maxTokens || 4096,
     });
 
     return response.choices[0]?.message?.content || 'No answer generated';

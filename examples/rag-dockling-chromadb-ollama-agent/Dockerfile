@@ -1,5 +1,5 @@
-# Multi-stage build for RAG Docling Vector Agent (Weaviate + ChromaDB)
-FROM node:24-slim AS base
+# Multi-stage build for RAG Docling Vector Agent (ChromaDB)
+FROM node:22-slim AS base
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -35,7 +35,7 @@ RUN /bin/bash -c "source python_modules/bin/activate && npx motia generate-types
 RUN /bin/bash -c "source python_modules/bin/activate && npx motia build"
 
 # Production stage
-FROM node:24-slim AS production
+FROM node:22-slim AS production
 
 # Install system dependencies for production
 RUN apt-get update && apt-get install -y \

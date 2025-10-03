@@ -28,7 +28,7 @@ export const handler: Handlers['read-documents-chromadb'] = async (
   const currentDirName = resolve(cwd).split('/').pop() ?? '';
   
   // Normalize common cases where users paste repo-relative paths like
-  // "examples/rag-docling-weaviate-agent/docs/pdfs" while already in that example dir
+  // "examples/rag-docling-vector-agent/docs/pdfs" while already in that example dir
   let normalizedPath = folderPath;
   if (!isAbsolute(folderPath) && folderPath.includes(`${currentDirName}/`)) {
     const parts = folderPath.split(`${currentDirName}/`);

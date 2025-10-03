@@ -11,8 +11,6 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - WEAVIATE_URL=http://weaviate:8080
-      - WEAVIATE_API_KEY=${WEAVIATE_API_KEY:-}
       - CHROMADB_HOST=chromadb
       - CHROMADB_PORT=8000
       - OPENAI_API_KEY=${OPENAI_API_KEY}
@@ -40,61 +38,10 @@ services:
       - ./logs:/app/logs
       # Mount Hugging Face cache directory for persistence
       - ./hf_cache:/app/.cache/huggingface
-    # depends_on:
-      # weaviate:
-        # condition: service_healthy
     restart: unless-stopped
     networks:
       - rag-network
 
-  # Weaviate vector database
-  weaviate:
-    command:
-      - --host
-      - 0.0.0.0
-      - --port
-      - '8080'
-      - --scheme
-      - http
-    image: cr.weaviate.io/semitechnologies/weaviate:1.32.7
-    ports:
-      - "8080:8080"
-      - "50051:50051"
-    environment:
-      QUERY_DEFAULTS_LIMIT: 25
-      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
-      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
-      ENABLE_API_BASED_MODULES: 'true'
-      DEFAULT_VECTORIZER_MODULE: 'text2vec-openai'
-      ENABLE_MODULES: 'text2vec-openai,generative-openai'
-      CLUSTER_HOSTNAME: 'node1'
-      # OpenAI configuration
-      OPENAI_APIKEY: ${OPENAI_API_KEY}
-    volumes:
-      - ./weaviate_data:/var/lib/weaviate
-    restart: on-failure:0
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:8080/v1/.well-known/ready"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 5
-    #   start_period: 30s
-    networks:
-      - rag-network
-
-  # Optional: Weaviate UI for database management
-  weaviate-ui:
-    image: semitechnologies/weaviate-console:latest
-    platform: linux/amd64
-    ports:
-      - "3001:80"
-    environment:
-      WEAVIATE_URL: http://weaviate:8080
-    depends_on:
-      - weaviate
-    restart: unless-stopped
-    networks:
-      - rag-network
 
   # ChromaDB vector database
   chromadb:
@@ -117,22 +64,20 @@ services:
     networks:
       - rag-network
 
-  # Ollama service for local embeddings
-  ollama:
-    image: ollama/ollama:latest
-    # ports:
-      # - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    # environment:
-      # - OLLAMA_HOST=0.0.0.0
-    restart: unless-stopped
-    networks:
-      - rag-network
+  # # Ollama service for local embeddings
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   # ports:
+  #     # - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   # environment:
+  #     # - OLLAMA_HOST=0.0.0.0
+  #   restart: unless-stopped
+  #   networks:
+  #     - rag-network
 
 volumes:
-  weaviate_data:
-    driver: local
   chromadb_data:
     driver: local
   ollama_data:
