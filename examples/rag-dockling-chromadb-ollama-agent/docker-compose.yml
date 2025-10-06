@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  # Main RAG application
+  rag-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - CHROMADB_HOST=chromadb
+      - CHROMADB_PORT=8000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_PROVIDER=${EMBEDDING_PROVIDER:-openai}
+      - OPENAI_EMBEDDING_MODEL=${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      - OPENAI_EMBEDDING_DIMENSION=${OPENAI_EMBEDDING_DIMENSION:-1536}
+      - TEXT_GENERATION_PROVIDER=${TEXT_GENERATION_PROVIDER:-openai}
+      - OPENAI_TEXT_MODEL=${OPENAI_TEXT_MODEL:-gpt-5-nano}
+      - OPENAI_MAX_TOKENS=${OPENAI_MAX_TOKENS:-4096}
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://localhost:11434}
+      - OLLAMA_EMBEDDING_MODEL=${OLLAMA_EMBEDDING_MODEL:-mxbai-embed-large}
+      - OLLAMA_EMBEDDING_DIMENSION=${OLLAMA_EMBEDDING_DIMENSION:-1024}
+      - OLLAMA_TEXT_MODEL=${OLLAMA_TEXT_MODEL:-gpt-oss}
+      - OLLAMA_MAX_TOKENS=${OLLAMA_MAX_TOKENS:-4096}
+      # Hugging Face cache configuration
+      - HF_HOME=/app/.cache/huggingface
+      - TRANSFORMERS_CACHE=/app/.cache/huggingface
+      - HF_HUB_CACHE=/app/.cache/huggingface
+    env_file:
+      - .env
+    volumes:
+      # Mount docs directory for PDF processing
+      - ./docs:/app/docs:ro
+      # Mount logs directory
+      - ./logs:/app/logs
+      # Mount Hugging Face cache directory for persistence
+      - ./hf_cache:/app/.cache/huggingface
+    restart: unless-stopped
+    networks:
+      - rag-network
+
+
+  # ChromaDB vector database
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+      - ANONYMIZED_TELEMETRY=false
+    volumes:
+      - ./chromadb_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - rag-network
+
+  # # Ollama service for local embeddings
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   # ports:
+  #     # - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   # environment:
+  #     # - OLLAMA_HOST=0.0.0.0
+  #   restart: unless-stopped
+  #   networks:
+  #     - rag-network
+
+volumes:
+  chromadb_data:
+    driver: local
+  ollama_data:
+    driver: local
+  hf_cache:
+    driver: local
+
+networks:
+  rag-network:
+    driver: bridge

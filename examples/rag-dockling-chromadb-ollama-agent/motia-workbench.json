@@ -1,0 +1,67 @@
+[
+  {
+    "id": "rag-workflow",
+    "config": {
+      "steps/api-steps/api-query-rag.step.ts": {
+        "x": 50,
+        "y": 100,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/api-steps/api-process-pdfs.step.ts": {
+        "x": 50,
+        "y": 200,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/api-steps/api-query-rag-chromadb.step.ts": {
+        "x": 50,
+        "y": 300,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/api-steps/api-process-pdfs-chromadb.step.ts": {
+        "x": 50,
+        "y": 400,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/event-steps/init-chromadb.step.ts": {
+        "x": 300,
+        "y": 350,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/event-steps/read-pdfs.step.ts": {
+        "x": 550,
+        "y": 100,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/event-steps/read-pdfs-chromadb.step.ts": {
+        "x": 550,
+        "y": 300,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/event-steps/process-pdfs.step.py": {
+        "x": 800,
+        "y": 100,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/event-steps/process-pdfs-chromadb.step.py": {
+        "x": 800,
+        "y": 300,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/event-steps/load-chromadb.step.ts": {
+        "x": 1050,
+        "y": 300,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      }
+    }
+  }
+]
