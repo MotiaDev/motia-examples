@@ -7,8 +7,8 @@ Welcome to the official examples repository for [Motia](https://motia.dev/) - a 
 For detailed tutorials and guided walkthroughs of these examples, visit our comprehensive documentation:
 
 - **[Examples Documentation](https://www.motia.dev/docs/examples)** - Step-by-step guides with code explanations
-- **[Getting Started](https://www.motia.dev/docs/getting-started)** - Quick start guide for Motia
-- **[Core Concepts](https://www.motia.dev/docs/concepts)** - Understanding Steps, Events, and Flows
+- **[Getting Started](https://www.motia.dev/docs/getting-started/quick-start)** - Quick start guide for Motia
+- **[Core Concepts](https://www.motia.dev/docs/concepts/overview)** - Understanding Steps, Events, and Flows
 
 ## 🗂 Examples
 
