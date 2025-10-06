@@ -6,15 +6,17 @@
     "dev": "motia dev",
     "generate-types": "motia generate-types",
     "build": "motia build",
-    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid",
+    "setup-appwrite": "ts-node script/setup-appwrite.ts"
   },
   "keywords": [
     "motia"
   ],
   "dependencies": {
     "appwrite": "^20.1.0",
+    "dotenv": "^17.2.3",
     "motia": "^0.7.3-beta.136",
-    "node-appwrite": "^19.1.0",
+    "node-appwrite": "^20.0.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Permission, Role } from "node-appwrite";
+import { Client, TablesDB, ID, Permission, Role } from "node-appwrite";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -8,7 +8,7 @@ const client = new Client()
   .setProject(process.env.APPWRITE_PROJECT_ID!)
   .setKey(process.env.APPWRITE_API_KEY!);
 
-const databases = new Databases(client);
+const tablesDB = new TablesDB(client);
 
 async function setupDatabase() {
   try {
@@ -17,7 +17,7 @@ async function setupDatabase() {
     // Delete database if it exists
     console.log("Checking for existing database...");
     try {
-      await databases.delete(databaseId);
+      await tablesDB.delete({ databaseId });
       console.log("✓ Existing database deleted");
     } catch (error: any) {
       if (error.code === 404) {
@@ -29,132 +29,145 @@ async function setupDatabase() {
 
     // Create fresh database
     console.log("\nCreating new database...");
-    const database = await databases.create(databaseId, "Email Marketing DB");
+    const database = await tablesDB.create({
+      databaseId,
+      name: "Email Marketing DB",
+    });
     console.log("✓ Database created");
 
-    // Create Users collection
-    console.log("\nCreating users collection...");
-    await databases.createCollection(databaseId, "users", "Users", [
-      Permission.read(Role.any()),
-      Permission.create(Role.any()),
-      Permission.update(Role.any()),
-      Permission.delete(Role.any()),
-    ]);
-    console.log("✓ Users collection created");
+    // Create Users table (not collection!)
+    console.log("\nCreating users table...");
+    await tablesDB.createTable({
+      databaseId,
+      tableId: "users",
+      name: "Users",
+      permissions: [
+        Permission.read(Role.any()),
+        Permission.create(Role.any()),
+        Permission.update(Role.any()),
+        Permission.delete(Role.any()),
+      ],
+    });
+    console.log("✓ Users table created");
 
-    // Add attributes to Users collection
-    console.log("Adding user attributes...");
-    await databases.createStringAttribute(
+    // Add columns (not attributes!) to Users table
+    console.log("Adding user columns...");
+    await tablesDB.createStringColumn({
       databaseId,
-      "users",
-      "email",
-      255,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "users",
+      key: "email",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "users",
-      "firstName",
-      100,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "users",
+      key: "firstName",
+      size: 100,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "users",
-      "lastName",
-      100,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "users",
+      key: "lastName",
+      size: 100,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "users",
-      "status",
-      50,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "users",
+      key: "status",
+      size: 50,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "users",
-      "preferences",
-      2048,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "users",
+      key: "preferences",
+      size: 2048,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "users",
-      "metadata",
-      2048,
-      true
-    );
-    console.log("✓ User attributes created");
+      tableId: "users",
+      key: "metadata",
+      size: 2048,
+      required: true,
+    });
+    console.log("✓ User columns created");
 
-    // Create Campaigns collection
-    console.log("\nCreating campaigns collection...");
-    await databases.createCollection(databaseId, "campaigns", "Campaigns", [
-      Permission.read(Role.any()),
-      Permission.create(Role.any()),
-      Permission.update(Role.any()),
-      Permission.delete(Role.any()),
-    ]);
-    console.log("✓ Campaigns collection created");
+    // Create Campaigns table
+    console.log("\nCreating campaigns table...");
+    await tablesDB.createTable({
+      databaseId,
+      tableId: "campaigns",
+      name: "Campaigns",
+      permissions: [
+        Permission.read(Role.any()),
+        Permission.create(Role.any()),
+        Permission.update(Role.any()),
+        Permission.delete(Role.any()),
+      ],
+    });
+    console.log("✓ Campaigns table created");
 
-    // Add attributes to Campaigns collection
-    console.log("Adding campaign attributes...");
-    await databases.createStringAttribute(
+    // Add columns to Campaigns table
+    console.log("Adding campaign columns...");
+    await tablesDB.createStringColumn({
       databaseId,
-      "campaigns",
-      "name",
-      255,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "campaigns",
+      key: "name",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "campaigns",
-      "subject",
-      255,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "campaigns",
+      key: "subject",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "campaigns",
-      "template",
-      255,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "campaigns",
+      key: "template",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "campaigns",
-      "targetAudience",
-      100,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "campaigns",
+      key: "targetAudience",
+      size: 100,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "campaigns",
-      "status",
-      200,
-      true
-    );
-    await databases.createStringAttribute(
+      tableId: "campaigns",
+      key: "status",
+      size: 200,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
       databaseId,
-      "campaigns",
-      "metrics",
-      1000,
-      true
-    );
-    await databases.createBooleanAttribute(
+      tableId: "campaigns",
+      key: "metrics",
+      size: 1000,
+      required: true,
+    });
+    await tablesDB.createBooleanColumn({
       databaseId,
-      "campaigns",
-      "personalizeContent",
-      true
-    );
-    await databases.createDatetimeAttribute(
+      tableId: "campaigns",
+      key: "personalizeContent",
+      required: true,
+    });
+    await tablesDB.createDatetimeColumn({
       databaseId,
-      "campaigns",
-      "scheduledFor",
-      false
-    );
-    console.log("✓ Campaign attributes created");
+      tableId: "campaigns",
+      key: "scheduledFor",
+      required: false,
+    });
+    console.log("✓ Campaign columns created");
 
     console.log("\n✅ Setup completed successfully!");
     console.log(`\nAdd this to your .env file:`);

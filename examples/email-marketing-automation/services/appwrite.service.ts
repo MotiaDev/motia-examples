@@ -1,4 +1,4 @@
-import { Client, Databases, Users, Storage, ID, Query } from "node-appwrite";
+import { Client, TablesDB, Users, Storage, ID, Query } from "node-appwrite";
 
 interface AppwriteConfig {
   endpoint: string;
@@ -37,18 +37,11 @@ interface Campaign {
   status: string;
   createdAt: string;
   metrics: string;
-  //   metrics: {
-  //     totalRecipients: number;
-  //     sent: number;
-  //     delivered: number;
-  //     opened: number;
-  //     clicked: number;
-  //   };
 }
 
 class AppwriteService {
   private client: Client;
-  private databases: Databases;
+  private tablesDB: TablesDB;
   private users: Users;
   private storage: Storage;
   private config: AppwriteConfig;
@@ -66,13 +59,13 @@ class AppwriteService {
       .setProject(this.config.projectId)
       .setKey(this.config.apiKey);
 
-    this.databases = new Databases(this.client);
+    this.tablesDB = new TablesDB(this.client);
     this.users = new Users(this.client);
     this.storage = new Storage(this.client);
   }
 
-  // Collection IDs
-  private collections = {
+  // Table IDs (formerly collections)
+  private tables = {
     users: "users",
     campaigns: "campaigns",
     emails: "emails",
@@ -84,12 +77,12 @@ class AppwriteService {
   // User Management
   async getUsers(queries: string[] = []): Promise<User[]> {
     try {
-      const response = await this.databases.listDocuments(
-        this.config.databaseId,
-        this.collections.users,
-        queries
-      );
-      return response.documents as unknown as User[];
+      const response = await this.tablesDB.listRows({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.users,
+        queries,
+      });
+      return response.rows as unknown as User[];
     } catch (error) {
       console.error("Error fetching users:", error);
       throw error;
@@ -98,11 +91,11 @@ class AppwriteService {
 
   async getUserById(userId: string): Promise<User | null> {
     try {
-      const response = await this.databases.getDocument(
-        this.config.databaseId,
-        this.collections.users,
-        userId
-      );
+      const response = await this.tablesDB.getRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.users,
+        rowId: userId,
+      });
       return response as unknown as User;
     } catch (error: any) {
       if (error.code === 404) {
@@ -115,12 +108,12 @@ class AppwriteService {
 
   async createUser(userData: Partial<User>): Promise<User> {
     try {
-      const response = await this.databases.createDocument(
-        this.config.databaseId,
-        this.collections.users,
-        userData.id || ID.unique(),
-        userData
-      );
+      const response = await this.tablesDB.createRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.users,
+        rowId: userData.id || ID.unique(),
+        data: userData,
+      });
       return response as unknown as User;
     } catch (error) {
       console.error("Error creating user:", error);
@@ -130,12 +123,12 @@ class AppwriteService {
 
   async updateUser(userId: string, userData: Partial<User>): Promise<User> {
     try {
-      const response = await this.databases.updateDocument(
-        this.config.databaseId,
-        this.collections.users,
-        userId,
-        userData
-      );
+      const response = await this.tablesDB.updateRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.users,
+        rowId: userId,
+        data: userData,
+      });
       return response as unknown as User;
     } catch (error) {
       console.error("Error updating user:", error);
@@ -179,12 +172,12 @@ class AppwriteService {
   // Campaign Management
   async createCampaign(campaignData: Partial<Campaign>): Promise<Campaign> {
     try {
-      const response = await this.databases.createDocument(
-        this.config.databaseId,
-        this.collections.campaigns,
-        campaignData.id || ID.unique(),
-        campaignData
-      );
+      const response = await this.tablesDB.createRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.campaigns,
+        rowId: campaignData.id || ID.unique(),
+        data: campaignData,
+      });
       return response as unknown as Campaign;
     } catch (error) {
       console.error("Error creating campaign:", error);
@@ -194,11 +187,11 @@ class AppwriteService {
 
   async getCampaign(campaignId: string): Promise<Campaign | null> {
     try {
-      const response = await this.databases.getDocument(
-        this.config.databaseId,
-        this.collections.campaigns,
-        campaignId
-      );
+      const response = await this.tablesDB.getRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.campaigns,
+        rowId: campaignId,
+      });
       return response as unknown as Campaign;
     } catch (error: any) {
       if (error.code === 404) {
@@ -214,12 +207,12 @@ class AppwriteService {
     campaignData: Partial<Campaign>
   ): Promise<Campaign> {
     try {
-      const response = await this.databases.updateDocument(
-        this.config.databaseId,
-        this.collections.campaigns,
-        campaignId,
-        campaignData
-      );
+      const response = await this.tablesDB.updateRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.campaigns,
+        rowId: campaignId,
+        data: campaignData,
+      });
       return response as unknown as Campaign;
     } catch (error) {
       console.error("Error updating campaign:", error);
@@ -229,12 +222,12 @@ class AppwriteService {
 
   async getCampaigns(queries: string[] = []): Promise<Campaign[]> {
     try {
-      const response = await this.databases.listDocuments(
-        this.config.databaseId,
-        this.collections.campaigns,
-        queries
-      );
-      return response.documents as unknown as Campaign[];
+      const response = await this.tablesDB.listRows({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.campaigns,
+        queries,
+      });
+      return response.rows as unknown as Campaign[];
     } catch (error) {
       console.error("Error fetching campaigns:", error);
       throw error;
@@ -244,12 +237,12 @@ class AppwriteService {
   // Email Management
   async createEmail(emailData: any): Promise<any> {
     try {
-      const response = await this.databases.createDocument(
-        this.config.databaseId,
-        this.collections.emails,
-        emailData.id || ID.unique(),
-        emailData
-      );
+      const response = await this.tablesDB.createRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.emails,
+        rowId: emailData.id || ID.unique(),
+        data: emailData,
+      });
       return response;
     } catch (error) {
       console.error("Error creating email:", error);
@@ -259,12 +252,12 @@ class AppwriteService {
 
   async updateEmail(emailId: string, emailData: any): Promise<any> {
     try {
-      const response = await this.databases.updateDocument(
-        this.config.databaseId,
-        this.collections.emails,
-        emailId,
-        emailData
-      );
+      const response = await this.tablesDB.updateRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.emails,
+        rowId: emailId,
+        data: emailData,
+      });
       return response;
     } catch (error) {
       console.error("Error updating email:", error);
@@ -274,12 +267,12 @@ class AppwriteService {
 
   async getEmails(queries: string[] = []): Promise<any[]> {
     try {
-      const response = await this.databases.listDocuments(
-        this.config.databaseId,
-        this.collections.emails,
-        queries
-      );
-      return response.documents;
+      const response = await this.tablesDB.listRows({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.emails,
+        queries,
+      });
+      return response.rows;
     } catch (error) {
       console.error("Error fetching emails:", error);
       throw error;
@@ -289,12 +282,12 @@ class AppwriteService {
   // Analytics Management
   async createAnalyticsRecord(analyticsData: any): Promise<any> {
     try {
-      const response = await this.databases.createDocument(
-        this.config.databaseId,
-        this.collections.analytics,
-        analyticsData.id || ID.unique(),
-        analyticsData
-      );
+      const response = await this.tablesDB.createRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.analytics,
+        rowId: analyticsData.id || ID.unique(),
+        data: analyticsData,
+      });
       return response;
     } catch (error) {
       console.error("Error creating analytics record:", error);
@@ -307,12 +300,12 @@ class AppwriteService {
     analyticsData: any
   ): Promise<any> {
     try {
-      const response = await this.databases.updateDocument(
-        this.config.databaseId,
-        this.collections.analytics,
-        recordId,
-        analyticsData
-      );
+      const response = await this.tablesDB.updateRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.analytics,
+        rowId: recordId,
+        data: analyticsData,
+      });
       return response;
     } catch (error) {
       console.error("Error updating analytics record:", error);
@@ -322,12 +315,12 @@ class AppwriteService {
 
   async getAnalyticsRecords(queries: string[] = []): Promise<any[]> {
     try {
-      const response = await this.databases.listDocuments(
-        this.config.databaseId,
-        this.collections.analytics,
-        queries
-      );
-      return response.documents;
+      const response = await this.tablesDB.listRows({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.analytics,
+        queries,
+      });
+      return response.rows;
     } catch (error) {
       console.error("Error fetching analytics records:", error);
       throw error;
@@ -337,12 +330,11 @@ class AppwriteService {
   // Template Management
   async uploadTemplate(file: File, filename: string): Promise<any> {
     try {
-      const response = await this.storage.createFile(
-        "templates", // bucket ID
-        ID.unique(),
-        file,
-        [filename]
-      );
+      const response = await this.storage.createFile({
+        bucketId: "templates",
+        fileId: ID.unique(),
+        file: file,
+      });
       return response;
     } catch (error) {
       console.error("Error uploading template:", error);
@@ -352,7 +344,10 @@ class AppwriteService {
 
   async getTemplate(fileId: string): Promise<Buffer> {
     try {
-      const response = await this.storage.getFileDownload("templates", fileId);
+      const response = await this.storage.getFileDownload({
+        bucketId: "templates",
+        fileId: fileId,
+      });
       return Buffer.from(response);
     } catch (error) {
       console.error("Error fetching template:", error);
@@ -363,12 +358,12 @@ class AppwriteService {
   // Sequence Management
   async createSequence(sequenceData: any): Promise<any> {
     try {
-      const response = await this.databases.createDocument(
-        this.config.databaseId,
-        this.collections.sequences,
-        sequenceData.id || ID.unique(),
-        sequenceData
-      );
+      const response = await this.tablesDB.createRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.sequences,
+        rowId: sequenceData.id || ID.unique(),
+        data: sequenceData,
+      });
       return response;
     } catch (error) {
       console.error("Error creating sequence:", error);
@@ -378,12 +373,12 @@ class AppwriteService {
 
   async updateSequence(sequenceId: string, sequenceData: any): Promise<any> {
     try {
-      const response = await this.databases.updateDocument(
-        this.config.databaseId,
-        this.collections.sequences,
-        sequenceId,
-        sequenceData
-      );
+      const response = await this.tablesDB.updateRow({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.sequences,
+        rowId: sequenceId,
+        data: sequenceData,
+      });
       return response;
     } catch (error) {
       console.error("Error updating sequence:", error);
@@ -393,12 +388,12 @@ class AppwriteService {
 
   async getSequences(queries: string[] = []): Promise<any[]> {
     try {
-      const response = await this.databases.listDocuments(
-        this.config.databaseId,
-        this.collections.sequences,
-        queries
-      );
-      return response.documents;
+      const response = await this.tablesDB.listRows({
+        databaseId: this.config.databaseId,
+        tableId: this.tables.sequences,
+        queries,
+      });
+      return response.rows;
     } catch (error) {
       console.error("Error fetching sequences:", error);
       throw error;
@@ -408,7 +403,7 @@ class AppwriteService {
   // Health Check
   async healthCheck(): Promise<boolean> {
     try {
-      await this.databases.list();
+      await this.tablesDB.list();
       return true;
     } catch (error) {
       console.error("Appwrite health check failed:", error);
