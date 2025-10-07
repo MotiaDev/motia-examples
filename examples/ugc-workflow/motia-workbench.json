@@ -33,28 +33,28 @@
         "y": 248
       },
       "steps/06-file-storage.step.ts": {
-        "x": 2065,
-        "y": 34
+        "x": 2099,
+        "y": 31
       },
       "steps/05-video-generation.step.ts": {
-        "x": 1618,
-        "y": 39
+        "x": 1664,
+        "y": 30
       },
       "steps/04-image-generation.step.ts": {
-        "x": 1179,
-        "y": 23
+        "x": 1206,
+        "y": 32
       },
       "steps/03-variant-generation.step.ts": {
-        "x": 721,
-        "y": 19
+        "x": 757,
+        "y": 31
       },
       "steps/02-vision-analysis.step.ts": {
-        "x": 410,
-        "y": 41
+        "x": 400,
+        "y": 39
       },
       "steps/01-image-upload.step.ts": {
-        "x": -29,
-        "y": 7
+        "x": -48,
+        "y": -5
       }
     }
   }
