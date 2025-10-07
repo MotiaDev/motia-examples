@@ -1,0 +1,27 @@
+[
+  {
+    "id": "harvest-logbook",
+    "config": {
+      "steps/harvest-logbook/receive-harvest-data.step.ts": {
+        "x": -244,
+        "y": -25
+      },
+      "steps/harvest-logbook/process-embeddings.step.ts": {
+        "x": 643,
+        "y": -6
+      },
+      "steps/harvest-logbook/query-agent.step.ts": {
+        "x": 350,
+        "y": 315
+      },
+      "steps/harvest-logbook/log-to-sheets.step.ts": {
+        "x": 863,
+        "y": 315
+      },
+      "steps/harvest-logbook/query-only.step.ts": {
+        "x": -252,
+        "y": 300
+      }
+    }
+  }
+]
