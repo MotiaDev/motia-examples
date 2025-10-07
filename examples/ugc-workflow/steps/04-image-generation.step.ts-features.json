@@ -1,0 +1,80 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step configuration for AI image generation that subscribes to variant events and generates UGC-style images.",
+    "lines": ["39-47"]
+  },
+  {
+    "id": "input-schema",
+    "title": "Input Schema Definition",
+    "description": "Zod schema defining variant input with image prompts, render preferences, brand colors, and product information.",
+    "lines": ["7-37"]
+  },
+  {
+    "id": "event-subscription",
+    "title": "Event Subscription",
+    "description": "Subscribes to 'variants.generated' events to process each variant independently for parallel image generation.",
+    "lines": ["43"]
+  },
+  {
+    "id": "event-emission",
+    "title": "Event Emission",
+    "description": "Emits 'image.generated' events with generated image URLs to trigger video generation workflow.",
+    "lines": ["44", "138-148"]
+  },
+  {
+    "id": "handler-implementation",
+    "title": "Handler Implementation",
+    "description": "Main handler that orchestrates image generation using Google Gemini and uploads results to ImageKit.",
+    "lines": ["49-168"]
+  },
+  {
+    "id": "gemini-integration",
+    "title": "Google Gemini Integration",
+    "description": "Initializes and uses Google's Gemini 2.5 Flash Image Preview model for AI-powered image generation.",
+    "lines": ["63-67"]
+  },
+  {
+    "id": "image-base64-conversion",
+    "title": "Image Download and Base64 Conversion",
+    "description": "Downloads the original image from URL and converts it to base64 format for Gemini API input.",
+    "lines": ["69-73"]
+  },
+  {
+    "id": "image-generation",
+    "title": "AI Image Generation",
+    "description": "Generates new UGC-style product images using Gemini with the original image and detailed prompt instructions.",
+    "lines": ["75-84"]
+  },
+  {
+    "id": "image-extraction",
+    "title": "Generated Image Extraction",
+    "description": "Extracts the generated image data from Gemini's response candidates and inline data structures.",
+    "lines": ["86-101"]
+  },
+  {
+    "id": "imagekit-upload",
+    "title": "ImageKit Storage Upload",
+    "description": "Uploads the generated image to ImageKit CDN for persistent storage and fast delivery.",
+    "lines": ["103-130"]
+  },
+  {
+    "id": "filename-sanitization",
+    "title": "Filename Sanitization",
+    "description": "Creates sanitized filenames for uploaded images by replacing special characters with underscores.",
+    "lines": ["105-109"]
+  },
+  {
+    "id": "structured-logging",
+    "title": "Structured Logging",
+    "description": "Comprehensive logging of generation progress, variant details, and uploaded image URLs for tracking.",
+    "lines": ["56-61", "132-136"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Management",
+    "description": "Robust error handling with detailed API error logging including status codes and response data.",
+    "lines": ["149-167"]
+  }
+]

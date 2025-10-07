@@ -1,0 +1,92 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step configuration for file storage that subscribes to video generation and uploads to Box storage.",
+    "lines": ["24-32"]
+  },
+  {
+    "id": "input-schema",
+    "title": "Input Schema Definition",
+    "description": "Zod schema defining storage input with requestId, video path, generated image URL, and variant details.",
+    "lines": ["6-22"]
+  },
+  {
+    "id": "event-subscription",
+    "title": "Event Subscription",
+    "description": "Subscribes to 'video.generated' events to automatically store completed videos and images to Box.",
+    "lines": ["28"]
+  },
+  {
+    "id": "event-emission",
+    "title": "Workflow Completion Event",
+    "description": "Emits 'workflow.completed' events with summary data and uploaded file information to finalize the UGC workflow.",
+    "lines": ["29", "204-221"]
+  },
+  {
+    "id": "box-configuration",
+    "title": "Box Storage Configuration",
+    "description": "Retrieves Box access token and folder ID from environment variables with validation.",
+    "lines": ["46-51"]
+  },
+  {
+    "id": "handler-implementation",
+    "title": "Handler Implementation",
+    "description": "Main handler that orchestrates uploading videos and images to Box storage with workflow state management.",
+    "lines": ["34-236"]
+  },
+  {
+    "id": "video-upload",
+    "title": "Video File Upload to Box",
+    "description": "Reads local video file, creates form data with metadata, and uploads to Box with proper authorization.",
+    "lines": ["64-123"]
+  },
+  {
+    "id": "image-download-upload",
+    "title": "Image Download and Box Upload",
+    "description": "Downloads generated image from URL, converts to buffer, and uploads to Box storage with sanitized filename.",
+    "lines": ["126-187"]
+  },
+  {
+    "id": "filename-sanitization",
+    "title": "Filename Sanitization",
+    "description": "Creates sanitized filenames for Box uploads by replacing special characters with underscores for compatibility.",
+    "lines": ["69-73", "134-138"]
+  },
+  {
+    "id": "box-api-integration",
+    "title": "Box API Integration",
+    "description": "Integrates with Box Content API for file uploads using FormData and Bearer token authentication.",
+    "lines": ["75-98", "140-163"]
+  },
+  {
+    "id": "uploaded-files-tracking",
+    "title": "Uploaded Files Tracking",
+    "description": "Maintains array of uploaded file metadata including Box file IDs, URLs, types, and original sources.",
+    "lines": ["61", "100-108", "166-172"]
+  },
+  {
+    "id": "workflow-state-update",
+    "title": "Workflow State Update",
+    "description": "Updates workflow state with completion status, uploaded files, variant details, and completion timestamp.",
+    "lines": ["189-201"]
+  },
+  {
+    "id": "completion-summary",
+    "title": "Completion Summary",
+    "description": "Creates comprehensive workflow summary including brand, product, camera settings, and file counts.",
+    "lines": ["212-218"]
+  },
+  {
+    "id": "structured-logging",
+    "title": "Structured Logging",
+    "description": "Detailed logging of storage operations, upload successes, failures, and workflow completion status.",
+    "lines": ["39-45", "54-59", "110-115", "174-179", "223-227"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Management",
+    "description": "Graceful error handling for video and image upload failures with detailed logging while allowing partial success.",
+    "lines": ["116-122", "180-186", "228-235"]
+  }
+]
