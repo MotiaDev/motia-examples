@@ -1,0 +1,11 @@
+node_modules
+dist
+.motia
+.mermaid
+python_modules
+.env
+
+# Log files
+logs/
+*.csv
+*.log
