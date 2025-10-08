@@ -285,6 +285,67 @@ export const config: EventConfig = {
 }
 ```
 
+## 🌐 Deployment
+
+### Deploy to Motia Cloud in one click
+
+You can deploy your `chat agent` to Motia Cloud using either the CLI or the web interface.
+
+1. Ensure your local project is running (`npm run dev`)
+2. Go to [Motia Cloud -> Import from Workbench](https://cloud.motia.dev)
+3. Select your local project port
+4. Choose project and environment name
+5. Upload environment variables (optional)
+6. Click **Deploy** and watch the magic happen! ✨
+
+### Deploy to Motia Cloud using the CLI
+
+#### Using the Motia CLI
+
+Deploy with a specific version:
+
+```bash
+motia cloud deploy --api-key your-api-key-here --version-name 1.2.3
+```
+
+Deploy to a specific environment with environment variables:
+
+```bash
+motia cloud deploy --api-key your-api-key-here \
+  --version-name 1.2.3 \
+  --env-file .env.production \
+  --environment-id env-id
+```
+
+![CLI Deployment](docs/images/deploy-cli.png)
+
+#### Using the Web Interface
+
+For a visual deployment experience, use the Motia Cloud web interface:
+
+1. Have your local project running (make sure your Motia version is 0.6.4 or higher)
+2. Go to **Import from Workbench** on [Motia Cloud](https://cloud.motia.dev)
+3. Select the port your local project is running on
+4. Choose the project and environment name
+5. Add any environment variables you need (you can upload from `.env` file or paste the content to auto-fill)
+6. Click **Deploy**
+7. Watch the magic happen ✨
+
+For detailed instructions, see the [Motia Cloud Deployment Guide](https://www.motia.dev/docs/deployment-guide/motia-cloud/deployment#using-web-interface).
+
+#### Monitoring Your Deployment
+
+Once deployed, you can monitor your chat agent in real-time:
+
+**Test Your API:**
+![Test Send Message](docs/images/test-sendmessage.png)
+
+**View Logs:**
+![Deployment Logs](docs/images/logs-deploy.png)
+
+**View Traces:**
+![Deployment Traces](docs/images/traces-deploy.png)
+
 ## 🚀 Extending This Example
 
 ### Add More Message Processors

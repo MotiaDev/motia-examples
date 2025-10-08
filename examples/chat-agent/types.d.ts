@@ -4,18 +4,18 @@
  * 
  * Consider adding this file to .prettierignore and eslint ignore.
  */
-import { EventHandler, ApiRouteHandler, ApiResponse, MotiaStream } from 'motia'
+import { EventHandler, ApiRouteHandler, ApiResponse, MotiaStream, CronHandler } from 'motia'
 
 declare module 'motia' {
   interface FlowContextStateStreams {
-    'chatMessages': MotiaStream<{ roomId: string; messages: { messageId: string; message: string; username: string; timestamp: string; sentiment?: string; isModerated?: boolean; flags?: string[] }[]; totalMessages: number; lastActivity: string }>
+    'chatMessages': MotiaStream<{ roomId: string; messages: Array<{ messageId: string; message: string; username: string; timestamp: string; sentiment?: string; isModerated?: boolean; flags?: Array<string> }>; totalMessages: number; lastActivity: string }>
   }
 
-  type Handlers = {
+  interface Handlers {
     'SendMessageApi': ApiRouteHandler<{ message: string; username: string; roomId?: string }, ApiResponse<200, { success: boolean; messageId: string; timestamp: string; message: { id: string; content: string; username: string; roomId: string; timestamp: string } }>, { topic: 'new-message'; data: { messageId: string; message: string; username: string; roomId: string; timestamp: string } }>
-    'MessageValidator': EventHandler<{ messageId: string; message: string; username: string; roomId: string; timestamp: string }, { topic: 'processed-message'; data: { type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: unknown } }>
-    'MessageSentiment': EventHandler<{ messageId: string; message: string; username: string; roomId: string; timestamp: string }, { topic: 'processed-message'; data: { type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: unknown } }>
-    'MessageModerator': EventHandler<{ messageId: string; message: string; username: string; roomId: string; timestamp: string }, { topic: 'processed-message'; data: { type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: unknown } }>
-    'MessageAggregator': EventHandler<{ type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: unknown }, never>
+    'MessageValidator': EventHandler<{ messageId: string; message: string; username: string; roomId: string; timestamp: string }, { topic: 'processed-message'; data: { type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: Record<string, unknown> } }>
+    'MessageSentiment': EventHandler<{ messageId: string; message: string; username: string; roomId: string; timestamp: string }, { topic: 'processed-message'; data: { type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: Record<string, unknown> } }>
+    'MessageModerator': EventHandler<{ messageId: string; message: string; username: string; roomId: string; timestamp: string }, { topic: 'processed-message'; data: { type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: Record<string, unknown> } }>
+    'MessageAggregator': EventHandler<{ type: 'validation' | 'sentiment' | 'moderation'; messageId: string; message: string; username: string; roomId: string; timestamp: string; result: Record<string, unknown> }, never>
   }
 }

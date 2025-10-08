@@ -3,24 +3,32 @@
     "id": "chat",
     "config": {
       "steps/send-message-api.step.ts": {
-        "x": 417,
-        "y": 0
+        "x": 456,
+        "y": 8,
+        "sourceHandlePosition": "bottom"
       },
       "steps/message-validator.step.ts": {
-        "x": 0,
-        "y": 214
+        "x": 10,
+        "y": 297,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
       },
       "steps/message-sentiment.step.ts": {
-        "x": 410,
-        "y": 214
+        "x": 423,
+        "y": 296,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
       },
       "steps/message-moderator.step.ts": {
-        "x": 820,
-        "y": 214
+        "x": 823,
+        "y": 297,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
       },
       "steps/message-aggregator.step.ts": {
-        "x": 410,
-        "y": 396
+        "x": 395,
+        "y": 529,
+        "targetHandlePosition": "top"
       }
     }
   }

@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "dotenv": "^16.5.0",
-    "motia": "^0.5.5-beta.113",
+    "motia": "^0.8.2-beta.139",
     "zod": "^3.25.67"
   },
   "devDependencies": {
