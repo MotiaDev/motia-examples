@@ -3,8 +3,6 @@ import { z } from 'zod'
 import { OpenAIService } from '../services/openai.service'
 import { ResearchConfig } from './types/research-config'
 
-type Input = typeof inputSchema
-
 const inputSchema = z.object({
   extractedContents: z.array(
     z.object({
@@ -18,6 +16,8 @@ const inputSchema = z.object({
   originalQuery: z.string(),
   depth: z.number().int()
 })
+
+type Input = z.infer<typeof inputSchema>
 
 export const config: EventConfig = {
   type: 'event',
@@ -54,11 +54,19 @@ export const handler: Handlers['Analyze Content'] = async (input, { traceId, log
     // Retrieve research config to check depth
     const researchConfig = await state.get<ResearchConfig>(traceId, 'researchConfig');
 
+    // Get full content from state (not truncated version from event)
+    const fullExtractedContents = (await state.get(traceId, `extractedContent-depth-${input.depth}`) as typeof input.extractedContents | null) || input.extractedContents;
+
+    logger.info('Using content for analysis', {
+      fullContentCount: fullExtractedContents.length,
+      fromState: fullExtractedContents !== input.extractedContents
+    })
+
     // Use the OpenAI service to analyze content
     const openAIService = new OpenAIService()
     const parsedResponse = await openAIService.analyzeContent(
       input.originalQuery,
-      input.extractedContents,
+      fullExtractedContents,
       input.depth,
       researchConfig?.depth || 0
     )

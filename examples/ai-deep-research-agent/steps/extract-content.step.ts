@@ -2,8 +2,6 @@ import { EventConfig, Handlers } from 'motia'
 import { z } from 'zod'
 import { FirecrawlService } from '../services/firecrawl.service'
 
-type Input = typeof inputSchema
-
 const inputSchema = z.object({
   searchResults: z.array(
     z.object({
@@ -21,6 +19,8 @@ const inputSchema = z.object({
   originalQuery: z.string(),
   depth: z.number().int()
 })
+
+type Input = z.infer<typeof inputSchema>
 
 export const config: EventConfig = {
   type: 'event',
@@ -59,21 +59,37 @@ export const handler: Handlers['Extract Web Content'] = async (input, { traceId,
       logger
     )
     
-    // Store the extracted content in state
+    // Truncate content to avoid SNS message size limits (256KB)
+    // Each content limited to 10,000 characters to stay well under SNS limits
+    const MAX_CONTENT_LENGTH = 10000
+    const truncatedContents = extractedContents.map(content => ({
+      ...content,
+      content: content.content.length > MAX_CONTENT_LENGTH 
+        ? content.content.slice(0, MAX_CONTENT_LENGTH) + '\n... (content truncated)'
+        : content.content
+    }))
+    
+    logger.info('Content extracted and truncated', {
+      originalCount: extractedContents.length,
+      truncatedCount: truncatedContents.length,
+      totalSize: JSON.stringify(truncatedContents).length
+    })
+    
+    // Store the full extracted content in state (no size limits)
     await state.set(traceId, `extractedContent-depth-${input.depth}`, extractedContents)
     
-    // Emit event with the extracted content
+    // Emit event with truncated content (for SNS compatibility)
     await emit({
       topic: 'content-extracted',
       data: {
-        extractedContents,
+        extractedContents: truncatedContents,
         requestId: input.requestId,
         originalQuery: input.originalQuery,
         depth: input.depth
       }
     })
   } catch (error) {
-    logger.error('Failed to extract content', { error: error.message })
+    logger.error('Failed to extract content', { error: error instanceof Error ? error.message : 'Unknown error' })
     throw error
   }
 } 

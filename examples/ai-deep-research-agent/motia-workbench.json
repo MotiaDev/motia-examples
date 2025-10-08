@@ -3,7 +3,7 @@
     "id": "research",
     "config": {
       "steps/status-api.step.ts": {
-        "x": -52,
+        "x": -356,
         "y": 48
       },
       "steps/search-web.step.ts": {
@@ -18,18 +18,18 @@
         "sourceHandlePosition": "right"
       },
       "steps/report-api.step.ts": {
-        "x": -44,
-        "y": -198
+        "x": -338,
+        "y": -153
       },
       "steps/generate-queries.step.ts": {
-        "x": 268,
-        "y": 278,
+        "x": 247,
+        "y": 290,
         "sourceHandlePosition": "right",
         "targetHandlePosition": "left"
       },
       "steps/follow-up-research.step.ts": {
         "x": 553,
-        "y": -40,
+        "y": -151,
         "sourceHandlePosition": "bottom",
         "targetHandlePosition": "top"
       },
@@ -40,8 +40,9 @@
         "targetHandlePosition": "left"
       },
       "steps/compile-report.step.ts": {
-        "x": 1217,
-        "y": 82
+        "x": 1473,
+        "y": 75,
+        "targetHandlePosition": "top"
       },
       "steps/analyze-content.step.ts": {
         "x": 2044,

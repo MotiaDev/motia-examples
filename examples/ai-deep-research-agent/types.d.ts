@@ -4,22 +4,22 @@
  * 
  * Consider adding this file to .prettierignore and eslint ignore.
  */
-import { EventHandler, ApiRouteHandler, ApiResponse, MotiaStream } from 'motia'
+import { EventHandler, ApiRouteHandler, ApiResponse, MotiaStream, CronHandler } from 'motia'
 
 declare module 'motia' {
   interface FlowContextStateStreams {
     
   }
 
-  type Handlers = {
+  interface Handlers {
     'Research Status API': ApiRouteHandler<{ requestId: string }, unknown, never>
-    'Web Search': EventHandler<{ searchQueries: string[]; requestId: string; originalQuery: string; depth: unknown }, { topic: 'search-results-collected'; data: { searchResults: { query: string; results: { url: string; title: string; snippet: string }[] }[]; requestId: string; originalQuery: string; depth: unknown } }>
+    'Web Search': EventHandler<{ searchQueries: Array<string>; requestId: string; originalQuery: string; depth: unknown }, { topic: 'search-results-collected'; data: { searchResults: Array<{ query: string; results: Array<{ url: string; title: string; snippet: string }> }>; requestId: string; originalQuery: string; depth: unknown } }>
     'Deep Research API': ApiRouteHandler<{ query: string; breadth?: unknown; depth?: unknown }, unknown, { topic: 'research-started'; data: { query: string; breadth: unknown; depth: unknown; requestId: string } }>
     'Research Report API': ApiRouteHandler<{ requestId: string }, unknown, never>
-    'Generate Search Queries': EventHandler<{ query: string; breadth: unknown; depth: unknown; requestId: string }, { topic: 'search-queries-generated'; data: { searchQueries: string[]; requestId: string; originalQuery: string; depth: unknown } }>
-    'Follow-up Research': EventHandler<{ followUpQueries: string[]; requestId: string; originalQuery: string; depth: unknown; previousAnalysis: { summary: string; keyFindings: string[]; sources: { title: string; url: string }[] } }, { topic: 'search-queries-generated'; data: { searchQueries: string[]; requestId: string; originalQuery: string; depth: unknown } }>
-    'Extract Web Content': EventHandler<{ searchResults: { query: string; results: { url: string; title: string; snippet: string }[] }[]; requestId: string; originalQuery: string; depth: unknown }, { topic: 'content-extracted'; data: { extractedContents: { url: string; title: string; content: string; query: string }[]; requestId: string; originalQuery: string; depth: unknown } }>
-    'Compile Research Report': EventHandler<{ analysis: { summary: string; keyFindings: string[]; sources: { title: string; url: string }[] }; requestId: string; originalQuery: string; depth: unknown; isComplete: boolean }, never>
-    'Analyze Content': EventHandler<{ extractedContents: { url: string; title: string; content: string; query: string }[]; requestId: string; originalQuery: string; depth: unknown }, { topic: 'analysis-completed'; data: { analysis: { summary: string; keyFindings: string[]; sources: { title: string; url: string }[] }; requestId: string; originalQuery: string; depth: unknown; isComplete: boolean } } | { topic: 'follow-up-research-needed'; data: { followUpQueries: string[]; requestId: string; originalQuery: string; depth: unknown; previousAnalysis: { summary: string; keyFindings: string[]; sources: { title: string; url: string }[] } } }>
+    'Generate Search Queries': EventHandler<{ query: string; breadth: unknown; depth: unknown; requestId: string }, { topic: 'search-queries-generated'; data: { searchQueries: Array<string>; requestId: string; originalQuery: string; depth: unknown } }>
+    'Follow-up Research': EventHandler<{ followUpQueries: Array<string>; requestId: string; originalQuery: string; depth: unknown; previousAnalysis: { summary: string; keyFindings: Array<string>; sources: Array<{ title: string; url: string }> } }, { topic: 'search-queries-generated'; data: { searchQueries: Array<string>; requestId: string; originalQuery: string; depth: unknown } }>
+    'Extract Web Content': EventHandler<{ searchResults: Array<{ query: string; results: Array<{ url: string; title: string; snippet: string }> }>; requestId: string; originalQuery: string; depth: unknown }, { topic: 'content-extracted'; data: { extractedContents: Array<{ url: string; title: string; content: string; query: string }>; requestId: string; originalQuery: string; depth: unknown } }>
+    'Compile Research Report': EventHandler<{ analysis: { summary: string; keyFindings: Array<string>; sources: Array<{ title: string; url: string }> }; requestId: string; originalQuery: string; depth: unknown; isComplete: boolean }, never>
+    'Analyze Content': EventHandler<{ extractedContents: Array<{ url: string; title: string; content: string; query: string }>; requestId: string; originalQuery: string; depth: unknown }, { topic: 'analysis-completed'; data: { analysis: { summary: string; keyFindings: Array<string>; sources: Array<{ title: string; url: string }> }; requestId: string; originalQuery: string; depth: unknown; isComplete: boolean } } | { topic: 'follow-up-research-needed'; data: { followUpQueries: Array<string>; requestId: string; originalQuery: string; depth: unknown; previousAnalysis: { summary: string; keyFindings: Array<string>; sources: Array<{ title: string; url: string }> } } }>
   }
 }
