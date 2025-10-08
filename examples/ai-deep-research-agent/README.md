@@ -63,7 +63,7 @@ Before you begin, ensure you have:
 
 ```bash
 # Clone the repository
-git clone https://github.com/MotiaDev/motia-examples/edit/main/examples
+git clone https://github.com/MotiaDev/motia-examples/examples
 cd examples/ai-deep-research-agent
 
 # Install dependencies
