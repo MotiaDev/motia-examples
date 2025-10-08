@@ -63,8 +63,8 @@ Before you begin, ensure you have:
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd ai-deep-research-agent
+git clone https://github.com/MotiaDev/motia-examples/edit/main/examples
+cd examples/ai-deep-research-agent
 
 # Install dependencies
 npm install
