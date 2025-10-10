@@ -1,0 +1,19 @@
+[
+  {
+    "id": "todo-app",
+    "config": {
+      "steps/todo/create-todo.step.ts": {
+        "x": -451,
+        "y": 116
+      },
+      "steps/todo/delete-todo.step.ts": {
+        "x": -20,
+        "y": 3
+      },
+      "steps/todo/update-todo.step.ts": {
+        "x": -33,
+        "y": 218
+      }
+    }
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "name": "todo-app",
+  "description": "A modern todo application built with Motia Streams",
+  "author": "Motia",
+  "license": "GPL-3.0-or-later",
+  "version": "1.0.0",
+  "scripts": {
+    "api": "pnpm --filter @motiadev/todo-api dev",
+    "app": "pnpm --filter @motiadev/todo-app dev",
+    "dev": "pnpm --filter @motiadev/todo-app dev & pnpm --filter @motiadev/todo-api dev",
+    "lint": "pnpm --filter @motiadev/todo-app run lint",
+    "build": "pnpm --filter @motiadev/todo-app run build & pnpm --filter @motiadev/todo-api run build"
+  },
+  "keywords": [
+    "motia",
+    "todo",
+    "streams"
+  ],
+  "packageManager": "pnpm@10.11.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "typescript": "~5.8.3",
+    "prettier": "^3.5.3"
+  }
+}
