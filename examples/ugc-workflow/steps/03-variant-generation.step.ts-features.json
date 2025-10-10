@@ -2,85 +2,37 @@
   {
     "id": "step-configuration",
     "title": "Step Configuration",
-    "description": "Event step configuration for variant generation that subscribes to vision analysis and emits generated variants.",
+    "description": "Event step that subscribes to 'vision.analyzed' events and emits 'variants.generated' events for parallel processing.",
     "lines": ["31-39"]
   },
   {
-    "id": "input-schema",
-    "title": "Input Schema Definition",
-    "description": "Zod schema defining the input structure with requestId, imageUrl, visionAnalysis data, and numVariations.",
-    "lines": ["4-29"]
-  },
-  {
-    "id": "event-subscription",
-    "title": "Event Subscription",
-    "description": "Subscribes to 'vision.analyzed' events to automatically process analyzed vision data for variant generation.",
-    "lines": ["35"]
-  },
-  {
-    "id": "event-emission",
-    "title": "Event Emission",
-    "description": "Emits 'variants.generated' events for each variant to enable parallel processing in downstream steps.",
-    "lines": ["36", "144-155"]
-  },
-  {
-    "id": "handler-implementation",
-    "title": "Handler Implementation",
-    "description": "Main handler that generates multiple content variants with different camera angles, lighting, and style configurations.",
-    "lines": ["41-165"]
-  },
-  {
-    "id": "camera-angles",
-    "title": "Camera Angle Options",
-    "description": "Predefined array of professional camera angles including top-down, three-quarter, angled overhead, and eye-level shots.",
-    "lines": ["56-61"]
-  },
-  {
-    "id": "lighting-styles",
-    "title": "Lighting Style Options",
-    "description": "Array of lighting styles optimized for product photography including natural daylight and studio lighting variations.",
-    "lines": ["63-68"]
-  },
-  {
-    "id": "headline-seeds",
-    "title": "Marketing Headline Seeds",
-    "description": "Collection of marketing-focused headline phrases for generating authentic UGC-style copy.",
-    "lines": ["70-81"]
+    "id": "variation-options",
+    "title": "Variation Options",
+    "description": "Predefined arrays of camera angles (top-down, three-quarter, overhead, eye-level), lighting styles (natural daylight, studio light), and marketing headline seeds for diverse content generation.",
+    "lines": ["56-81"]
   },
   {
     "id": "variant-generation-loop",
-    "title": "Variant Generation Loop",
-    "description": "Iterates through the requested number of variations, rotating through camera angles, lighting, and headline options.",
+    "title": "Variant Generation",
+    "description": "Iterates through requested variations, rotating through camera angles, lighting, and headlines to create unique combinations for each variant.",
     "lines": ["84-132"]
   },
   {
     "id": "image-prompt-creation",
-    "title": "Image Prompt Construction",
-    "description": "Builds detailed AI image generation prompts with emotion, action, character, product details, and visual styling instructions.",
+    "title": "Prompt Construction",
+    "description": "Builds detailed prompts combining emotion, action, character descriptions, product details, and visual styling instructions for authentic UGC-style image generation.",
     "lines": ["91-103"]
   },
   {
     "id": "variant-object",
     "title": "Variant Data Structure",
-    "description": "Creates comprehensive variant objects containing image prompts, render preferences, brand colors, and product information.",
+    "description": "Creates comprehensive variant objects with image prompts, render preferences (aspect ratio, lighting, camera, depth of field), brand colors, and product information for downstream processing.",
     "lines": ["105-129"]
-  },
-  {
-    "id": "structured-logging",
-    "title": "Structured Logging",
-    "description": "Detailed logging of variant generation progress, parameters, and completion status for observability.",
-    "lines": ["48-53", "134-141", "157"]
   },
   {
     "id": "parallel-processing",
     "title": "Parallel Event Emission",
-    "description": "Emits each variant as a separate event to enable parallel processing of image and video generation downstream.",
+    "description": "Emits each variant as a separate event to enable concurrent image and video generation, dramatically reducing total workflow processing time.",
     "lines": ["144-155"]
-  },
-  {
-    "id": "error-handling",
-    "title": "Error Management",
-    "description": "Comprehensive error handling with detailed logging for debugging variant generation failures.",
-    "lines": ["158-164"]
   }
 ]

@@ -28,33 +28,29 @@
   {
     "id": "ugc-generation",
     "config": {
-      "steps/imagekit-auth.step.ts": {
-        "x": -18,
-        "y": 248
-      },
       "steps/06-file-storage.step.ts": {
-        "x": 2099,
-        "y": 31
+        "x": 2004,
+        "y": 67
       },
       "steps/05-video-generation.step.ts": {
-        "x": 1664,
-        "y": 30
+        "x": 1496,
+        "y": 68
       },
       "steps/04-image-generation.step.ts": {
-        "x": 1206,
-        "y": 32
+        "x": 982,
+        "y": 69
       },
       "steps/03-variant-generation.step.ts": {
-        "x": 757,
-        "y": 31
-      },
-      "steps/02-vision-analysis.step.ts": {
-        "x": 400,
-        "y": 39
+        "x": 456,
+        "y": 69
       },
       "steps/01-image-upload.step.ts": {
-        "x": -48,
-        "y": -5
+        "x": -415,
+        "y": 35
+      },
+      "steps/02-vision-analysis_step.py": {
+        "x": 43,
+        "y": 79
       }
     }
   }

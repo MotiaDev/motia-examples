@@ -34,7 +34,7 @@ export const config: EventConfig = {
 };
 
 // Configuration for Vertex AI
-const PROJECT_ID = process.env.VERTEX_PROJECT_ID || "taofiq-veo3-test";
+const PROJECT_ID = process.env.VERTEX_PROJECT_ID;
 const MODEL_ID = "veo-3.0-generate-001";
 const LOCATION = "us-central1";
 

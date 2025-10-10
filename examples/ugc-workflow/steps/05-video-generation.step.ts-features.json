@@ -2,97 +2,37 @@
   {
     "id": "step-configuration",
     "title": "Step Configuration",
-    "description": "Event step configuration for video generation using Google Vertex AI Veo 3 that subscribes to image generation events.",
+    "description": "Event step that subscribes to 'image.generated' events and emits 'video.generated' events to trigger file storage and workflow completion.",
     "lines": ["26-34"]
   },
   {
-    "id": "input-schema",
-    "title": "Input Schema Definition",
-    "description": "Zod schema defining video generation input with requestId, generated image URL, variant details, and product information.",
-    "lines": ["7-24"]
-  },
-  {
-    "id": "event-subscription",
-    "title": "Event Subscription",
-    "description": "Subscribes to 'image.generated' events to automatically trigger video generation for each completed image.",
-    "lines": ["30"]
-  },
-  {
-    "id": "event-emission",
-    "title": "Event Emission",
-    "description": "Emits 'video.generated' events with video file paths to trigger the final storage and workflow completion.",
-    "lines": ["31", "290-300"]
-  },
-  {
-    "id": "vertex-ai-config",
-    "title": "Vertex AI Configuration",
-    "description": "Configuration constants for Google Vertex AI including project ID, model ID (Veo 3), and location.",
-    "lines": ["37-39"]
-  },
-  {
-    "id": "access-token-helper",
-    "title": "Access Token Helper",
-    "description": "Helper function to retrieve Vertex AI access token from environment variables with validation.",
-    "lines": ["42-49"]
-  },
-  {
-    "id": "image-base64-helper",
-    "title": "Image URL to Base64 Converter",
-    "description": "Helper function that downloads images from URLs and converts them to base64 for Vertex AI API.",
-    "lines": ["52-57"]
-  },
-  {
-    "id": "type-definitions",
-    "title": "TypeScript Type Definitions",
-    "description": "Comprehensive type definitions for Vertex AI API payloads, responses, and operation status structures.",
-    "lines": ["60-98"]
-  },
-  {
-    "id": "handler-implementation",
-    "title": "Handler Implementation",
-    "description": "Main handler that orchestrates Veo 3 video generation from images with polling for completion.",
-    "lines": ["100-202"]
+    "id": "veo3-integration",
+    "title": "Veo 3 Integration",
+    "description": "Configures Google Vertex AI Veo 3.0 with project ID, model settings (veo-3.0-generate-001), authentication tokens, and helper functions for image-to-base64 conversion.",
+    "lines": ["37-57"]
   },
   {
     "id": "video-prompt-creation",
     "title": "Video Prompt Creation",
-    "description": "Constructs detailed video generation prompts describing person, product presentation, setting, and UGC-style requirements.",
+    "description": "Constructs detailed prompts describing confident person presenting product in casual kitchen setting with natural UGC-style presentation, direct eye contact, and visible branding.",
     "lines": ["114"]
   },
   {
     "id": "video-generation-request",
-    "title": "Vertex AI Video Generation Request",
-    "description": "Submits long-running video generation request to Veo 3 with image, prompt, aspect ratio, and resolution parameters.",
+    "title": "Video Generation",
+    "description": "Submits long-running request to Veo 3 with base64 image, detailed prompt, 9:16 aspect ratio for social media, and 1080p resolution, returning operation name for status polling.",
     "lines": ["117-156"]
   },
   {
-    "id": "state-management",
-    "title": "State Management",
-    "description": "Stores video generation request information in workflow state for tracking and polling status updates.",
-    "lines": ["159-171"]
-  },
-  {
     "id": "polling-implementation",
-    "title": "Polling Implementation",
-    "description": "Polls Vertex AI operation status at regular intervals until video generation completes or times out.",
+    "title": "Status Polling",
+    "description": "Polls Vertex AI operation status every 15 seconds (up to 20 attempts) until video generation completes, handling async nature of video generation that can take several minutes.",
     "lines": ["174-183", "204-327"]
   },
   {
     "id": "video-conversion",
-    "title": "Base64 to Video File Conversion",
-    "description": "Converts the generated video from base64 to MP4 file and saves it to the local filesystem.",
-    "lines": ["255-278"]
-  },
-  {
-    "id": "structured-logging",
-    "title": "Structured Logging",
-    "description": "Detailed logging of video generation progress, polling attempts, completion status, and file sizes.",
-    "lines": ["107-111", "152-156", "224-227", "258-278"]
-  },
-  {
-    "id": "error-handling",
-    "title": "Error Management",
-    "description": "Comprehensive error handling for API failures, polling timeouts, and operation errors with detailed logging.",
-    "lines": ["184-201", "246-253", "310-327"]
+    "title": "Video File Conversion",
+    "description": "Converts generated video from base64 to MP4 file, saves to local filesystem with sanitized filename (brand_product_variant_timestamp.mp4), and emits event with file path.",
+    "lines": ["255-278", "290-300"]
   }
 ]

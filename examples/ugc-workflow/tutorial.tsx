@@ -16,7 +16,7 @@ export const steps: TutorialStep[] = [
         <br />
         You'll learn how to analyze product images with AI vision, generate
         multiple content variants, create UGC-style images with Gemini, produce
-        videos with Veo 3, and store results in cloud storage - all through an
+        videos with Veo 3, and store results in cloud storage, all through an
         event-driven workflow.
         <br />
         <br />
@@ -326,23 +326,31 @@ export const steps: TutorialStep[] = [
         generation.
         <br />
         <br />
-        💡 This comprehensive analysis ensures the generated content maintains
+        This comprehensive analysis ensures the generated content maintains
         brand consistency and authenticity.
       </p>
     ),
-    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.closePanelButton,
+        optional: true,
+      },
+    ],
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Event Step Configuration",
+    title: "Python Step Configuration",
     description: () => (
       <p>
-        The analyzer is configured as an event step that subscribes to
-        image.uploaded events and performs AI vision analysis using OpenAI APIs.
+        The analyzer is implemented as a Python event step using a dict-based
+        config that subscribes to <code>image.uploaded</code> events and emits{" "}
+        <code>vision.analyzed</code> events.
         <br />
         <br />
-        The step configuration includes subscription setup, handler definition,
-        and event emission for downstream content generation.
+        The Python implementation leverages async/await with aiohttp for
+        efficient HTTP requests to OpenAI's Vision API, providing fast parallel
+        image analysis.
       </p>
     ),
     before: [
@@ -352,107 +360,7 @@ export const steps: TutorialStep[] = [
       },
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("step-configuration"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Input Schema Definition",
-    description: () => (
-      <p>
-        The input schema defines the expected structure of image upload data
-        received from the image.uploaded topic.
-        <br />
-        <br />
-        This ensures type safety and validates that the analyzer receives all
-        necessary data including image URL, number of variations, and metadata.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("input-schema"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Event Subscription",
-    description: () => (
-      <p>
-        Subscribes to <code>image.uploaded</code> events to automatically
-        process uploaded images for vision analysis.
-        <br />
-        <br />
-        This event-driven approach enables asynchronous processing and allows
-        the system to scale horizontally for high-volume content generation.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("event-subscription"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Event Emission",
-    description: () => (
-      <p>
-        Emits <code>vision.analyzed</code> events to trigger the variant
-        generation step with complete product analysis data.
-        <br />
-        <br />
-        This event contains all the extracted brand, product, color, and style
-        information needed to generate authentic UGC content.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("event-emission"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Handler Implementation",
-    description: () => (
-      <p>
-        Main handler that processes image URLs, performs vision analysis with
-        OpenAI, and normalizes the results.
-        <br />
-        <br />
-        The handler orchestrates the entire vision analysis pipeline from image
-        retrieval to data extraction and event emission.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("handler-implementation"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "OpenAI Vision Integration",
-    description: () => (
-      <p>
-        Integrates with OpenAI's GPT-4 Vision API to analyze product images and
-        extract comprehensive product information.
-        <br />
-        <br />
-        The API provides detailed insights including brand names, product types,
-        color palettes, font styles, and visual characteristics.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("openai-integration"),
+        selector: workbenchXPath.flows.feature("config-definition"),
       },
     ],
   },
@@ -461,15 +369,22 @@ export const steps: TutorialStep[] = [
     title: "Structured Vision Prompt",
     description: () => (
       <p>
-        Comprehensive prompt that guides the AI to extract specific product
-        information in a structured JSON format:
+        Comprehensive prompt engineering that extracts brand name, product type,
+        colors, visual guide, ad copy, and styling from product images:
         <br />
-        <br />• <b>Brand name</b> - Exact branding as shown
-        <br />• <b>Product details</b> - Type and characteristics
-        <br />• <b>Color palette</b> - 3-4 prominent colors with hex codes
-        <br />• <b>Font style</b> - Typography characteristics
-        <br />• <b>Visual guide</b> - Camera angle and lighting notes
-        <br />• <b>Ad copy</b> - Concise marketing message
+        <br />• <b>Brand name</b> - Exact branding as printed on packaging
+        <br />• <b>Product details</b> - Specific product type and
+        characteristics
+        <br />• <b>Color palette</b> - 3-4 dominant colors with hex codes and
+        names
+        <br />• <b>Font style</b> - Typography characteristics (serif, bold,
+        etc.)
+        <br />• <b>Visual guide</b> - Camera angles, lighting, and style notes
+        <br />• <b>Ad copy</b> - Concise marketing message (20-35 characters)
+        <br />
+        <br />
+        This structured approach ensures consistent, high-quality data for UGC
+        generation.
       </p>
     ),
     before: [
@@ -481,15 +396,42 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
+    title: "Async OpenAI API Integration",
+    description: () => (
+      <p>
+        Uses aiohttp for async HTTP requests to OpenAI's GPT-4o Vision API with
+        proper error handling and authentication.
+        <br />
+        <br />
+        The async implementation enables efficient parallel processing of
+        multiple product images, significantly improving throughput for
+        high-volume UGC generation workflows.
+        <br />
+        <br />
+        API responses are validated for status codes and parsed as JSON for
+        downstream processing.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("aiohttp-integration"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
     title: "JSON Response Parsing",
     description: () => (
       <p>
-        Robust parsing of AI-generated JSON responses with error handling and
-        cleanup of markdown formatting.
+        Robust parsing of AI JSON responses with markdown cleanup and error
+        handling for malformed output.
         <br />
         <br />
-        The parser handles various response formats and ensures clean, valid
-        JSON data for downstream processing.
+        The parser strips markdown code fences (```json blocks), handles various
+        AI response formats, and validates JSON structure before processing.
+        This ensures reliable data extraction even when the AI returns slightly
+        malformed responses.
       </p>
     ),
     before: [
@@ -501,15 +443,18 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Data Normalization",
+    title: "Data Normalization with Defaults",
     description: () => (
       <p>
-        Normalizes and validates the vision analysis results with fallback
-        defaults for missing or invalid data.
+        Normalizes vision analysis results with fallback defaults for missing
+        fields and extracts primary, secondary, and tertiary colors from the
+        palette array.
         <br />
         <br />
-        This ensures consistent data structure for variant generation even when
-        the AI response is incomplete or imperfect.
+        The normalization ensures every field has a valid value, preventing
+        downstream errors. It intelligently extracts color values from the
+        palette and provides sensible defaults for brand names, product types,
+        and visual characteristics when data is missing.
       </p>
     ),
     before: [
@@ -521,61 +466,23 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Structured Logging",
+    title: "Event Emission for Variant Generation",
     description: () => (
       <p>
-        Comprehensive logging of analysis progress, results, and errors for
-        observability and debugging.
+        Emits structured <code>vision.analyzed</code> event with normalized data
+        to trigger variant generation in the UGC pipeline.
         <br />
         <br />
-        The logging provides complete visibility into the vision analysis
-        process and helps troubleshoot any issues.
+        The event contains all extracted brand information, product details,
+        color palettes, font styles, and visual characteristics needed for
+        downstream steps to generate authentic, brand-consistent UGC content
+        variants.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("structured-logging"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Error Management",
-    description: () => (
-      <p>
-        Robust error handling for API failures, JSON parsing errors, and other
-        issues with proper error propagation.
-        <br />
-        <br />
-        This ensures the workflow fails gracefully and provides actionable error
-        information for debugging.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("error-handling"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Workflow Continuation",
-    description: () => (
-      <p>
-        Emits structured event data with analyzed vision information to continue
-        the UGC generation pipeline.
-        <br />
-        <br />
-        The event contains all the brand, product, color, and style data needed
-        to generate multiple content variants.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("workflow-continuation"),
+        selector: workbenchXPath.flows.feature("event-emission"),
       },
     ],
   },
@@ -605,15 +512,17 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Step Configuration",
+    title: "Event Step Configuration",
     description: () => (
       <p>
-        The variant generator is configured as an event step that creates
-        multiple content variations with different visual styles.
+        The variant generator is configured as an event step that subscribes to{" "}
+        <code>vision.analyzed</code> events and emits{" "}
+        <code>variants.generated</code> events for parallel processing.
         <br />
         <br />
-        The step configuration includes subscription to vision.analyzed events
-        and emission setup for parallel variant processing.
+        This event-driven architecture enables each variant to be processed
+        independently and concurrently in downstream image and video generation
+        steps, significantly improving throughput.
       </p>
     ),
     before: [
@@ -629,103 +538,33 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Input Schema Definition",
+    title: "Visual Variation Options",
     description: () => (
       <p>
-        The input schema accepts vision analysis results including brand data,
-        product details, color palettes, and visual characteristics.
+        Predefined arrays of camera angles, lighting styles, and marketing
+        headline seeds that create diverse content variations:
         <br />
         <br />
-        This comprehensive schema ensures the generator receives all necessary
-        data to create authentic, brand-consistent content variants.
+        <b>Camera Angles:</b> Top-down flat lay • Three-quarter product angle
+        (30°) • Angled overhead (15° tilt) • Eye-level hero shot
+        <br />
+        <br />
+        <b>Lighting Styles:</b> Soft natural daylight • Bright, even daylight •
+        Diffused window light • Soft studio light with diffuser
+        <br />
+        <br />
+        <b>Headline Seeds:</b> "instant radiance" • "effortless glow" • "fresh
+        finish" • "skin-first beauty" • "everyday dewy" • "natural luminosity"
+        <br />
+        <br />
+        These options are rotated across variants to maximize visual and content
+        diversity while maintaining brand authenticity.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("input-schema"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Camera Angle Options",
-    description: () => (
-      <p>
-        Predefined array of professional camera angles for product photography:
-        <br />
-        <br />
-        • Top-down flat lay
-        <br />
-        • Three-quarter product angle (30°)
-        <br />
-        • Angled overhead (15° tilt)
-        <br />
-        • Eye-level hero shot
-        <br />
-        <br />
-        These angles are rotated across variants to create visual diversity
-        while maintaining professional quality.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("camera-angles"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Lighting Style Options",
-    description: () => (
-      <p>
-        Array of lighting styles optimized for product photography:
-        <br />
-        <br />
-        • Soft natural daylight
-        <br />
-        • Bright, even daylight
-        <br />
-        • Diffused window light
-        <br />
-        • Soft studio light with diffuser
-        <br />
-        <br />
-        Different lighting creates distinct moods and atmospheres for each
-        content variant.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("lighting-styles"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Marketing Headline Seeds",
-    description: () => (
-      <p>
-        Collection of marketing-focused headline phrases for generating
-        authentic UGC-style copy:
-        <br />
-        <br />
-        • "instant radiance" • "effortless glow"
-        <br />
-        • "fresh finish" • "skin-first beauty"
-        <br />
-        • "everyday dewy" • "natural luminosity"
-        <br />
-        <br />
-        These seeds inspire varied marketing messages across content variants.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("headline-seeds"),
+        selector: workbenchXPath.flows.feature("variation-options"),
       },
     ],
   },
@@ -734,12 +573,14 @@ export const steps: TutorialStep[] = [
     title: "Variant Generation Loop",
     description: () => (
       <p>
-        Iterates through the requested number of variations, rotating through
-        camera angles, lighting, and headline options.
+        Iterates through requested variations, rotating through camera angles,
+        lighting styles, and headlines to create unique combinations for each
+        variant.
         <br />
         <br />
-        Each iteration creates a unique combination of visual and content
-        elements for maximum diversity in the generated UGC.
+        The loop uses modulo arithmetic to cycle through the predefined options,
+        ensuring each variant has a distinct visual style and marketing message
+        for maximum content diversity in the UGC pipeline.
       </p>
     ),
     before: [
@@ -751,15 +592,18 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Image Prompt Construction",
+    title: "AI Image Prompt Construction",
     description: () => (
       <p>
-        Builds detailed AI image generation prompts with emotion, action,
-        character, product details, and visual styling instructions.
+        Builds detailed prompts combining emotion, action, character
+        descriptions, product details, and visual styling instructions for
+        authentic UGC-style image generation.
         <br />
         <br />
-        The prompts combine analyzed brand data with variant-specific camera
-        angles, lighting, and color palettes for authentic UGC-style imagery.
+        Each prompt integrates the analyzed brand data (colors, fonts, visual
+        guide) with variant-specific settings (camera angle, lighting) to create
+        cohesive, brand-consistent UGC content that feels genuine and
+        user-generated.
       </p>
     ),
     before: [
@@ -774,19 +618,15 @@ export const steps: TutorialStep[] = [
     title: "Variant Data Structure",
     description: () => (
       <p>
-        Creates comprehensive variant objects containing:
+        Creates comprehensive variant objects with image prompts, render
+        preferences (aspect ratio, lighting, camera, depth of field), brand
+        colors, and product information for downstream processing.
         <br />
         <br />
-        • Image generation prompts
-        <br />
-        • Render preferences (aspect ratio, lighting, camera)
-        <br />
-        • Brand colors (primary, secondary, tertiary)
-        <br />
-        • Product information (brand, product, watermark)
-        <br />
-        <br />
-        This structured data drives the downstream image and video generation.
+        This structured data package contains everything needed by the image
+        generation (Gemini) and video generation (Veo 3) steps to create
+        consistent, high-quality UGC content that maintains brand authenticity
+        across all variants.
       </p>
     ),
     before: [
@@ -801,12 +641,14 @@ export const steps: TutorialStep[] = [
     title: "Parallel Event Emission",
     description: () => (
       <p>
-        Emits each variant as a separate event to enable parallel processing of
-        image and video generation downstream.
+        Emits each variant as a separate event to enable concurrent image and
+        video generation, dramatically reducing total workflow processing time.
         <br />
         <br />
-        This architecture allows multiple variants to be processed concurrently,
-        dramatically reducing total generation time for the workflow.
+        This parallel architecture is key to scalability - instead of generating
+        content sequentially, all variants process simultaneously through Gemini
+        and Veo 3, allowing production of multiple UGC assets in the time it
+        would take to create just one.
       </p>
     ),
     before: [
@@ -845,12 +687,13 @@ export const steps: TutorialStep[] = [
     title: "Step Configuration",
     description: () => (
       <p>
-        The image generator is configured as an event step that creates
-        UGC-style images using Google Gemini AI.
+        Event step that subscribes to <code>variants.generated</code> events and
+        emits <code>image.generated</code> events to trigger video generation.
         <br />
         <br />
-        The step configuration includes subscription to variants.generated
-        events and emission setup for triggering video generation.
+        Each variant is processed independently, allowing parallel image
+        generation across multiple variants for faster workflow completion and
+        higher throughput.
       </p>
     ),
     before: [
@@ -866,15 +709,17 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Google Gemini Integration",
+    title: "Gemini AI Integration",
     description: () => (
       <p>
-        Initializes and uses Google's Gemini 2.5 Flash Image Preview model for
-        AI-powered image generation.
+        Initializes Google's Gemini 2.5 Flash Image Preview model for AI-powered
+        UGC-style image generation with multimodal capabilities.
         <br />
         <br />
-        This cutting-edge model can understand the original image and transform
-        it according to detailed prompts while maintaining product authenticity.
+        This cutting-edge model combines vision understanding with generative
+        capabilities, allowing it to analyze the original product image and
+        transform it according to detailed prompts while maintaining product
+        authenticity and brand consistency.
       </p>
     ),
     before: [
@@ -886,35 +731,18 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Image Download and Base64 Conversion",
-    description: () => (
-      <p>
-        Downloads the original image from URL and converts it to base64 format
-        for Gemini API input.
-        <br />
-        <br />
-        This conversion allows the AI to analyze the original product image and
-        generate transformed versions that maintain brand consistency.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("image-base64-conversion"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
     title: "AI Image Generation",
     description: () => (
       <p>
-        Generates new UGC-style product images using Gemini with the original
-        image and detailed prompt instructions.
+        Downloads original image, converts to base64, and generates new
+        UGC-style images using Gemini with detailed variant prompts including
+        camera angles, lighting, and brand styling.
         <br />
         <br />
-        The AI understands the prompt's camera angle, lighting, color palette,
-        and style requirements to create authentic-looking user content.
+        The generation process combines the original product image with the
+        variant's specific instructions (camera angle, lighting style, color
+        palette) to create authentic-looking user-generated content that
+        maintains brand consistency while appearing natural and spontaneous.
       </p>
     ),
     before: [
@@ -926,15 +754,16 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Generated Image Extraction",
+    title: "Image Extraction",
     description: () => (
       <p>
-        Extracts the generated image data from Gemini's response candidates and
-        inline data structures.
+        Extracts generated image data from Gemini's response candidates and
+        inline data structures, handling the API response format.
         <br />
         <br />
-        The extraction handles Gemini's response format to retrieve the
-        base64-encoded generated image for upload.
+        The extraction process navigates Gemini's response structure to locate
+        and retrieve the base64-encoded generated image, ensuring robust
+        handling of the API's response format variations.
       </p>
     ),
     before: [
@@ -946,15 +775,17 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "ImageKit Storage Upload",
+    title: "ImageKit CDN Upload",
     description: () => (
       <p>
-        Uploads the generated image to ImageKit CDN for persistent storage and
-        fast delivery.
+        Uploads generated images to ImageKit CDN with sanitized filenames for
+        persistent storage, fast delivery, and global distribution.
         <br />
         <br />
         ImageKit provides optimized image delivery with automatic format
-        conversion, compression, and global CDN distribution.
+        conversion, compression, and global CDN distribution, ensuring fast load
+        times and reliable access to generated UGC content from anywhere in the
+        world.
       </p>
     ),
     before: [
@@ -966,21 +797,23 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Filename Sanitization",
+    title: "Event Emission",
     description: () => (
       <p>
-        Creates sanitized filenames for uploaded images by replacing special
-        characters with underscores.
+        Emits <code>image.generated</code> events with CDN URLs and variant
+        metadata to trigger downstream video generation with Veo 3.
         <br />
         <br />
-        This ensures compatibility with storage systems and maintains clean,
-        predictable file naming conventions.
+        The emitted event contains the generated image URL from ImageKit, along
+        with all variant metadata, enabling the video generation step to create
+        UGC videos based on the generated images while maintaining the full
+        context of the variant's styling and branding.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("filename-sanitization"),
+        selector: workbenchXPath.flows.feature("event-emission"),
       },
     ],
   },
@@ -1013,12 +846,14 @@ export const steps: TutorialStep[] = [
     title: "Step Configuration",
     description: () => (
       <p>
-        The video generator is configured as an event step that creates UGC
-        videos using Google Vertex AI Veo 3.
+        Event step that subscribes to <code>image.generated</code> events and
+        emits <code>video.generated</code> events to trigger file storage and
+        workflow completion.
         <br />
         <br />
-        The step configuration includes subscription to image.generated events
-        and emission setup for triggering file storage.
+        Each generated image triggers independent video generation, enabling
+        parallel processing of multiple UGC video variants simultaneously for
+        optimal workflow performance.
       </p>
     ),
     before: [
@@ -1034,63 +869,24 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Vertex AI Configuration",
+    title: "Veo 3 Integration",
     description: () => (
       <p>
-        Configuration constants for Google Vertex AI including:
-        <br />
-        <br />• <b>Project ID</b> - Your Google Cloud project
-        <br />• <b>Model ID</b> - Veo 3.0 generate model
-        <br />• <b>Location</b> - us-central1 region
+        Configures Google Vertex AI Veo 3.0 with project ID, model settings
+        (veo-3.0-generate-001), authentication tokens, and helper functions for
+        image-to-base64 conversion.
         <br />
         <br />
-        These settings connect to Google's Veo 3 video generation service.
+        The integration includes configuration for Google Cloud project
+        (us-central1 region), access token authentication via environment
+        variables, and utilities to download images from URLs and convert them
+        to base64 format required by Veo 3's API for image-to-video generation.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("vertex-ai-config"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Access Token Helper",
-    description: () => (
-      <p>
-        Helper function to retrieve Vertex AI access token from environment
-        variables with validation.
-        <br />
-        <br />
-        The token authenticates API requests to Google Cloud for video
-        generation services.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("access-token-helper"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Image URL to Base64 Converter",
-    description: () => (
-      <p>
-        Helper function that downloads images from URLs and converts them to
-        base64 for Vertex AI API.
-        <br />
-        <br />
-        Veo 3 requires base64-encoded images as input for image-to-video
-        generation.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("image-base64-helper"),
+        selector: workbenchXPath.flows.feature("veo3-integration"),
       },
     ],
   },
@@ -1099,22 +895,17 @@ export const steps: TutorialStep[] = [
     title: "Video Prompt Creation",
     description: () => (
       <p>
-        Constructs detailed video generation prompts describing:
+        Constructs detailed prompts describing confident person presenting
+        product in casual kitchen setting with natural UGC-style presentation,
+        direct eye contact, and visible branding.
         <br />
         <br />
-        • Person presenting the product enthusiastically
-        <br />
-        • Natural kitchen/casual setting
-        <br />
-        • Direct eye contact with camera
-        <br />
-        • Product branding clearly visible
-        <br />
-        • Authentic UGC style presentation
-        <br />
-        <br />
-        These prompts guide Veo 3 to create realistic, authentic-looking UGC
-        videos.
+        The prompts are carefully crafted to guide Veo 3 in creating realistic,
+        authentic-looking UGC videos that show people enthusiastically
+        presenting products as friends would on social media. Key elements
+        include: natural kitchen/casual setting, confident presenter making
+        direct eye contact, product branding clearly visible, and authentic
+        social media presentation style.
       </p>
     ),
     before: [
@@ -1126,22 +917,19 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Vertex AI Video Generation Request",
+    title: "Video Generation Request",
     description: () => (
       <p>
-        Submits long-running video generation request to Veo 3 with:
+        Submits long-running request to Veo 3 with base64 image, detailed
+        prompt, 9:16 aspect ratio for social media, and 1080p resolution,
+        returning operation name for status polling.
         <br />
         <br />
-        • Base64-encoded source image
-        <br />
-        • Detailed video prompt
-        <br />
-        • Aspect ratio (9:16 for social media)
-        <br />
-        • Resolution (1080p)
-        <br />
-        <br />
-        The API returns an operation name used for polling completion status.
+        The request includes the generated UGC-style image as base64, the video
+        prompt describing the desired presentation, 9:16 vertical aspect ratio
+        optimized for Instagram Reels, TikTok, and YouTube Shorts, and 1080p
+        resolution for high-quality output. The API returns an operation name
+        used to poll for completion.
       </p>
     ),
     before: [
@@ -1153,35 +941,19 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "State Management",
+    title: "Status Polling",
     description: () => (
       <p>
-        Stores video generation request information in workflow state for
-        tracking and polling status updates.
+        Polls Vertex AI operation status every 15 seconds (up to 20 attempts)
+        until video generation completes, handling async nature of video
+        generation that can take several minutes.
         <br />
         <br />
-        This state allows the system to monitor multiple concurrent video
-        generation operations and handle completion properly.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("state-management"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Polling Implementation",
-    description: () => (
-      <p>
-        Polls Vertex AI operation status at 15-second intervals until video
-        generation completes or times out.
-        <br />
-        <br />
-        Video generation can take several minutes, so the polling loop checks
-        status periodically and processes the video when ready.
+        Video generation is a long-running operation that can take 3-5 minutes
+        or more. The polling mechanism checks the operation status at 15-second
+        intervals, handling the asynchronous nature of the video generation
+        process. With a maximum of 20 attempts (5 minutes), the system ensures
+        completion tracking while preventing indefinite waiting.
       </p>
     ),
     before: [
@@ -1193,15 +965,19 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Base64 to Video File Conversion",
+    title: "Video File Conversion",
     description: () => (
       <p>
-        Converts the generated video from base64 to MP4 file and saves it to the
-        local filesystem.
+        Converts generated video from base64 to MP4 file, saves to local
+        filesystem with sanitized filename
+        (brand_product_variant_timestamp.mp4), and emits event with file path.
         <br />
         <br />
-        The video file is named with brand, product, variant ID, and timestamp
-        for easy identification and organization.
+        Once video generation completes, the base64-encoded video data is
+        converted to an MP4 file and saved locally with a descriptive filename
+        format that includes the brand name, product type, variant ID, and
+        timestamp. An event is then emitted with the file path to trigger the
+        final storage step for uploading to Box cloud storage.
       </p>
     ),
     before: [
@@ -1240,12 +1016,15 @@ export const steps: TutorialStep[] = [
     title: "Step Configuration",
     description: () => (
       <p>
-        The storage handler is configured as an event step that uploads
-        generated content to Box cloud storage.
+        Event step that subscribes to <code>video.generated</code> events and
+        emits <code>workflow.completed</code> events to finalize the UGC
+        generation pipeline.
         <br />
         <br />
-        The step configuration includes subscription to video.generated events
-        and emission setup for workflow completion tracking.
+        This final step completes the workflow by persisting all generated
+        content to cloud storage, providing a complete audit trail, and
+        signaling successful completion to downstream systems or notification
+        services.
       </p>
     ),
     before: [
@@ -1261,35 +1040,42 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Box Storage Configuration",
+    title: "Box Cloud Storage Integration",
     description: () => (
       <p>
-        Retrieves Box access token and folder ID from environment variables with
-        validation.
+        Configures Box API with access tokens and folder IDs from environment
+        variables, using FormData and Bearer token authentication for file
+        uploads to Box Content API.
         <br />
         <br />
-        These credentials authenticate uploads to Box and specify the target
-        folder for organizing generated UGC content.
+        The Box integration provides enterprise-grade cloud storage with
+        built-in sharing, permissions, and collaboration features. Configuration
+        includes authentication tokens, target folder IDs for organizing
+        content, and the necessary headers and request formatting for the Box
+        Content API.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("box-configuration"),
+        selector: workbenchXPath.flows.feature("box-integration"),
       },
     ],
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Video File Upload to Box",
+    title: "Video File Upload",
     description: () => (
       <p>
-        Reads local video file, creates form data with metadata, and uploads to
-        Box with proper authorization.
+        Reads local MP4 video file, creates sanitized filename, and uploads to
+        Box storage with metadata including file attributes and parent folder
+        specification.
         <br />
         <br />
-        The upload includes file attributes specifying the filename and parent
-        folder for proper organization in Box.
+        The video upload process reads the generated MP4 file from the local
+        filesystem, sanitizes the filename by replacing special characters with
+        underscores, creates FormData with the video buffer and metadata, and
+        uploads to Box with proper authorization and folder organization.
       </p>
     ),
     before: [
@@ -1301,116 +1087,73 @@ export const steps: TutorialStep[] = [
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Image Download and Box Upload",
+    title: "Image Download and Upload",
     description: () => (
       <p>
-        Downloads generated image from ImageKit CDN, converts to buffer, and
-        uploads to Box storage with sanitized filename.
+        Downloads generated UGC image from ImageKit CDN, converts to buffer, and
+        uploads to Box storage with sanitized filename to store both video and
+        source image together.
         <br />
         <br />
-        This ensures both the video and its source image are stored together in
-        Box for complete content management.
+        This ensures complete content management by keeping the generated video
+        and its source UGC-style image together in Box. The process downloads
+        the image from ImageKit's CDN, converts it to a buffer, and uploads it
+        alongside the video for easy reference and content organization.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("image-download-upload"),
+        selector: workbenchXPath.flows.feature("image-upload"),
       },
     ],
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Box API Integration",
+    title: "Workflow State Management",
     description: () => (
       <p>
-        Integrates with Box Content API for file uploads using FormData and
-        Bearer token authentication.
+        Updates workflow state with completion status, tracks uploaded file
+        metadata (Box IDs, URLs, types), variant details, and completion
+        timestamp for audit trail.
         <br />
         <br />
-        The Box API provides reliable, enterprise-grade cloud storage with
-        built-in sharing, permissions, and collaboration features.
+        The state management system maintains a complete record of the workflow
+        including all uploaded files with their Box IDs and URLs, variant
+        configurations used, processing timestamps, and final completion status.
+        This provides a comprehensive audit trail for analytics, reporting, and
+        content tracking across the UGC generation pipeline.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("box-api-integration"),
+        selector: workbenchXPath.flows.feature("workflow-state"),
       },
     ],
   },
   {
     elementXpath: workbenchXPath.sidebarContainer,
-    title: "Uploaded Files Tracking",
+    title: "Workflow Completion",
     description: () => (
       <p>
-        Maintains array of uploaded file metadata including:
+        Emits <code>workflow.completed</code> event with comprehensive summary
+        including brand, product, camera settings, lighting, file counts, and
+        workflow status for tracking and notifications.
         <br />
         <br />
-        • Box file IDs for reference
-        <br />
-        • Direct Box URLs for access
-        <br />
-        • File types (video/image)
-        <br />
-        • Original sources
-        <br />
-        <br />
-        This tracking provides complete audit trail of generated content.
+        The completion event provides a full summary of the UGC generation
+        results, including all brand and product details, variant configurations
+        (camera angles, lighting styles), number of files successfully uploaded,
+        and final workflow status. This enables downstream systems to track
+        completion, trigger notifications, update dashboards, or initiate
+        follow-up workflows.
       </p>
     ),
     before: [
       {
         type: "click",
-        selector: workbenchXPath.flows.feature("uploaded-files-tracking"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Workflow State Update",
-    description: () => (
-      <p>
-        Updates workflow state with completion status, uploaded files, variant
-        details, and completion timestamp.
-        <br />
-        <br />
-        This final state update creates a complete record of the entire UGC
-        generation process for analytics and reporting.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("workflow-state-update"),
-      },
-    ],
-  },
-  {
-    elementXpath: workbenchXPath.sidebarContainer,
-    title: "Completion Summary",
-    description: () => (
-      <p>
-        Creates comprehensive workflow summary including:
-        <br />
-        <br />
-        • Brand and product details
-        <br />
-        • Camera settings and lighting used
-        <br />
-        • Number of files successfully stored
-        <br />
-        • Final workflow status
-        <br />
-        <br />
-        This summary enables easy tracking and reporting of UGC generation
-        results.
-      </p>
-    ),
-    before: [
-      {
-        type: "click",
-        selector: workbenchXPath.flows.feature("completion-summary"),
+        selector: workbenchXPath.flows.feature("completion-event"),
       },
     ],
   },
@@ -1493,7 +1236,7 @@ export const steps: TutorialStep[] = [
       {
         type: "fill-editor",
         content: {
-          imageUrl: "https://example.com/product-image.jpg",
+          imageUrl: "https://ik.imagekit.io/5adb4yvnz/sauce_UHVrd53SR.jpg",
           numVariations: 2,
         },
       },

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "config-definition",
+    "title": "Step Configuration",
+    "description": "Dict-based config defining event step that subscribes to 'image.uploaded' and emits 'vision.analyzed' events.",
+    "lines": ["5-22"]
+  },
+  {
+    "id": "vision-prompt",
+    "title": "Vision Prompt",
+    "description": "Comprehensive prompt engineering that extracts brand name, product type, colors, visual guide, ad copy, and styling from product images.",
+    "lines": ["38-65"]
+  },
+  {
+    "id": "aiohttp-integration",
+    "title": "OpenAI Integration",
+    "description": "Uses aiohttp for async HTTP requests to OpenAI's GPT-4o Vision API with proper error handling and authentication.",
+    "lines": ["87-100"]
+  },
+  {
+    "id": "json-parsing",
+    "title": "Response Parsing",
+    "description": "Robust parsing of AI JSON responses with markdown cleanup and error handling for malformed output.",
+    "lines": ["106-128"]
+  },
+  {
+    "id": "data-normalization",
+    "title": "Data Normalization",
+    "description": "Normalizes vision analysis results with fallback defaults for missing fields and extracts primary/secondary/tertiary colors from palette.",
+    "lines": ["131-166"]
+  },
+  {
+    "id": "event-emission",
+    "title": "Event Emission",
+    "description": "Emits structured 'vision.analyzed' event with normalized data to trigger variant generation in the UGC pipeline.",
+    "lines": ["178-190"]
+  }
+]
