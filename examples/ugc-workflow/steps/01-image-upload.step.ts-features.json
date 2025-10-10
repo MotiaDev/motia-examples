@@ -1,0 +1,68 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "API step configuration for UGC image upload endpoint with URL validation and workflow triggering.",
+    "lines": ["10-18"]
+  },
+  {
+    "id": "api-endpoint",
+    "title": "API Endpoint Definition",
+    "description": "POST endpoint at /ugc/upload that accepts image URLs and triggers the UGC generation workflow.",
+    "lines": ["14-15"]
+  },
+  {
+    "id": "request-schema",
+    "title": "Request Body Schema",
+    "description": "Zod schema defining the input structure with required imageUrl and optional numVariations for controlling generation count.",
+    "lines": ["5-8"]
+  },
+  {
+    "id": "event-driven-architecture",
+    "title": "Event Emission",
+    "description": "The API emits 'image.uploaded' events to trigger the vision analysis and UGC generation workflow asynchronously.",
+    "lines": ["17", "45-53"]
+  },
+  {
+    "id": "request-handler",
+    "title": "Request Handler",
+    "description": "Main handler that processes image URL submissions, validates accessibility, and triggers the UGC workflow.",
+    "lines": ["21-77"]
+  },
+  {
+    "id": "request-id-generation",
+    "title": "Request ID Generation",
+    "description": "Creates unique request identifiers using timestamp and random string for tracking throughout the UGC workflow.",
+    "lines": ["25-27"]
+  },
+  {
+    "id": "structured-logging",
+    "title": "Structured Logging",
+    "description": "Comprehensive logging of request details, validation status, and workflow initiation for observability.",
+    "lines": ["29-32", "38", "43"]
+  },
+  {
+    "id": "url-validation",
+    "title": "Image URL Validation",
+    "description": "Validates that the provided image URL is accessible by making a HEAD request with timeout for reliability.",
+    "lines": ["38", "41"]
+  },
+  {
+    "id": "workflow-trigger",
+    "title": "Workflow Initiation",
+    "description": "Emits structured event data with validated image URL to start the vision analysis and UGC generation pipeline.",
+    "lines": ["45-53"]
+  },
+  {
+    "id": "http-response",
+    "title": "API Response",
+    "description": "Returns confirmation with request ID and processing status, allowing clients to track their UGC generation request.",
+    "lines": ["55-62"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Management",
+    "description": "Comprehensive error handling for URL validation failures and other issues with structured error responses.",
+    "lines": ["63-76"]
+  }
+]

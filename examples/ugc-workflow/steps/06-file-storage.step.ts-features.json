@@ -1,0 +1,38 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step that subscribes to 'video.generated' events and emits 'workflow.completed' events to finalize the UGC generation pipeline.",
+    "lines": ["24-32"]
+  },
+  {
+    "id": "box-integration",
+    "title": "Box Cloud Storage",
+    "description": "Configures Box API with access tokens and folder IDs from environment variables, using FormData and Bearer token authentication for file uploads to Box Content API.",
+    "lines": ["46-51", "75-98"]
+  },
+  {
+    "id": "video-upload",
+    "title": "Video File Upload",
+    "description": "Reads local MP4 video file, creates sanitized filename, and uploads to Box storage with metadata including file attributes and parent folder specification.",
+    "lines": ["64-123"]
+  },
+  {
+    "id": "image-upload",
+    "title": "Image Download and Upload",
+    "description": "Downloads generated UGC image from ImageKit CDN, converts to buffer, and uploads to Box storage with sanitized filename to store both video and source image together.",
+    "lines": ["126-187"]
+  },
+  {
+    "id": "workflow-state",
+    "title": "Workflow State Management",
+    "description": "Updates workflow state with completion status, tracks uploaded file metadata (Box IDs, URLs, types), variant details, and completion timestamp for audit trail.",
+    "lines": ["61", "100-108", "166-172", "189-201"]
+  },
+  {
+    "id": "completion-event",
+    "title": "Workflow Completion",
+    "description": "Emits 'workflow.completed' event with comprehensive summary including brand, product, camera settings, lighting, file counts, and workflow status for tracking and notifications.",
+    "lines": ["204-221"]
+  }
+]

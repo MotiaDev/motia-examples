@@ -1,0 +1,38 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step that subscribes to 'variants.generated' events and emits 'image.generated' events to trigger video generation.",
+    "lines": ["39-47"]
+  },
+  {
+    "id": "gemini-integration",
+    "title": "Gemini AI Integration",
+    "description": "Initializes Google's Gemini 2.5 Flash Image Preview model for AI-powered UGC-style image generation with multimodal capabilities.",
+    "lines": ["63-67"]
+  },
+  {
+    "id": "image-generation",
+    "title": "AI Image Generation",
+    "description": "Downloads original image, converts to base64, and generates new UGC-style images using Gemini with detailed variant prompts including camera angles, lighting, and brand styling.",
+    "lines": ["69-84"]
+  },
+  {
+    "id": "image-extraction",
+    "title": "Image Extraction",
+    "description": "Extracts generated image data from Gemini's response candidates and inline data structures, handling the API response format.",
+    "lines": ["86-101"]
+  },
+  {
+    "id": "imagekit-upload",
+    "title": "ImageKit CDN Upload",
+    "description": "Uploads generated images to ImageKit CDN with sanitized filenames for persistent storage, fast delivery, and global distribution.",
+    "lines": ["103-130"]
+  },
+  {
+    "id": "event-emission",
+    "title": "Event Emission",
+    "description": "Emits 'image.generated' events with CDN URLs and variant metadata to trigger downstream video generation with Veo 3.",
+    "lines": ["138-148"]
+  }
+]
