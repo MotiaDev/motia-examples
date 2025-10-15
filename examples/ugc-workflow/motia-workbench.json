@@ -1,0 +1,57 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "ugc-generation",
+    "config": {
+      "steps/06-file-storage.step.ts": {
+        "x": 2004,
+        "y": 67
+      },
+      "steps/05-video-generation.step.ts": {
+        "x": 1496,
+        "y": 68
+      },
+      "steps/04-image-generation.step.ts": {
+        "x": 982,
+        "y": 69
+      },
+      "steps/03-variant-generation.step.ts": {
+        "x": 456,
+        "y": 69
+      },
+      "steps/01-image-upload.step.ts": {
+        "x": -415,
+        "y": 35
+      },
+      "steps/02-vision-analysis_step.py": {
+        "x": 43,
+        "y": 79
+      }
+    }
+  }
+]

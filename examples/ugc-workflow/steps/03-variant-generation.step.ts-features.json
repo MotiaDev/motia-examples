@@ -1,0 +1,38 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step that subscribes to 'vision.analyzed' events and emits 'variants.generated' events for parallel processing.",
+    "lines": ["31-39"]
+  },
+  {
+    "id": "variation-options",
+    "title": "Variation Options",
+    "description": "Predefined arrays of camera angles (top-down, three-quarter, overhead, eye-level), lighting styles (natural daylight, studio light), and marketing headline seeds for diverse content generation.",
+    "lines": ["56-81"]
+  },
+  {
+    "id": "variant-generation-loop",
+    "title": "Variant Generation",
+    "description": "Iterates through requested variations, rotating through camera angles, lighting, and headlines to create unique combinations for each variant.",
+    "lines": ["84-132"]
+  },
+  {
+    "id": "image-prompt-creation",
+    "title": "Prompt Construction",
+    "description": "Builds detailed prompts combining emotion, action, character descriptions, product details, and visual styling instructions for authentic UGC-style image generation.",
+    "lines": ["91-103"]
+  },
+  {
+    "id": "variant-object",
+    "title": "Variant Data Structure",
+    "description": "Creates comprehensive variant objects with image prompts, render preferences (aspect ratio, lighting, camera, depth of field), brand colors, and product information for downstream processing.",
+    "lines": ["105-129"]
+  },
+  {
+    "id": "parallel-processing",
+    "title": "Parallel Event Emission",
+    "description": "Emits each variant as a separate event to enable concurrent image and video generation, dramatically reducing total workflow processing time.",
+    "lines": ["144-155"]
+  }
+]

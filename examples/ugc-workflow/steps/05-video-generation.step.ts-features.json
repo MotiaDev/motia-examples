@@ -1,0 +1,38 @@
+[
+  {
+    "id": "step-configuration",
+    "title": "Step Configuration",
+    "description": "Event step that subscribes to 'image.generated' events and emits 'video.generated' events to trigger file storage and workflow completion.",
+    "lines": ["26-34"]
+  },
+  {
+    "id": "veo3-integration",
+    "title": "Veo 3 Integration",
+    "description": "Configures Google Vertex AI Veo 3.0 with project ID, model settings (veo-3.0-generate-001), authentication tokens, and helper functions for image-to-base64 conversion.",
+    "lines": ["37-57"]
+  },
+  {
+    "id": "video-prompt-creation",
+    "title": "Video Prompt Creation",
+    "description": "Constructs detailed prompts describing confident person presenting product in casual kitchen setting with natural UGC-style presentation, direct eye contact, and visible branding.",
+    "lines": ["114"]
+  },
+  {
+    "id": "video-generation-request",
+    "title": "Video Generation",
+    "description": "Submits long-running request to Veo 3 with base64 image, detailed prompt, 9:16 aspect ratio for social media, and 1080p resolution, returning operation name for status polling.",
+    "lines": ["117-156"]
+  },
+  {
+    "id": "polling-implementation",
+    "title": "Status Polling",
+    "description": "Polls Vertex AI operation status every 15 seconds (up to 20 attempts) until video generation completes, handling async nature of video generation that can take several minutes.",
+    "lines": ["174-183", "204-327"]
+  },
+  {
+    "id": "video-conversion",
+    "title": "Video File Conversion",
+    "description": "Converts generated video from base64 to MP4 file, saves to local filesystem with sanitized filename (brand_product_variant_timestamp.mp4), and emits event with file path.",
+    "lines": ["255-278", "290-300"]
+  }
+]
