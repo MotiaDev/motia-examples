@@ -316,6 +316,43 @@ All Gemini API calls include robust error handling, case-insensitive key process
 - **Cross-paper Synthesis**: Generating insights across multiple related papers
 - **Question Answering**: Direct Q&A about papers in the knowledge base
 
+## 🌐 Deployment
+
+### Deploy to Motia Cloud
+
+You can deploy your Research Paper Assistant to Motia Cloud using either the CLI or the web interface.
+
+#### Using the Motia CLI
+
+Deploy with a specific version:
+
+```bash
+motia cloud deploy --api-key your-api-key-here --version-name 1.0.0
+```
+
+Deploy to a specific environment with environment variables:
+
+```bash
+motia cloud deploy --api-key your-api-key-here \
+  --version-name 1.0.0 \
+  --env-file .env.production \
+  --environment-id env-id
+```
+
+#### Using the Web Interface
+
+For a visual deployment experience, use the Motia Cloud web interface:
+
+1. Have your local project running (`pnpm dev`)
+2. Go to **Import from Workbench** on [Motia Cloud](https://cloud.motia.dev)
+3. Select the port your local project is running on (default: 3000)
+4. Choose the project and environment name
+5. Add environment variables:
+   - `GOOGLE_API_KEY`
+6. Click **Deploy** and watch the magic happen! ✨
+
+For detailed instructions, see the [Motia Cloud Deployment Guide](https://www.motia.dev/docs/deployment-guide/motia-cloud/deployment#using-web-interface).
+
 ## 🙏 Acknowledgements
 
 - [Motia](https://motia.dev/) for the powerful event-driven framework

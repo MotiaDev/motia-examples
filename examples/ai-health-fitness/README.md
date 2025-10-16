@@ -399,6 +399,47 @@ curl -X POST http://localhost:3000/log \
 ```
 
 
+## 🌐 Deployment
+
+### Deploy to Motia Cloud
+
+You can deploy your AI Health & Fitness Companion to Motia Cloud using either the CLI or the web interface.
+
+#### Using the Motia CLI
+
+Deploy with a specific version:
+
+```bash
+motia cloud deploy --api-key your-api-key-here --version-name 1.0.0
+```
+
+Deploy to a specific environment with environment variables:
+
+```bash
+motia cloud deploy --api-key your-api-key-here \
+  --version-name 1.0.0 \
+  --env-file .env.production \
+  --environment-id env-id
+```
+
+#### Using the Web Interface
+
+For a visual deployment experience, use the Motia Cloud web interface:
+
+1. Have your local project running (`npm run dev`)
+2. Go to **Import from Workbench** on [Motia Cloud](https://cloud.motia.dev)
+3. Select the port your local project is running on (default: 3000)
+4. Choose the project and environment name
+5. Add environment variables:
+   - `OPENAI_API_KEY`
+   - `WHATSAPP_TOKEN`
+   - `PHONE_NUMBER_ID`
+   - `RECEIVER_PHONE`
+   - `DB_PATH` (optional)
+6. Click **Deploy** and watch the magic happen! ✨
+
+For detailed instructions, see the [Motia Cloud Deployment Guide](https://www.motia.dev/docs/deployment-guide/motia-cloud/deployment#using-web-interface).
+
 ## 🤝 Contributing
 
 We welcome contributions! Here's how to get started:

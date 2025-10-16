@@ -372,15 +372,45 @@ NODE_ENV=development
 ./start-dev.sh
 ```
 
-### Production
+### Deploy to Motia Cloud
 
-#### Backend (Motia Cloud)
+You can deploy your Streaming AI Chatbot to Motia Cloud using either the CLI or the web interface.
+
+#### Using the Motia CLI
+
+Deploy with a specific version:
+
 ```bash
-npm run build
-motia cloud deploy --api-key your-api-key --version-name 1.0.0
+motia cloud deploy --api-key your-api-key-here --version-name 1.0.0
 ```
 
-#### Frontend (Vercel/Netlify)
+Deploy to a specific environment with environment variables:
+
+```bash
+motia cloud deploy --api-key your-api-key-here \
+  --version-name 1.0.0 \
+  --env-file .env.production \
+  --environment-id env-id
+```
+
+#### Using the Web Interface
+
+For a visual deployment experience, use the Motia Cloud web interface:
+
+1. Have your local project running (`npm run dev`)
+2. Go to **Import from Workbench** on [Motia Cloud](https://cloud.motia.dev)
+3. Select the port your local project is running on (default: 3001)
+4. Choose the project and environment name
+5. Add environment variables:
+   - `OPENAI_API_KEY`
+   - `OPENAI_BASE_URL` (optional)
+   - `AZURE_OPENAI_ENDPOINT` (optional)
+   - `AZURE_OPENAI_API_KEY` (optional)
+6. Click **Deploy** and watch the magic happen! ✨
+
+For detailed instructions, see the [Motia Cloud Deployment Guide](https://www.motia.dev/docs/deployment-guide/motia-cloud/deployment#using-web-interface).
+
+#### Frontend Deployment (Vercel/Netlify)
 ```bash
 cd frontend
 npm run build
