@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "@slack/web-api": "^7.10.0",
-    "motia": "^0.6.4-beta.130",
+    "motia": "^0.8.2-beta.139",
     "openai": "^5.19.1",
     "zod": "^3.24.4"
   },

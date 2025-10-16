@@ -8,11 +8,6 @@ A complete content moderation system built with [Motia](https://motia.dev) that 
 
 This system processes user-generated content (text and images) through AI analysis and routes uncertain content to human moderators via interactive Slack messages. Content with high confidence scores is automatically approved or rejected, while borderline content requires human review.
 
-## Architecture
-
-```
-Content Submit → AI Analysis → Decision Router → [Auto-action OR Slack Review] → Final Action
-```
 
 ### Workflow Steps
 
@@ -185,6 +180,51 @@ Content is routed to different Slack channels based on risk level:
 
 - `@slack/web-api` - Slack API client
 - `openai` - OpenAI API client
+
+## 🌐 Deployment
+
+### Deploy to Motia Cloud
+
+You can deploy your AI Content Moderation system to Motia Cloud using either the CLI or the web interface.
+
+#### Using the Motia CLI
+
+Deploy with a specific version:
+
+```bash
+motia cloud deploy --api-key your-api-key-here --version-name 1.0.0
+```
+
+Deploy to a specific environment with environment variables:
+
+```bash
+motia cloud deploy --api-key your-api-key-here \
+  --version-name 1.0.0 \
+  --env-file .env.production \
+  --environment-id env-id
+```
+
+#### Using the Web Interface
+
+For a visual deployment experience, use the Motia Cloud web interface:
+
+1. Have your local project running (`npm run dev`)
+2. Go to **Import from Workbench** on [Motia Cloud](https://motia.cloud)
+![Import from Workbench](assets/import-workbench.png)
+3. Select the port your local project is running on (default: 3000)
+4. Choose the project and environment name
+5. Add environment variables:
+   - `OPENAI_API_KEY`
+   - `SLACK_BOT_TOKEN`
+   - `SLACK_SIGNING_SECRET`
+   - `SLACK_CHANNEL_MODERATION`
+   - `SLACK_CHANNEL_URGENT`
+   - `SLACK_CHANNEL_ESCALATED`
+6. Click **Deploy** and watch the magic happen! ✨
+![Deploy to Motia Cloud](assets/hit-deploy.png)
+![Deployment Success](assets/production.png)
+
+For detailed instructions, see the [Motia Cloud Deployment Guide](https://motia.dev/docs/deployment-guide/motia-cloud/deployment#using-web-interface).
 
 ## License
 
