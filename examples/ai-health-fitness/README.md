@@ -16,7 +16,7 @@
     A smart, multi-agent assistant that acts as your daily health coach over WhatsApp generating personalized meal/workout plans, tracking your weight and activities, and providing habit insights powered by OpenAI GPT-4o.
   </p>
 
-![Motia Health Companion](docs/images/image.png)
+![Motia Health Companion](docs/images/workflow.png)
 
   <a href="https://motia.dev">
     <img src="https://img.shields.io/badge/Motia.dev-Event--Driven%20Flows-1e1e1e" alt="Motia.dev Badge" />
@@ -503,7 +503,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](../../LIC
 ## 📞 Support
 
 - **Documentation**: [Motia Docs](https://motia.dev/docs)
-- **Community**: [Discord](https://discord.com/invite/nJFfsH5d6v)
+- **Community**: [Discord](https://discord.gg/motia)
 
 ---
 

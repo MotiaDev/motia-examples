@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "AI Health & Fitness Companion using Motia, OpenAI, and SQLite",
   "scripts": {
+    "postinstall": "motia install",
     "dev": "motia dev",
     "dev:debug": "motia dev --debug",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid",
     "generate:config": "motia get-config --output ./",
     "init:db": "python3 -c 'from shared.state_manager import init_db; init_db()'"
   },
@@ -19,7 +23,7 @@
   "dependencies": {
     "better-sqlite3": "^12.2.0",
     "dotenv": "^16.4.7",
-    "motia": "^0.5.5-beta.113",
+    "motia": "^0.8.2-beta.139",
     "mustache": "^4.2.0",
     "openai": "^4.83.0",
     "sqlite": "^5.1.1",

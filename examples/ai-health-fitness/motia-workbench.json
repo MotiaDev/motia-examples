@@ -2,41 +2,43 @@
   {
     "id": "health-companion",
     "config": {
-      "steps\\whatsapp-webhook.step.ts": {
-        "x": -130,
-        "y": -802
+      "steps/whatsapp-webhook.step.ts": {
+        "x": -84,
+        "y": -1,
+        "sourceHandlePosition": "bottom"
       },
-      "steps\\send-whatsapp.step.ts": {
-        "x": 786,
-        "y": 670
+      "steps/send-whatsapp.step.ts": {
+        "x": 1626,
+        "y": 326
       },
-      "steps\\planner.step.ts": {
-        "x": 592,
-        "y": 86
+      "steps/planner.step.ts": {
+        "x": 1040,
+        "y": -18
       },
-      "steps\\log-confirmation.step.ts": {
-        "x": -858,
-        "y": 517
+      "steps/log-confirmation.step.ts": {
+        "x": 1005,
+        "y": 135
       },
-      "steps\\log-activity.step.ts": {
-        "x": 820,
-        "y": 623
+      "steps/log-activity.step.ts": {
+        "x": 1007,
+        "y": 299
       },
-      "steps\\extract_health_slots.step.ts": {
-        "x": -1042,
-        "y": 296
+      "steps/extract_health_slots.step.ts": {
+        "x": 394,
+        "y": 289
       },
-      "steps\\classify_intent.step.ts": {
-        "x": -130,
-        "y": -527
+      "steps/classify_intent.step.ts": {
+        "x": -61,
+        "y": 297,
+        "targetHandlePosition": "top"
       },
-      "steps\\analyzer.step.ts": {
-        "x": 1230,
-        "y": 623
+      "steps/analyzer.step.ts": {
+        "x": 1005,
+        "y": 425
       },
-      "steps\\ai-response.step.ts": {
-        "x": 1102,
-        "y": -94
+      "steps/ai-response.step.ts": {
+        "x": 1005,
+        "y": 580
       }
     }
   }
