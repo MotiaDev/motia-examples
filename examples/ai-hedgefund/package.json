@@ -21,7 +21,7 @@
     "alpha-vantage-cli": "^1.0.8",
     "axios": "^1.11.0",
     "dotenv": "^16.6.1",
-    "motia": "0.6.4-beta.130",
+    "motia": "^0.8.2-beta.139",
     "openai": "^4.104.0",
     "react": "^19.1.0",
     "yahoo-finance2": "^2.13.3",

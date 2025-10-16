@@ -120,6 +120,8 @@ For a visual deployment experience, use the Motia Cloud web interface:
 
 For detailed instructions, see the [Motia Cloud Deployment Guide](https://www.motia.dev/docs/deployment-guide/motia-cloud/deployment#using-web-interface).
 
+https://github.com/user-attachments/assets/motia-cloud.mp4
+
 ## 🐳 Docker Deployment
 
 ### Setup Environment Variables
