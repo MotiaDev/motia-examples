@@ -2,7 +2,7 @@
 # 🥷 Spamurai
 [![Motia.dev](https://img.shields.io/badge/Built%20with-Motia.dev-blue)](https://motia.dev)
 A GitHub PR Assistant powered by [Motia.dev](https://motia.dev) AI Agent Framework. 
-![Motia Workbench](https://github.com/user-attachments/assets/b078bc35-ddcb-42f0-b109-89917a1169c2)
+![Motia Workbench](docs/workbench.png)
 
 
 
