@@ -122,7 +122,6 @@ For detailed instructions, see the [Motia Cloud Deployment Guide](https://www.mo
 
 <video src="https://github.com/MotiaDev/motia-examples/examples/ai-hedgefund/public/motia-cloud.mp4" controls width="400"></video>
 
-
 ## 🐳 Docker Deployment
 
 ### Setup Environment Variables
