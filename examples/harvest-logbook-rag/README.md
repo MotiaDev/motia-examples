@@ -309,7 +309,7 @@ You'll see all queries and responses logged.
 ## 🗂️ Project Structure
 
 ```
-agritech-test/
+harvest-logbook-rag/
 ├── src/services/harvest-logbook/
 │   ├── spicedb.schema              # SpiceDB permission model
 │   ├── spicedb-service.ts          # Authorization service
