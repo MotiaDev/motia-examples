@@ -36,3 +36,8 @@ dist/
 ._*
 .Spotlight-V100
 .Trashes
+
+#vector data
+weaviate_data/
+chromadb_data/
+hf_cache/
