@@ -9,6 +9,7 @@ export * from './openai-service';
 export * from './pinecone-service';
 export * from './sheets-service';
 export * from './csv-logger';
+export * from './spicedb-service';
 
 // Export specific items from chat services to avoid conflicts
 export { OpenAIChatService, getOpenAIChatService } from './openai-chat-service';

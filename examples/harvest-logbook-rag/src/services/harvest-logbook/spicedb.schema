@@ -1,0 +1,57 @@
+/**
+ * SpiceDB Authorization Schema for Harvest Logbook
+ * 
+ * This schema defines:
+ * - Organizations: Top-level entities that own farms and data
+ * - Farms: Belong to organizations, contain harvest data
+ * - Harvest Entries: Individual harvest log entries
+ * - Users: Have roles within organizations
+ * 
+ * Permissions:
+ * - view: Can view harvest data
+ * - edit: Can add new harvest entries
+ * - query: Can query the RAG system
+ * - admin: Full control over organization and its data
+ */
+
+definition user {}
+
+definition organization {
+    relation admin: user
+    relation member: user
+    
+    permission view = admin + member
+    permission edit = admin + member
+    permission query = admin + member
+    permission manage = admin
+}
+
+definition farm {
+    relation organization: organization
+    relation owner: user
+    relation editor: user
+    relation viewer: user
+    
+    permission view = viewer + editor + owner + organization->view
+    permission edit = editor + owner + organization->edit
+    permission query = viewer + editor + owner + organization->query
+    permission manage = owner + organization->admin
+}
+
+definition harvest_entry {
+    relation farm: farm
+    relation creator: user
+    
+    permission view = farm->view
+    permission edit = farm->edit
+    permission delete = creator + farm->manage
+}
+
+definition query_session {
+    relation farm: farm
+    relation user: user
+    
+    permission execute = user & farm->query
+    permission view_results = user & farm->view
+}
+

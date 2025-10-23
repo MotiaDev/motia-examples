@@ -28,22 +28,26 @@ export const handler: Handlers['LogToSheets'] = async (input, { logger }) => {
   try {
     const { entryId, query, response, sources } = input;
 
-    logger.info('Logging to Google Sheets', {
+    // Determine logging destination based on environment
+    const useCSV = process.env.USE_CSV_LOGGER === 'true' || !process.env.GOOGLE_SHEETS_ID;
+    const destination = useCSV ? 'CSV' : 'Google Sheets';
+
+    logger.info(`Logging to ${destination}`, {
       entryId,
       queryLength: query.length,
       responseLength: response.length
     });
 
-    // Log to Google Sheets
+    // Log to CSV or Google Sheets
     await HarvestLogbookService.logToSheets(
       query,
       response,
       sources
     );
 
-    logger.info('Successfully logged to Google Sheets', { entryId });
+    logger.info(`Successfully logged to ${destination}`, { entryId });
   } catch (error) {
-    logger.error('Failed to log to Google Sheets', {
+    logger.error('Failed to log query response', {
       entryId: input.entryId,
       error: error instanceof Error ? error.message : 'Unknown error'
     });
