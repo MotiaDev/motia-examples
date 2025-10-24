@@ -94,15 +94,6 @@ curl -X POST http://localhost:3000/connected_car_alert \
 - **Chunks**: `car_alerts_{session_id}` → stores text chunks
 - **Memory**: `memory_{session_id}` → stores conversation history (last 20 messages)
 
-## Key Differences from n8n
-
-| Feature | n8n | Motia |
-|---------|-----|-------|
-| Vector Store | Redis | Motia State |
-| Search | Semantic (embeddings) | Context-based (all chunks) |
-| Memory | LangChain | Custom state-based |
-| Logging | Google Sheets | Local JSON (Sheets optional) |
-
 ## Files
 
 ```
