@@ -121,9 +121,9 @@ services/
 
 ## Troubleshooting
 
-**No response:** Check `OPENAI_API_KEY` is set
-**Logs not appearing:** Check `logs/` directory was created
-**Memory issues:** Restart server (fixed state wrapping issue)
+- **No response:** Check `OPENAI_API_KEY` is set
+- **Logs not appearing:** Check `logs/` directory was created
+- **Memory issues:** Restart server (fixed state wrapping issue)
 
 ## Workbench
 
