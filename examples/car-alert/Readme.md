@@ -1,6 +1,6 @@
 # Connected Car Alert - Motia Workflow
 
-AI-powered car alert processing system converted from n8n to Motia.
+AI-powered car alert processing system
 
 ![Connected Car Alert Workflow](./docs/img/workbench.png)
 
