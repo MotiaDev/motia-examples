@@ -1,0 +1,80 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/petstore/state_audit_cron_step.py": {
+        "x": -38,
+        "y": 683,
+        "sourceHandlePosition": "right"
+      },
+      "steps/petstore/process_food_order_step.py": {
+        "x": 384,
+        "y": 476,
+        "targetHandlePosition": "left"
+      },
+      "steps/petstore/notification_step.py": {
+        "x": 601,
+        "y": 724,
+        "targetHandlePosition": "left"
+      },
+      "steps/petstore/api_step.py": {
+        "x": 15,
+        "y": 461,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "connected-car-alert",
+    "config": {
+      "steps/connected_car/webhook_step.py": {
+        "x": -58,
+        "y": 17
+      },
+      "steps/connected_car/log_to_sheet_step.py": {
+        "x": 808,
+        "y": 42
+      },
+      "steps/connected_car/agent_step.py": {
+        "x": 350,
+        "y": 34
+      }
+    }
+  },
+  {
+    "id": "competitor-price-scraper",
+    "config": {
+      "steps/competitor_price_scraper/webhook/webhook.step.ts": {
+        "x": -78,
+        "y": 49
+      },
+      "steps/competitor_price_scraper/vector_store/vector_store.step.ts": {
+        "x": 1065,
+        "y": -254
+      },
+      "steps/competitor_price_scraper/text_processor/text_processor.step.ts": {
+        "x": 301,
+        "y": 68
+      },
+      "steps/competitor_price_scraper/slack_alert/slack_alert.step.ts": {
+        "x": 1374,
+        "y": 199,
+        "targetHandlePosition": "top"
+      },
+      "steps/competitor_price_scraper/sheets_logger/sheets_logger.step.ts": {
+        "x": 1797,
+        "y": 184,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      },
+      "steps/competitor_price_scraper/rag_agent/rag_agent.step.ts": {
+        "x": 1590,
+        "y": -256
+      },
+      "steps/competitor_price_scraper/embeddings/embeddings.step.ts": {
+        "x": 692,
+        "y": 59
+      }
+    }
+  }
+]
