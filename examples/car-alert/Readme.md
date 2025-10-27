@@ -1,6 +1,6 @@
 # Connected Car Alert - Motia Workflow
 
-AI-powered car alert processing system converted from n8n to Motia.
+AI-powered car alert processing system
 
 ![Connected Car Alert Workflow](./docs/img/workbench.png)
 
@@ -94,15 +94,6 @@ curl -X POST http://localhost:3000/connected_car_alert \
 - **Chunks**: `car_alerts_{session_id}` → stores text chunks
 - **Memory**: `memory_{session_id}` → stores conversation history (last 20 messages)
 
-## Key Differences from n8n
-
-| Feature | n8n | Motia |
-|---------|-----|-------|
-| Vector Store | Redis | Motia State |
-| Search | Semantic (embeddings) | Context-based (all chunks) |
-| Memory | LangChain | Custom state-based |
-| Logging | Google Sheets | Local JSON (Sheets optional) |
-
 ## Files
 
 ```
@@ -121,9 +112,9 @@ services/
 
 ## Troubleshooting
 
-**No response:** Check `OPENAI_API_KEY` is set
-**Logs not appearing:** Check `logs/` directory was created
-**Memory issues:** Restart server (fixed state wrapping issue)
+- **No response:** Check `OPENAI_API_KEY` is set
+- **Logs not appearing:** Check `logs/` directory was created
+- **Memory issues:** Restart server (fixed state wrapping issue)
 
 ## Workbench
 
