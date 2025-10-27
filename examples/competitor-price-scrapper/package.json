@@ -1,0 +1,29 @@
+{
+  "name": ".",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "motia": "^0.8.2-beta.139",
+    "zod": "^3.24.4",
+    "@anthropic-ai/sdk": "^0.20.1",
+    "@slack/web-api": "^7.0.2",
+    "@supabase/supabase-js": "^2.39.7",
+    "google-auth-library": "^9.6.3",
+    "googleapis": "^134.0.0",
+    "openai": "^4.28.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
