@@ -1,0 +1,25 @@
+{
+  "name": "car-alert",
+  "version": "1.0.0",
+  "description": "Public Form Auto Triage workflow with RAG",
+  "main": "index.js",
+  "scripts": {
+    "dev": "motia dev",
+    "build": "motia build",
+    "start": "motia start"
+  },
+  "dependencies": {
+    "motia": "latest",
+    "zod": "^3.22.4",
+    "@supabase/supabase-js": "^2.39.0",
+    "@anthropic-ai/sdk": "^0.20.0",
+    "cohere-ai": "^7.7.0",
+    "googleapis": "^128.0.0",
+    "@slack/web-api": "^6.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}
+
