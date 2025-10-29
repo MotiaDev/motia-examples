@@ -1,0 +1,35 @@
+{
+  "openai": {
+    "apiKey": "sk-your-openai-api-key-here",
+    "embeddingModel": "text-embedding-3-small",
+    "chatModel": "gpt-4"
+  },
+  "weaviate": {
+    "url": "http://localhost:8080",
+    "apiKey": "your-weaviate-api-key-here",
+    "className": "CurrencyRateMonitor"
+  },
+  "googleSheets": {
+    "spreadsheetId": "your-google-sheet-id-here",
+    "accessToken": "your-google-access-token-here",
+    "sheetName": "Log"
+  },
+  "slack": {
+    "webhookUrl": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
+    "channel": "#alerts"
+  },
+  "server": {
+    "port": 3000
+  },
+  "textSplitter": {
+    "chunkSize": 400,
+    "chunkOverlap": 40
+  },
+  "rag": {
+    "maxContextChunks": 5,
+    "conversationWindowSize": 5,
+    "temperature": 0.7,
+    "maxTokens": 500
+  }
+}
+
