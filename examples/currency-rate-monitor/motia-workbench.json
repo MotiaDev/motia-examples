@@ -1,0 +1,45 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/petstore/state-audit-cron.step.ts": {
+        "x": -175,
+        "y": 220,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "currency-rate-monitor",
+    "config": {
+      "steps/webhook-trigger/webhook-trigger.step.ts": {
+        "x": -45,
+        "y": 0
+      },
+      "steps/weaviate-insert/weaviate-insert.step.ts": {
+        "x": 1176,
+        "y": 6
+      },
+      "steps/text-splitter/text-splitter.step.ts": {
+        "x": 312,
+        "y": -158
+      },
+      "steps/embeddings-generator/embeddings-generator.step.ts": {
+        "x": 775,
+        "y": -168
+      },
+      "steps/rag-agent/rag-agent.step.ts": {
+        "x": 328,
+        "y": 235
+      },
+      "steps/sheets-append/sheets-append.step.ts": {
+        "x": 797,
+        "y": 97
+      },
+      "steps/slack-alert/slack-alert.step.ts": {
+        "x": 818,
+        "y": 366
+      }
+    }
+  }
+]
