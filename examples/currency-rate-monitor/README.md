@@ -2,6 +2,8 @@
 
 A sophisticated Currency Rate Monitor application built with **Motia** that implements RAG (Retrieval-Augmented Generation) using OpenAI embeddings, Weaviate vector database, with Google Sheets logging and Slack error notifications.
 
+![Currency Rate Monitor](./docs/img/workbench.png)
+
 ## 🎯 Features
 
 - **Webhook Endpoint**: POST endpoint to receive currency rate data
