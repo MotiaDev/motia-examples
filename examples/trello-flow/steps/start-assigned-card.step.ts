@@ -1,25 +1,25 @@
-import { EventConfig, StepHandler } from 'motia'
+import { EventConfig, Handlers } from 'motia'
 import { z } from 'zod'
 import { TrelloService } from '../services/trello.service'
-import { appConfig } from '../config/default'
 
 const inputSchema = z.object({
   id: z.string(),
 })
 
-export const config: EventConfig<typeof inputSchema> = {
+export const config: EventConfig = {
   type: 'event',
   name: 'Start Assigned Card',
   description: 'Moves newly assigned cards to the in-progress state',
   subscribes: ['member.assigned', 'card.readyForDevelopment'],
   virtualEmits: ['card.inProgress'],
-  emits: [''],
+  emits: [],
   input: inputSchema,
   flows: ['trello'],
 }
 
-export const handler: StepHandler<typeof config> = async (payload, { logger }) => {
+export const handler: Handlers['Start Assigned Card'] = async (payload, { logger }) => {
   try {
+    const { appConfig } = await import('../config/default')
     logger.info('Start Assigned Card Handler', { payload })
     const trelloService = new TrelloService(appConfig.trello, logger)
     const card = await trelloService.getCard(payload.id)

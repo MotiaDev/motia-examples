@@ -2,7 +2,6 @@ import { z } from 'zod'
 import { ApiRouteConfig, FlowContext, ApiRequest } from 'motia'
 import { TrelloCardDetails } from '../types/trello'
 import { TrelloService } from '../services/trello.service'
-import { appConfig } from '../config/default'
 
 type TrelloActionType = 'createCard' | 'updateCard' | 'commentCard' | 'addMemberToCard' | 'updateCustomFieldItem'
 
@@ -49,6 +48,7 @@ export const config: ApiRouteConfig = {
 }
 
 export const handler = async (request: ApiRequest, context: FlowContext) => {
+  const { appConfig } = await import('../config/default')
   const payload = inputSchema.parse(request.body)
 
   const handlers: Record<TrelloActionType, (card: TrelloCardDetails, context: FlowContext, action: WebhookAction) => void> = {

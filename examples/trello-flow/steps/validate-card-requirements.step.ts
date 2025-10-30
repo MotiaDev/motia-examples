@@ -1,6 +1,5 @@
-import { EventConfig, StepHandler } from 'motia'
+import { EventConfig, FlowContext } from 'motia'
 import { z } from 'zod'
-import { appConfig } from '../config/default'
 import { TrelloService } from '../services/trello.service'
 
 const inputSchema = z
@@ -12,19 +11,25 @@ const inputSchema = z
   })
   .strict()
 
-export const config: EventConfig<typeof inputSchema> = {
+export const config: EventConfig = {
   type: 'event',
   name: 'Card Requirements Validator',
   description: 'Ensures new cards have required title, description and assignee',
   subscribes: ['card.created'],
-  emits: [''],
-  virtualEmits: ['card.validated'],
+  emits: [],
+  virtualEmits: [
+    {
+      topic: 'card.validated',
+      label: 'Card Validated',
+    },
+  ],
   input: inputSchema,
   flows: ['trello'],
 }
 
-export const handler: StepHandler<typeof config> = async (card, { logger }) => {
+export const handler = async (card: any, { logger }: any) => {
   logger.info('New task validator', { card })
+  const { appConfig } = await import('../config/default')
   const trello = new TrelloService(appConfig.trello, logger)
 
   try {
