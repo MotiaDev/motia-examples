@@ -1,14 +1,13 @@
-import { EventConfig, StepHandler } from 'motia'
+import { EventConfig, Handlers } from 'motia'
 import { z } from 'zod'
 import { SlackService } from '../services/slack.service'
-import { appConfig } from '../config/default'
 
 const inputSchema = z.object({
   channel: z.string(),
   message: z.string(),
 })
 
-export const config: EventConfig<typeof inputSchema> = {
+export const config: EventConfig = {
   type: 'event',
   name: 'Slack Notifier',
   description: 'Sends notifications to Slack channels',
@@ -18,7 +17,8 @@ export const config: EventConfig<typeof inputSchema> = {
   flows: ['trello'],
 }
 
-export const handler: StepHandler<typeof config> = async (notification, { logger }) => {
+export const handler: Handlers['Slack Notifier'] = async (notification, { logger }) => {
+  const { appConfig } = await import('../config/default')
   logger.info('Sending notification to Slack', { notification })
   const slack = new SlackService(appConfig.slack.webhookUrl, logger)
   await slack.sendMessage(notification.channel, notification.message)

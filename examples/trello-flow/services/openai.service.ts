@@ -1,15 +1,16 @@
 import OpenAI from 'openai'
 import { Logger } from 'motia'
-import { appConfig } from '../config/default'
 
 export class OpenAIService {
   private openai: OpenAI
   private logger: Logger
+  private model: string
 
-  constructor(logger: Logger) {
+  constructor(logger: Logger, apiKey: string, model: string) {
     this.openai = new OpenAI({
-      apiKey: appConfig.openai.apiKey,
+      apiKey,
     })
+    this.model = model
     this.logger = logger
   }
 
@@ -44,7 +45,7 @@ export class OpenAIService {
 
     try {
       const completion = await this.openai.chat.completions.create({
-        model: appConfig.openai.model,
+        model: this.model,
         messages: [
           {
             role: 'user',

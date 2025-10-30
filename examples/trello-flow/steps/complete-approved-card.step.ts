@@ -1,7 +1,6 @@
-import { EventConfig, StepHandler } from 'motia'
+import { EventConfig, Handlers } from 'motia'
 import { z } from 'zod'
 import { TrelloService } from '../services/trello.service'
-import { appConfig } from '../config/default'
 
 const inputSchema = z.object({
   card: z.object({
@@ -16,7 +15,7 @@ const inputSchema = z.object({
   }),
 })
 
-export const config: EventConfig<typeof inputSchema> = {
+export const config: EventConfig = {
   type: 'event',
   name: 'Complete Approved Card',
   description: 'Moves approved cards to the completed state',
@@ -26,7 +25,8 @@ export const config: EventConfig<typeof inputSchema> = {
   flows: ['trello'],
 }
 
-export const handler: StepHandler<typeof config> = async (payload, { logger }) => {
+export const handler: Handlers['Complete Approved Card'] = async (payload, { logger }) => {
+  const { appConfig } = await import('../config/default')
   const trelloService = new TrelloService(appConfig.trello, logger)
   const { card, comment } = payload
 

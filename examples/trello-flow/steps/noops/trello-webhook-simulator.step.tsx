@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { ApiNode, ApiNodeProps, Button } from 'motia/workbench'
+import { BaseNode, NoopNodeProps } from 'motia/workbench'
+import { Button } from '@motiadev/ui'
 import * as Select from '@radix-ui/react-select'
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 
-export const Node: React.FC<ApiNodeProps> = ({ data }) => {
+export const Node: React.FC<NoopNodeProps> = ({ data }) => {
   const [selectedEvent, setSelectedEvent] = useState<string | undefined>()
+  const virtualEmits = (data as any).virtualEmits || []
 
   const events = [
     {
@@ -99,7 +101,14 @@ export const Node: React.FC<ApiNodeProps> = ({ data }) => {
   }
 
   return (
-    <ApiNode data={{ ...data, description: undefined }}>
+    <BaseNode
+      title={data.name}
+      variant="noop"
+      data={data}
+      subtitle={data.description}
+      disableTargetHandle
+      disableSourceHandle={!virtualEmits.length}
+    >
       <div className="flex flex-row gap-4">
         <div className="flex flex-col items-center text-sm">{data.description}</div>
         <div className="flex flex-row items-center gap-2 text-sm">
@@ -146,6 +155,6 @@ export const Node: React.FC<ApiNodeProps> = ({ data }) => {
           </Button>
         </div>
       </div>
-    </ApiNode>
+    </BaseNode>
   )
 }

@@ -1,8 +1,7 @@
-import { EventConfig, StepHandler } from 'motia'
+import { EventConfig, Handlers } from 'motia'
 import { z } from 'zod'
 import { TrelloService } from '../services/trello.service'
 import { OpenAIService } from '../services/openai.service'
-import { appConfig } from '../config/default'
 
 const inputSchema = z.object({
   id: z.string(),
@@ -14,7 +13,7 @@ const inputSchema = z.object({
     .optional(),
 })
 
-export const config: EventConfig<typeof inputSchema> = {
+export const config: EventConfig = {
   type: 'event',
   name: 'Mark Card For Review',
   description: 'Moves completed cards to review queue and notifies reviewers',
@@ -25,11 +24,12 @@ export const config: EventConfig<typeof inputSchema> = {
   flows: ['trello'],
 }
 
-export const handler: StepHandler<typeof config> = async (input, { emit, logger }) => {
+export const handler = async (input: any, { emit, logger }: any) => {
+  const { appConfig } = await import('../config/default')
   logger.info('Needs Review Handler', { input })
 
   const trelloService = new TrelloService(appConfig.trello, logger)
-  const openaiService = new OpenAIService(logger)
+  const openaiService = new OpenAIService(logger, appConfig.openai.apiKey, appConfig.openai.model)
 
   const card = await trelloService.getCard(input.id)
 

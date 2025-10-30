@@ -1,6 +1,5 @@
 import { CronConfig, FlowContext } from 'motia'
 import { TrelloService } from '../services/trello.service'
-import { appConfig } from '../config/default'
 
 export const config: CronConfig = {
   type: 'cron',
@@ -12,6 +11,7 @@ export const config: CronConfig = {
 }
 
 export const handler = async ({ logger }: FlowContext) => {
+  const { appConfig } = await import('../config/default')
   const trello = new TrelloService(appConfig.trello, logger)
   logger.info('Starting overdue task check')
 
