@@ -1,0 +1,31 @@
+[
+  {
+    "id": "github-commit-jenkins",
+    "config": {
+      "steps/webhookTrigger/webhookTrigger.step.ts": {
+        "x": 30,
+        "y": -109,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/slackAlert/slackAlert.step.ts": {
+        "x": 1277,
+        "y": 253
+      },
+      "steps/ragAgent/ragAgent.step.ts": {
+        "x": 596,
+        "y": -122,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/processCommit/processCommit.step.ts": {
+        "x": 13,
+        "y": 230,
+        "targetHandlePosition": "top"
+      },
+      "steps/appendSheet/appendSheet.step.ts": {
+        "x": 1207,
+        "y": -91
+      }
+    }
+  }
+]
