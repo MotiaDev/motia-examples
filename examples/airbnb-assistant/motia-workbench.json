@@ -1,0 +1,19 @@
+[
+  {
+    "id": "guest-assistant",
+    "config": {
+      "steps/guest-assistant/save-conversation.step.ts": {
+        "x": 139,
+        "y": 295
+      },
+      "steps/guest-assistant/load-documents.step.ts": {
+        "x": -746,
+        "y": 277
+      },
+      "steps/guest-assistant/chat.step.ts": {
+        "x": -342,
+        "y": 227
+      }
+    }
+  }
+]
