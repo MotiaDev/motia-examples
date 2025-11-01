@@ -1,0 +1,102 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/petstore/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/petstore/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/petstore/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/petstore/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "research-workflow",
+    "config": {
+      "steps/08-result-storage-api.step.ts": {
+        "x": 2509,
+        "y": 34
+      },
+      "steps/07-results-coordinator.step.ts": {
+        "x": 2175,
+        "y": 34
+      },
+      "steps/06-mastra-report-writer-agent.step.ts": {
+        "x": 1819,
+        "y": 34
+      },
+      "steps/05-mastra-fact-check-agent.step.ts": {
+        "x": 1400,
+        "y": 34
+      },
+      "steps/04-mastra.summary.agent.step.ts": {
+        "x": 1050,
+        "y": 34
+      },
+      "steps/03-mastra-research-agent.step.ts": {
+        "x": 665,
+        "y": 34
+      },
+      "steps/02-data-collection.step.ts": {
+        "x": 280,
+        "y": 31
+      },
+      "steps/01-research-query-api.step.ts": {
+        "x": -134,
+        "y": -5
+      }
+    }
+  },
+  {
+    "id": "motia-research-assistant",
+    "config": {
+      "steps/03-mastra-research-agent.step.ts": {
+        "x": 667,
+        "y": 34
+      },
+      "steps/02 data collection.step.ts": {
+        "x": 350,
+        "y": 44
+      },
+      "steps/01-research-query-api.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/04-mastra-summary-agent.step.ts": {
+        "x": 1017,
+        "y": 34
+      },
+      "steps/05-mastra-fact-check-agent.step.ts": {
+        "x": 1367,
+        "y": 34
+      },
+      "steps/06-mastra-report-writer-agent.step.ts": {
+        "x": 1717,
+        "y": 34
+      },
+      "steps/07-results-coordinator.step.ts": {
+        "x": 2067,
+        "y": 34
+      },
+      "steps/08-result-storage-api.step.ts": {
+        "x": 2417,
+        "y": 34
+      }
+    }
+  }
+]
