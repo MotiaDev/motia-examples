@@ -1,0 +1,27 @@
+{
+  "name": "smarttravel-multi-agent",
+  "version": "1.0.0",
+  "description": "SmartTravel - Multi-Agent Travel Planning System built with Motia",
+  "scripts": {
+    "dev": "motia dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "motia build",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "motia start",
+    "generate-types": "motia generate-types"
+  },
+  "dependencies": {
+    "motia": "latest",
+    "zod": "^3.22.4",
+    "openai": "^4.20.0",
+    "@motiadev/core": "0.8.3-beta.140",
+    "@motiadev/plugin-logs": "0.8.3-beta.140",
+    "@motiadev/plugin-states": "0.8.3-beta.140",
+    "@motiadev/plugin-endpoint": "0.8.3-beta.140",
+    "@motiadev/plugin-observability": "0.8.3-beta.140"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}
