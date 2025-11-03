@@ -2,7 +2,7 @@
 
 **Intelligent travel planning powered by AI agents**
 
-SmartTravel is a multi-agent travel planning system built with [Motia](https://motia.dev) that transforms simple inputs into comprehensive, personalized travel itineraries. Powered by 6 specialized AI agents working in harmony.
+SmartTravel is a multi-agent travel planning system built with [Motia](https://motia.dev) and [Tanstack](https://tanstack.com/) that transforms simple inputs into comprehensive, personalized travel itineraries. Powered by 6 specialized AI agents working in harmony.
 
 ![SmartTravel Multi-Agent System](./public/frontend.png)
 ![SmartTravel Multi-Agent System](./public/workbench.png)
