@@ -3,52 +3,51 @@
     "id": "travel-planning",
     "config": {
       "steps/trigger-travel-plan/trigger-travel-plan.step.ts": {
-        "x": -735,
-        "y": 573
+        "x": -351,
+        "y": 734
       },
       "steps/search-hotels/search-hotels.step.ts": {
-        "x": -1525,
-        "y": 1116,
+        "x": 405,
+        "y": 1229,
         "targetHandlePosition": "top"
       },
       "steps/search-flights/search-flights.step.ts": {
-        "x": -1125,
-        "y": 1114,
+        "x": 782,
+        "y": 1226,
         "targetHandlePosition": "top"
       },
       "steps/search-dining/search-dining.step.ts": {
-        "x": 529,
-        "y": 1099,
+        "x": -327,
+        "y": 1226,
         "targetHandlePosition": "top"
       },
       "steps/research-destination/research-destination.step.ts": {
-        "x": -717,
-        "y": 1111,
+        "x": 1158,
+        "y": 1220,
         "targetHandlePosition": "top"
       },
       "steps/orchestrate-travel-planning/orchestrate-travel-planning.step.ts": {
-        "x": -312,
-        "y": 525,
-        "sourceHandlePosition": "bottom",
-        "targetHandlePosition": "left"
+        "x": 38,
+        "y": 677,
+        "sourceHandlePosition": "bottom"
       },
       "steps/optimize-budget/optimize-budget.step.ts": {
-        "x": 935,
-        "y": 1097,
+        "x": -699,
+        "y": 1234,
         "targetHandlePosition": "top"
       },
       "steps/get-travel-plan-status/get-travel-plan-status.step.ts": {
-        "x": -1131,
-        "y": 578
+        "x": -742,
+        "y": 729
       },
       "steps/finalize-travel-plan/finalize-travel-plan.step.ts": {
-        "x": -309,
-        "y": 1103,
+        "x": 36,
+        "y": 1228,
         "targetHandlePosition": "top"
       },
       "steps/create-itinerary/create-itinerary.step.ts": {
-        "x": 91,
-        "y": 1106,
+        "x": -1074,
+        "y": 1243,
         "targetHandlePosition": "top"
       }
     }

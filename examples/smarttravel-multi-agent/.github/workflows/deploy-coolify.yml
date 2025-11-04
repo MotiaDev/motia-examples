@@ -1,0 +1,56 @@
+name: Deploy to Coolify
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy SmartTravel to Coolify
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Trigger Coolify Deployment
+        run: |
+          curl -X POST "${{ secrets.COOLIFY_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "branch": "${{ github.ref_name }}",
+              "commit": "${{ github.sha }}",
+              "message": "${{ github.event.head_commit.message }}",
+              "author": "${{ github.event.head_commit.author.name }}"
+            }'
+
+      - name: Deployment triggered
+        run: |
+          echo "✅ Deployment triggered successfully on Coolify"
+          echo "🌐 Check your Coolify dashboard for deployment status"
+          echo "📦 Commit: ${{ github.sha }}"
+          echo "🔀 Branch: ${{ github.ref_name }}"
+
+  notify:
+    name: Notify deployment status
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always()
+    
+    steps:
+      - name: Success notification
+        if: needs.deploy.result == 'success'
+        run: |
+          echo "🎉 SmartTravel deployment triggered successfully!"
+          echo "Check Coolify dashboard for completion status."
+
+      - name: Failure notification
+        if: needs.deploy.result == 'failure'
+        run: |
+          echo "❌ Failed to trigger deployment"
+          echo "Please check COOLIFY_WEBHOOK_URL secret"
+          exit 1
+

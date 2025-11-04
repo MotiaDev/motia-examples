@@ -1,0 +1,86 @@
+name: Validate Docker Build
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - develop
+      - staging
+
+jobs:
+  validate:
+    name: Validate Docker Configuration
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Validate docker-compose.yml
+        run: |
+          docker-compose config
+          echo "✅ docker-compose.yml is valid"
+
+      - name: Build Docker image (Coolify)
+        run: |
+          docker build -f Dockerfile.coolify -t smarttravel:test .
+          echo "✅ Dockerfile.coolify builds successfully"
+
+      - name: Build Docker image (Standard)
+        run: |
+          docker build -f Dockerfile -t smarttravel:standard .
+          echo "✅ Dockerfile builds successfully"
+
+      - name: Test container health
+        run: |
+          # Start container in background
+          docker run -d --name smarttravel-test \
+            -p 3000:3000 \
+            -e OPENAI_API_KEY=sk-test-key \
+            smarttravel:test
+
+          # Wait for container to start
+          sleep 10
+
+          # Check if container is running
+          if docker ps | grep smarttravel-test; then
+            echo "✅ Container is running"
+          else
+            echo "❌ Container failed to start"
+            docker logs smarttravel-test
+            exit 1
+          fi
+
+          # Cleanup
+          docker stop smarttravel-test
+          docker rm smarttravel-test
+
+      - name: Validate Coolify configuration
+        run: |
+          if [ -f .coolify/config.json ]; then
+            echo "✅ .coolify/config.json exists"
+            # Validate JSON syntax
+            cat .coolify/config.json | jq empty
+            echo "✅ .coolify/config.json is valid JSON"
+          else
+            echo "❌ .coolify/config.json not found"
+            exit 1
+          fi
+
+      - name: Summary
+        run: |
+          echo "=================================="
+          echo "✅ All Docker validations passed!"
+          echo "=================================="
+          echo "- docker-compose.yml: Valid"
+          echo "- Dockerfile.coolify: Builds successfully"
+          echo "- Dockerfile: Builds successfully"
+          echo "- Container: Starts and runs"
+          echo "- Coolify config: Valid"
+

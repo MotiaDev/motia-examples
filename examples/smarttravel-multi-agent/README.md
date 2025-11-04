@@ -23,7 +23,7 @@ SmartTravel is a multi-agent travel planning system built with [Motia](https://m
 ## 🛠️ Tech Stack
 
 **Backend:**
-- **Framework**: Motia (TypeScript)
+- **Framework**: Motia
 - **AI**: OpenAI GPT-4o (latest model)
 - **Architecture**: Event-driven multi-agent system
 - **Type Safety**: Zod schemas
@@ -330,6 +330,45 @@ docker run -it --rm -p 3000:3000 -e OPENAI_API_KEY=your_key_here smarttravel
 docker run -it --rm -p 3000:3000 --env-file .env smarttravel
 ```
 
+### Docker Compose Deployment
+
+**Run with Docker Compose:**
+```bash
+# Create .env file first
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+
+# Start services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+### 🎯 Coolify Self-Hosted Deployment
+
+Deploy on your own server with [Coolify](https://coolify.io) - an open-source Heroku/Vercel alternative.
+
+**Quick Setup:**
+```bash
+# 1. Install Coolify on your Linux server (VPS, cloud, or dedicated)
+curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
+
+# 2. Access dashboard at http://your-server-ip:8000
+
+# 3. Deploy SmartTravel:
+#    - Connect your Git repository
+#    - Add environment variable: OPENAI_API_KEY
+#    - Click Deploy
+```
+
+**Features:** Auto SSL, Git webhooks, monitoring, no vendor lock-in
+**Cost:** From €3.79/month ([Hetzner](https://coolify.io/hetzner))
+**📖 Full guide:** See `COOLIFY_DEPLOYMENT.md`
+
 ### Cloud Deployment
 
 #### AWS Lightsail (ARM)
@@ -380,6 +419,27 @@ npx motia@latest docker run --help
 **Note:** Make sure `package-lock.json` is included in your repository for `npm ci` to work in Docker. Otherwise, the Dockerfile will use `npm install --omit=dev`.
 
 For complete deployment guide, see [Motia Self-Hosted Deployment Docs](https://www.motia.dev/docs/deployment-guide/self-hosted)
+
+## 🔌 Custom Plugins (Optional)
+
+This example includes a **sample API Tester plugin** to showcase how easily you can extend Motia with custom workbench plugins.
+
+**Important Notes:**
+- ✨ The API tester is a **demonstration of Motia's plugin system** - not a core dependency for the travel planning functionality
+- 🎓 Shows how simple it is to add custom tools to your Motia workbench
+- 🗑️ **You can safely delete the `plugins/` folder** if you don't need this half-baked tester
+- 🛠️ Use it as inspiration to build your own production-ready plugins
+
+**To remove the plugin:**
+```bash
+# Delete the plugins folder
+rm -rf plugins/
+
+# Remove plugin import from motia.config.ts
+# (remove the apiTesterPlugin line)
+```
+
+**Learn more about building Motia plugins:** [Motia Plugin Documentation](https://www.motia.dev/docs/development-guide/plugins)
 
 ## 🔐 Environment Variables
 

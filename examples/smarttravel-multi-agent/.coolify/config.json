@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "name": "smarttravel-multi-agent",
+  "description": "Intelligent travel planning powered by AI agents",
+  "type": "docker-compose",
+  "compose_file": "docker-compose.yml",
+  "port": 3000,
+  "healthcheck": {
+    "enabled": true,
+    "path": "/health",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3,
+    "start_period": 40
+  },
+  "environment": {
+    "required": [
+      "OPENAI_API_KEY"
+    ],
+    "optional": [
+      "PORT",
+      "NODE_ENV"
+    ]
+  },
+  "domains": [],
+  "ssl": {
+    "enabled": true,
+    "auto_renew": true,
+    "provider": "letsencrypt"
+  },
+  "build": {
+    "dockerfile": "Dockerfile.coolify",
+    "context": ".",
+    "args": {}
+  },
+  "resources": {
+    "cpu": "1",
+    "memory": "1G",
+    "storage": "10G"
+  },
+  "restart_policy": "unless-stopped",
+  "networks": [
+    "smarttravel-network"
+  ],
+  "volumes": [],
+  "labels": {
+    "app": "smarttravel",
+    "framework": "motia",
+    "frontend": "react-vite",
+    "type": "multi-agent-system"
+  },
+  "notifications": {
+    "deployment_success": true,
+    "deployment_failure": true,
+    "container_restart": true
+  }
+}
+

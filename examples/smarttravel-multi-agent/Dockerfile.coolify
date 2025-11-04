@@ -1,0 +1,65 @@
+# Multi-stage Dockerfile optimized for Coolify deployment
+# Build stage for frontend
+FROM node:20-alpine AS frontend-builder
+
+WORKDIR /app/frontend
+
+# Copy frontend package files
+COPY frontend/package*.json ./
+
+# Install frontend dependencies (including dev dependencies needed for build)
+RUN npm ci
+
+# Copy frontend source
+COPY frontend/ ./
+
+# Build frontend
+RUN npm run build
+
+# Build stage for backend
+FROM node:20-alpine AS backend-builder
+
+WORKDIR /app
+
+# Copy backend package files
+COPY package*.json ./
+
+# Install backend dependencies (production only, no build needed)
+RUN npm ci --only=production
+
+# Copy backend source
+COPY . .
+
+# Production stage
+FROM motiadev/motia:latest
+
+WORKDIR /app
+
+# Copy backend dependencies and application
+COPY --from=backend-builder /app/node_modules ./node_modules
+COPY --from=backend-builder /app/package*.json ./
+COPY --from=backend-builder /app/steps ./steps
+COPY --from=backend-builder /app/src ./src
+COPY --from=backend-builder /app/types ./types
+COPY --from=backend-builder /app/motia.config.ts ./
+COPY --from=backend-builder /app/motia-workbench.json ./
+COPY --from=backend-builder /app/tsconfig.json ./
+COPY --from=backend-builder /app/types.d.ts ./types.d.ts
+
+# Copy built frontend into public directory served by Motia
+COPY --from=frontend-builder /app/frontend/dist ./public
+
+# Create health check endpoint
+RUN echo '#!/bin/sh\ncurl -f http://localhost:3000/ || exit 1' > /healthcheck.sh && \
+    chmod +x /healthcheck.sh
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD ["/healthcheck.sh"]
+
+# Run application
+CMD ["npm", "run", "start"]
+

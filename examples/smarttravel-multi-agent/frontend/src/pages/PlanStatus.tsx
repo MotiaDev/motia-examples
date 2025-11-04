@@ -110,6 +110,23 @@ export function PlanStatus() {
               🤖 AI Agents Progress
             </h3>
             
+            {/* Show compilation status when finalizing */}
+            {isProcessing && plan.progress >= 95 && (
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600"></div>
+                  <div>
+                    <div className="font-medium text-purple-900">
+                      🧠 Compiling Your Complete Travel Guide...
+                    </div>
+                    <div className="text-sm text-purple-700 mt-1">
+                      Waiting for all agents to finish, then generating your final itinerary with AI
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {plan.agents.map((agent) => (
               <div
                 key={agent.agentName}
