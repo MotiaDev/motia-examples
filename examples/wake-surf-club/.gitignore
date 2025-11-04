@@ -6,3 +6,9 @@ venv
 .mermaid
 dist
 *.pyc
+tasks/
+/tasks
+agents-context/
+.claude/
+.cursorrules/
+.cursorrules
