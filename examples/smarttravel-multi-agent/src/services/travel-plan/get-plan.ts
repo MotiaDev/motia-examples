@@ -5,6 +5,20 @@ export async function getPlan(
   state: InternalStateManager,
   planId: string
 ): Promise<TravelPlanStatus | null> {
-  return await state.get<TravelPlanStatus>('travel-plans', planId)
+  const plan = await state.get<TravelPlanStatus>('travel-plans', planId)
+  
+  // Debug logging
+  if (plan) {
+    console.log('[DEBUG getPlan]', {
+      planId,
+      hasFinalItinerary: !!plan.finalItinerary,
+      finalItineraryKeys: plan.finalItinerary ? Object.keys(plan.finalItinerary) : [],
+      hasDetailedResults: !!(plan.finalItinerary as any)?.detailedResults,
+      detailedResultsKeys: (plan.finalItinerary as any)?.detailedResults ? Object.keys((plan.finalItinerary as any).detailedResults) : [],
+      detailedResultsType: typeof (plan.finalItinerary as any)?.detailedResults,
+    })
+  }
+  
+  return plan
 }
 

@@ -1,37 +1,69 @@
-# Git
-.git
-.gitignore
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-
-# Node
+# Node modules
 node_modules/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# Local development
-.env
-
-# OS generated files
+# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Testing
+coverage/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Build artifacts (will be built in Docker)
+dist/
+build/
+.next/
+frontend/dist/
+frontend/build/
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Development
+.prettierrc
+.eslintrc*
+.editorconfig
+
+# Docker files (we're already in Docker)
+Dockerfile
+Dockerfile.*
+docker-compose*.yml
+.dockerignore
+
+# Public assets that get copied in
+public/

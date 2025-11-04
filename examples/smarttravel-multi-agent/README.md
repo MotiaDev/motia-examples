@@ -23,7 +23,7 @@ SmartTravel is a multi-agent travel planning system built with [Motia](https://m
 ## 🛠️ Tech Stack
 
 **Backend:**
-- **Framework**: Motia (TypeScript)
+- **Framework**: Motia
 - **AI**: OpenAI GPT-4o (latest model)
 - **Architecture**: Event-driven multi-agent system
 - **Type Safety**: Zod schemas
@@ -329,6 +329,45 @@ docker run -it --rm -p 3000:3000 -e OPENAI_API_KEY=your_key_here smarttravel
 ```bash
 docker run -it --rm -p 3000:3000 --env-file .env smarttravel
 ```
+
+### Docker Compose Deployment
+
+**Run with Docker Compose:**
+```bash
+# Create .env file first
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+
+# Start services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+### 🎯 Coolify Self-Hosted Deployment
+
+Deploy on your own server with [Coolify](https://coolify.io) - an open-source Heroku/Vercel alternative.
+
+**Quick Setup:**
+```bash
+# 1. Install Coolify on your Linux server (VPS, cloud, or dedicated)
+curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
+
+# 2. Access dashboard at http://your-server-ip:8000
+
+# 3. Deploy SmartTravel:
+#    - Connect your Git repository
+#    - Add environment variable: OPENAI_API_KEY
+#    - Click Deploy
+```
+
+**Features:** Auto SSL, Git webhooks, monitoring, no vendor lock-in
+**Cost:** From €3.79/month ([Hetzner](https://coolify.io/hetzner))
+**📖 Full guide:** See `COOLIFY_DEPLOYMENT.md`
 
 ### Cloud Deployment
 
