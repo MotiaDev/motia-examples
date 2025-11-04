@@ -420,6 +420,27 @@ npx motia@latest docker run --help
 
 For complete deployment guide, see [Motia Self-Hosted Deployment Docs](https://www.motia.dev/docs/deployment-guide/self-hosted)
 
+## 🔌 Custom Plugins (Optional)
+
+This example includes a **sample API Tester plugin** to showcase how easily you can extend Motia with custom workbench plugins.
+
+**Important Notes:**
+- ✨ The API tester is a **demonstration of Motia's plugin system** - not a core dependency for the travel planning functionality
+- 🎓 Shows how simple it is to add custom tools to your Motia workbench
+- 🗑️ **You can safely delete the `plugins/` folder** if you don't need this half-baked tester
+- 🛠️ Use it as inspiration to build your own production-ready plugins
+
+**To remove the plugin:**
+```bash
+# Delete the plugins folder
+rm -rf plugins/
+
+# Remove plugin import from motia.config.ts
+# (remove the apiTesterPlugin line)
+```
+
+**Learn more about building Motia plugins:** [Motia Plugin Documentation](https://www.motia.dev/docs/development-guide/plugins)
+
 ## 🔐 Environment Variables
 
 | Variable | Description | Required |
