@@ -1,0 +1,53 @@
+{
+  "name": "wake-surf-club",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "setup": "node scripts/setup.js",
+    "seed": "node scripts/seed-test-data.js",
+    "reseed": "node scripts/reseed-data.js",
+    "dev": "motia dev --port 8000",
+    "dev:frontend": "vite",
+    "dev:full": "concurrently \"motia dev --port 8000\" \"vite\"",
+    "generate-types": "motia generate-types",
+    "build": "motia build && vite build",
+    "build:frontend": "vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.0",
+    "clsx": "^2.0.0",
+    "concurrently": "^8.2.2",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "ics": "^2.44.0",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.263.1",
+    "motia": "^0.7.1-beta.132",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "twilio": "^4.19.0",
+    "vite": "^5.4.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.16",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/react": "^18.3.18",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.35",
+    "tailwindcss": "4.1.16",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": "8.4.35"
+    }
+  }
+}

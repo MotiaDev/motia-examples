@@ -1,0 +1,172 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "public-api",
+    "config": {
+      "steps/14-calendar-download.step.ts": {
+        "x": 16,
+        "y": 0
+      },
+      "steps/13-public-session-info.step.ts": {
+        "x": 0,
+        "y": 204
+      }
+    }
+  },
+  {
+    "id": "admin-management",
+    "config": {
+      "steps/11-admin-send-invites.step.ts": {
+        "x": 7,
+        "y": 0
+      },
+      "steps/09-admin-friends-import.step.ts": {
+        "x": 0,
+        "y": 204
+      }
+    }
+  },
+  {
+    "id": "booking-management",
+    "config": {
+      "steps/05-cancel-from-link.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/04-book-from-link.step.ts": {
+        "x": 25,
+        "y": 224
+      }
+    }
+  },
+  {
+    "id": "session-management",
+    "config": {
+      "steps/03-seed-next-session.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "notifications",
+    "config": {
+      "steps/12-manual-invite-trigger.step.ts": {
+        "x": 17,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "wake-surf-club",
+    "config": {
+      "steps/15-handle-cancellation.step.ts": {
+        "x": 272,
+        "y": 626
+      },
+      "steps/14-calendar-download.step.ts": {
+        "x": -728,
+        "y": 720
+      },
+      "steps/13-public-session-info.step.ts": {
+        "x": 0,
+        "y": 1040
+      },
+      "steps/12-manual-invite-trigger.step.ts": {
+        "x": 376,
+        "y": 2370
+      },
+      "steps/11-admin-send-invites.step.ts": {
+        "x": 295,
+        "y": 311,
+        "sourceHandlePosition": "right"
+      },
+      "steps/09-admin-friends-import.step.ts": {
+        "x": -192,
+        "y": -214,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/08-booking-confirmation.step.ts": {
+        "x": 270,
+        "y": 948
+      },
+      "steps/07-send-morning-reminder.step.ts": {
+        "x": 567,
+        "y": 45,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/06-send-invite-blast.step.ts": {
+        "x": 912,
+        "y": 44,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/05-cancel-from-link.step.ts": {
+        "x": -210,
+        "y": 593
+      },
+      "steps/04-book-from-link.step.ts": {
+        "x": -331,
+        "y": 873
+      },
+      "steps/03-seed-next-session.step.ts": {
+        "x": 151,
+        "y": -217,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/02-generate-ics.step.ts": {
+        "x": 940,
+        "y": 1083,
+        "targetHandlePosition": "left"
+      },
+      "steps/01-send-sms.step.ts": {
+        "x": 1294,
+        "y": 344
+      },
+      "steps/10-admin-session-info.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/16-admin-friends-list.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/17-admin-friends-delete.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/18-admin-create-session.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "steps/19-direct-booking.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  }
+]
