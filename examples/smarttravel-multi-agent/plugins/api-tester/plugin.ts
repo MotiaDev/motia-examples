@@ -1,6 +1,23 @@
 import path from 'node:path'
 import type { MotiaPlugin, MotiaPluginContext } from '@motiadev/core'
 
+interface SavedRequest {
+  id: number
+  name: string
+  method: string
+  url: string
+  headers: Record<string, string>
+  body?: unknown
+  savedAt: string
+}
+
+interface ProxyRequestBody {
+  method: string
+  url: string
+  headers: Record<string, string>
+  body?: unknown
+}
+
 export default function apiTesterPlugin(motia: MotiaPluginContext): MotiaPlugin {
   // Register API endpoint to proxy requests (to avoid CORS issues)
   motia.registerApi(
@@ -10,7 +27,7 @@ export default function apiTesterPlugin(motia: MotiaPluginContext): MotiaPlugin 
     },
     async (req, ctx) => {
       try {
-        const { method, url, headers, body } = req.body as any
+        const { method, url, headers, body } = req.body as ProxyRequestBody
         
         const startTime = Date.now()
         const response = await fetch(url, {
@@ -58,7 +75,7 @@ export default function apiTesterPlugin(motia: MotiaPluginContext): MotiaPlugin 
       path: '/__motia/api-tester/saved-requests',
     },
     async (req, ctx) => {
-      const requests = await motia.state.get('api-tester-requests') || []
+      const requests = (await ctx.state.get<SavedRequest[]>('api-tester', 'requests')) || []
       return {
         status: 200,
         body: requests,
@@ -72,10 +89,15 @@ export default function apiTesterPlugin(motia: MotiaPluginContext): MotiaPlugin 
       path: '/__motia/api-tester/saved-requests',
     },
     async (req, ctx) => {
-      const request = req.body
-      const requests = await motia.state.get('api-tester-requests') || []
-      requests.push({ ...request, id: Date.now(), savedAt: new Date().toISOString() })
-      await motia.state.set('api-tester-requests', requests)
+      const request = req.body as Omit<SavedRequest, 'id' | 'savedAt'>
+      const requests = (await ctx.state.get<SavedRequest[]>('api-tester', 'requests')) || []
+      const newRequest: SavedRequest = {
+        ...request,
+        id: Date.now(),
+        savedAt: new Date().toISOString()
+      }
+      requests.push(newRequest)
+      await ctx.state.set('api-tester', 'requests', requests)
       
       return {
         status: 200,
@@ -90,10 +112,10 @@ export default function apiTesterPlugin(motia: MotiaPluginContext): MotiaPlugin 
       path: '/__motia/api-tester/saved-requests/:id',
     },
     async (req, ctx) => {
-      const id = parseInt(req.params.id)
-      const requests = await motia.state.get('api-tester-requests') || []
-      const filtered = requests.filter((r: any) => r.id !== id)
-      await motia.state.set('api-tester-requests', filtered)
+      const id = parseInt((req as any).params?.id as string)
+      const requests = (await ctx.state.get<SavedRequest[]>('api-tester', 'requests')) || []
+      const filtered = requests.filter(r => r.id !== id)
+      await ctx.state.set('api-tester', 'requests', filtered)
       
       return {
         status: 200,
