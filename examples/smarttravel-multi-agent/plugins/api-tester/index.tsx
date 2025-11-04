@@ -136,22 +136,10 @@ const PRESET_ENDPOINTS = [
   {
     name: 'Trigger Travel Plan',
     method: 'POST',
-    url: '/api/v1/travel-plan',
-    body: '{\n  "destination": "Paris",\n  "startDate": "2025-12-01",\n  "endDate": "2025-12-07",\n  "budget": 5000,\n  "travelers": 2\n}',
+    url: '/api/travel-plan/trigger',
+    body: '{\n  "request": {\n    "name": "John Doe",\n    "destination": "Paris",\n    "startingLocation": "New York",\n    "duration": 6,\n    "travelDates": {\n      "start": "2025-12-01",\n      "end": "2025-12-07"\n    },\n    "adults": 2,\n    "children": 0,\n    "rooms": 1,\n    "budget": 5000,\n    "budgetCurrency": "USD",\n    "travelStyle": "comfort",\n    "interests": "Culture, food, and sightseeing"\n  }\n}',
   },
-  { name: 'Get Plan Status', method: 'GET', url: '/api/v1/travel-plan/:planId', body: '' },
-  {
-    name: 'Search Flights',
-    method: 'POST',
-    url: '/api/v1/search-flights',
-    body: '{\n  "origin": "NYC",\n  "destination": "Paris",\n  "date": "2025-12-01"\n}',
-  },
-  {
-    name: 'Search Hotels',
-    method: 'POST',
-    url: '/api/v1/search-hotels',
-    body: '{\n  "destination": "Paris",\n  "checkIn": "2025-12-01",\n  "checkOut": "2025-12-07"\n}',
-  },
+  { name: 'Get Plan Status', method: 'GET', url: '/api/travel-plan/status/:planId', body: '' },
 ]
 
 const getMethodColor = (method: string) => {
