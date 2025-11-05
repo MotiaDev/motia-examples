@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+python_modules/
+
+# Environment
+.env
+.env.local
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Motia
+.motia/
+motia-workbench.json
+types.d.ts
+
+# Testing
+coverage/
+.pytest_cache/
+.coverage
+
+# Temporary files
+*.tmp
+*.bak

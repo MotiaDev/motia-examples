@@ -1,0 +1,33 @@
+{
+  "name": "motia-plugin-test",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "pip-install": "pip install -r requirements.txt",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "motia": "^0.8.4-beta.141",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@motiadev/core": "^0.8.4-beta.141",
+    "@motiadev/plugin-endpoint": "^0.8.4-beta.141",
+    "@motiadev/plugin-logs": "^0.8.4-beta.141",
+    "@motiadev/plugin-observability": "^0.8.4-beta.141",
+    "@motiadev/plugin-states": "^0.8.4-beta.141",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^18.3.18",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
