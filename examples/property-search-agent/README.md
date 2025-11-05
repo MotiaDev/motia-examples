@@ -7,10 +7,13 @@
 ## 📊 Quick Stats
 
 - 🚀 **2 API Endpoints** - Simple polling pattern
-- ⚡ **4 Parallel Processors** - 57% faster than sequential
-- 🎨 **6 Beautiful UI Components** - Motia Workbench visualizations
-- 🧹 **~925 Lines of Code** - Production-ready and maintainable
-- ✅ **Use any real estate website** - Successfully scrapes Zillow, Realtor.com, Redfin, etc.
+- ⚡ **4 Parallel Processors** - Event-driven architecture (57% faster than sequential)
+- 🌐 **Concurrent Website Scraping** - Multiple websites scraped simultaneously
+- 🎨 **7 Beautiful UI Components** - 6 step visualizations + 1 interactive dashboard plugin
+- 🧹 **~1,150 Lines of Code** - Production-ready and maintainable
+- ✅ **Use any real estate website** - Zillow, Realtor.com, Redfin, and more
+- 🎯 **Interactive Dashboard** - Full React app with search, progress tracking, property cards
+- 🔌 **Local Plugin System** - No build required, instant hot reload
 
 ## 🎯 What This Does
 
@@ -19,6 +22,8 @@ Search for properties across multiple real estate websites with **parallel AI an
 - 🤖 **AI-powered market analysis** with Agno + OpenAI GPT-4o-mini
 - 📈 **Property enrichment** - schools, crime stats, walkability scores
 - 🏘️ **Neighborhood analysis** - parks, amenities, safety ratings
+
+![plugin ui dashboard](./docs/img/plugin-ui.png)
 
 **All 4 processors run in PARALLEL for maximum speed!**
 
@@ -31,15 +36,18 @@ Search for properties across multiple real estate websites with **parallel AI an
 Single API Call
     ↓
 Emits 4 Events Simultaneously
-├─ property.scrape       → Scrapes properties (10s)
+├─ property.scrape       → Scrapes 2+ websites concurrently (10s)
+│                          asyncio.gather for parallel execution
 ├─ property.enrich       → Gets enrichment data (5s)
-├─ market.analyze        → AI market analysis (3s)
+├─ market.analyze        → AI market analysis with Agno (3s)
 └─ neighborhood.analyze  → Analyzes neighborhoods (2s)
     ↓
 All Run in PARALLEL → Results Aggregate → Done! (~10s total)
 ```
 
 **57% faster than sequential processing!**
+
+**Note:** Property scraping uses `asyncio.gather` for concurrent website scraping. If you hit Firecrawl API concurrency limits, the code can be easily modified to scrape sequentially (see `scrape_properties.py`).
 
 ---
 
@@ -82,6 +90,110 @@ npm run dev
 The server will start on:
 - **API Server:** http://localhost:3000
 - **Workbench (UI):** http://localhost:3000
+- **Interactive Dashboard:** Click the "Property Search" tab in the Workbench
+
+---
+
+## 🎨 Interactive Dashboard Plugin
+
+The project includes a **full-featured interactive dashboard plugin** built with Motia's plugin system:
+
+### Features:
+- 📝 **Search Form** - Configure city, state, budget, property type, bedrooms, bathrooms
+- 🔄 **Real-Time Monitoring** - Live progress updates with visual progress bars
+- 📊 **Statistics Dashboard** - Properties found, average price, completion status
+- 🏠 **Property Cards** - Beautiful card-based layout with all property details
+- 🤖 **AI Analysis Display** - Shows market analysis and insights from Agno agents
+- 🎯 **One-Click Access** - View listings directly from the dashboard
+
+### Using the Dashboard:
+1. Start your Motia server with `npm run dev`
+2. Open the Workbench at http://localhost:3000
+3. Click the **"Property Search"** tab at the top
+4. Enter your search criteria and click "Start Property Search"
+5. Watch real-time progress as 4 parallel processors work simultaneously
+6. View results with property cards, AI analysis, and statistics
+
+**The dashboard uses Motia's local plugin system** - no separate build required! It's a perfect example of building interactive UIs with Motia's plugin architecture.
+
+### How Plugins Work:
+
+Plugins are registered in `motia.config.ts` and loaded automatically:
+
+```typescript
+// Property Dashboard Plugin
+function propertyDashboardPlugin(motia: MotiaPluginContext): MotiaPlugin {
+  return {
+    dirname: path.join(__dirname, 'plugins'),
+    workbench: [
+      {
+        componentName: 'PropertyDashboard',
+        packageName: '~/plugins/property-dashboard',  // Local plugin path
+        label: 'Property Search',
+        position: 'top',
+        labelIcon: 'building-2',
+      },
+    ],
+  }
+}
+```
+
+**Key Points:**
+- `~/` prefix loads from local project (no npm package needed)
+- No build step required - instant hot reload
+- Full React + TypeScript support
+- Access to Motia UI components (Badge, Button, etc.)
+- Integrates directly with your API endpoints
+
+---
+
+## 🎨 UI Step Visualizations (.tsx files)
+
+All steps can have **custom UI visualizations** in Motia Workbench by creating a `.tsx` file next to your step:
+
+```
+steps/
+├── api/
+│   ├── start-property-search.step.ts    ← Logic (TypeScript/Python)
+│   └── start-property-search.step.tsx   ← UI Only (React component)
+```
+
+**Important:** `.tsx` files are **ONLY for visualization** in Workbench - they don't affect step execution!
+
+### What .tsx Files Do:
+- ✅ Customize how steps appear in Workbench flow diagrams
+- ✅ Add badges, icons, colors, and visual indicators
+- ✅ Show step metadata (status, data, configurations)
+- ✅ Make workflows easier to understand visually
+
+### What .tsx Files DON'T Do:
+- ❌ They don't contain business logic
+- ❌ They don't execute or process data
+- ❌ They don't affect API responses
+- ❌ They're purely cosmetic for Workbench UI
+
+### Example UI Override:
+
+```typescript
+// start-property-search.step.tsx
+import { ApiNode, ApiNodeProps } from 'motia/workbench'
+
+export const Node: React.FC<ApiNodeProps> = (props) => {
+  return (
+    <ApiNode {...props}>
+      <div className="flex gap-2">
+        {props.data.emits.map((event) => (
+          <span className="px-2 py-1 bg-blue-500 text-white rounded">
+            {event}
+          </span>
+        ))}
+      </div>
+    </ApiNode>
+  )
+}
+```
+
+This creates a beautiful visual in Workbench showing all emitted events, but the actual API logic remains in `.step.ts`!
 
 ---
 
@@ -180,46 +292,128 @@ done
 ## 🏗️ Project Structure
 
 ```
+├── plugins/                                    (1 interactive plugin)
+│   └── property-dashboard/
+│       └── index.tsx                           ← 🎨 React dashboard (570+ lines)
+│                                                  Full search form, progress tracking,
+│                                                  property cards, error handling
+│
 ├── steps/
-│   ├── api/                                    (2 endpoints)
-│   │   ├── start-property-search.step.ts       ← POST: Triggers parallel events
-│   │   ├── start-property-search.step.tsx      ← 🎨 Beautiful UI component
-│   │   ├── get-property-results.step.ts        ← GET: Retrieve results (polling)
-│   │   └── get-property-results.step.tsx       ← 🎨 Beautiful UI component
+│   ├── api/                                    (2 endpoints with UI)
+│   │   ├── start-property-search.step.ts       ← Logic: POST endpoint
+│   │   ├── start-property-search.step.tsx      ← UI: Shows parallel processors badge
+│   │   ├── get-property-results.step.ts        ← Logic: GET endpoint  
+│   │   └── get-property-results.step.tsx       ← UI: Shows data checklist
 │   │
-│   ├── events/                                 (4 parallel processors)
-│   │   ├── property-search-processor_step.py   ← Scrapes properties (Firecrawl)
-│   │   ├── property-search-processor_step.tsx  ← 🎨 UI: Scraper visualization
-│   │   ├── market-analysis-processor_step.py   ← AI market analysis (Agno)
-│   │   ├── market-analysis-processor_step.tsx  ← 🎨 UI: AI agent badge
-│   │   ├── property-enrichment-processor_step.py ← Enrichment (schools, crime)
-│   │   ├── property-enrichment-processor_step.tsx ← 🎨 UI: Enrichment grid
-│   │   ├── neighborhood-analysis-processor_step.py ← Neighborhood scores
-│   │   └── neighborhood-analysis-processor_step.tsx ← 🎨 UI: Score cards
+│   ├── events/                                 (4 parallel processors with UI)
+│   │   ├── property-search-processor_step.py   ← Logic: Scrapes properties
+│   │   ├── property-search-processor_step.tsx  ← UI: Firecrawl icon + "Fast: No AI" badge
+│   │   ├── market-analysis-processor_step.py   ← Logic: AI market analysis
+│   │   ├── market-analysis-processor_step.tsx  ← UI: Agno+GPT-4 badge
+│   │   ├── property-enrichment-processor_step.py ← Logic: Schools, crime, walkability
+│   │   ├── property-enrichment-processor_step.tsx ← UI: Enrichment categories grid
+│   │   ├── neighborhood-analysis-processor_step.py ← Logic: Neighborhood scoring
+│   │   └── neighborhood-analysis-processor_step.tsx ← UI: Score visualization
 │   │
 │   └── streams/                                (2 real-time streams)
 │       ├── property-search-progress.stream.ts  ← Progress updates
-│       └── property-results.stream.ts          ← Final results
+│       └── property-results.stream.ts          ← Final aggregated results
 │
 ├── src/services/                               (3 essential services)
-│   ├── property_scraper_service/               ← Fast parallel scraping
-│   │   ├── __init__.py
-│   │   └── scrape_properties.py
+│   ├── property_scraper_service/               ← Fast CONCURRENT scraping
+│   │   ├── __init__.py                            Uses asyncio.gather for parallel
+│   │   └── scrape_properties.py                   Scrapes multiple URLs at once
 │   ├── agents/                                 ← Agno AI agents
-│   │   └── property_agents.py
-│   └── firecrawl/                              ← Web scraping API
-│       └── firecrawl_service.py
+│   │   └── property_agents.py                     Market analysis + valuations
+│   └── firecrawl/                              ← Web scraping API client
+│       └── firecrawl_service.py                   Firecrawl integration
 │
-└── middlewares/                                (2 middlewares)
-    ├── error-handler.middleware.ts             ← Error handling
-    └── logger.middleware.ts                    ← Request logging
+├── middlewares/                                (2 middlewares)
+│   ├── error-handler.middleware.ts             ← Global error handling
+│   └── logger.middleware.ts                    ← Request/response logging
+│
+└── motia.config.ts                             ← Plugin registration
+                                                   Loads propertyDashboardPlugin
 ```
 
-**✨ Beautiful UI Components:**
-- All steps have custom UI visualizations in Motia Workbench
-- Color-coded badges for different processor types
-- Visual indicators for parallel execution
-- Real-time progress visualization
+### File Structure Explanation:
+
+**`.step.ts` / `.step.py` = LOGIC** (Business logic, API handlers, event processors)  
+**`.step.tsx` = UI ONLY** (Workbench visualization, no execution)  
+**`plugins/` = Interactive UI** (Full React dashboards with state management)
+
+**✨ UI System:**
+- 🎨 **1 Dashboard Plugin** - Interactive search interface (index.tsx)
+- 🎯 **6 Step UI Overrides** - Custom visualizations for each step (.tsx files)
+- 🏷️ **Color-coded Badges** - Visual indicators for processor types
+- 📊 **Real-time Updates** - Progress bars, status badges, property cards
+- 🔌 **Local Plugin** - No build required, instant hot reload with `~/` path
+
+---
+
+## 🔌 Understanding the UI System
+
+This project demonstrates **two types of UI customization** in Motia:
+
+### 1. Step UI Visualizations (.tsx files)
+
+**Purpose:** Customize how steps appear in Workbench **flow diagrams**
+
+**Location:** Next to step files
+```
+steps/api/start-property-search.step.ts   ← Logic
+steps/api/start-property-search.step.tsx  ← Visual override
+```
+
+**What they do:**
+- Enhance step nodes in the flow diagram
+- Show badges, icons, status indicators
+- Display metadata (emits, subscribes, etc.)
+- **Purely visual** - no logic execution
+
+**Use case:** Making your workflow diagram easier to understand
+
+---
+
+### 2. Dashboard Plugins (plugins/ folder)
+
+**Purpose:** Create full **interactive applications** with forms, buttons, state management
+
+**Location:** `plugins/` directory
+```
+plugins/property-dashboard/index.tsx  ← Full React app
+```
+
+**What they do:**
+- Create custom tabs in Workbench
+- Build complete UIs with forms and inputs
+- Call your API endpoints
+- Manage state with React hooks
+- Display data in tables, cards, charts
+
+**Use case:** Building admin panels, dashboards, monitoring tools
+
+---
+
+### Key Differences:
+
+| Feature | Step UI (.tsx) | Dashboard Plugin |
+|---------|---------------|------------------|
+| **Purpose** | Visualize steps in flow | Interactive application |
+| **Location** | Next to step files | `plugins/` folder |
+| **Functionality** | Display only | Full interactivity |
+| **State Management** | No state | React hooks |
+| **API Calls** | No | Yes (fetch, etc.) |
+| **User Input** | No | Forms, buttons, etc. |
+| **Registration** | Automatic | `motia.config.ts` |
+| **Build Required** | No | No (with `~/` path) |
+
+### This Project Uses Both:
+
+✅ **6 Step UI Overrides** - Make the flow diagram beautiful  
+✅ **1 Dashboard Plugin** - Interactive search interface
+
+**Result:** A beautiful, functional property search system! 🎉
 
 ---
 
@@ -361,16 +555,18 @@ npm run generate-types # Generate TypeScript types
 ## ✅ Features
 
 - ✅ **Event-driven architecture** with parallel processing (57% faster!)
+- ✅ **Interactive Dashboard Plugin** - Full-featured UI with real-time search and monitoring
 - ✅ **Multi-language support** (TypeScript + Python)
 - ✅ **Real-time streaming** with progress updates
 - ✅ **AI-powered analysis** with Agno + OpenAI GPT-4o-mini
-- ✅ **Beautiful UI components** for Motia Workbench visualization
+- ✅ **Beautiful UI components** for Motia Workbench visualization (7 total)
 - ✅ **2 API endpoints** (simple polling pattern)
 - ✅ **4 parallel processors** (scraping, AI, enrichment, neighborhoods)
 - ✅ **Fault-tolerant** with comprehensive error handling
 - ✅ **Type-safe** with Zod schemas (TypeScript) and JSON Schema (Python)
 - ✅ **Clean architecture** following DDD patterns
 - ✅ **Production-ready** with real Firecrawl integration
+- ✅ **Local plugin system** - No build required, instant development
 
 ---
 
@@ -431,13 +627,15 @@ done
 This is a **production-ready, event-driven property search backend** that showcases:
 
 1. ⚡ **Parallel Processing** - 4 event processors running simultaneously (57% faster!)
-2. 🏗️ **Event-Driven Architecture** - Built with Motia framework for scalability
-3. 🤖 **AI-Powered Analysis** - Agno + OpenAI GPT-4o-mini for market insights
-4. 🎨 **Beautiful UI** - Custom Workbench visualizations for all steps
-5. 🌐 **Real Web Scraping** - Firecrawl integration with Zillow, Realtor.com
-6. 📊 **Real-Time Streaming** - Progress updates and result aggregation
-7. 🧹 **Clean Code** - Only ~925 lines of production code, DDD patterns
-8. 🚀 **Simple API** - Just 2 endpoints (POST to start, GET to poll)
+2. 🎨 **Interactive Dashboard** - Full-featured plugin with search form, real-time monitoring, property cards
+3. 🏗️ **Event-Driven Architecture** - Built with Motia framework for scalability
+4. 🤖 **AI-Powered Analysis** - Agno + OpenAI GPT-4o-mini for market insights
+5. 🎯 **Beautiful UI** - 7 custom components (6 step visualizations + 1 dashboard plugin)
+6. 🌐 **Real Web Scraping** - Firecrawl integration with any real estate website
+7. 📊 **Real-Time Streaming** - Progress updates and result aggregation
+8. 🧹 **Clean Code** - Only ~1,150 lines of production code, DDD patterns
+9. 🚀 **Simple API** - Just 2 endpoints (POST to start, GET to poll)
+10. 🔌 **Plugin System** - Demonstrates Motia's powerful local plugin architecture
 
 **Tested with real data - works in production!** ✅
 
@@ -448,6 +646,93 @@ This is a **production-ready, event-driven property search backend** that showca
 - **Motia Docs:** https://motia.dev/docs
 - **Agno Docs:** https://docs.agno.com
 - **Issues:** Check server logs in terminal
+
+---
+
+## 🔧 Troubleshooting
+
+### Firecrawl Concurrency Limit
+
+**Problem:** Getting timeout errors when scraping multiple websites?
+
+**Cause:** Firecrawl's free/starter plan has a low concurrency limit (1-2 concurrent requests).
+
+**Solution 1 - Upgrade Firecrawl Plan (Recommended):**
+- Increases concurrency limit
+- Keeps parallel scraping benefits
+- 57% performance improvement maintained
+
+**Solution 2 - Switch to Sequential Scraping:**
+
+Edit `src/services/property_scraper_service/scrape_properties.py`:
+
+```python
+# Change FROM (parallel):
+scrape_tasks = [_scrape_single_url(url, ...) for url in urls]
+results = await asyncio.gather(*scrape_tasks)
+
+# Change TO (sequential):
+results = []
+for url in urls:
+    result = await _scrape_single_url(url, ...)
+    results.append(result)
+```
+
+Also increase timeout:
+```python
+timeout=60.0  # Instead of 15.0
+```
+
+**Trade-off:** Sequential is slower but works with free Firecrawl plan.
+
+---
+
+## 🎨 Plugin Development Tips
+
+### Creating Your Own Dashboard Plugin:
+
+1. Create a folder in `plugins/`:
+   ```bash
+   mkdir plugins/my-dashboard
+   ```
+
+2. Create `index.tsx`:
+   ```tsx
+   export const MyDashboard = () => {
+     return <div>My Custom Dashboard</div>
+   }
+   ```
+
+3. Register in `motia.config.ts`:
+   ```typescript
+   function myDashboardPlugin(motia: MotiaPluginContext): MotiaPlugin {
+     return {
+       dirname: path.join(__dirname, 'plugins'),
+       workbench: [{
+         componentName: 'MyDashboard',
+         packageName: '~/plugins/my-dashboard',
+         label: 'My Dashboard',
+         position: 'top',
+         labelIcon: 'layout-dashboard',
+       }],
+     }
+   }
+   ```
+
+4. Add to plugins array:
+   ```typescript
+   export default config({
+     plugins: [...existingPlugins, myDashboardPlugin],
+   })
+   ```
+
+**Available Motia UI Components:**
+- `Badge` - Status indicators
+- `Button` - Click actions
+- Lucide Icons - All icons from lucide-react
+- Tailwind CSS - Full utility classes
+
+**No build required!** Just save and refresh Workbench (Cmd/Ctrl + R).
 
 ---
 
