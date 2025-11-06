@@ -1,0 +1,81 @@
+[
+  {
+    "id": "travel-planning",
+    "config": {
+      "steps/trigger-travel-plan/trigger-travel-plan.step.ts": {
+        "x": -735,
+        "y": 573
+      },
+      "steps/search-hotels/search-hotels.step.ts": {
+        "x": -1525,
+        "y": 1116,
+        "targetHandlePosition": "top"
+      },
+      "steps/search-flights/search-flights.step.ts": {
+        "x": -1125,
+        "y": 1114,
+        "targetHandlePosition": "top"
+      },
+      "steps/search-dining/search-dining.step.ts": {
+        "x": 529,
+        "y": 1099,
+        "targetHandlePosition": "top"
+      },
+      "steps/research-destination/research-destination.step.ts": {
+        "x": -717,
+        "y": 1111,
+        "targetHandlePosition": "top"
+      },
+      "steps/orchestrate-travel-planning/orchestrate-travel-planning.step.ts": {
+        "x": -312,
+        "y": 525,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/optimize-budget/optimize-budget.step.ts": {
+        "x": 935,
+        "y": 1097,
+        "targetHandlePosition": "top"
+      },
+      "steps/get-travel-plan-status/get-travel-plan-status.step.ts": {
+        "x": -1131,
+        "y": 578
+      },
+      "steps/finalize-travel-plan/finalize-travel-plan.step.ts": {
+        "x": -309,
+        "y": 1103,
+        "targetHandlePosition": "top"
+      },
+      "steps/create-itinerary/create-itinerary.step.ts": {
+        "x": 91,
+        "y": 1106,
+        "targetHandlePosition": "top"
+      }
+    }
+  },
+  {
+    "id": "github-stars-video",
+    "config": {
+      "steps/github/renderVideo.step.ts": {
+        "x": 927,
+        "y": 440
+      },
+      "steps/github/processStars.step.ts": {
+        "x": 442,
+        "y": 440
+      },
+      "steps/github/getStarsData.step.ts": {
+        "x": 4,
+        "y": 0
+      },
+      "steps/github/getJobStatus.step.ts": {
+        "x": 13,
+        "y": 203
+      },
+      "steps/github/fetchStars.step.ts": {
+        "x": 0,
+        "y": 406
+      }
+    }
+  }
+]
