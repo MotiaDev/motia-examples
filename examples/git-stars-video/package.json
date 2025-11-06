@@ -1,0 +1,39 @@
+{
+  "name": "github-stars-video-motia",
+  "version": "1.0.0",
+  "description": "Generate videos for your GitHub stars using Motia and Remotion",
+  "scripts": {
+    "dev": "motia dev",
+    "build": "motia build",
+    "start": "motia start",
+    "generate-types": "motia generate-types",
+    "build:plugin": "cd plugins/plugin-github-stars && npm run build"
+  },
+  "dependencies": {
+    "@motiadev/core": "0.8.3-beta.140",
+    "@motiadev/plugin-endpoint": "0.8.3-beta.140",
+    "@motiadev/plugin-logs": "0.8.3-beta.140",
+    "@motiadev/plugin-observability": "0.8.3-beta.140",
+    "@motiadev/plugin-states": "0.8.3-beta.140",
+    "@octokit/rest": "^20.0.2",
+    "@remotion/bundler": "^4.0.372",
+    "@remotion/renderer": "^4.0.372",
+    "@remotion/tailwind": "^4.0.372",
+    "@vitejs/plugin-react": "^4.2.0",
+    "autoprefixer": "^10.4.21",
+    "date-fns": "^3.0.0",
+    "motia": "latest",
+    "postcss": "^8.5.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.372",
+    "tailwindcss": "^4.1.16",
+    "vite": "^5.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}
