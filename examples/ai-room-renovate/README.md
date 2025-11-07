@@ -71,6 +71,8 @@ cd frontend && npm run dev
 - **Frontend**: `http://localhost:5173`
 ```
 
+![Motia Room Renovate](./public/motia-room-renovate.gif)
+
 ## 🎯 Usage
 
 ### Web Interface (Recommended)
