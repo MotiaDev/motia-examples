@@ -12,7 +12,7 @@ const bodySchema = z.object({
 
 export const config: ApiRouteConfig = {
   type: 'api',
-  name: 'EditRendering',
+  name: 'EditRenderingApi',
   description: 'Edits existing renovation rendering based on user feedback',
   path: '/renovation/:sessionId/edit',
   method: 'POST',
@@ -30,7 +30,7 @@ export const config: ApiRouteConfig = {
   },
 };
 
-export const handler: Handlers['EditRendering'] = async (req, { emit, logger, state }) => {
+export const handler: Handlers['EditRenderingApi'] = async (req, { emit, logger, state }) => {
   try {
     const { sessionId } = req.pathParams;
     const { editPrompt } = bodySchema.parse(req.body);
@@ -38,7 +38,7 @@ export const handler: Handlers['EditRendering'] = async (req, { emit, logger, st
     logger.info('Edit rendering request', { sessionId, editPrompt });
 
     // Check if there's an existing rendering
-    const rendering = await state.get<any>(sessionId, 'rendering');
+    const rendering = await state.get(sessionId, 'rendering');
     if (!rendering) {
       logger.error('No rendering found to edit', { sessionId });
       return {
@@ -49,7 +49,7 @@ export const handler: Handlers['EditRendering'] = async (req, { emit, logger, st
       };
     }
 
-    // Trigger edit event
+    // Trigger edit event to regenerate with modifications
     await emit({
       topic: 'renovation.edit',
       data: {
