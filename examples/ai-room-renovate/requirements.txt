@@ -1,0 +1,12 @@
+# Google ADK for Gemini 2.5 Flash Image Generation
+# This is what the original repo uses: https://github.com/Shubhamsaboo/awesome-llm-apps
+google-adk>=0.1.0
+
+# Fallback: If google-adk not available, use google-genai
+google-genai>=0.2.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Pydantic for validation
+pydantic>=2.0.0
