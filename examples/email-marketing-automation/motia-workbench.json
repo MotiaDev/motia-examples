@@ -28,9 +28,25 @@
   {
     "id": "email-automation",
     "config": {
+      "steps/14-get-users.step.ts": {
+        "x": -1999,
+        "y": -623
+      },
+      "steps/13-get-dashboard-stats.step.ts": {
+        "x": -1981,
+        "y": 7
+      },
+      "steps/12-get-campaign-by-id.step.ts": {
+        "x": -1985,
+        "y": -349
+      },
+      "steps/11-get-campaigns.step.ts": {
+        "x": -1580,
+        "y": -2
+      },
       "steps/10-behavioral-trigger-engine.step.ts": {
-        "x": -135,
-        "y": -784,
+        "x": -141,
+        "y": -621,
         "sourceHandlePosition": "bottom"
       },
       "steps/09-welcome-email-series.step.ts": {
@@ -39,7 +55,7 @@
       },
       "steps/08-unsubscribe-handler.step.ts": {
         "x": -1608,
-        "y": -742
+        "y": -633
       },
       "steps/07-campaign-status-monitor.step.ts": {
         "x": -1049,
@@ -50,8 +66,8 @@
         "y": -316
       },
       "steps/05-email-scheduler.step.ts": {
-        "x": -958,
-        "y": -753
+        "x": -1049,
+        "y": -636
       },
       "steps/04-email-delivery.step.ts": {
         "x": 202,
@@ -68,9 +84,13 @@
         "sourceHandlePosition": "right"
       },
       "steps/03-content-personalization_step.py": {
-        "x": -486,
-        "y": -314,
+        "x": -481,
+        "y": -323,
         "targetHandlePosition": "left"
+      },
+      "steps/15-get-campaign-emails.step.ts": {
+        "x": -2369,
+        "y": -357
       }
     }
   }

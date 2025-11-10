@@ -52,7 +52,7 @@ export const config: CronConfig = {
   name: "CampaignStatusMonitor",
   description:
     "Monitors campaign health, performance, and generates alerts for issues",
-  emits: ["campaign-alert", "campaign-health-report"],
+  emits: [],
   flows: ["email-automation"],
 };
 
@@ -124,15 +124,11 @@ export const handler: Handlers["CampaignStatusMonitor"] = async ({
       }
     }
 
-    // Send aggregated alerts if any
+    // Alerts are logged; no subscribers needed
     if (alerts.length > 0) {
-      await (emit as any)({
-        topic: "campaign-alert",
-        data: {
-          alertCount: alerts.length,
-          alerts: alerts,
-          timestamp: new Date().toISOString(),
-        },
+      logger.warn("Campaign alerts detected", {
+        alertCount: alerts.length,
+        timestamp: new Date().toISOString(),
       });
     }
 
@@ -291,12 +287,6 @@ async function generateHealthReport(
 
     // Store health report
     await state.set("campaign_health_reports", campaign.id, healthReport);
-
-    // Emit health report for dashboard updates
-    await emit({
-      topic: "campaign-health-report",
-      data: healthReport,
-    });
   } catch (error) {
     logger.error("Error generating health report", {
       campaignId: campaign.id,

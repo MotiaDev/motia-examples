@@ -1,0 +1,27 @@
+[
+  {
+    "id": "api-configuration",
+    "title": "GET Campaigns Endpoint",
+    "description": "Simple GET endpoint at /campaigns that fetches all campaigns from Appwrite database.",
+    "lines": ["5-34"]
+  },
+  {
+    "id": "response-schema",
+    "title": "Campaign Response Schema",
+    "description": "Type-safe array response schema with all campaign fields including ID, name, subject, status, and metrics.",
+    "lines": ["14-33"]
+  },
+  {
+    "id": "campaign-fetching",
+    "title": "Campaign Data Retrieval",
+    "description": "Fetches all campaigns from Appwrite and maps them to the response schema format.",
+    "lines": ["43-59"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Handling",
+    "description": "Comprehensive error handling with proper status codes and error messages.",
+    "lines": ["60-71"]
+  }
+]
+

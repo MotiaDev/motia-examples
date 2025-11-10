@@ -491,12 +491,12 @@ export const steps: TutorialStep[] = [
     title: "AI-Powered Personalization",
     description: () => (
       <p>
-        Advanced AI personalization functions create personalized subject lines
+        Advanced AI personalization using GPT-4o-mini creates personalized subject lines
         and content based on user metadata, VIP status, and purchase history.
         <br />
         <br />
-        The system uses language models to generate contextually relevant
-        content that resonates with individual recipients.
+        The system uses OpenAI's latest efficient model to generate contextually relevant
+        content that resonates with individual recipients at 5x lower cost.
       </p>
     ),
     before: [
@@ -1711,6 +1711,209 @@ export const steps: TutorialStep[] = [
     ],
   },
 
+  // Frontend API Integration
+
+  {
+    elementXpath: workbenchXPath.flows.node("getcampaigns"),
+    title: "Frontend API Integration",
+    description: () => (
+      <p>
+        The system includes <b>Frontend API Endpoints</b> that power a React
+        dashboard for campaign management and analytics.
+        <br />
+        <br />
+        These RESTful APIs provide data to the TanStack Router frontend,
+        enabling real-time campaign monitoring, user management, and
+        performance analytics.
+        <br />
+        <br />
+        Let's explore the key API endpoints that connect the backend to the
+        frontend dashboard.
+      </p>
+    ),
+    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "List Campaigns Endpoint",
+    description: () => (
+      <p>
+        The GET /campaigns endpoint retrieves all campaigns from Appwrite with
+        their complete details including status, metrics, and scheduling
+        information.
+        <br />
+        <br />
+        This powers the campaigns list page in the frontend dashboard, showing
+        all active, scheduled, and completed campaigns with real-time data.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("getcampaigns"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("api-configuration"),
+      },
+    ],
+  },
+
+  {
+    elementXpath: workbenchXPath.flows.node("getcampaignbyid"),
+    title: "RESTful Path Parameters",
+    description: () => (
+      <p>
+        The <b>GET /campaigns/:id</b> endpoint demonstrates proper REST API
+        design with dynamic path parameters for fetching individual campaigns.
+        <br />
+        <br />
+        This endpoint uses Motia's <code>req.pathParams</code> to extract the
+        campaign ID from the URL path, following REST API best practices.
+        <br />
+        <br />
+        It powers the campaign details page, showing comprehensive metrics and
+        performance data for each campaign.
+      </p>
+    ),
+    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Path Parameter Extraction",
+    description: () => (
+      <p>
+        The system extracts the campaign ID from <code>req.pathParams.id</code>{" "}
+        - Motia's standard way to access path parameters from dynamic routes
+        like <code>/campaigns/:id</code>.
+        <br />
+        <br />
+        This is the correct approach for RESTful APIs in Motia, replacing the
+        need for query parameters or POST body workarounds.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("getcampaignbyid"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("path-parameter-extraction"),
+      },
+    ],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "404 Not Found Handling",
+    description: () => (
+      <p>
+        The endpoint returns proper HTTP 404 status when a campaign doesn't
+        exist, following REST API conventions and providing clear error
+        messages.
+        <br />
+        <br />
+        This ensures the frontend can gracefully handle missing campaigns and
+        display appropriate user feedback.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("not-found-handling"),
+      },
+    ],
+  },
+
+  {
+    elementXpath: workbenchXPath.flows.node("getdashboardstats"),
+    title: "Dashboard Statistics API",
+    description: () => (
+      <p>
+        The <b>GET /stats</b> endpoint aggregates campaign, email, and
+        analytics data to provide real-time dashboard statistics.
+        <br />
+        <br />
+        It calculates total campaigns, emails sent, open rates, and click rates
+        by pulling data from multiple Appwrite collections.
+        <br />
+        <br />
+        This powers the main dashboard view with key performance metrics for
+        the entire email marketing system.
+      </p>
+    ),
+    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Graceful Error Handling",
+    description: () => (
+      <p>
+        The stats endpoint gracefully handles missing database tables (emails,
+        analytics) by returning zero values instead of throwing errors.
+        <br />
+        <br />
+        This ensures the dashboard always loads successfully, even when
+        analytics tables haven't been populated yet or don't exist.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("getdashboardstats"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("graceful-error-handling"),
+      },
+    ],
+  },
+
+  {
+    elementXpath: workbenchXPath.flows.node("getusers"),
+    title: "User Management API",
+    description: () => (
+      <p>
+        The <b>GET /users</b> endpoint retrieves all users from Appwrite with
+        their preferences, metadata, and segmentation data.
+        <br />
+        <br />
+        This powers the user management page, displaying user lists with
+        automatic segment detection (VIP, Active, New Signups) based on their
+        behavior and purchase history.
+        <br />
+        <br />
+        The frontend automatically segments users for display, showing total
+        users, active users, VIP customers, and new signups.
+      </p>
+    ),
+    before: [{ type: "click", selector: workbenchXPath.closePanelButton }],
+  },
+  {
+    elementXpath: workbenchXPath.sidebarContainer,
+    title: "Data Transformation",
+    description: () => (
+      <p>
+        The endpoint transforms user data to ensure preferences and metadata are
+        properly formatted as JSON strings for frontend consumption.
+        <br />
+        <br />
+        This makes it easy for the React frontend to parse and display user
+        preferences, purchase history, and behavioral attributes.
+      </p>
+    ),
+    before: [
+      {
+        type: "click",
+        selector: workbenchXPath.flows.previewButton("getusers"),
+      },
+      {
+        type: "click",
+        selector: workbenchXPath.flows.feature("data-transformation"),
+      },
+    ],
+  },
+
   // Testing the System
 
   {
@@ -1940,6 +2143,15 @@ export const steps: TutorialStep[] = [
         <br />✅ <b>Multi-provider Support</b> - Flexible email service
         integration
         <br />✅ <b>Compliance Features</b> - GDPR and CAN-SPAM compliance
+        <br />✅ <b>Frontend Dashboard</b> - React UI with TanStack Router
+        <br />✅ <b>RESTful APIs</b> - Clean API design with proper path
+        parameters
+        <br />✅ <b>User Management</b> - Automatic segmentation and tracking
+        <br />
+        <br />
+        The system includes a complete frontend dashboard at{" "}
+        <code>http://localhost:3001</code> with live data integration, campaign
+        management, user segmentation, and real-time analytics.
         <br />
         <br />
         This system can handle enterprise-scale email marketing with advanced
@@ -1949,7 +2161,7 @@ export const steps: TutorialStep[] = [
         Ready to build more? Explore other Motia examples or create your own
         automation workflows. Join our{" "}
         <a
-          href="https://discord.com/invite/nJFfsH5d6v"
+          href="https://discord.gg/motia"
           target="_blank"
           rel="noopener noreferrer"
         >

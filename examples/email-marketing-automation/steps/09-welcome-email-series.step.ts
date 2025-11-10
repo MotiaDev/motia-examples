@@ -43,12 +43,10 @@ export const config: EventConfig = {
   description:
     "Manages welcome email sequence progression and sends timed welcome emails",
   flows: ["email-automation"],
-  subscribes: [
-    "welcome-sequence-started",
-    "welcome-sequence-progression",
-    "welcome-email-timer",
-  ],
-  emits: ["content-personalized", "welcome-sequence-completed"],
+  // NOTE: This step is currently NON-FUNCTIONAL - no steps emit these events!
+  // To activate, you need to emit 'welcome-sequence-started' from user signup/registration
+  subscribes: [],
+  emits: ["content-personalized"],
   input: z.object({
     userId: z.string(),
     email: z.string().email(),
@@ -364,20 +362,6 @@ async function completeWelcomeSequence(
   sequence.completed = true;
   sequence.nextEmailAt = new Date().toISOString();
   await state.set("welcome_sequences", sequence.userId, sequence);
-
-  // Emit completion event
-  await emit({
-    topic: "welcome-sequence-completed",
-    data: {
-      userId: sequence.userId,
-      email: sequence.email,
-      completedAt: new Date().toISOString(),
-      totalEmailsSent: sequence.currentStep + 1,
-      emailsOpened: sequence.openedEmails.length,
-      emailsClicked: sequence.clickedEmails.length,
-      engagementRate: sequence.openedEmails.length / (sequence.currentStep + 1),
-    },
-  });
 
   logger.info("Welcome sequence completed", {
     userId: sequence.userId,

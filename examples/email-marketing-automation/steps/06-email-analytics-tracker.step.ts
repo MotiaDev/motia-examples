@@ -51,7 +51,7 @@ export const config: EventConfig = {
     "email-bounced",
     "email-unsubscribed",
   ],
-  emits: ["analytics-updated", "engagement-milestone"],
+  emits: [],
   input: z.object({
     emailId: z.string(),
     campaignId: z.string(),
@@ -158,19 +158,6 @@ export const handler: Handlers["EmailAnalyticsTracker"] = async (
       eventType,
       currentStatus: emailMetrics.currentStatus,
       totalEvents: emailMetrics.events.length,
-    });
-
-    // Emit analytics update event
-    await (emit as any)({
-      topic: "analytics-updated",
-      data: {
-        emailId,
-        campaignId,
-        userId,
-        eventType,
-        timestamp,
-        emailMetrics,
-      },
     });
   } catch (error) {
     logger.error("Email analytics tracking failed", {
@@ -313,18 +300,6 @@ async function checkEngagementMilestones(
           campaignId,
           milestone: milestoneKey,
           currentRate: `${currentRate.toFixed(1)}%`,
-        });
-
-        // Emit milestone event
-        await emit({
-          topic: "engagement-milestone",
-          data: {
-            campaignId,
-            milestoneType: milestone.type,
-            threshold: milestone.threshold,
-            currentRate: currentRate,
-            achievedAt: new Date().toISOString(),
-          },
         });
       }
     }
