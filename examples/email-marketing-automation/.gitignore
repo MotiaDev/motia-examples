@@ -1,11 +1,11 @@
 node_modules
+dist
 python_modules
-.venv
-venv
 .motia
 .mermaid
-dist
-*.pyc
 .env
-.claude
+.DS_Store
+*.log
+.output
+.tanstack/tmp
 .cursor

@@ -64,7 +64,7 @@ export const config: ApiRouteConfig = {
       error: z.string(),
     }),
   },
-  emits: ["user-unsubscribed", "unsubscribe-feedback", "compliance-log"],
+  emits: [],
 };
 
 export const handler: Handlers["UnsubscribeHandler"] = async (
@@ -235,36 +235,6 @@ export const handler: Handlers["UnsubscribeHandler"] = async (
 
     // Log for compliance
     await logComplianceEvent(unsubscribeRecord, state, emit, logger);
-
-    // Emit unsubscribe event
-    await (emit as any)({
-      topic: "user-unsubscribed",
-      data: {
-        unsubscribeId,
-        userId,
-        email,
-        campaignId,
-        reason: unsubscribeRecord.reason,
-        unsubscribedAt: unsubscribeRecord.unsubscribedAt,
-        method: "one_click",
-      },
-    });
-
-    // Emit feedback if provided
-    if (feedbackStr) {
-      await (emit as any)({
-        topic: "unsubscribe-feedback",
-        data: {
-          unsubscribeId,
-          userId,
-          email,
-          campaignId,
-          reason: reasonStr,
-          feedback: feedbackStr,
-          submittedAt: unsubscribeRecord.unsubscribedAt,
-        },
-      });
-    }
 
     logger.info("User successfully unsubscribed", {
       unsubscribeId,
@@ -468,12 +438,6 @@ async function logComplianceEvent(
     };
 
     await state.set("compliance_logs", record.id, complianceLog);
-
-    // Emit compliance event
-    await emit({
-      topic: "compliance-log",
-      data: complianceLog,
-    });
 
     logger.info("Compliance event logged", {
       type: "unsubscribe",

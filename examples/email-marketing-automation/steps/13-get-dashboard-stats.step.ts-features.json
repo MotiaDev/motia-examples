@@ -1,0 +1,27 @@
+[
+  {
+    "id": "api-configuration",
+    "title": "Dashboard Stats Endpoint",
+    "description": "GET endpoint at /stats that aggregates campaign, email, and analytics data for dashboard display.",
+    "lines": ["5-26"]
+  },
+  {
+    "id": "graceful-error-handling",
+    "title": "Graceful Table Handling",
+    "description": "Gracefully handles missing emails and analytics tables, returning zero values instead of crashing the API.",
+    "lines": ["39-53"]
+  },
+  {
+    "id": "stats-calculation",
+    "title": "Metrics Calculation",
+    "description": "Calculates totalCampaigns, emailsSent, openRate, and clickRate from multiple data sources.",
+    "lines": ["55-63"]
+  },
+  {
+    "id": "response-formatting",
+    "title": "Response Formatting",
+    "description": "Returns formatted statistics with rounded decimal values for clean dashboard display.",
+    "lines": ["65-73"]
+  }
+]
+

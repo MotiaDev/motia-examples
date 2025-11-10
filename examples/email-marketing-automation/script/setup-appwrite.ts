@@ -169,6 +169,85 @@ async function setupDatabase() {
     });
     console.log("✓ Campaign columns created");
 
+    // Create Analytics table
+    console.log("\nCreating analytics table...");
+    await tablesDB.createTable({
+      databaseId,
+      tableId: "analytics",
+      name: "Analytics",
+      permissions: [
+        Permission.read(Role.any()),
+        Permission.create(Role.any()),
+        Permission.update(Role.any()),
+        Permission.delete(Role.any()),
+      ],
+    });
+    console.log("✓ Analytics table created");
+
+    // Add columns to Analytics table
+    console.log("Adding analytics columns...");
+    await tablesDB.createStringColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "campaignId",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "userId",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "email",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "emailId",
+      size: 255,
+      required: true,
+    });
+    await tablesDB.createStringColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "status",
+      size: 100,
+      required: true,
+    });
+    await tablesDB.createDatetimeColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "deliveredAt",
+      required: false,
+    });
+    await tablesDB.createDatetimeColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "openedAt",
+      required: false,
+    });
+    await tablesDB.createDatetimeColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "clickedAt",
+      required: false,
+    });
+    await tablesDB.createStringColumn({
+      databaseId,
+      tableId: "analytics",
+      key: "events",
+      size: 4096,
+      required: false,
+    });
+    console.log("✓ Analytics columns created");
+
     console.log("\n✅ Setup completed successfully!");
     console.log(`\nAdd this to your .env file:`);
     console.log(`APPWRITE_DATABASE_ID=${database.$id}`);

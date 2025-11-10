@@ -66,11 +66,12 @@ export const config: EventConfig = {
   description:
     "Processes behavioral triggers and initiates targeted email campaigns",
   flows: ["email-automation"],
-  subscribes: ["behavior-trigger"],
+  // NOTE: This step is currently NON-FUNCTIONAL - nothing emits 'behavior-trigger'!
+  // To activate, you need to emit 'behavior-trigger' from user action events
+  subscribes: ["behavior-trigger"],  // ⚠️ Nothing emits this
   emits: [
-    "behavioral-campaign-triggered",
-    "content-personalized",
-    "behavioral-sequence-started",
+    "content-personalized",  // ✅ Used by email-delivery
+    // Removed unused: behavioral-campaign-triggered, behavioral-sequence-started (no subscribers)
   ],
   input: z.object({
     type: z.string(),
@@ -400,35 +401,6 @@ async function initiateBehavioralSequence(
         personalizedEmail
       );
     }
-
-    // Emit sequence started event
-    await emit({
-      topic: "behavioral-sequence-started",
-      data: {
-        sequenceId,
-        userId: user.id,
-        email: user.email,
-        campaignId: campaign.id,
-        triggerType: campaign.triggerType,
-        scheduledFor: sendTime.toISOString(),
-        delay: campaign.delay,
-      },
-    });
-
-    // Emit campaign triggered event
-    await emit({
-      topic: "behavioral-campaign-triggered",
-      data: {
-        campaignId: campaign.id,
-        campaignName: campaign.name,
-        userId: user.id,
-        email: user.email,
-        triggerType: campaign.triggerType,
-        triggerData: trigger.data,
-        triggeredAt: new Date().toISOString(),
-        scheduledFor: sendTime.toISOString(),
-      },
-    });
 
     logger.info("Behavioral sequence initiated", {
       sequenceId,

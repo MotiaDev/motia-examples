@@ -2,7 +2,7 @@
   {
     "id": "event-configuration",
     "title": "Event Step Configuration",
-    "description": "Event-driven step that processes behavioral triggers and initiates targeted email campaigns based on user behavior patterns.",
+    "description": "Event-driven step that processes behavioral triggers and initiates targeted campaigns. NOTE: Currently non-functional as no step emits 'behavior-trigger' events - would need user action tracking to activate.",
     "lines": ["63-82"]
   },
   {

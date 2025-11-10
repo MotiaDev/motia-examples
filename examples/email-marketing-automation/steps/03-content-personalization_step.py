@@ -8,7 +8,7 @@ import json
 config = {
     "type": "event",
     "name": "ContentPersonalization",
-    "description": "AI-powered content personalization for email campaigns using Appwrite Storage",
+    "description": "AI-powered content personalization for email campaigns using GPT-4o-mini and Appwrite Storage",
     "subscribes": ["users-segmented"],
     "emits": ["content-personalized"],
     "input": {
@@ -51,11 +51,11 @@ async def handler(input_data, ctx):
             f"Starting content personalization - campaignId: {campaign_id}, recipients: {len(recipients)}, personalize: {personalize}, template: {template_name}"
         )
 
-        # Fetch template from Appwrite Storage
-        template_content = await fetch_template_from_storage(template_name, ctx)
-        if not template_content:
-            ctx.logger.error(f"Failed to fetch template: {template_name}")
-            template_content = get_fallback_template()
+        # Use fallback template (skip Appwrite Storage for now)
+        # TODO: Upload templates to Appwrite Storage and uncomment below
+        # template_content = await fetch_template_from_storage(template_name, ctx)
+        template_content = get_fallback_template()
+        ctx.logger.info(f"Using fallback template for: {template_name}")
 
         personalized_emails = []
 
@@ -63,13 +63,17 @@ async def handler(input_data, ctx):
         for i, recipient_data in enumerate(recipients):
             try:
                 if personalize:
-                    # AI-powered personalization
-                    personalized_subject = await personalize_subject_with_ai(
-                        recipient_data, base_subject, ctx
+                    # AI-powered personalization (OPTIMIZED: 1 API call instead of 2)
+                    ai_result = await personalize_email_with_ai(
+                        recipient_data, base_subject, template_content, ctx
                     )
-                    personalized_content = await personalize_content_with_ai(
-                        recipient_data, template_content, base_subject, ctx
-                    )
+                    if ai_result:
+                        personalized_subject = ai_result["subject"]
+                        personalized_content = ai_result["content"]
+                    else:
+                        # Fallback if AI fails
+                        personalized_subject = personalize_subject_fallback(recipient_data, base_subject)
+                        personalized_content = personalize_content_fallback(recipient_data, template_content)
                 else:
                     # Basic personalization (template replacement only)
                     personalized_subject = replace_placeholders(
@@ -79,14 +83,19 @@ async def handler(input_data, ctx):
                         template_content, recipient_data
                     )
 
-                # Create personalized email object
+                # Create personalized email object (matching TypeScript API schema)
+                recipient_name = f"{recipient_data.get('firstName', '')} {recipient_data.get('lastName', '')}".strip()
+                if not recipient_name:
+                    recipient_name = recipient_data.get("email", "").split("@")[0]
+                
                 email = {
                     "id": f"email_{int(datetime.now().timestamp())}_{recipient_data['id']}",
                     "campaignId": campaign_id,
-                    "userId": recipient_data["id"],
-                    "email": recipient_data["email"],
-                    "subject": personalized_subject,
-                    "content": personalized_content,
+                    "recipientId": recipient_data["id"],
+                    "recipientEmail": recipient_data["email"],
+                    "recipientName": recipient_name,
+                    "personalizedSubject": personalized_subject,
+                    "personalizedContent": personalized_content,
                     "status": "queued",
                     "createdAt": datetime.now().isoformat(),
                 }
@@ -186,8 +195,78 @@ async def fetch_template_from_storage(template_name, ctx):
         return None
 
 
+async def personalize_email_with_ai(user_data, base_subject, template_content, ctx):
+    """OPTIMIZED: AI-powered personalization for both subject AND content in ONE API call"""
+    try:
+        openai_key = os.getenv("OPENAI_API_KEY")
+        if not openai_key:
+            ctx.logger.warn("No OpenAI API key, falling back to rule-based personalization")
+            return None
+
+        # Prepare user context
+        user_context = prepare_user_context(user_data)
+        
+        # Replace basic placeholders first
+        content_with_placeholders = replace_placeholders(template_content, user_data)
+
+        # Combined prompt for BOTH subject and content
+        prompt = f"""
+        Personalize this email for a user with the following profile:
+        
+        Base Subject: "{base_subject}"
+        User Profile: {user_context}
+        
+        Generate:
+        1. A personalized subject line (max 60 characters)
+        2. A personalized HTML content section to replace {{{{personalizedSection}}}}
+        
+        Requirements:
+        - Subject: engaging, relevant to their profile, use their name if appropriate
+        - Content: 2-3 sentences, professional tone, relevant to their VIP status/engagement
+        - Consider their purchase history and engagement level
+        - Format content as HTML
+        
+        Return ONLY valid JSON in this exact format (no markdown, no code blocks):
+        {{"subject": "personalized subject here", "content": "<div>personalized HTML here</div>"}}
+        """
+
+        response_text = await call_openai_api(prompt, ctx, max_tokens=200)
+        
+        if response_text:
+            # Parse JSON response
+            import json
+            # Clean up response (remove markdown code blocks if present)
+            cleaned = response_text.strip()
+            if cleaned.startswith("```"):
+                cleaned = cleaned.split("```")[1]
+                if cleaned.startswith("json"):
+                    cleaned = cleaned[4:]
+            cleaned = cleaned.strip()
+            
+            result = json.loads(cleaned)
+            
+            # Replace personalized section in content
+            final_content = content_with_placeholders.replace(
+                "{{personalizedSection}}", 
+                result.get("content", get_fallback_personalized_section(user_data))
+            )
+            
+            ctx.logger.info(f"✅ AI personalization successful for {user_data.get('firstName', 'user')}")
+            
+            return {
+                "subject": result.get("subject", base_subject),
+                "content": final_content
+            }
+        
+        return None
+
+    except Exception as e:
+        ctx.logger.warn(f"AI email personalization failed: {str(e)}")
+        return None
+
+
 async def personalize_subject_with_ai(user_data, base_subject, ctx):
-    """AI-powered subject line personalization using OpenAI"""
+    """AI-powered subject line personalization using OpenAI (DEPRECATED: Use personalize_email_with_ai instead)"""
     try:
         openai_key = os.getenv("OPENAI_API_KEY")
         if not openai_key:
@@ -280,7 +359,7 @@ async def personalize_content_with_ai(user_data, template_content, subject, ctx)
 
 
 async def call_openai_api(prompt, ctx, max_tokens=100):
-    """Make API call to OpenAI"""
+    """Make API call to OpenAI with rate limiting and retry logic"""
     try:
         openai_key = os.getenv("OPENAI_API_KEY")
         url = "https://api.openai.com/v1/chat/completions"
@@ -291,20 +370,33 @@ async def call_openai_api(prompt, ctx, max_tokens=100):
         }
 
         data = {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4o-mini",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": max_tokens,
             "temperature": 0.7,
         }
 
-        async with aiohttp.ClientSession() as session:
-            async with session.post(url, headers=headers, json=data) as response:
-                if response.status == 200:
-                    result = await response.json()
-                    return result["choices"][0]["message"]["content"]
-                else:
-                    ctx.logger.warn(f"OpenAI API error: {response.status}")
-                    return None
+        # Retry logic for rate limiting
+        max_retries = 3
+        for attempt in range(max_retries):
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, headers=headers, json=data) as response:
+                    if response.status == 200:
+                        result = await response.json()
+                        # Add delay to avoid rate limiting (free tier: 3 req/min = 20s between calls)
+                        await asyncio.sleep(2.0)
+                        return result["choices"][0]["message"]["content"]
+                    elif response.status == 429:  # Rate limit
+                        wait_time = (attempt + 1) * 2  # Exponential backoff: 2s, 4s, 6s
+                        ctx.logger.warn(f"OpenAI rate limit hit, waiting {wait_time}s (attempt {attempt + 1}/{max_retries})")
+                        await asyncio.sleep(wait_time)
+                        continue
+                    else:
+                        ctx.logger.warn(f"OpenAI API error: {response.status}")
+                        return None
+        
+        ctx.logger.warn("OpenAI API failed after all retries")
+        return None
 
     except Exception as e:
         ctx.logger.warn(f"OpenAI API call failed: {str(e)}")

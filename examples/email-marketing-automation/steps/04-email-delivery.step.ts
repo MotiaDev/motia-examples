@@ -37,7 +37,7 @@ export const config: EventConfig = {
   description: "Processes and delivers personalized emails to recipients",
   flows: ["email-automation"],
   subscribes: ["content-personalized"],
-  emits: ["email-sent", "email-failed", "campaign-completed"],
+  emits: ["email-sent"],
   input: z.object({
     campaignId: z.string(),
     scheduledFor: z.string().optional(),
@@ -152,18 +152,6 @@ export const handler: Handlers["EmailDelivery"] = async (
         100
       ).toFixed(1)}%`,
     });
-
-    // Emit campaign completion event
-    await (emit as any)({
-      topic: "campaign-completed",
-      data: {
-        campaignId,
-        totalEmails: personalizedEmails.length,
-        successCount,
-        failureCount,
-        completedAt: new Date().toISOString(),
-      },
-    });
   } catch (error) {
     logger.error("Email delivery process failed", {
       campaignId,
@@ -171,15 +159,6 @@ export const handler: Handlers["EmailDelivery"] = async (
     });
 
     await updateCampaignStatus(campaignId, "failed", state);
-
-    await (emit as any)({
-      topic: "email-failed",
-      data: {
-        campaignId,
-        error: error instanceof Error ? error.message : String(error),
-        failedAt: new Date().toISOString(),
-      },
-    });
   }
 };
 

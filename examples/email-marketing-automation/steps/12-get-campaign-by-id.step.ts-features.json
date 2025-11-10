@@ -1,0 +1,33 @@
+[
+  {
+    "id": "api-configuration",
+    "title": "RESTful Path Parameters",
+    "description": "GET endpoint at /campaigns/:id demonstrating proper REST API design with dynamic path parameters.",
+    "lines": ["5-39"]
+  },
+  {
+    "id": "path-parameter-extraction",
+    "title": "Path Parameter Extraction",
+    "description": "Extracts campaign ID from req.pathParams, Motia's standard way to access path parameters from dynamic routes.",
+    "lines": ["42-46"]
+  },
+  {
+    "id": "campaign-retrieval",
+    "title": "Single Campaign Fetch",
+    "description": "Fetches specific campaign by ID from Appwrite and returns detailed campaign information.",
+    "lines": ["48-75"]
+  },
+  {
+    "id": "not-found-handling",
+    "title": "404 Not Found Response",
+    "description": "Returns proper 404 status when campaign doesn't exist, following REST API best practices.",
+    "lines": ["51-59"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Handling",
+    "description": "Comprehensive error handling with proper status codes and error messages for failed fetches.",
+    "lines": ["76-87"]
+  }
+]
+

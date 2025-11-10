@@ -1,0 +1,27 @@
+[
+  {
+    "id": "api-configuration",
+    "title": "Users List Endpoint",
+    "description": "GET endpoint at /users that fetches all users with their preferences and metadata for user management.",
+    "lines": ["5-32"]
+  },
+  {
+    "id": "user-data-retrieval",
+    "title": "User Data Fetching",
+    "description": "Fetches all users from Appwrite database and prepares them for frontend display.",
+    "lines": ["37-48"]
+  },
+  {
+    "id": "data-transformation",
+    "title": "Data Transformation",
+    "description": "Transforms user data to ensure preferences and metadata are properly formatted as JSON strings.",
+    "lines": ["50-60"]
+  },
+  {
+    "id": "error-handling",
+    "title": "Error Handling",
+    "description": "Comprehensive error handling with proper status codes for failed user fetches.",
+    "lines": ["62-72"]
+  }
+]
+
