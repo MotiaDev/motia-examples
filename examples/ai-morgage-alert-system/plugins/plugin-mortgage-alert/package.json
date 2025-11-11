@@ -1,0 +1,23 @@
+{
+  "name": "plugin-mortgage-alert",
+  "version": "1.0.0",
+  "description": "Manual testing and monitoring UI for Mortgage Rate Alert System",
+  "main": "index.tsx",
+  "motia": {
+    "type": "plugin",
+    "title": "Mortgage Alerts",
+    "icon": "🏠",
+    "description": "AI-powered mortgage rate monitoring and analysis"
+  },
+  "keywords": [
+    "motia",
+    "plugin",
+    "mortgage",
+    "ai",
+    "openai",
+    "couchbase"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+
