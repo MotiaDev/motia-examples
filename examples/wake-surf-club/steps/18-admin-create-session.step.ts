@@ -1,6 +1,5 @@
 import { ApiRouteConfig, Handlers } from "motia";
 import { z } from "zod";
-import { verifyHostToken } from "../types/utils";
 import { Session } from "../types/models";
 
 export const config: ApiRouteConfig = {
@@ -16,13 +15,13 @@ export const config: ApiRouteConfig = {
     startTime: z
       .string()
       .regex(/^\d{2}:\d{2}$/, "Start time must be in HH:MM format")
-      .default("07:00"),
+      .optional(),
     endTime: z
       .string()
       .regex(/^\d{2}:\d{2}$/, "End time must be in HH:MM format")
-      .default("09:00"),
-    capacity: z.number().min(1).max(10).default(3),
-    location: z.string().optional(),
+      .optional(),
+    capacity: z.number().min(1).max(10).optional(),
+    location: z.string().optional().nullable(),
     status: z.enum(["draft", "published", "closed"]).default("published"),
   }),
   responseSchema: {
@@ -49,20 +48,43 @@ export const config: ApiRouteConfig = {
 
 export const handler: Handlers["AdminCreateSession"] = async (
   req,
-  { emit, logger, state, traceId }
+  { logger, state, traceId }
 ) => {
   try {
-    // For now, skip authentication - we'll add it back later
     const {
       date,
-      startTime = "07:00",
-      endTime = "09:00",
-      capacity = 3,
+      startTime,
+      endTime,
+      capacity,
       location,
       status = "published",
     } = req.body;
 
-    // Validate date format (removed Tuesday restriction)
+    // Get stored settings for defaults (if fields not provided)
+    const settings: {
+      capacity: number;
+      startTime: string;
+      endTime: string;
+      location: string | null;
+    } = ((await state.get("settings", "defaults")) as {
+      capacity: number;
+      startTime: string;
+      endTime: string;
+      location: string | null;
+    }) || {
+      capacity: 3,
+      startTime: "07:00",
+      endTime: "09:00",
+      location: null,
+    };
+
+    logger.info("Admin creating session", {
+      requestData: req.body,
+      defaultSettings: settings,
+      traceId,
+    });
+
+    // Validate date format
     const sessionDate = new Date(date);
     if (isNaN(sessionDate.getTime())) {
       return {
@@ -82,18 +104,34 @@ export const handler: Handlers["AdminCreateSession"] = async (
       };
     }
 
-    // Create new session
+    // Create session using provided values or stored/default settings
     const sessionId = crypto.randomUUID();
     const newSession: Session = {
       id: sessionId,
       date,
-      startTime,
-      endTime,
-      capacity,
+      startTime: startTime || settings.startTime,
+      endTime: endTime || settings.endTime,
+      capacity: capacity || settings.capacity,
       status,
-      location: location || null,
+      location:
+        location !== undefined
+          ? (location as string | null)
+          : settings.location, // Allow explicit null
       createdAt: new Date().toISOString(),
     };
+
+    // Validate time logic
+    const [startHour, startMin] = newSession.startTime.split(":").map(Number);
+    const [endHour, endMin] = newSession.endTime.split(":").map(Number);
+    const startMinutes = startHour * 60 + startMin;
+    const endMinutes = endHour * 60 + endMin;
+
+    if (endMinutes <= startMinutes) {
+      return {
+        status: 400 as const,
+        body: { error: "End time must be after start time" },
+      };
+    }
 
     // Store the session
     await state.set("sessions", date, newSession);
@@ -105,10 +143,16 @@ export const handler: Handlers["AdminCreateSession"] = async (
     const updatedSessionsList = [...existingSessionsList, newSession];
     await state.set("sessions", "list", updatedSessionsList);
 
-    logger.info("Session created successfully", {
+    logger.info("Admin session created successfully", {
       sessionId,
-      date,
-      status,
+      session: newSession,
+      usedSettings: {
+        startTime: startTime || `${settings.startTime} (default)`,
+        endTime: endTime || `${settings.endTime} (default)`,
+        capacity: capacity || `${settings.capacity} (default)`,
+        location:
+          location !== undefined ? location : `${settings.location} (default)`,
+      },
       traceId,
     });
 
@@ -121,8 +165,6 @@ export const handler: Handlers["AdminCreateSession"] = async (
       error: error.message,
       traceId,
     });
-
-    // Authentication errors removed for now
 
     return {
       status: 500 as const,

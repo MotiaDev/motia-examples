@@ -12,6 +12,7 @@ export const config: CronConfig = {
   description:
     "Send SMS invites to all active friends for the next Tuesday session",
   cron: "0 15 * * MON", // Every Monday at 3:00 PM
+  // cron: "* * * * *",
   emits: ["sms.send", "invite.blast.failed"],
   flows: ["wake-surf-club"],
 };
@@ -33,6 +34,8 @@ export const handler: Handlers["SendInviteBlast"] = async ({
     // Get the next Tuesday session using utility
     const dateStr = calculateNextTuesdayDate();
     const session = (await state.get("sessions", dateStr)) as Session;
+    console.log("session", session);
+    console.log("dateStr", dateStr);
     if (!session) {
       logger.warn("No session found for next Tuesday", {
         date: dateStr,

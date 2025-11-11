@@ -8,6 +8,8 @@ import {
   Trash2,
   Send,
   Download,
+  X,
+  AlertTriangle,
 } from "lucide-react";
 import { format, parseISO, addDays } from "date-fns";
 import EnhancedCalendar from "./EnhancedCalendar";
@@ -26,6 +28,13 @@ interface Friend {
   createdAt: string;
 }
 
+interface SettingsConfig {
+  capacity: number;
+  startTime: string;
+  endTime: string;
+  location: string | null;
+}
+
 const AdminPanel: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"users" | "sessions" | "settings">(
     "sessions"
@@ -38,14 +47,32 @@ const AdminPanel: React.FC = () => {
     type: "success" | "error";
   } | null>(null);
 
+  // Settings state
+  const [settings, setSettings] = useState<SettingsConfig>({
+    capacity: 3,
+    startTime: "07:00",
+    endTime: "09:00",
+    location: null,
+  });
+
   // User management state
   const [showAddUser, setShowAddUser] = useState(false);
   const [editingUser, setEditingUser] = useState<Friend | null>(null);
   const [newUser, setNewUser] = useState({ name: "", phone: "" });
 
+  // Booking cancellation state
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [cancelingBooking, setCancelingBooking] = useState<{
+    id: string;
+    friendName: string;
+  } | null>(null);
+  const [cancelReason, setCancelReason] = useState("");
+  const [canceling, setCanceling] = useState(false);
+
   useEffect(() => {
     loadFriends();
     loadSessions();
+    loadSettings();
   }, []);
 
   const showToast = (message: string, type: "success" | "error") => {
@@ -55,6 +82,62 @@ const AdminPanel: React.FC = () => {
       console.log("Auto-hiding toast");
       setToast(null);
     }, 5000); // Auto-hide after 5 seconds
+  };
+
+  const loadSettings = async () => {
+    try {
+      // For now, we'll use the hardcoded defaults since we don't have a GET endpoint
+      // In the future, you could create a GET /admin/settings endpoint
+      setSettings({
+        capacity: 3,
+        startTime: "07:00",
+        endTime: "09:00",
+        location: null,
+      });
+    } catch (err) {
+      console.log("Failed to load settings, using defaults");
+    }
+  };
+
+  const handleSaveSettings = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      // Validate time logic on frontend
+      const [startHour, startMin] = settings.startTime.split(":").map(Number);
+      const [endHour, endMin] = settings.endTime.split(":").map(Number);
+      const startMinutes = startHour * 60 + startMin;
+      const endMinutes = endHour * 60 + endMin;
+
+      if (endMinutes <= startMinutes) {
+        showToast("End time must be after start time", "error");
+        return;
+      }
+
+      const response = await fetch("/admin/settings", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(settings),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        showToast(data.message || "Settings saved successfully!", "success");
+        // Update local state with response to ensure consistency
+        setSettings(data.settings);
+      } else {
+        const errorData = await response.json();
+        showToast(errorData.error || "Failed to save settings", "error");
+      }
+    } catch (err) {
+      showToast("Failed to save settings. Please try again.", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const loadFriends = async (retryCount = 0) => {
@@ -86,7 +169,7 @@ const AdminPanel: React.FC = () => {
 
   const loadSessions = async (retryCount = 0) => {
     try {
-      const sessionsInfo = await loadSessionsFromAPI();
+      const sessionsInfo = await loadSessionsFromAPI(true);
       setSessions(sessionsInfo);
     } catch (err) {
       console.log("Error loading sessions:", err);
@@ -130,19 +213,59 @@ const AdminPanel: React.FC = () => {
     }
   };
 
+  const handleUpdateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingUser) return;
+
+    try {
+      setLoading(true);
+
+      const response = await fetch(`/api/admin/friends/${editingUser.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: editingUser.name,
+          phone: editingUser.phoneE164,
+          active: editingUser.active,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        showToast(data.message || "Friend updated successfully", "success");
+        setEditingUser(null);
+        loadFriends();
+      } else {
+        const errorData = await response.json();
+        showToast(errorData.error || "Failed to update friend", "error");
+      }
+    } catch (err) {
+      showToast("Failed to update friend. Please try again.", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleDeleteUser = async (friendId: string) => {
     if (!confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const response = await fetch(`/admin/friends/${friendId}`, {
+      const response = await fetch(`/api/admin/friends/${friendId}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
-        loadFriends();
+        const data = await response.json();
+        showToast(data.message || "Friend deleted successfully", "success");
+        loadFriends(); // Refresh the list - removes from UI
+      } else {
+        const errorData = await response.json();
+        showToast(errorData.error || "Failed to delete friend", "error");
       }
     } catch (err) {
-      showToast("Failed to delete user", "error");
+      showToast("Failed to delete friend. Please try again.", "error");
     }
   };
 
@@ -219,15 +342,59 @@ const AdminPanel: React.FC = () => {
     }
   };
 
-  const handleBookingCancel = async (bookingId: string) => {
+  const handleBookingCancel = async (bookingId: string, friendName: string) => {
+    // Show the cancellation modal
+    setCancelingBooking({ id: bookingId, friendName });
+    setShowCancelModal(true);
+    setCancelReason("");
+  };
+
+  const confirmBookingCancellation = async () => {
+    if (!cancelingBooking) return;
+
     try {
-      // This would call an API to cancel the booking
-      alert(
-        `Canceling booking ${bookingId}. This would integrate with your booking cancellation API.`
+      setCanceling(true);
+
+      // Log booking details before API call
+      console.log("=== Canceling Booking ===");
+      console.log("Booking ID:", cancelingBooking.id);
+      console.log("Friend Name:", cancelingBooking.friendName);
+      console.log("Reason:", cancelReason);
+      console.log("API URL:", `/admin/booking/${cancelingBooking.id}/cancel`);
+      console.log("========================");
+
+      const response = await fetch(
+        `/admin/booking/${cancelingBooking.id}/cancel`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            reason: cancelReason || undefined,
+          }),
+        }
       );
-      loadSessions();
+
+      if (response.ok) {
+        const data = await response.json();
+        showToast(
+          data.message ||
+            "Booking canceled successfully. User notified via SMS.",
+          "success"
+        );
+        setShowCancelModal(false);
+        setCancelingBooking(null);
+        setCancelReason("");
+        loadSessions(); // Refresh to show updated bookings
+      } else {
+        const errorData = await response.json();
+        showToast(errorData.error || "Failed to cancel booking", "error");
+      }
     } catch (err) {
-      showToast("Failed to cancel booking", "error");
+      showToast("Failed to cancel booking. Please try again.", "error");
+    } finally {
+      setCanceling(false);
     }
   };
 
@@ -430,6 +597,107 @@ const AdminPanel: React.FC = () => {
               </div>
             )}
 
+            {/* Edit User Modal */}
+            {editingUser && (
+              <div className="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50">
+                <div className="p-6 w-full max-w-md bg-white rounded-lg">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-lg font-semibold">Edit Friend</h3>
+                    <button
+                      onClick={() => setEditingUser(null)}
+                      className="text-gray-400 hover:text-gray-600"
+                      aria-label="Close edit modal"
+                      title="Close"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <form onSubmit={handleUpdateUser}>
+                    <div className="space-y-4">
+                      <div>
+                        <label
+                          htmlFor="edit-name-input"
+                          className="block mb-1 text-sm font-medium text-gray-700"
+                        >
+                          Name
+                        </label>
+                        <input
+                          id="edit-name-input"
+                          type="text"
+                          value={editingUser.name}
+                          onChange={(e) =>
+                            setEditingUser({
+                              ...editingUser,
+                              name: e.target.value,
+                            })
+                          }
+                          className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="edit-phone-input"
+                          className="block mb-1 text-sm font-medium text-gray-700"
+                        >
+                          Phone Number
+                        </label>
+                        <input
+                          id="edit-phone-input"
+                          type="tel"
+                          value={editingUser.phoneE164}
+                          onChange={(e) =>
+                            setEditingUser({
+                              ...editingUser,
+                              phoneE164: e.target.value,
+                            })
+                          }
+                          className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          placeholder="+15551234567"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            checked={editingUser.active}
+                            onChange={(e) =>
+                              setEditingUser({
+                                ...editingUser,
+                                active: e.target.checked,
+                              })
+                            }
+                            className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-2 focus:ring-blue-500"
+                          />
+                          <span className="text-sm font-medium text-gray-700">
+                            Active (receives invites)
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <div className="flex justify-end mt-6 space-x-3">
+                      <button
+                        type="button"
+                        onClick={() => setEditingUser(null)}
+                        disabled={loading}
+                        className="px-4 py-2 text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {loading ? "Updating..." : "Update Friend"}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+
             {/* Friends List */}
             <div className="overflow-hidden bg-white rounded-lg shadow">
               <table className="min-w-full divide-y divide-gray-200">
@@ -582,59 +850,215 @@ const AdminPanel: React.FC = () => {
               <h3 className="mb-4 text-lg font-semibold">
                 Session Configuration
               </h3>
-              <div className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="session-capacity"
-                    className="block mb-1 text-sm font-medium text-gray-700"
+              <form onSubmit={handleSaveSettings}>
+                <div className="space-y-4">
+                  <div>
+                    <label
+                      htmlFor="session-capacity"
+                      className="block mb-1 text-sm font-medium text-gray-700"
+                    >
+                      Session Capacity
+                    </label>
+                    <input
+                      id="session-capacity"
+                      type="number"
+                      min="1"
+                      max="20"
+                      value={settings.capacity}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          capacity: parseInt(e.target.value),
+                        })
+                      }
+                      className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="session-start-time"
+                      className="block mb-1 text-sm font-medium text-gray-700"
+                    >
+                      Session Start Time
+                    </label>
+                    <input
+                      id="session-start-time"
+                      type="time"
+                      value={settings.startTime}
+                      onChange={(e) =>
+                        setSettings({ ...settings, startTime: e.target.value })
+                      }
+                      className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="session-end-time"
+                      className="block mb-1 text-sm font-medium text-gray-700"
+                    >
+                      Session End Time
+                    </label>
+                    <input
+                      id="session-end-time"
+                      type="time"
+                      value={settings.endTime}
+                      onChange={(e) =>
+                        setSettings({ ...settings, endTime: e.target.value })
+                      }
+                      className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="session-location"
+                      className="block mb-1 text-sm font-medium text-gray-700"
+                    >
+                      Default Location
+                    </label>
+                    <input
+                      id="session-location"
+                      type="text"
+                      value={settings.location || ""}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          location: e.target.value || null,
+                        })
+                      }
+                      placeholder="Lake location or address"
+                      className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
                   >
-                    Session Capacity
-                  </label>
-                  <input
-                    id="session-capacity"
-                    type="number"
-                    defaultValue="3"
-                    className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
+                    {loading ? "Saving..." : "Save Settings"}
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            {/* Current Settings Display */}
+            <div className="p-6 bg-gray-50 rounded-lg">
+              <h3 className="mb-4 text-lg font-semibold text-gray-900">
+                Current Configuration
+              </h3>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div>
+                  <p className="text-sm text-gray-600">Session Capacity</p>
+                  <p className="text-lg font-medium text-gray-900">
+                    {settings.capacity} people
+                  </p>
                 </div>
                 <div>
-                  <label
-                    htmlFor="session-time"
-                    className="block mb-1 text-sm font-medium text-gray-700"
-                  >
-                    Session Time
-                  </label>
-                  <input
-                    id="session-time"
-                    type="text"
-                    defaultValue="7:00 AM - 9:00 AM"
-                    className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
+                  <p className="text-sm text-gray-600">Session Time</p>
+                  <p className="text-lg font-medium text-gray-900">
+                    {settings.startTime} - {settings.endTime}
+                  </p>
                 </div>
-                <div>
-                  <label
-                    htmlFor="session-location"
-                    className="block mb-1 text-sm font-medium text-gray-700"
-                  >
-                    Location
-                  </label>
-                  <input
-                    id="session-location"
-                    type="text"
-                    placeholder="Lake location or address"
-                    className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
+                <div className="md:col-span-2">
+                  <p className="text-sm text-gray-600">Default Location</p>
+                  <p className="text-lg font-medium text-gray-900">
+                    {settings.location || "No default location set"}
+                  </p>
                 </div>
-              </div>
-              <div className="mt-6">
-                <button className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                  Save Settings
-                </button>
               </div>
             </div>
           </div>
         )}
       </div>
+
+      {/* Cancellation Modal */}
+      {showCancelModal && cancelingBooking && (
+        <div className="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50">
+          <div className="p-6 w-full max-w-md bg-white rounded-lg shadow-xl">
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">
+                Cancel Booking
+              </h3>
+              <button
+                onClick={() => {
+                  setShowCancelModal(false);
+                  setCancelingBooking(null);
+                  setCancelReason("");
+                }}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="mb-4">
+              <p className="text-sm text-gray-600">
+                Are you sure you want to cancel the booking for{" "}
+                <span className="font-semibold text-gray-900">
+                  {cancelingBooking.friendName}
+                </span>
+                ?
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="cancel-reason"
+                className="block mb-2 text-sm font-medium text-gray-700"
+              >
+                Reason (optional but recommended for records)
+              </label>
+              <textarea
+                id="cancel-reason"
+                value={cancelReason}
+                onChange={(e) => setCancelReason(e.target.value)}
+                rows={3}
+                className="px-3 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="e.g., Weather conditions, Equipment issue, Emergency..."
+              />
+            </div>
+
+            <div className="flex gap-3 items-start p-3 mb-4 bg-yellow-50 rounded-lg border border-yellow-200">
+              <AlertTriangle className="flex-shrink-0 mt-0.5 w-5 h-5 text-yellow-600" />
+              <div className="text-sm text-yellow-800">
+                <p className="mb-1 font-medium">This action will:</p>
+                <ul className="space-y-1 text-xs">
+                  <li>• Notify the user via SMS</li>
+                  <li>• Free up the spot</li>
+                  <li>• Promote waitlist if available</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCancelModal(false);
+                  setCancelingBooking(null);
+                  setCancelReason("");
+                }}
+                disabled={canceling}
+                className="px-4 py-2 text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmBookingCancellation}
+                disabled={canceling}
+                className="px-4 py-2 text-white bg-red-600 rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {canceling ? "Canceling..." : "Confirm Cancellation"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Toast Notification */}
       {toast && (

@@ -60,7 +60,7 @@ interface EnhancedCalendarProps {
   onSessionEdit?: (session: Session) => void;
   onSessionDelete?: (sessionId: string) => void;
   onBookingCreate?: (sessionId: string) => void;
-  onBookingCancel?: (bookingId: string) => void;
+  onBookingCancel?: (bookingId: string, friendName: string) => void;
   loading?: boolean;
 }
 
@@ -73,7 +73,7 @@ interface SessionModalProps {
   onBook?: (sessionId: string) => void;
   onEdit?: (session: Session) => void;
   onDelete?: (sessionId: string) => void;
-  onCancelBooking?: (bookingId: string) => void;
+  onCancelBooking?: (bookingId: string, friendName: string) => void;
   loading?: boolean;
 }
 
@@ -115,7 +115,7 @@ const SessionModal: React.FC<SessionModalProps> = ({
     <div className="flex fixed inset-0 z-50 justify-center items-center p-4 bg-black bg-opacity-50">
       <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Modal Header */}
-        <div className="px-6 py-6 text-white from-blue-600 to-blue-700 rounded-t-xl bg-linear-to-r">
+        <div className="px-6 py-6 text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-t-xl">
           <div className="flex justify-between items-center">
             <div>
               <h2 className="mb-2 text-2xl font-bold">Session Details</h2>
@@ -126,8 +126,6 @@ const SessionModal: React.FC<SessionModalProps> = ({
             <button
               onClick={onClose}
               className="p-2 rounded-lg transition-colors hover:bg-blue-600"
-              aria-label="Close modal"
-              title="Close modal"
             >
               <X className="w-6 h-6" />
             </button>
@@ -281,10 +279,9 @@ const SessionModal: React.FC<SessionModalProps> = ({
                       </span>
                       {mode === "admin" && booking.status === "confirmed" && (
                         <button
-                          onClick={() => onCancelBooking?.(booking.id)}
+                          onClick={() => onCancelBooking?.(booking.id, booking.friendName)}
                           className="text-red-600 hover:text-red-800"
-                          aria-label={`Cancel booking for ${booking.friendName}`}
-                          title={`Cancel booking for ${booking.friendName}`}
+                          title="Cancel booking"
                         >
                           <X className="w-4 h-4" />
                         </button>
@@ -442,17 +439,15 @@ const EnhancedCalendar: React.FC<EnhancedCalendarProps> = ({
     }
   };
 
-  const handleCancelBooking = async (bookingId: string) => {
-    if (confirm("Are you sure you want to cancel this booking?")) {
-      await onBookingCancel?.(bookingId);
-      // Refresh the session data after cancellation
-      if (selectedSession) {
-        const session = sessions.find(
-          (s) => s.session.id === selectedSession.id
-        );
-        if (session) {
-          setSelectedBookings(session.bookings || []);
-        }
+  const handleCancelBooking = async (bookingId: string, friendName: string) => {
+    await onBookingCancel?.(bookingId, friendName);
+    // Refresh the session data after cancellation
+    if (selectedSession) {
+      const session = sessions.find(
+        (s) => s.session.id === selectedSession.id
+      );
+      if (session) {
+        setSelectedBookings(session.bookings || []);
       }
     }
   };
@@ -470,8 +465,6 @@ const EnhancedCalendar: React.FC<EnhancedCalendarProps> = ({
               <button
                 onClick={prevMonth}
                 className="p-2 rounded-lg transition-colors hover:bg-gray-200"
-                aria-label="Previous month"
-                title="Previous month"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -484,8 +477,6 @@ const EnhancedCalendar: React.FC<EnhancedCalendarProps> = ({
               <button
                 onClick={nextMonth}
                 className="p-2 rounded-lg transition-colors hover:bg-gray-200"
-                aria-label="Next month"
-                title="Next month"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -519,31 +510,11 @@ const EnhancedCalendar: React.FC<EnhancedCalendarProps> = ({
               return (
                 <div
                   key={index}
-                  onClick={() => handleDayClick(day)}
                   className={`
-                    aspect-square p-2 border border-gray-200 rounded-lg transition-all relative cursor-pointer
-                    ${
-                      !isCurrentMonth
-                        ? "text-gray-400 bg-gray-50"
-                        : "bg-white hover:bg-gray-50"
-                    }
+                    aspect-square p-2 border border-gray-200 rounded-lg transition-all relative
+                    ${!isCurrentMonth ? "text-gray-400 bg-gray-50" : "bg-white"}
                     ${isCurrentDay ? "bg-blue-50 ring-2 ring-blue-500" : ""}
                     ${isPastDay ? "opacity-50" : ""}`}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`${format(day, "EEEE, MMMM d, yyyy")}${
-                    session
-                      ? ` - ${getStatusText(sessionStatus!)}`
-                      : mode === "admin"
-                      ? " - Click to create session"
-                      : ""
-                  }`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      handleDayClick(day);
-                    }
-                  }}
                 >
                   <div className="flex flex-col h-full">
                     {/* Day Number */}
@@ -561,7 +532,13 @@ const EnhancedCalendar: React.FC<EnhancedCalendarProps> = ({
 
                     {/* Session Indicator */}
                     {session && (
-                      <div className="flex flex-col flex-1 justify-center p-1 rounded">
+                      <div
+                        className="flex flex-col flex-1 justify-center p-1 rounded cursor-pointer hover:bg-gray-50"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDayClick(day);
+                        }}
+                      >
                         <div
                           className={`w-full h-2 rounded-full ${getStatusColor(
                             sessionStatus!
@@ -586,7 +563,13 @@ const EnhancedCalendar: React.FC<EnhancedCalendarProps> = ({
 
                     {/* Add Session Button for Admin */}
                     {mode === "admin" && !session && isCurrentMonth && (
-                      <div className="flex absolute inset-0 justify-center items-center opacity-0 transition-opacity hover:opacity-100">
+                      <div
+                        className="flex absolute inset-0 justify-center items-center opacity-0 transition-opacity cursor-pointer hover:opacity-100"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDayClick(day);
+                        }}
+                      >
                         <div className="p-1 text-white bg-blue-600 rounded-full">
                           <Plus className="w-3 h-3" />
                         </div>
@@ -653,8 +636,6 @@ const EnhancedCalendar: React.FC<EnhancedCalendarProps> = ({
               <button
                 onClick={handleCancelCreate}
                 className="text-gray-400 hover:text-gray-600"
-                aria-label="Close"
-                title="Close"
               >
                 <X className="w-5 h-5" />
               </button>

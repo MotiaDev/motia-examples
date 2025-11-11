@@ -94,7 +94,8 @@ export const handler: Handlers['CancelFromSignedLink'] = async (req, { emit, log
         sessionId,
         friendId: booking.friendId,
         phoneE164,
-        canceledAt: updatedBooking.canceledAt!
+        canceledAt: updatedBooking.canceledAt!,
+        canceledBy: 'user'
       }
     })
     

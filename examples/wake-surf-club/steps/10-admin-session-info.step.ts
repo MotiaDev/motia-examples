@@ -143,7 +143,12 @@ export const handler: Handlers["AdminSessionInfo"] = async (
     });
 
     // Calculate stats
-    const stats = calculateSessionStats(sessionBookings, session.capacity);
+    const activeBookings = sessionBookings.filter(
+      (b) => b.status !== "canceled"
+    );
+    console.log("activeBookings", activeBookings);
+    const stats = calculateSessionStats(activeBookings, session.capacity);
+    console.log("stats", stats);
 
     logger.info("Admin session info retrieved", {
       sessionId: session.id,

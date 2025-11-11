@@ -36,16 +36,34 @@ export const handler: Handlers["SeedNextTuesdaySession"] = async ({
       return;
     }
 
-    // Create new session
+    // Get stored settings or use hardcoded defaults
+    const settings: {
+      capacity: number;
+      startTime: string;
+      endTime: string;
+      location: string | null;
+    } = ((await state.get("settings", "defaults")) as {
+      capacity: number;
+      startTime: string;
+      endTime: string;
+      location: string | null;
+    }) || {
+      capacity: 3,
+      startTime: "07:00",
+      endTime: "09:00",
+      location: null,
+    };
+
+    // Create new session using stored/default settings
     const sessionId = crypto.randomUUID();
     const newSession: Session = {
       id: sessionId,
       date: nextTuesdayDate,
-      startTime: "07:00",
-      endTime: "09:00",
-      capacity: 3,
+      startTime: settings.startTime,
+      endTime: settings.endTime,
+      capacity: settings.capacity,
       status: "published",
-      location: null,
+      location: settings.location,
       createdAt: new Date().toISOString(),
     };
 
@@ -61,9 +79,10 @@ export const handler: Handlers["SeedNextTuesdaySession"] = async ({
     const updatedSessionsList = [...existingSessionsList, newSession];
     await state.set("sessions", "list", updatedSessionsList);
 
-    logger.info("Next Tuesday session created", {
+    logger.info("Next Tuesday session created with settings", {
       sessionId,
       date: nextTuesdayDate,
+      settings: settings,
       traceId,
     });
   } catch (error: any) {

@@ -6,18 +6,60 @@ import UserInterface from "./components/UserInterface";
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600">
-        <nav className="px-5 bg-white shadow-sm">
-          <div className="flex justify-between items-center mx-auto max-w-7xl h-16">
+      {/* <div className="min-h-screen bg-slate-100"> */}
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        }}
+      >
+        <nav
+          style={{
+            background: "white",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            padding: "0 20px",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              height: "64px",
+            }}
+          >
             <Link
               to="/"
-              className="text-xl font-bold text-gray-800 no-underline"
+              style={{
+                fontSize: "1.25rem",
+                fontWeight: "bold",
+                color: "#2d3748",
+                textDecoration: "none",
+              }}
             >
               Wake Surf Club
             </Link>
             <Link
               to="/admin"
-              className="px-4 py-2 text-sm font-medium text-gray-500 no-underline rounded-md transition-all duration-200 hover:text-gray-800 hover:bg-gray-100"
+              style={{
+                color: "#718096",
+                padding: "8px 16px",
+                borderRadius: "6px",
+                fontSize: "0.875rem",
+                fontWeight: "500",
+                textDecoration: "none",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#2d3748";
+                e.target.style.backgroundColor = "#f7fafc";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "#718096";
+                e.target.style.backgroundColor = "transparent";
+              }}
             >
               Admin
             </Link>

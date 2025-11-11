@@ -90,16 +90,16 @@
         "y": 1159
       },
       "steps/18-admin-create-session.step.ts": {
-        "x": -1287,
-        "y": 1247
+        "x": -1149,
+        "y": 1231
       },
       "steps/17-admin-friends-delete.step.ts": {
-        "x": -1253,
-        "y": 916
+        "x": -1140,
+        "y": 941
       },
       "steps/16-admin-friends-list.step.ts": {
-        "x": -1420,
-        "y": 1533
+        "x": -1128,
+        "y": 1502
       },
       "steps/15-handle-cancellation.step.ts": {
         "x": 180,
@@ -110,8 +110,8 @@
         "y": 386
       },
       "steps/13-public-session-info.step.ts": {
-        "x": -1043,
-        "y": 1649
+        "x": -1150,
+        "y": 1721
       },
       "steps/12-manual-invite-trigger.step.ts": {
         "x": 189,
@@ -151,8 +151,8 @@
         "y": 658
       },
       "steps/04-book-from-link.step.ts": {
-        "x": -730,
-        "y": 376
+        "x": -710,
+        "y": 368
       },
       "steps/03-seed-next-session.step.ts": {
         "x": 1350,
@@ -167,6 +167,10 @@
       "steps/01-send-sms.step.ts": {
         "x": 1350,
         "y": 115
+      },
+      "steps/20-admin-cancel-booking.step.ts": {
+        "x": 0,
+        "y": 1907
       }
     }
   }

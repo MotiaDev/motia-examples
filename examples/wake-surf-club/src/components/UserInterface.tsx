@@ -246,7 +246,7 @@ const UserInterface: React.FC = () => {
 
       {/* Toast Notification */}
       {toast && (
-        <div className="fixed top-4 right-4 transition-all duration-300 ease-in-out transform z-100">
+        <div className="fixed top-4 right-4 z-[100] transform transition-all duration-300 ease-in-out">
           <div
             className={`px-6 py-4 rounded-lg shadow-xl max-w-sm border-l-4 ${
               toast.type === "success"
