@@ -1,0 +1,10 @@
+{
+  "name": "plugin-aqi-dashboard",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.tsx",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
+
