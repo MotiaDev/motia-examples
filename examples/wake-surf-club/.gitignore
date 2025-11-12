@@ -1,0 +1,14 @@
+node_modules
+python_modules
+.venv
+venv
+.motia
+.mermaid
+dist
+*.pyc
+tasks/
+/tasks
+agents-context/
+.claude/
+.cursorrules/
+.cursorrules
