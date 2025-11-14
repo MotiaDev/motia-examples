@@ -1,0 +1,7 @@
+node_modules/
+.motia/
+types.d.ts
+dist/
+.DS_Store
+*.log
+

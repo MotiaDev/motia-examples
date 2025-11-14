@@ -1,0 +1,90 @@
+[
+  {
+    "id": "aqi-analysis",
+    "config": {
+      "steps/aqi-analysis/trends/analyze-trends.step.ts": {
+        "x": 747,
+        "y": 789
+      },
+      "steps/aqi-analysis/recommendations/send-analysis-email.step.ts": {
+        "x": 1207,
+        "y": 487
+      },
+      "steps/aqi-analysis/recommendations/generate-health-recommendations.step.ts": {
+        "x": 732,
+        "y": 354,
+        "sourceHandlePosition": "right"
+      },
+      "steps/aqi-analysis/historical/store-historical-data.step.ts": {
+        "x": 752,
+        "y": 191
+      },
+      "steps/aqi-analysis/fetch-data/fetch-aqi-data.step.ts": {
+        "x": -6,
+        "y": 381,
+        "sourceHandlePosition": "right"
+      },
+      "steps/aqi-analysis/analyze/get-analysis-result.step.ts": {
+        "x": -923,
+        "y": 377
+      },
+      "steps/aqi-analysis/analyze/analyze-aqi.step.ts": {
+        "x": -558,
+        "y": 369
+      },
+      "steps/aqi-analysis/alerts/subscribe-alert.step.ts": {
+        "x": -904,
+        "y": 573
+      },
+      "steps/aqi-analysis/alerts/send-alert-email.step.ts": {
+        "x": 178,
+        "y": 903
+      },
+      "steps/aqi-analysis/alerts/check-alerts-cron.step.ts": {
+        "x": -937,
+        "y": 861,
+        "sourceHandlePosition": "right"
+      },
+      "steps/aqi-analysis/alerts/check-alert.step.ts": {
+        "x": -362,
+        "y": 893,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      }
+    }
+  },
+  {
+    "id": "multi-agent-research",
+    "config": {
+      "steps/agents/process/execute-multi-agent.step.ts": {
+        "x": 350,
+        "y": 44
+      },
+      "steps/agents/multi-agent/research-workflow.step.ts": {
+        "x": -147,
+        "y": 131
+      },
+      "steps/agents/multi-agent/get-research-result.step.ts": {
+        "x": -127,
+        "y": -101
+      }
+    }
+  },
+  {
+    "id": "agent-chat",
+    "config": {
+      "steps/agents/process/process-agent.step.ts": {
+        "x": 608,
+        "y": -74
+      },
+      "steps/agents/chat/simple-chat.step.ts": {
+        "x": 145,
+        "y": -36
+      },
+      "steps/agents/chat/get-chat-result.step.ts": {
+        "x": -181,
+        "y": -26
+      }
+    }
+  }
+]

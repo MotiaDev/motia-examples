@@ -1,0 +1,33 @@
+import path from 'node:path'
+import { config, type MotiaPlugin, type MotiaPluginContext } from '@motiadev/core'
+
+const statesPlugin = require('@motiadev/plugin-states/plugin')
+const endpointPlugin = require('@motiadev/plugin-endpoint/plugin')
+const logsPlugin = require('@motiadev/plugin-logs/plugin')
+const observabilityPlugin = require('@motiadev/plugin-observability/plugin')
+
+function agentDashboardPlugin(motia: MotiaPluginContext): MotiaPlugin {
+  return {
+    dirname: path.join(__dirname, 'plugins/plugin-agent-dashboard'),
+    workbench: [
+      {
+        packageName: '~/plugins/plugin-agent-dashboard',
+        componentName: 'AgentDashboardUI',
+        label: 'Agent Dashboard',
+        labelIcon: 'brain',
+        position: 'top',
+      },
+    ],
+  }
+}
+
+export default config({
+  plugins: [
+    observabilityPlugin,
+    statesPlugin,
+    endpointPlugin,
+    logsPlugin,
+    agentDashboardPlugin,
+  ],
+})
+
