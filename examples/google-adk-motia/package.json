@@ -1,0 +1,35 @@
+{
+  "name": "flows-demo-app",
+  "version": "1.0.0",
+  "description": "Demo app to showcase Motia flows",
+  "private": true,
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules .motia"
+  },
+  "keywords": [
+    "motia",
+    "flows",
+    "demo"
+  ],
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@motiadev/core": "^0.9.0-beta.145",
+    "@motiadev/plugin-endpoint": "^0.9.0-beta.145",
+    "@motiadev/plugin-logs": "^0.9.0-beta.145",
+    "@motiadev/plugin-observability": "^0.9.0-beta.145",
+    "@motiadev/plugin-states": "^0.9.0-beta.145",
+    "dotenv": "^17.2.3",
+    "motia": "^0.9.0-beta.145",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.2.3",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.7.3"
+  }
+}
