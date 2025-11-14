@@ -249,7 +249,8 @@ export const config: ApiRouteConfig = {
 
 ```bash
 # Clone or download the project
-cd flows-demo-app
+git clone https://github.com/MotiaDev/motia-examples/
+cd examples/google-adk-motia
 
 # Install dependencies
 npm install
