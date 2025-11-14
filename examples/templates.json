@@ -1,5 +1,11 @@
 [
   {
+    "name": "ai-aqi-alert-system",
+    "description": "Comprehensive Air Quality Index analysis backend with real-time monitoring, AI health recommendations, and email alerts.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/ai-aqi-alert-system",
+    "tags": ["ai", "alerts", "health", "monitoring"]
+  },
+  {
     "name": "ai-content-moderation",
     "description": "Example project for AI-based content moderation using Motia.",
     "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/ai-content-moderation",
@@ -18,10 +24,28 @@
     "tags": ["ai", "health", "fitness"]
   },
   {
-    "name": "ai-hedgehfund",
+    "name": "ai-hedgefund",
     "description": "AI hedge fund analysis and portfolio optimization example.",
-    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/ai-hedgehfund",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/ai-hedgefund",
     "tags": ["ai", "finance", "trading"]
+  },
+  {
+    "name": "ai-morgage-alert-system",
+    "description": "Intelligent mortgage rate monitoring with AI analysis, vector search, and email alerts.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/ai-morgage-alert-system",
+    "tags": ["ai", "alerts", "finance", "mortgage"]
+  },
+  {
+    "name": "ai-room-renovate",
+    "description": "AI-powered home renovation planner with Gemini 2.5 Flash photorealistic rendering and natural language editing.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/ai-room-renovate",
+    "tags": ["ai", "design", "renovation", "gemini"]
+  },
+  {
+    "name": "airbnb-assistant",
+    "description": "AI-powered Airbnb guest assistant with RAG, Pinecone vector search, and Notion conversation history.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/airbnb-assistant",
+    "tags": ["ai", "assistant", "rag", "hospitality"]
   },
   {
     "name": "blog-to-tweet",
@@ -54,6 +78,12 @@
     "tags": ["ai", "nlp", "vision"]
   },
   {
+    "name": "currency-rate-monitor",
+    "description": "Currency Rate Monitor with RAG using OpenAI embeddings, Weaviate vector database, and Google Sheets logging.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/currency-rate-monitor",
+    "tags": ["ai", "rag", "currency", "monitoring"]
+  },
+  {
     "name": "email-marketing-automation",
     "description": "Automate personalized email marketing campaigns.",
     "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/email-marketing-automation",
@@ -72,6 +102,18 @@
     "tags": ["ai", "finance", "agent"]
   },
   {
+    "name": "git-stars-video",
+    "description": "Generate beautiful animated videos showcasing GitHub repository star history using Remotion.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/git-stars-video",
+    "tags": ["video", "github", "animation", "remotion"]
+  },
+  {
+    "name": "github-commit-jenkins",
+    "description": "Production-ready workflow for processing GitHub commits with AI-powered RAG analysis.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/github-commit-jenkins",
+    "tags": ["github", "ai", "rag", "automation"]
+  },
+  {
     "name": "github-integration-workflow",
     "description": "Automated GitHub integration and workflow management template.",
     "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/github-integration-workflow",
@@ -82,6 +124,12 @@
     "description": "Gmail automation and integration workflow example.",
     "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/gmail-workflow",
     "tags": ["gmail", "automation", "workflow"]
+  },
+  {
+    "name": "google-adk-motia",
+    "description": "Build production-grade AI agents with Google's Agent Development Kit and Gemini, simplified by Motia.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/google-adk-motia",
+    "tags": ["ai", "agent", "gemini", "google"]
   },
   {
     "name": "harvest-logbook-rag",
@@ -120,10 +168,16 @@
     "tags": ["performance", "parallel", "agents"]
   },
   {
-    "name": "motia-update-monitor",
-    "description": "Monitor and notify updates in Motia-powered applications.",
-    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/motia-update-monitor",
-    "tags": ["monitoring", "automation"]
+    "name": "motia-research-assistant",
+    "description": "Multi-agent research system with Mastra AI delivering comprehensive business reports in under 60 seconds.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/motia-research-assistant",
+    "tags": ["ai", "agent", "research", "mastra"]
+  },
+  {
+    "name": "motia-uptime-monitor",
+    "description": "Production-ready website monitoring system with Discord alerts and health reporting.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/motia-uptime-monitor",
+    "tags": ["monitoring", "automation", "alerts"]
   },
   {
     "name": "nvidia-docs-motia",
@@ -138,16 +192,28 @@
     "tags": ["ai", "ollama", "chat"]
   },
   {
-    "name": "rag-docking-chromadb-ollama-agent",
-    "description": "RAG docking example using ChromaDB and Ollama agent integration.",
-    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/rag-docking-chromadb-ollama-agent",
-    "tags": ["rag", "ai", "ollama", "chromadb"]
+    "name": "property-search-agent",
+    "description": "High-performance real estate search system with parallel processing, AI analysis, and interactive dashboard.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/property-search-agent",
+    "tags": ["ai", "agent", "realestate", "parallel"]
   },
   {
-    "name": "rag-docking-weaviate-agent",
-    "description": "RAG docking example with Weaviate vector database integration.",
-    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/rag-docking-weaviate-agent",
-    "tags": ["rag", "ai", "weaviate"]
+    "name": "public-form-auto-triage",
+    "description": "Intelligent form triage using RAG with vector similarity search and LLM processing.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/public-form-auto-triage",
+    "tags": ["ai", "rag", "forms", "automation"]
+  },
+  {
+    "name": "rag-dockling-chromadb-ollama-agent",
+    "description": "Multi-format document RAG agent using ChromaDB, Docling, and Ollama integration.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/rag-dockling-chromadb-ollama-agent",
+    "tags": ["rag", "ai", "ollama", "chromadb", "docling"]
+  },
+  {
+    "name": "rag-docling-weaviate-agent",
+    "description": "PDF RAG agent with Docling for parsing and Weaviate vector database integration.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/rag-docling-weaviate-agent",
+    "tags": ["rag", "ai", "weaviate", "docling"]
   },
   {
     "name": "realtime-todo-app",
@@ -166,6 +232,12 @@
     "description": "Perform sentiment analysis on text using Motia agents.",
     "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/sentimental-analysis",
     "tags": ["nlp", "ai", "analysis"]
+  },
+  {
+    "name": "smarttravel-multi-agent",
+    "description": "Intelligent travel planning system powered by 6 specialized AI agents with React frontend.",
+    "repo": "https://github.com/MotiaDev/motia-examples/tree/main/examples/smarttravel-multi-agent",
+    "tags": ["ai", "agent", "travel", "multi-agent"]
   },
   {
     "name": "Spamurai-pr-agent",
