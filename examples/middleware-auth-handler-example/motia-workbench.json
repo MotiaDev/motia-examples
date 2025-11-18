@@ -1,0 +1,78 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/petstore/state-audit-cron.step.ts": {
+        "x": -165,
+        "y": 217,
+        "sourceHandlePosition": "right"
+      },
+      "steps/petstore/process-food-order.step.ts": {
+        "x": 211,
+        "y": 17,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "left"
+      },
+      "steps/petstore/api.step.ts": {
+        "x": -100,
+        "y": 3,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/petstore/notification.step.ts": {
+        "x": 300,
+        "y": 264
+      }
+    }
+  },
+  {
+    "id": "youtube-niche-analysis",
+    "config": {
+      "steps/fetch-videos/fetch-videos.step.ts": {
+        "x": 350,
+        "y": 34
+      },
+      "steps/fetch-niche/fetch-niche.step.ts": {
+        "x": 759,
+        "y": 45
+      },
+      "steps/create-job/create-job.step.ts": {
+        "x": -61,
+        "y": 1
+      }
+    }
+  },
+  {
+    "id": "jwt-auth-example",
+    "config": {
+      "steps/events/process-order.step.ts": {
+        "x": -282,
+        "y": 697
+      },
+      "steps/api/update-user.step.ts": {
+        "x": -1269,
+        "y": 645
+      },
+      "steps/api/public-content.step.ts": {
+        "x": -874,
+        "y": 647
+      },
+      "steps/api/profile.step.ts": {
+        "x": -1276,
+        "y": 881
+      },
+      "steps/api/generate-token.step.ts": {
+        "x": -1673,
+        "y": 879
+      },
+      "steps/api/create-order.step.ts": {
+        "x": -878,
+        "y": 884
+      },
+      "steps/api/admin-dashboard.step.ts": {
+        "x": -1661,
+        "y": 637
+      }
+    }
+  }
+]
