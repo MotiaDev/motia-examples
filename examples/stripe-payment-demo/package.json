@@ -1,0 +1,29 @@
+{
+  "name": "motia-payment-integration-demo",
+  "description": "A complete Stripe payment integration demo built with Motia - showcasing API steps, event processing, and webhooks",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@motiadev/core": "latest",
+    "@motiadev/plugin-endpoint": "latest",
+    "@motiadev/plugin-logs": "latest",
+    "@motiadev/plugin-observability": "latest",
+    "@motiadev/plugin-states": "latest",
+    "motia": "latest",
+    "stripe": "^17.5.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
