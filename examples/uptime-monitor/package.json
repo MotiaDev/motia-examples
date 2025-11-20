@@ -1,0 +1,25 @@
+{
+  "name": "uptime-monitor",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "dev:debug": "motia dev --verbose",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "mongodb": "^6.18.0",
+    "motia": "^0.5.2-beta.103",
+    "zod": "^3.25.72"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.23",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
