@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Checkout - Stripe Payment Simulation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
+  <div class="container mx-auto px-4 py-16 max-w-2xl">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="text-6xl mb-4">💳</div>
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">
+        Demo Stripe Checkout
+      </h1>
+      <p class="text-gray-600">
+        This is a simulated Stripe Checkout page for testing
+      </p>
+    </div>
+
+    <!-- Checkout Card -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
+      <!-- Product Info -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Premium Plan</h2>
+        <div class="flex items-baseline gap-2 mb-6">
+          <span class="text-5xl font-bold text-blue-600">$29</span>
+          <span class="text-gray-600 text-xl">.99</span>
+        </div>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <p class="text-sm text-blue-900">
+            ℹ️ <strong>Demo Mode:</strong> This is a simulated checkout. To test with real Stripe:
+          </p>
+          <ol class="text-sm text-blue-800 mt-2 ml-4 list-decimal">
+            <li>Add your Stripe keys to <code class="bg-blue-100 px-1 rounded">.env</code></li>
+            <li>Uncomment the Stripe code in <code class="bg-blue-100 px-1 rounded">create-checkout-session.step.ts</code></li>
+            <li>Install: <code class="bg-blue-100 px-1 rounded">npm install stripe</code></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Simulated Form -->
+      <form id="checkout-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Email
+          </label>
+          <input 
+            type="email" 
+            id="email"
+            required
+            placeholder="customer@example.com"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Card Number (Demo)
+          </label>
+          <input 
+            type="text" 
+            id="card-number"
+            placeholder="4242 4242 4242 4242"
+            value="4242 4242 4242 4242"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+            readonly
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              Expiry (Demo)
+            </label>
+            <input 
+              type="text" 
+              placeholder="12/25"
+              value="12/25"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+              readonly
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              CVC (Demo)
+            </label>
+            <input 
+              type="text" 
+              placeholder="123"
+              value="123"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+              readonly
+            />
+          </div>
+        </div>
+
+        <button 
+          type="submit"
+          id="submit-btn"
+          class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 rounded-xl transition-all transform hover:scale-105 shadow-lg"
+        >
+          Pay $29.99
+        </button>
+
+        <button 
+          type="button"
+          id="cancel-btn"
+          class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-xl transition-all"
+        >
+          Cancel
+        </button>
+      </form>
+
+      <!-- Powered by -->
+      <div class="mt-6 text-center">
+        <p class="text-sm text-gray-500">
+          Powered by <span class="font-semibold text-blue-600">Motia</span> + <span class="font-semibold text-purple-600">Stripe</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Info Box -->
+    <div class="mt-8 bg-white rounded-xl p-6 border border-gray-200">
+      <h3 class="font-semibold text-gray-900 mb-3">🧪 Testing Instructions</h3>
+      <div class="space-y-2 text-sm text-gray-700">
+        <p><strong>For Demo Mode (Current):</strong></p>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>Click "Pay" to simulate successful payment</li>
+          <li>Check Motia Workbench for event flow</li>
+          <li>View Payment Dashboard for stats</li>
+        </ul>
+        
+        <p class="mt-4"><strong>For Real Stripe Testing:</strong></p>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>Get test keys from <a href="https://dashboard.stripe.com/test/apikeys" target="_blank" class="text-blue-600 hover:underline">Stripe Dashboard</a></li>
+          <li>Add to <code class="bg-gray-100 px-1 rounded">.env</code>: <code class="bg-gray-100 px-1 rounded">STRIPE_SECRET_KEY=sk_test_...</code></li>
+          <li>Use test card: <code class="bg-gray-100 px-1 rounded">4242 4242 4242 4242</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session');
+
+    document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submit-btn');
+      const email = document.getElementById('email').value;
+      
+      if (!email) {
+        alert('Please enter your email');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Processing...';
+
+      // Simulate payment processing
+      setTimeout(() => {
+        // Redirect to success page
+        window.location.href = `/success?session_id=${sessionId}&email=${encodeURIComponent(email)}`;
+      }, 1500);
+    });
+
+    document.getElementById('cancel-btn').addEventListener('click', () => {
+      window.location.href = '/cancel';
+    });
+  </script>
+</body>
+</html>
+
