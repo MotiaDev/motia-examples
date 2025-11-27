@@ -145,8 +145,8 @@ Room-Renovate/
 ### 1. Install
 
 ```bash
-git clone <your-repo>
-cd Room-Renovate
+git clone https://github.com/MotiaDev/motia-examples
+cd github-notion-sync
 npm install
 ```
 
