@@ -1,0 +1,36 @@
+{
+  "name": "GitHub-Notion-Sync",
+  "version": "1.0.0",
+  "description": "GitHub to Notion Integration - A Motia workflow that syncs GitHub issues to a Notion database, automatically creating, updating, and archiving pages based on issue events",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@motiadev/core": "^0.13.0-beta.161",
+    "@motiadev/plugin-endpoint": "^0.13.0-beta.161",
+    "@motiadev/plugin-logs": "^0.13.0-beta.161",
+    "@motiadev/plugin-observability": "^0.13.0-beta.161",
+    "@motiadev/plugin-states": "^0.13.0-beta.161",
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^17.2.3",
+    "motia": "^0.13.0-beta.161",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^19.1.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.7.3"
+  }
+}
