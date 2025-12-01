@@ -4,7 +4,7 @@
 
 A real-time AI-versus-AI Tic Tac Toe tournament system built with Motia. Watch top AI models from Anthropic, Google, and OpenAI compete in strategic battles!
 
-![AI Arena](dist/ai-arerna.png)
+![AI Arena](public/ai-arerna.png)
 
 ## 🏆 Tournament Format
 
@@ -23,16 +23,16 @@ A real-time AI-versus-AI Tic Tac Toe tournament system built with Motia. Watch t
 ## 📸 Screenshots
 
 ### Tournament Start
-![Tournament Start](dist/tournament-start.png)
+![Tournament Start](public/tournament-start.png)
 
 ### Victory Screen
-![Victory](dist/vivtory.png)
+![Victory](public/vivtory.png)
 
 ### Tournament Complete
-![Tournament Done](dist/tournament-done.png)
+![Tournament Done](public/tournament-done.png)
 
 ### Motia Workbench
-![Workbench](dist/workbench.png)
+![Workbench](public/workbench.png)
 
 ## 🚀 Quick Start
 
