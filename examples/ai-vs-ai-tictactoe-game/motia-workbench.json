@@ -1,0 +1,82 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "steps/hello/process_greeting_step.py": {
+        "x": 409,
+        "y": 44
+      },
+      "steps/hello/hello_api_step.py": {
+        "x": -46,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "tictactoe-game",
+    "config": {
+      "steps/tictactoe/api/get-game.step.ts": {
+        "x": 6,
+        "y": 0
+      },
+      "steps/tictactoe/api/create-game.step.ts": {
+        "x": 0,
+        "y": 204
+      }
+    }
+  },
+  {
+    "id": "tictactoe-ui",
+    "config": {
+      "steps/tictactoe/ui/serve-js.step.ts": {
+        "x": 3,
+        "y": 0
+      },
+      "steps/tictactoe/ui/serve-html.step.ts": {
+        "x": 0,
+        "y": 204
+      },
+      "steps/tictactoe/ui/serve-css.step.ts": {
+        "x": 23,
+        "y": 408
+      }
+    }
+  },
+  {
+    "id": "tictactoe-tournament",
+    "config": {
+      "steps/tictactoe/events/tournament-match-start.step.ts": {
+        "x": -326,
+        "y": 622,
+        "targetHandlePosition": "top"
+      },
+      "steps/tictactoe/events/tournament-match-completed.step.ts": {
+        "x": 171,
+        "y": 279,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/tictactoe/events/tournament-completed.step.ts": {
+        "x": 590,
+        "y": 455
+      },
+      "steps/tictactoe/api/start-tournament.step.ts": {
+        "x": -344,
+        "y": 245,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/tictactoe/api/list-models.step.ts": {
+        "x": -1245,
+        "y": 187
+      },
+      "steps/tictactoe/api/get-tournament.step.ts": {
+        "x": -1294,
+        "y": 413
+      },
+      "steps/tictactoe/api/create-tournament.step.ts": {
+        "x": -873,
+        "y": 180
+      }
+    }
+  }
+]
