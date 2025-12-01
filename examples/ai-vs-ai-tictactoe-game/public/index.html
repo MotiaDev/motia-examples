@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tic Tac Toe Tournament</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/game/styles.css?v=3">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚔️</span>
+        <h1>AI Arena</h1>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="game">Single Game</button>
+        <button class="nav-btn" data-view="tournament">Tournament</button>
+        <button class="nav-btn" data-view="models">Models</button>
+      </nav>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Connected</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Single Game View -->
+      <section id="game-view" class="view active">
+        <div class="game-container">
+          <!-- Game Setup Panel -->
+          <div class="panel setup-panel" id="game-setup">
+            <h2 class="panel-title">
+              <span class="title-icon">🎮</span>
+              New Battle
+            </h2>
+            
+            <div class="team-selector">
+              <div class="team-card team-x">
+                <div class="team-header">
+                  <span class="player-mark x">X</span>
+                  <span class="team-label">Player X</span>
+                </div>
+                <select id="player-x-model" class="model-select">
+                  <option value="">Loading models...</option>
+                </select>
+                <div class="model-info" id="player-x-info"></div>
+              </div>
+
+              <div class="vs-badge">
+                <span>VS</span>
+              </div>
+
+              <div class="team-card team-o">
+                <div class="team-header">
+                  <span class="player-mark o">O</span>
+                  <span class="team-label">Player O</span>
+                </div>
+                <select id="player-o-model" class="model-select">
+                  <option value="">Loading models...</option>
+                </select>
+                <div class="model-info" id="player-o-info"></div>
+              </div>
+            </div>
+
+            <button id="start-game-btn" class="action-btn primary">
+              <span class="btn-icon">⚡</span>
+              Start Battle
+            </button>
+          </div>
+
+          <!-- Game Board -->
+          <div class="panel board-panel" id="game-board-panel" style="display: none;">
+            <div class="game-header">
+              <div class="player-info player-x-info">
+                <span class="player-mark x">X</span>
+                <span class="player-name" id="game-player-x">Claude</span>
+              </div>
+              <div class="game-status" id="game-status">
+                <span class="turn-indicator">X's Turn</span>
+              </div>
+              <div class="player-info player-o-info">
+                <span class="player-name" id="game-player-o">GPT</span>
+                <span class="player-mark o">O</span>
+              </div>
+            </div>
+
+            <div class="board-container">
+              <div class="board" id="game-board">
+                <div class="cell" data-row="0" data-col="0"></div>
+                <div class="cell" data-row="0" data-col="1"></div>
+                <div class="cell" data-row="0" data-col="2"></div>
+                <div class="cell" data-row="1" data-col="0"></div>
+                <div class="cell" data-row="1" data-col="1"></div>
+                <div class="cell" data-row="1" data-col="2"></div>
+                <div class="cell" data-row="2" data-col="0"></div>
+                <div class="cell" data-row="2" data-col="1"></div>
+                <div class="cell" data-row="2" data-col="2"></div>
+              </div>
+              <div class="thinking-overlay" id="thinking-overlay">
+                <div class="thinking-animation">
+                  <div class="thinking-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <p id="thinking-model">AI is thinking...</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="game-footer">
+              <div class="move-log" id="move-log">
+                <h4>Move History</h4>
+                <ul id="move-list"></ul>
+              </div>
+              <div class="game-stats">
+                <div class="stat">
+                  <span class="stat-label">Moves</span>
+                  <span class="stat-value" id="move-count">0</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-label">X Time</span>
+                  <span class="stat-value" id="x-time">0ms</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-label">O Time</span>
+                  <span class="stat-value" id="o-time">0ms</span>
+                </div>
+              </div>
+            </div>
+
+            <button id="new-game-btn" class="action-btn secondary">
+              <span class="btn-icon">🔄</span>
+              New Game
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tournament View -->
+      <section id="tournament-view" class="view">
+        <div class="tournament-container">
+          <!-- Tournament Setup -->
+          <div class="panel" id="tournament-setup">
+            <h2 class="panel-title">
+              <span class="title-icon">🏆</span>
+              Create Tournament
+            </h2>
+            
+            <div class="tournament-form">
+              <input type="text" id="tournament-name" class="text-input" placeholder="Tournament Name" value="AI Championship 2025">
+              
+              <div class="teams-preview">
+                <div class="team-preview anthropic">
+                  <div class="team-icon">🟣</div>
+                  <div class="team-info">
+                    <h4>Team Claude</h4>
+                    <p>Anthropic AI</p>
+                  </div>
+                </div>
+                <div class="team-preview google">
+                  <div class="team-icon">🔵</div>
+                  <div class="team-info">
+                    <h4>Team Gemini</h4>
+                    <p>Google AI</p>
+                  </div>
+                </div>
+                <div class="team-preview openai">
+                  <div class="team-icon">🟢</div>
+                  <div class="team-info">
+                    <h4>Team OpenAI</h4>
+                    <p>OpenAI</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tournament-info-box">
+                <p>📊 15 matches • 2v2 format • Round Robin + Championship</p>
+              </div>
+
+              <button id="create-tournament-btn" class="action-btn primary">
+                <span class="btn-icon">🚀</span>
+                Create Tournament
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Tournament -->
+          <div class="panel" id="tournament-active" style="display: none;">
+            <div class="tournament-header">
+              <h2 id="tournament-title">AI Championship 2025</h2>
+              <div class="tournament-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" id="tournament-progress-fill"></div>
+                </div>
+                <span id="tournament-progress-text">0/15 matches</span>
+              </div>
+            </div>
+
+            <div class="standings-container">
+              <h3>🏅 Standings</h3>
+              <div class="standings-table" id="standings-table">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <div class="current-match" id="current-match">
+              <h3>⚡ Current Match</h3>
+              <div class="match-display">
+                <span class="match-player" id="match-player-x">-</span>
+                <span class="match-vs">VS</span>
+                <span class="match-player" id="match-player-o">-</span>
+              </div>
+            </div>
+
+            <div class="tournament-controls">
+              <button id="start-tournament-btn" class="action-btn primary">
+                <span class="btn-icon">▶️</span>
+                Start Tournament
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Models View -->
+      <section id="models-view" class="view">
+        <div class="models-container">
+          <h2 class="panel-title">
+            <span class="title-icon">🤖</span>
+            AI Models
+          </h2>
+          
+          <div class="models-grid" id="models-grid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Winner Modal -->
+    <div class="modal" id="winner-modal">
+      <div class="modal-content">
+        <div class="winner-animation" id="winner-animation">
+          <div class="confetti"></div>
+        </div>
+        <h2 id="winner-title">🎉 Winner!</h2>
+        <p id="winner-message">Claude wins the game!</p>
+        <button class="action-btn primary" id="close-modal-btn">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+  </div>
+
+  <script src="/game/app.js"></script>
+</body>
+</html>
+
