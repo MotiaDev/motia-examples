@@ -31,11 +31,11 @@ export const config: EventConfig = {
   description: '☠️ Dead Letter Queue Handler - Captures permanently failed messages after all retries exhausted. In production, this would trigger alerts (Slack/PagerDuty) and store failures for manual review and recovery.',
   flows: ['queue-tests'],
   subscribes: ['queue-test.dlq'],
-  emits: [],
+  emits: ['queue-test.dlq.processed'], // Emit to next step for automated processing
   input: inputSchema,
 }
 
-export const handler: Handlers['DeadLetterQueueHandler'] = async (input, { traceId, logger, state }) => {
+export const handler: Handlers['DeadLetterQueueHandler'] = async (input, { traceId, logger, state, emit }) => {
   logger.error('☠️ ═══════════════════════════════════════════════════════════════', {})
   logger.error('☠️ MESSAGE ARRIVED IN DEAD LETTER QUEUE', {
     originalTopic: input.originalTopic,
@@ -94,6 +94,15 @@ export const handler: Handlers['DeadLetterQueueHandler'] = async (input, { trace
     entryId: dlqEntry.id,
     canRetry: input.canRetry,
     recoveryEndpoint: 'POST /queue-tests/dlq/retry/:id',
+  })
+
+  // Emit to listener for automated processing
+  await emit({
+    topic: 'queue-test.dlq.processed',
+    data: {
+      ...input,
+      dlqEntryId: dlqEntry.id,
+    },
   })
 }
 

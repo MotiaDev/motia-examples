@@ -283,23 +283,27 @@ sleep 2
 
 print_header "🔍 STEP 8: DLQ Listener - Automated DLQ Processing"
 
-echo "The DLQ Listener automatically processes failed messages from the DLQ."
+echo "The DLQ Listener automatically processes failed messages after they've been"
+echo "stored by the DLQ Handler. This creates a sequential processing pipeline."
 echo ""
-echo -e "${CYAN}What it does:${NC}"
+echo -e "${CYAN}The flow:${NC}"
+echo "  error-queue → queue-test.dlq → dlq-handler → queue-test.dlq.processed → dlq-listener"
+echo ""
+echo -e "${CYAN}What the listener does:${NC}"
 echo "  • Analyzes failure patterns (transient vs permanent)"
 echo "  • Automatically retries transient failures"
 echo "  • Flags permanent failures for manual review"
 echo "  • Routes messages based on failure type"
 echo ""
 echo -e "${YELLOW}Why this matters:${NC}"
+echo "  • Sequential processing ensures proper order"
+echo "  • Handler stores first, listener processes second"
 echo "  • Reduces manual intervention for recoverable failures"
 echo "  • Intelligent failure classification"
-echo "  • Automated recovery for transient issues"
-echo "  • Escalation for permanent failures"
 echo ""
 
-print_info "The DLQ Listener processes messages from 'queue-test.dlq' topic"
-print_info "Watch Workbench to see it analyze and route failed messages!"
+print_info "The DLQ Listener subscribes to 'queue-test.dlq.processed' (from dlq-handler)"
+print_info "Watch Workbench to see the sequential flow: handler → listener!"
 sleep 2
 
 # ═══════════════════════════════════════════════════════════════════════════════

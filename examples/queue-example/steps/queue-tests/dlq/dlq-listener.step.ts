@@ -13,7 +13,7 @@ import { z } from 'zod'
  * 5. Archive old DLQ entries
  */
 
-const inputSchema = z.object({
+const listenerInputSchema = z.object({
   originalTopic: z.string(),
   originalData: z.any(),
   traceId: z.string(),
@@ -22,6 +22,7 @@ const inputSchema = z.object({
   failedAt: z.string(),
   canRetry: z.boolean().optional().default(true),
   errorStack: z.string().optional(),
+  dlqEntryId: z.string(), // Added by dlq-handler
 })
 
 export const config: EventConfig = {
@@ -29,7 +30,7 @@ export const config: EventConfig = {
   name: 'DeadLetterQueueListener',
   description: '🔍 DLQ Listener - Automatically processes messages from Dead Letter Queue. Can perform automated recovery, routing, or alerting based on failure patterns.',
   flows: ['queue-tests'],
-  subscribes: ['queue-test.dlq'],
+  subscribes: ['queue-test.dlq.processed'], // Subscribe to processed DLQ entries from handler
   emits: [
     'queue-test.simple',
     'queue-test.chain-start',
@@ -38,7 +39,7 @@ export const config: EventConfig = {
     'queue-test.state',
     'queue-test.error',
   ],
-  input: inputSchema,
+  input: listenerInputSchema,
 }
 
 export const handler: Handlers['DeadLetterQueueListener'] = async (input, { traceId, logger, state, emit }) => {
@@ -66,9 +67,11 @@ export const handler: Handlers['DeadLetterQueueListener'] = async (input, { trac
     analysis: failureAnalysis,
   })
 
-  // Store DLQ entry for tracking
-  const dlqEntryId = `dlq-${input.traceId}-${Date.now()}`
-  await state.set('queue-test-dlq', dlqEntryId, {
+  // Use the DLQ entry ID from handler (already stored)
+  const dlqEntryId = input.dlqEntryId || `dlq-${input.traceId}-${Date.now()}`
+  
+  // Base entry data to preserve across all status updates
+  const baseEntryData = {
     id: dlqEntryId,
     originalTopic: input.originalTopic,
     originalData: input.originalData,
@@ -78,10 +81,9 @@ export const handler: Handlers['DeadLetterQueueListener'] = async (input, { trac
     failedAt: input.failedAt,
     arrivedInDlqAt: new Date().toISOString(),
     canRetry: input.canRetry,
-    status: 'processing',
     processedByListener: true,
     failureAnalysis,
-  })
+  }
 
   // Decision logic for automated handling
   if (failureAnalysis.isRecoverable && failureAnalysis.isTransient) {
@@ -94,8 +96,9 @@ export const handler: Handlers['DeadLetterQueueListener'] = async (input, { trac
     const retryDelay = Math.min(1000 * Math.pow(2, input.attemptCount), 30000)
     logger.info(`⏳ Waiting ${retryDelay}ms before automated retry`, { traceId: input.traceId })
 
-    // Update status
+    // Update status - preserve all base data
     await state.set('queue-test-dlq', dlqEntryId, {
+      ...baseEntryData,
       status: 'auto-retrying',
       retryScheduledAt: new Date(Date.now() + retryDelay).toISOString(),
     })
@@ -137,7 +140,9 @@ export const handler: Handlers['DeadLetterQueueListener'] = async (input, { trac
       failureReason: input.failureReason,
     })
 
+    // Update status - preserve all base data
     await state.set('queue-test-dlq', dlqEntryId, {
+      ...baseEntryData,
       status: 'requires-manual-review',
       requiresManualIntervention: true,
       reason: 'Permanent failure detected',
@@ -157,7 +162,7 @@ export const handler: Handlers['DeadLetterQueueListener'] = async (input, { trac
     return
   }
 
-  // Default: Mark for review
+  // Default: Mark for review - preserve all base data
   logger.info('📋 DLQ entry marked for review', {
     traceId: input.traceId,
     dlqEntryId,
@@ -165,6 +170,7 @@ export const handler: Handlers['DeadLetterQueueListener'] = async (input, { trac
   })
 
   await state.set('queue-test-dlq', dlqEntryId, {
+    ...baseEntryData,
     status: 'pending-review',
     reviewedAt: null,
   })
