@@ -1,0 +1,19 @@
+[
+  {
+    "id": "gmail-telegram-flow",
+    "config": {
+      "steps/gmail-telegram/poll-gmail.step.ts": {
+        "x": -114,
+        "y": -4
+      },
+      "steps/gmail-telegram/analyze-email.step.ts": {
+        "x": 284,
+        "y": 29
+      },
+      "steps/gmail-telegram/send-telegram.step.ts": {
+        "x": 975,
+        "y": 32
+      }
+    }
+  }
+]
