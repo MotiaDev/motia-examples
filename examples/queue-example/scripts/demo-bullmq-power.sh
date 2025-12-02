@@ -71,7 +71,8 @@ echo "  2. 🔗 Event Chaining - Multi-step workflow processing"
 echo "  3. 🔀 Parallel Processing - Concurrent job execution"
 echo "  4. 🔄 Retry Mechanisms - Automatic failure recovery"
 echo "  5. ☠️  Dead Letter Queue - Handling unrecoverable failures"
-echo "  6. 🏥 DLQ Recovery - Manual intervention and retry"
+echo "  6. 🔍 DLQ Listener - Automated DLQ processing and recovery"
+echo "  7. 🏥 DLQ Recovery - Manual intervention and retry"
 echo ""
 echo -e "${PURPLE}Why this matters for production:${NC}"
 echo "  • Prototypes don't handle failures - production must"
@@ -277,10 +278,35 @@ echo "        • Whether it can be retried"
 sleep 2
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# STEP 8: DLQ Recovery
+# STEP 8: DLQ Listener - Automated Processing
 # ═══════════════════════════════════════════════════════════════════════════════
 
-print_header "🏥 STEP 8: DLQ Recovery - Manual Intervention"
+print_header "🔍 STEP 8: DLQ Listener - Automated DLQ Processing"
+
+echo "The DLQ Listener automatically processes failed messages from the DLQ."
+echo ""
+echo -e "${CYAN}What it does:${NC}"
+echo "  • Analyzes failure patterns (transient vs permanent)"
+echo "  • Automatically retries transient failures"
+echo "  • Flags permanent failures for manual review"
+echo "  • Routes messages based on failure type"
+echo ""
+echo -e "${YELLOW}Why this matters:${NC}"
+echo "  • Reduces manual intervention for recoverable failures"
+echo "  • Intelligent failure classification"
+echo "  • Automated recovery for transient issues"
+echo "  • Escalation for permanent failures"
+echo ""
+
+print_info "The DLQ Listener processes messages from 'queue-test.dlq' topic"
+print_info "Watch Workbench to see it analyze and route failed messages!"
+sleep 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# STEP 9: DLQ Recovery
+# ═══════════════════════════════════════════════════════════════════════════════
+
+print_header "🏥 STEP 9: DLQ Recovery - Manual Intervention"
 
 echo "After fixing the root cause, you can retry DLQ entries."
 echo ""
@@ -302,10 +328,10 @@ print_info "Use DELETE /queue-tests/dlq/:id to discard entries"
 sleep 2
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# STEP 9: View All Test Results
+# STEP 10: View All Test Results
 # ═══════════════════════════════════════════════════════════════════════════════
 
-print_header "📊 STEP 9: Viewing All Test Results"
+print_header "📊 STEP 10: Viewing All Test Results"
 
 print_step "Fetching all queue test results..."
 response=$(curl -s "$BASE_URL/queue-tests/results")
@@ -326,7 +352,8 @@ echo "  2. ✅ Multi-step workflow chaining"
 echo "  3. ✅ Parallel job processing with concurrency control"
 echo "  4. ✅ Automatic retry with exponential backoff"
 echo "  5. ✅ Dead Letter Queue for permanent failures"
-echo "  6. ✅ Manual recovery options via API"
+echo "  6. ✅ Automated DLQ processing with intelligent routing"
+echo "  7. ✅ Manual recovery options via API"
 echo ""
 echo -e "${YELLOW}Why this matters for production:${NC}"
 echo ""

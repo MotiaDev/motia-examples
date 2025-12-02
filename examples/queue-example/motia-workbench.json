@@ -2,87 +2,92 @@
   {
     "id": "queue-tests",
     "config": {
-      "steps/queue-tests/trigger-queue-tests.step.ts": {
+      "steps/queue-tests/management/trigger-queue-tests.step.ts": {
         "x": -400,
         "y": 0,
         "sourceHandlePosition": "right"
       },
-      "steps/queue-tests/simple-queue.step.ts": {
+      "steps/queue-tests/simple/simple-queue.step.ts": {
         "x": 200,
         "y": -100,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/simple-complete.step.ts": {
+      "steps/queue-tests/simple/simple-complete.step.ts": {
         "x": 600,
         "y": -100,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/chain-start.step.ts": {
+      "steps/queue-tests/chain/chain-start.step.ts": {
         "x": 200,
         "y": 100,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/chain-middle.step.ts": {
+      "steps/queue-tests/chain/chain-middle.step.ts": {
         "x": 600,
         "y": 100,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/chain-end.step.ts": {
+      "steps/queue-tests/chain/chain-end.step.ts": {
         "x": 1000,
         "y": 100,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/parallel-queue.step.ts": {
+      "steps/queue-tests/parallel/parallel-queue.step.ts": {
         "x": 200,
         "y": 300,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/heavy-queue.step.ts": {
+      "steps/queue-tests/heavy/heavy-queue.step.ts": {
         "x": 200,
         "y": 500,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/state-queue.step.ts": {
+      "steps/queue-tests/state/state-queue.step.ts": {
         "x": 200,
         "y": 700,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/error-queue.step.ts": {
+      "steps/queue-tests/error/error-queue.step.ts": {
         "x": 200,
         "y": 900,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/dlq-handler.step.ts": {
+      "steps/queue-tests/dlq/dlq-handler.step.ts": {
         "x": 600,
         "y": 900,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/dlq-list.step.ts": {
+      "steps/queue-tests/dlq/dlq-listener.step.ts": {
+        "x": 600,
+        "y": 1100,
+        "sourceHandlePosition": "left"
+      },
+      "steps/queue-tests/dlq/dlq-list.step.ts": {
         "x": 1000,
         "y": 900,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/dlq-retry.step.ts": {
+      "steps/queue-tests/dlq/dlq-retry.step.ts": {
         "x": 1000,
         "y": 1100,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/dlq-discard.step.ts": {
+      "steps/queue-tests/dlq/dlq-discard.step.ts": {
         "x": 1000,
         "y": 1300,
         "sourceHandlePosition": "left"
       },
-      "steps/queue-tests/get-test-results.step.ts": {
+      "steps/queue-tests/management/get-test-results.step.ts": {
         "x": -400,
         "y": 300,
         "sourceHandlePosition": "right"
       },
-      "steps/queue-tests/clear-test-results.step.ts": {
+      "steps/queue-tests/management/clear-test-results.step.ts": {
         "x": -400,
         "y": 500,
         "sourceHandlePosition": "right"
       },
-      "steps/queue-tests/queue-health-check.step.ts": {
+      "steps/queue-tests/management/queue-health-check.step.ts": {
         "x": -400,
         "y": 700,
         "sourceHandlePosition": "right"

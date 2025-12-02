@@ -10,6 +10,7 @@ This project showcases **why production systems need robust queue infrastructure
 
 - ✅ **Automatic Retry Mechanisms** - Exponential backoff for transient failures
 - ✅ **Dead Letter Queue (DLQ)** - Handling permanent failures that need human intervention
+- ✅ **DLQ Listener** - Automated DLQ processing with intelligent failure analysis and recovery
 - ✅ **Parallel Processing** - Concurrent job execution with configurable concurrency
 - ✅ **Event Chaining** - Multi-step workflows with isolated failure handling
 - ✅ **DLQ Recovery** - Manual retry and discard capabilities for failed messages
@@ -24,10 +25,13 @@ Jobs automatically retry with exponential backoff (1s → 2s → 4s) when transi
 ### 2. Dead Letter Queue
 Permanently failed jobs are routed to DLQ for review. In production, this would trigger alerts (Slack/PagerDuty) and store failures for manual recovery.
 
-### 3. Parallel Processing
+### 3. DLQ Listener (Automated Processing)
+The DLQ Listener automatically processes messages from the Dead Letter Queue. It analyzes failure patterns, automatically retries transient failures, and flags permanent failures for manual review. This reduces manual intervention while ensuring critical failures get proper attention.
+
+### 4. Parallel Processing
 Process multiple jobs simultaneously with configurable concurrency limits. Balance throughput vs. resource usage.
 
-### 4. Event Chaining
+### 5. Event Chaining
 Multi-step workflows where each step can have independent retry policies. Failures are isolated to the failed step.
 
 ## Quick Start
@@ -54,6 +58,7 @@ This starts the Motia runtime and the **Workbench** - a powerful UI for developi
    - Events flowing through the queue system
    - Retry attempts with exponential backoff
    - DLQ routing for permanent failures
+   - Automated DLQ processing and recovery
    - Parallel job processing
    - Event chaining across multiple steps
 
@@ -161,8 +166,10 @@ See all completed queue tests with processing times and status.
 The Workbench shows the complete queue flow:
 - **Left**: Trigger API (entry point)
 - **Middle**: Queue processors (simple, chain, parallel, error)
-- **Right**: DLQ flow (error → dlq-handler → dlq-list/retry/discard)
+- **Right**: DLQ flow (error → dlq-handler → dlq-listener → dlq-list/retry/discard)
 - **Bottom**: Management APIs (health-check, results, clear)
+
+The DLQ Listener automatically processes failed messages, analyzing them for automated retry or manual review.
 
 Watch events flow through the system in real-time!
 
