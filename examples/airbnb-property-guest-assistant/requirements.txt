@@ -1,0 +1,32 @@
+# Airbnb Guest Assistant - Python Dependencies
+
+# Vector Database
+lancedb>=0.10.0
+pyarrow>=15.0.0
+
+# OpenAI for embeddings and LLM
+openai>=1.40.0
+
+# Email via Resend
+resend>=2.0.0
+
+# Document Parsing
+pypdf>=4.0.0
+python-docx>=1.1.0
+beautifulsoup4>=4.12.0
+markdownify>=0.12.0
+chardet>=5.2.0
+
+# HTTP Client
+httpx>=0.27.0
+aiofiles>=24.1.0
+
+# Data Validation
+pydantic>=2.7.0
+
+# Utilities
+python-dateutil>=2.9.0
+uuid6>=2024.1.12
+
+# JSON Schema validation (already installed)
+jsonschema>=4.20.0
