@@ -1,0 +1,70 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "steps/hello/process_greeting_step.py": {
+        "x": 409,
+        "y": 44
+      }
+    }
+  },
+  {
+    "id": "guest-assistant",
+    "config": {
+      "steps/query/guest_query_api_step.py": {
+        "x": -142,
+        "y": -4
+      },
+      "steps/notifications/send_notification_step.py": {
+        "x": 639,
+        "y": 52
+      }
+    }
+  },
+  {
+    "id": "document-ingestion",
+    "config": {
+      "steps/notifications/send_notification_step.py": {
+        "x": 2111,
+        "y": 254
+      },
+      "steps/ingestion/start_ingestion_api_step.py": {
+        "x": -245,
+        "y": -69,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/ingestion/ingestion_error_step.py": {
+        "x": 1438,
+        "y": 256,
+        "sourceHandlePosition": "right"
+      },
+      "steps/ingestion/ingestion_complete_step.py": {
+        "x": 2080,
+        "y": -283
+      },
+      "steps/ingestion/get_ingestion_status_api_step.py": {
+        "x": -217,
+        "y": -280
+      },
+      "steps/ingestion/document_parse_step.py": {
+        "x": 270,
+        "y": -275
+      },
+      "steps/ingestion/document_embed_step.py": {
+        "x": 1438,
+        "y": -287,
+        "sourceHandlePosition": "right"
+      },
+      "steps/ingestion/document_discovery_step.py": {
+        "x": -251,
+        "y": 245,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "top"
+      },
+      "steps/ingestion/document_chunk_step.py": {
+        "x": 858,
+        "y": -267
+      }
+    }
+  }
+]

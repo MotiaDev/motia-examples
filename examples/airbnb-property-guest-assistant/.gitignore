@@ -1,0 +1,33 @@
+node_modules
+python_modules
+.venv
+venv
+.motia
+.mermaid
+dist
+
+# Python
+*.pyc
+__pycache__/
+
+# Data (LanceDB storage)
+data/lancedb/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+opencode.json
+.claude/
+.cursor/
+AGENTS.md
+CLAUDE.md
