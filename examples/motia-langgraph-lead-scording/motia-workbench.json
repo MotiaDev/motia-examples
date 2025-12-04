@@ -1,0 +1,73 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "steps/hello/process_greeting_step.py": {
+        "x": 409,
+        "y": 44
+      },
+      "steps/hello/hello_api_step.py": {
+        "x": 0,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "lead-score-flow",
+    "config": {
+      "steps/lead-flow/upload-csv.step.ts": {
+        "x": -2,
+        "y": -16
+      },
+      "steps/lead-flow/send-individual-email.step.ts": {
+        "x": -385,
+        "y": 8
+      },
+      "steps/lead-flow/send-emails.step.ts": {
+        "x": 50,
+        "y": -521
+      },
+      "steps/lead-flow/send-batch-emails.step.ts": {
+        "x": 856,
+        "y": -371
+      },
+      "steps/lead-flow/score-leads.step.ts": {
+        "x": 1163,
+        "y": 21
+      },
+      "steps/lead-flow/retry-failed-emails.step.ts": {
+        "x": 69,
+        "y": -243
+      },
+      "steps/lead-flow/process-csv.step.ts": {
+        "x": 600,
+        "y": 15
+      },
+      "steps/lead-flow/notify-completion.step.ts": {
+        "x": 1499,
+        "y": -381
+      },
+      "steps/lead-flow/get-flow-status.step.ts": {
+        "x": -385,
+        "y": -234
+      },
+      "steps/lead-flow/get-flow-results.step.ts": {
+        "x": -371,
+        "y": -469
+      },
+      "steps/lead-flow/generate-drafts.step.ts": {
+        "x": 1833,
+        "y": 19
+      },
+      "steps/lead-flow/drafts-ready.step.ts": {
+        "x": 2476,
+        "y": 30
+      },
+      "steps/lead-flow/approve-emails.step.ts": {
+        "x": -374,
+        "y": -715
+      }
+    }
+  }
+]
