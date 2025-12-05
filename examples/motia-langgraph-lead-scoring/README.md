@@ -219,29 +219,7 @@ Retry any failed email sends:
 ```bash
 curl -X POST http://localhost:3000/lead-flows/{flowId}/retry
 ```
-
-## Event Flow Pipeline
-
-```
-┌─────────────────┐     ┌────────────┐     ┌─────────────┐     ┌──────────────────┐
-│  UploadLeadsCSV │────▶│ ProcessCSV │────▶│ ScoreLeads  │────▶│GenerateEmailDrafts│
-│   (API Step)    │     │  (Event)   │     │  (Event)    │     │     (Event)      │
-└─────────────────┘     └────────────┘     └─────────────┘     └──────────────────┘
-                                                                        │
-                                                                        ▼
-                                                               ┌─────────────────┐
-                                                               │   DraftsReady   │
-                                                               │ (Human Review)  │
-                                                               └─────────────────┘
-                                                                        │
-                                                            [Manual Approval via API]
-                                                                        │
-                                                                        ▼
-┌───────────────────┐     ┌─────────────────┐     ┌───────────────────────┐
-│ NotifyCompletion  │◀────│ SendBatchEmails │◀────│ SendEmails (API Step) │
-│     (Event)       │     │    (Event)      │     └───────────────────────┘
-└───────────────────┘     └─────────────────┘
-```
+![emails-retry](docs/img/email.png)
 
 ## Project Structure
 
