@@ -1,0 +1,37 @@
+{
+  "name": "day7automation",
+  "description": "Multi-agent game generation pipeline with Motia",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia",
+    "game-generation",
+    "multi-agent",
+    "ai"
+  ],
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@motiadev/adapter-bullmq-events": "^0.14.0-beta.164",
+    "@motiadev/core": "^0.14.0-beta.164",
+    "@motiadev/plugin-bullmq": "^0.14.0-beta.164",
+    "@motiadev/plugin-endpoint": "^0.14.0-beta.164",
+    "@motiadev/plugin-logs": "^0.14.0-beta.164",
+    "@motiadev/plugin-observability": "^0.14.0-beta.164",
+    "@motiadev/plugin-states": "^0.14.0-beta.164",
+    "motia": "^0.14.0-beta.164",
+    "uuid": "^11.1.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.1.1",
+    "@types/uuid": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

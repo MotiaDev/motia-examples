@@ -1,0 +1,67 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "steps/hello/process_greeting_step.py": {
+        "x": 409,
+        "y": 44
+      },
+      "steps/hello/hello_api_step.py": {
+        "x": 0,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "game-generation",
+    "config": {
+      "steps/game-generation/revision-handler.step.ts": {
+        "x": 1118,
+        "y": 546,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      },
+      "steps/game-generation/qa-agent.step.ts": {
+        "x": 1991,
+        "y": -40,
+        "sourceHandlePosition": "bottom"
+      },
+      "steps/game-generation/list-games-api.step.ts": {
+        "x": -201,
+        "y": 609
+      },
+      "steps/game-generation/get-status-api.step.ts": {
+        "x": -247,
+        "y": 137
+      },
+      "steps/game-generation/generate-game-api.step.ts": {
+        "x": -251,
+        "y": -68
+      },
+      "steps/game-generation/engineer-agent.step.ts": {
+        "x": 1050,
+        "y": -32
+      },
+      "steps/game-generation/download-game-api.step.ts": {
+        "x": -255,
+        "y": 355
+      },
+      "steps/game-generation/completion-handler.step.ts": {
+        "x": 1992,
+        "y": 711,
+        "targetHandlePosition": "top"
+      },
+      "steps/game-generation/chief-qa-agent.step.ts": {
+        "x": 1987,
+        "y": 335,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      },
+      "steps/game-generation/architect-agent.step.ts": {
+        "x": 329,
+        "y": -35
+      }
+    }
+  }
+]
