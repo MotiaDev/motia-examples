@@ -6,12 +6,14 @@ An intelligent, event-driven backend system that orchestrates the full game deve
 
 ## Overview
 
-This Motia application demonstrates how to build complex, multi-step AI agent workflows with:
+This production-ready Motia application demonstrates how to build complex, multi-step AI agent workflows with:
 
-- **Event-driven architecture** - Stateful workflow orchestration
+- **Event-driven architecture** - Stateful workflow orchestration with BullMQ
 - **Multi-agent collaboration** - Specialized AI roles working together
 - **Feedback loops** - Automatic revision cycles for quality assurance
-- **In-browser game player** - Play generated games directly in Workbench
+- **In-browser game player** - Play generated games directly in Workbench using Pyodide
+- **Redis adapters** - Distributed state, cron, and streams for horizontal scaling
+- **Docker deployment** - Production-ready containerized setup
 - **Observability** - Full visibility into agent reasoning and decisions
 - **Robust error handling** - Retry mechanisms and JSON recovery
 
@@ -41,7 +43,11 @@ cd examples/multi-agent-game-generation
 npm install
 
 # Set up environment variables
-export GEMINI_API_KEY="your-gemini-api-key"
+cp .env.example .env
+# Edit .env and add your GEMINI_API_KEY
+
+# Start Redis (if not already running)
+docker run -d -p 6379:6379 redis:alpine
 
 # Generate TypeScript types
 npm run generate-types
@@ -241,8 +247,135 @@ List all game generation flows.
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google Gemini API key |
+| `GEMINI_API_KEY` | Yes | Google Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey) |
+| `REDIS_URL` | No | Redis connection URL (default: `redis://localhost:6379`) |
 | `PORT` | No | Server port (default: 3000) |
+
+#### Running Redis
+
+**Local Development:**
+
+```bash
+# Using Docker (recommended)
+docker run -d -p 6379:6379 redis:alpine
+
+# Or using Homebrew (macOS)
+brew install redis
+brew services start redis
+```
+
+**Production Options:**
+- AWS ElastiCache
+- Redis Cloud
+- Google Cloud Memorystore
+- Azure Cache for Redis
+
+> **📝 Note**: Use `REDIS_URL=redis://host:port` format in production. The `{ host, port }` format shown in some Motia docs doesn't work correctly with current adapter versions.
+
+## 🐳 Docker Deployment
+
+### Production-Ready Setup with Redis
+
+![Docker Deployment](docs/img/docker-deploy.png)
+
+*Complete Docker setup with Motia, Redis, and optional Redis Commander*
+
+The application uses **official Motia Docker support** with distributed Redis adapters for production-grade deployments.
+
+### Quick Start
+
+```bash
+# Generate Dockerfile using Motia CLI
+npx motia@latest docker setup
+
+# Build and run with Docker Compose
+docker-compose up -d
+
+# Check logs
+docker-compose logs -f motia
+
+# Stop services
+docker-compose down
+```
+
+### What's Included
+
+| Service | Purpose | Port |
+|---------|---------|------|
+| **Motia App** | Game generation backend | 3000 |
+| **Redis** | Distributed state, cron, streams | 6379 |
+| **Redis Commander** | Web UI for debugging (optional) | 8081 |
+
+### Redis Adapter Configuration
+
+![Redis Docker Setup](docs/img/redis-docker.png)
+
+*Redis adapters successfully connected in Docker environment*
+
+> **⚠️ Important**: The official Motia docs show `{ host, port }` format, but you must use `{ url }` format for Redis adapters to work correctly.
+
+**Working Configuration:**
+
+```typescript
+const redisUrl = `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+
+export default config({
+  adapters: {
+    state: new RedisStateAdapter({ url: redisUrl }),
+    cron: new RedisCronAdapter({ url: redisUrl }),
+    streams: new RedisStreamAdapterManager({ url: redisUrl })
+  }
+})
+```
+
+### Environment Variables
+
+The `docker-compose.yml` automatically sets:
+
+```yaml
+environment:
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  GEMINI_API_KEY: ${GEMINI_API_KEY}
+```
+
+### Verify Deployment
+
+```bash
+# Check container status
+docker-compose ps
+
+# Verify Redis connection (should show no errors)
+docker-compose logs motia | grep -i "redis"
+
+# Test API
+curl http://localhost:3000/__motia/game-viewer/games
+
+# Access services
+open http://localhost:3000                    # Workbench
+open http://localhost:8081                    # Redis Commander (with --profile debug)
+```
+
+### Scaling to Multiple Instances
+
+With Redis adapters, you can run multiple Motia instances sharing the same state:
+
+```yaml
+services:
+  motia-1:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      REDIS_HOST: redis
+      
+  motia-2:
+    build: .
+    ports: ["3001:3000"]
+    environment:
+      REDIS_HOST: redis
+```
+
+All instances will share game state, event queues, and cron locks through Redis.
 
 ### Complexity Levels
 
@@ -377,20 +510,6 @@ npm run build
 }
 ```
 
-## 📸 Screenshots
-
-### Motia Workbench
-![Workbench Overview](docs/img/workbench.png)
-
-### Game Viewer Plugin
-![Game Viewer](docs/img/game-viewer-plugin.png)
-
-### Event Queues
-![Event Queues](docs/img/queues.png)
-
-### API Endpoints
-![API Endpoints](docs/img/endpoints.png)
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -402,6 +521,17 @@ npm run build
 ## 📄 License
 
 MIT License - see LICENSE file for details.
+
+---
+
+## 🏗️ Built With
+
+- **[Motia](https://motia.dev)** - Event-driven backend framework
+- **Google Gemini 2.0 Flash** - AI agents for game generation
+- **Redis** - Distributed state management
+- **Motia** - Event queue processing
+- **Pyodide** - Python WebAssembly runtime
+- **TypeScript** - Type-safe development
 
 ---
 

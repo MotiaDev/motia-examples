@@ -3,10 +3,19 @@
   "description": "Multi-agent game generation pipeline with Motia",
   "scripts": {
     "postinstall": "motia install",
+    "start": "motia start",
     "dev": "motia dev",
     "generate-types": "motia generate-types",
     "build": "motia build",
-    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid",
+    "docker:setup": "npx motia@latest docker setup",
+    "docker:build": "docker build -t motia-game-gen .",
+    "docker:run": "npx motia@latest docker run --project-name game-gen",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f motia",
+    "docker:redis": "docker-compose --profile debug up -d redis-commander",
+    "test:redis": "npx ts-node scripts/test-redis.ts"
   },
   "keywords": [
     "motia",
@@ -17,6 +26,9 @@
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@motiadev/adapter-bullmq-events": "^0.14.0-beta.164",
+    "@motiadev/adapter-redis-state": "^0.14.0-beta.164",
+    "@motiadev/adapter-redis-cron": "^0.14.0-beta.164",
+    "@motiadev/adapter-redis-streams": "^0.14.0-beta.164",
     "@motiadev/core": "^0.14.0-beta.164",
     "@motiadev/plugin-bullmq": "^0.14.0-beta.164",
     "@motiadev/plugin-endpoint": "^0.14.0-beta.164",
