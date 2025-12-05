@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # Redis for state, cron, and streams
+  redis:
+    image: redis:7-alpine
+    container_name: motia-game-gen-redis
+    ports:
+      - '6379:6379'
+    command: redis-server --save "" --appendonly no
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - motia-network
+
+  # Motia application
+  motia:
+    build: .
+    container_name: motia-game-gen-app
+    ports:
+      - '3000:3000'
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      STATE_KEY_PREFIX: 'motia:game-gen:state:'
+      CRON_KEY_PREFIX: 'motia:game-gen:cron:lock:'
+      STREAM_KEY_PREFIX: 'motia:game-gen:streams:'
+      STATE_TTL: 86400
+      CRON_LOCK_TTL: 300000
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - motia-network
+    restart: unless-stopped
+
+  # Optional: Redis Commander for debugging
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: motia-redis-commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - '8081:8081'
+    depends_on:
+      - redis
+    networks:
+      - motia-network
+    profiles:
+      - debug
+
+volumes:
+  redis-data:
+
+networks:
+  motia-network:
+    driver: bridge

@@ -1,5 +1,8 @@
 import path from 'node:path'
 import { config, type MotiaPlugin, type MotiaPluginContext } from 'motia'
+import { RedisStateAdapter } from '@motiadev/adapter-redis-state'
+import { RedisCronAdapter } from '@motiadev/adapter-redis-cron'
+import { RedisStreamAdapterManager } from '@motiadev/adapter-redis-streams'
 
 const statesPlugin = require('@motiadev/plugin-states/plugin')
 const endpointPlugin = require('@motiadev/plugin-endpoint/plugin')
@@ -7,12 +10,7 @@ const logsPlugin = require('@motiadev/plugin-logs/plugin')
 const observabilityPlugin = require('@motiadev/plugin-observability/plugin')
 const bullmqPlugin = require('@motiadev/plugin-bullmq/plugin')
 
-/**
- * Game Viewer Plugin
- * Adds a workbench panel to view and download generated games
- */
 function gameViewerPlugin(motia: MotiaPluginContext): MotiaPlugin {
-  // Register API endpoint to list all games
   motia.registerApi(
     {
       method: 'GET',
@@ -51,7 +49,6 @@ function gameViewerPlugin(motia: MotiaPluginContext): MotiaPlugin {
     }
   )
 
-  // Register API endpoint to get game details
   motia.registerApi(
     {
       method: 'GET',
@@ -139,6 +136,19 @@ function gameViewerPlugin(motia: MotiaPluginContext): MotiaPlugin {
   }
 }
 
+const redisHost = process.env.REDIS_HOST || 'localhost'
+const redisPort = process.env.REDIS_PORT || '6379'
+const redisPassword = process.env.REDIS_PASSWORD
+const redisUsername = process.env.REDIS_USERNAME
+const redisDatabase = process.env.REDIS_DATABASE || '0'
+
+let redisUrl = `redis://${redisHost}:${redisPort}/${redisDatabase}`
+if (redisUsername && redisPassword) {
+  redisUrl = `redis://${redisUsername}:${redisPassword}@${redisHost}:${redisPort}/${redisDatabase}`
+} else if (redisPassword) {
+  redisUrl = `redis://:${redisPassword}@${redisHost}:${redisPort}/${redisDatabase}`
+}
+
 export default config({
   plugins: [
     observabilityPlugin,
@@ -148,4 +158,21 @@ export default config({
     bullmqPlugin,
     gameViewerPlugin,
   ],
+  adapters: {
+    state: new RedisStateAdapter(
+      { url: redisUrl },
+      {
+        keyPrefix: process.env.STATE_KEY_PREFIX || 'motia:game-gen:state:',
+        ttl: parseInt(process.env.STATE_TTL || '86400'),
+      }
+    ),
+    cron: new RedisCronAdapter(
+      { url: redisUrl },
+      {
+        keyPrefix: process.env.CRON_KEY_PREFIX || 'motia:game-gen:cron:lock:',
+        lockTTL: parseInt(process.env.CRON_LOCK_TTL || '300000'),
+      }
+    ),
+    streams: new RedisStreamAdapterManager({ url: redisUrl }),
+  },
 })
