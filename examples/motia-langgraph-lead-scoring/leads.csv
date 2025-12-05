@@ -1,0 +1,1001 @@
+id,name,company,role,industry,email,website,employee_range,country,notes
+1,Morgan Patel,Nova Software,Head of Sales,SaaS,morgan.patel@nova.io,https://www.nova.io,51-200,DE,Inbound from referral
+2,Morgan Khan,Nimbus Solutions,Founder,Cybersecurity,morgan.khan@nimbus.io,https://www.nimbus.io,51-200,UK,Interested in AI automation demos
+3,Casey Miller,Pulse Labs,Head of Sales,E-commerce,casey.miller@pulse.io,https://www.pulse.io,201-500,US,Requested pricing info
+4,Quinn Williams,Nimbus Analytics,Growth Lead,Edtech,quinn.williams@nimbus.io,https://www.nimbus.io,1000+,DE,Interested in AI automation demos
+5,Jordan Khan,Pulse Partners,VP Engineering,Cybersecurity,jordan.khan@pulse.io,https://www.pulse.io,1000+,DE,Inbound from referral
+6,Chris Johnson,Acme Partners,VP Engineering,Edtech,chris.johnson@acme.io,https://www.acme.io,1000+,DE,Inbound from referral
+7,Casey Williams,Nova Labs,VP Marketing,Healthtech,casey.williams@nova.io,https://www.nova.io,51-200,FR,Using competitor tool
+8,Sam Smith,Pulse Holdings,VP Engineering,Healthtech,sam.smith@pulse.io,https://www.pulse.io,501-1000,AU,Inbound from referral
+9,Sam Miller,Acme Holdings,Head of Sales,Healthtech,sam.miller@acme.io,https://www.acme.io,1000+,US,Requested pricing info
+10,Chris Smith,Vista Holdings,Head of Sales,DevTools,chris.smith@vista.io,https://www.vista.io,51-200,US,Requested pricing info
+11,Sam Williams,Nova Solutions,CIO,E-commerce,sam.williams@nova.io,https://www.nova.io,51-200,CA,Inbound from referral
+12,Jamie Martinez,Vista Labs,CTO,DevTools,jamie.martinez@vista.io,https://www.vista.io,11-50,FR,Met at conference
+13,Avery Patel,Nimbus Solutions,COO,DevTools,avery.patel@nimbus.io,https://www.nimbus.io,51-200,AU,Interested in AI automation demos
+14,Chris Williams,Nimbus Partners,Head of Product,DevTools,chris.williams@nimbus.io,https://www.nimbus.io,201-500,AU,Requested pricing info
+15,Jordan Williams,Orbit Software,CIO,DevTools,jordan.williams@orbit.io,https://www.orbit.io,1-10,US,Interested in AI automation demos
+16,Chris Singh,Zenith Partners,Head of Product,Fintech,chris.singh@zenith.io,https://www.zenith.io,51-200,AU,Inbound from referral
+17,Morgan Garcia,Orbit Software,CIO,Edtech,morgan.garcia@orbit.io,https://www.orbit.io,11-50,FR,Requested pricing info
+18,Alex Davis,Pulse Studios,VP Engineering,Edtech,alex.davis@pulse.io,https://www.pulse.io,1-10,CA,Inbound from referral
+19,Casey Johnson,Orbit Partners,COO,Healthtech,casey.johnson@orbit.io,https://www.orbit.io,201-500,UK,Requested pricing info
+20,Sam Smith,Vista Technologies,Founder,Cybersecurity,sam.smith@vista.io,https://www.vista.io,1-10,DE,Interested in AI automation demos
+21,Jordan Martinez,Summit Holdings,Head of Sales,Healthtech,jordan.martinez@summit.io,https://www.summit.io,11-50,AU,Requested pricing info
+22,Jamie Brown,Zenith Labs,CTO,Retail,jamie.brown@zenith.io,https://www.zenith.io,201-500,CA,Met at conference
+23,Sam Garcia,Vista Technologies,Founder,E-commerce,sam.garcia@vista.io,https://www.vista.io,501-1000,FR,Signed up for newsletter
+24,Taylor Williams,Nova Software,CIO,Retail,taylor.williams@nova.io,https://www.nova.io,501-1000,UK,Met at conference
+25,Devin Singh,Pulse Technologies,Founder,Retail,devin.singh@pulse.io,https://www.pulse.io,501-1000,US,Met at conference
+26,Taylor Patel,Vertex Analytics,Growth Lead,Fintech,taylor.patel@vertex.io,https://www.vertex.io,501-1000,DE,Inbound from referral
+27,Chris Williams,Vista Analytics,VP Engineering,Cybersecurity,chris.williams@vista.io,https://www.vista.io,11-50,UK,Interested in AI automation demos
+28,Chris Miller,Orbit Partners,CIO,SaaS,chris.miller@orbit.io,https://www.orbit.io,501-1000,FR,Using competitor tool
+29,Quinn Singh,Pulse Software,Head of Product,Healthtech,quinn.singh@pulse.io,https://www.pulse.io,201-500,UK,Inbound from referral
+30,Taylor Smith,Nimbus Studios,Head of Sales,Cybersecurity,taylor.smith@nimbus.io,https://www.nimbus.io,201-500,IN,Using competitor tool
+31,Chris Singh,Nova Holdings,VP Engineering,Fintech,chris.singh@nova.io,https://www.nova.io,1000+,UK,Interested in AI automation demos
+32,Taylor Williams,Vista Software,COO,Retail,taylor.williams@vista.io,https://www.vista.io,501-1000,US,Interested in AI automation demos
+33,Chris Patel,Vista Technologies,COO,Retail,chris.patel@vista.io,https://www.vista.io,1000+,DE,Interested in AI automation demos
+34,Riley Miller,Pulse Technologies,Head of Sales,Retail,riley.miller@pulse.io,https://www.pulse.io,201-500,DE,Interested in AI automation demos
+35,Alex Smith,Zenith Analytics,Growth Lead,SaaS,alex.smith@zenith.io,https://www.zenith.io,1-10,AU,Using competitor tool
+36,Quinn Miller,Zenith Studios,Head of Sales,Healthtech,quinn.miller@zenith.io,https://www.zenith.io,11-50,DE,Met at conference
+37,Chris Garcia,Orbit Labs,VP Marketing,Edtech,chris.garcia@orbit.io,https://www.orbit.io,51-200,AU,Interested in AI automation demos
+38,Jordan Smith,Acme Partners,CTO,Fintech,jordan.smith@acme.io,https://www.acme.io,1-10,FR,Signed up for newsletter
+39,Avery Patel,Nimbus Holdings,CIO,Cybersecurity,avery.patel@nimbus.io,https://www.nimbus.io,501-1000,DE,Interested in AI automation demos
+40,Avery Martinez,Zenith Partners,CIO,Fintech,avery.martinez@zenith.io,https://www.zenith.io,501-1000,FR,Using competitor tool
+41,Avery Williams,Nova Studios,Growth Lead,Edtech,avery.williams@nova.io,https://www.nova.io,51-200,SG,Requested pricing info
+42,Chris Brown,Zenith Systems,Founder,AI/ML,chris.brown@zenith.io,https://www.zenith.io,11-50,US,Using competitor tool
+43,Avery Johnson,Acme Studios,Growth Lead,SaaS,avery.johnson@acme.io,https://www.acme.io,51-200,CA,Interested in AI automation demos
+44,Devin Garcia,Vista Labs,VP Marketing,DevTools,devin.garcia@vista.io,https://www.vista.io,51-200,CA,Met at conference
+45,Quinn Smith,Vista Holdings,VP Marketing,DevTools,quinn.smith@vista.io,https://www.vista.io,51-200,SG,Interested in AI automation demos
+46,Riley Davis,Vertex Holdings,VP Engineering,Cybersecurity,riley.davis@vertex.io,https://www.vertex.io,1000+,AU,Met at conference
+47,Jordan Garcia,Vertex Systems,CTO,Edtech,jordan.garcia@vertex.io,https://www.vertex.io,1000+,DE,Interested in AI automation demos
+48,Casey Garcia,Vertex Systems,COO,DevTools,casey.garcia@vertex.io,https://www.vertex.io,1000+,CA,Requested pricing info
+49,Alex Lopez,Zenith Systems,VP Engineering,DevTools,alex.lopez@zenith.io,https://www.zenith.io,11-50,AU,Met at conference
+50,Devin Martinez,Nova Solutions,COO,DevTools,devin.martinez@nova.io,https://www.nova.io,201-500,AU,Using competitor tool
+51,Jamie Johnson,Summit Analytics,COO,Healthtech,jamie.johnson@summit.io,https://www.summit.io,201-500,UK,Requested pricing info
+52,Devin Smith,Vertex Analytics,COO,Cybersecurity,devin.smith@vertex.io,https://www.vertex.io,501-1000,AU,Met at conference
+53,Quinn Miller,Pulse Labs,Head of Sales,Fintech,quinn.miller@pulse.io,https://www.pulse.io,11-50,AU,Using competitor tool
+54,Devin Martinez,Vertex Systems,VP Engineering,Fintech,devin.martinez@vertex.io,https://www.vertex.io,1000+,DE,Inbound from referral
+55,Chris Davis,Vertex Technologies,Growth Lead,AI/ML,chris.davis@vertex.io,https://www.vertex.io,201-500,DE,Signed up for newsletter
+56,Morgan Martinez,Pulse Technologies,CTO,Fintech,morgan.martinez@pulse.io,https://www.pulse.io,11-50,CA,Signed up for newsletter
+57,Casey Williams,Nova Systems,COO,Healthtech,casey.williams@nova.io,https://www.nova.io,51-200,DE,Inbound from referral
+58,Chris Garcia,Nimbus Analytics,Founder,Healthtech,chris.garcia@nimbus.io,https://www.nimbus.io,1000+,UK,Met at conference
+59,Jordan Williams,Nimbus Studios,Head of Product,DevTools,jordan.williams@nimbus.io,https://www.nimbus.io,1-10,IN,Interested in AI automation demos
+60,Taylor Smith,Vista Solutions,Founder,SaaS,taylor.smith@vista.io,https://www.vista.io,1000+,DE,Inbound from referral
+61,Chris Singh,Orbit Holdings,CTO,Fintech,chris.singh@orbit.io,https://www.orbit.io,11-50,DE,Using competitor tool
+62,Morgan Johnson,Pulse Studios,Head of Product,Retail,morgan.johnson@pulse.io,https://www.pulse.io,501-1000,FR,Met at conference
+63,Casey Miller,Vertex Technologies,VP Engineering,Retail,casey.miller@vertex.io,https://www.vertex.io,1-10,IN,Met at conference
+64,Morgan Patel,Vista Labs,VP Engineering,E-commerce,morgan.patel@vista.io,https://www.vista.io,1000+,UK,Interested in AI automation demos
+65,Devin Lopez,Zenith Technologies,Founder,Retail,devin.lopez@zenith.io,https://www.zenith.io,1000+,UK,Signed up for newsletter
+66,Taylor Garcia,Nimbus Partners,CIO,Edtech,taylor.garcia@nimbus.io,https://www.nimbus.io,501-1000,US,Requested pricing info
+67,Quinn Williams,Orbit Systems,Head of Product,E-commerce,quinn.williams@orbit.io,https://www.orbit.io,51-200,FR,Requested pricing info
+68,Morgan Lopez,Pulse Analytics,Head of Sales,AI/ML,morgan.lopez@pulse.io,https://www.pulse.io,1000+,UK,Requested pricing info
+69,Jamie Miller,Vista Labs,Founder,SaaS,jamie.miller@vista.io,https://www.vista.io,501-1000,IN,Interested in AI automation demos
+70,Quinn Garcia,Summit Labs,Head of Product,Fintech,quinn.garcia@summit.io,https://www.summit.io,1-10,IN,Met at conference
+71,Alex Patel,Zenith Software,Growth Lead,Cybersecurity,alex.patel@zenith.io,https://www.zenith.io,11-50,CA,Using competitor tool
+72,Avery Singh,Pulse Solutions,Head of Product,AI/ML,avery.singh@pulse.io,https://www.pulse.io,1-10,AU,Signed up for newsletter
+73,Jamie Khan,Nimbus Analytics,VP Engineering,SaaS,jamie.khan@nimbus.io,https://www.nimbus.io,51-200,AU,Interested in AI automation demos
+74,Morgan Davis,Orbit Labs,Founder,Healthtech,morgan.davis@orbit.io,https://www.orbit.io,501-1000,US,Inbound from referral
+75,Casey Miller,Zenith Analytics,Head of Sales,AI/ML,casey.miller@zenith.io,https://www.zenith.io,1-10,FR,Interested in AI automation demos
+76,Chris Smith,Acme Labs,VP Engineering,Fintech,chris.smith@acme.io,https://www.acme.io,11-50,CA,Inbound from referral
+77,Quinn Garcia,Zenith Solutions,Head of Product,E-commerce,quinn.garcia@zenith.io,https://www.zenith.io,51-200,US,Requested pricing info
+78,Devin Patel,Zenith Labs,Growth Lead,Retail,devin.patel@zenith.io,https://www.zenith.io,1-10,AU,Inbound from referral
+79,Casey Garcia,Vista Holdings,Growth Lead,SaaS,casey.garcia@vista.io,https://www.vista.io,1000+,SG,Interested in AI automation demos
+80,Taylor Smith,Vertex Solutions,Founder,Cybersecurity,taylor.smith@vertex.io,https://www.vertex.io,1000+,DE,Met at conference
+81,Taylor Miller,Vista Technologies,Head of Product,Cybersecurity,taylor.miller@vista.io,https://www.vista.io,1000+,AU,Inbound from referral
+82,Casey Khan,Nova Labs,COO,E-commerce,casey.khan@nova.io,https://www.nova.io,1000+,AU,Met at conference
+83,Chris Singh,Vista Holdings,Head of Sales,AI/ML,chris.singh@vista.io,https://www.vista.io,201-500,US,Met at conference
+84,Casey Garcia,Nova Holdings,VP Marketing,Healthtech,casey.garcia@nova.io,https://www.nova.io,11-50,CA,Interested in AI automation demos
+85,Casey Patel,Vista Labs,Head of Product,Edtech,casey.patel@vista.io,https://www.vista.io,1000+,FR,Interested in AI automation demos
+86,Morgan Johnson,Acme Analytics,Growth Lead,Healthtech,morgan.johnson@acme.io,https://www.acme.io,501-1000,CA,Met at conference
+87,Alex Lopez,Zenith Technologies,VP Marketing,DevTools,alex.lopez@zenith.io,https://www.zenith.io,201-500,US,Inbound from referral
+88,Taylor Singh,Pulse Analytics,Founder,E-commerce,taylor.singh@pulse.io,https://www.pulse.io,11-50,AU,Met at conference
+89,Avery Singh,Zenith Holdings,VP Engineering,E-commerce,avery.singh@zenith.io,https://www.zenith.io,11-50,FR,Interested in AI automation demos
+90,Morgan Lopez,Vista Technologies,Founder,DevTools,morgan.lopez@vista.io,https://www.vista.io,501-1000,FR,Met at conference
+91,Morgan Williams,Acme Partners,Founder,Healthtech,morgan.williams@acme.io,https://www.acme.io,1-10,SG,Met at conference
+92,Avery Garcia,Acme Solutions,Head of Sales,Fintech,avery.garcia@acme.io,https://www.acme.io,201-500,UK,Using competitor tool
+93,Devin Miller,Acme Software,Head of Product,Fintech,devin.miller@acme.io,https://www.acme.io,201-500,FR,Signed up for newsletter
+94,Casey Johnson,Pulse Labs,VP Engineering,DevTools,casey.johnson@pulse.io,https://www.pulse.io,11-50,FR,Interested in AI automation demos
+95,Devin Singh,Nimbus Software,Head of Sales,DevTools,devin.singh@nimbus.io,https://www.nimbus.io,1-10,DE,Requested pricing info
+96,Riley Davis,Nova Analytics,VP Engineering,Healthtech,riley.davis@nova.io,https://www.nova.io,501-1000,UK,Interested in AI automation demos
+97,Taylor Smith,Zenith Studios,Head of Product,AI/ML,taylor.smith@zenith.io,https://www.zenith.io,1-10,CA,Requested pricing info
+98,Sam Garcia,Zenith Solutions,Head of Product,SaaS,sam.garcia@zenith.io,https://www.zenith.io,11-50,IN,Requested pricing info
+99,Jamie Brown,Vertex Systems,Founder,DevTools,jamie.brown@vertex.io,https://www.vertex.io,501-1000,CA,Signed up for newsletter
+100,Morgan Miller,Orbit Software,VP Engineering,Cybersecurity,morgan.miller@orbit.io,https://www.orbit.io,51-200,FR,Interested in AI automation demos
+101,Quinn Lopez,Vertex Labs,Growth Lead,Healthtech,quinn.lopez@vertex.io,https://www.vertex.io,1000+,DE,Inbound from referral
+102,Chris Patel,Nimbus Holdings,COO,Fintech,chris.patel@nimbus.io,https://www.nimbus.io,501-1000,DE,Interested in AI automation demos
+103,Taylor Martinez,Pulse Holdings,Growth Lead,Cybersecurity,taylor.martinez@pulse.io,https://www.pulse.io,51-200,SG,Signed up for newsletter
+104,Taylor Williams,Vertex Technologies,CIO,DevTools,taylor.williams@vertex.io,https://www.vertex.io,1-10,IN,Requested pricing info
+105,Morgan Smith,Vertex Analytics,COO,Fintech,morgan.smith@vertex.io,https://www.vertex.io,11-50,FR,Interested in AI automation demos
+106,Avery Johnson,Vertex Solutions,CIO,Cybersecurity,avery.johnson@vertex.io,https://www.vertex.io,501-1000,FR,Using competitor tool
+107,Avery Davis,Pulse Systems,Head of Product,AI/ML,avery.davis@pulse.io,https://www.pulse.io,1000+,IN,Met at conference
+108,Jamie Smith,Acme Systems,VP Marketing,Cybersecurity,jamie.smith@acme.io,https://www.acme.io,11-50,FR,Met at conference
+109,Sam Davis,Orbit Analytics,Growth Lead,Healthtech,sam.davis@orbit.io,https://www.orbit.io,1-10,IN,Requested pricing info
+110,Riley Patel,Vista Holdings,Founder,DevTools,riley.patel@vista.io,https://www.vista.io,51-200,FR,Signed up for newsletter
+111,Chris Williams,Nimbus Studios,COO,E-commerce,chris.williams@nimbus.io,https://www.nimbus.io,11-50,DE,Interested in AI automation demos
+112,Sam Smith,Pulse Labs,CTO,Cybersecurity,sam.smith@pulse.io,https://www.pulse.io,1000+,FR,Interested in AI automation demos
+113,Devin Brown,Nimbus Labs,Founder,AI/ML,devin.brown@nimbus.io,https://www.nimbus.io,51-200,UK,Interested in AI automation demos
+114,Jordan Khan,Pulse Analytics,COO,E-commerce,jordan.khan@pulse.io,https://www.pulse.io,1-10,SG,Using competitor tool
+115,Quinn Lopez,Orbit Solutions,VP Marketing,E-commerce,quinn.lopez@orbit.io,https://www.orbit.io,1-10,AU,Using competitor tool
+116,Morgan Williams,Pulse Technologies,COO,E-commerce,morgan.williams@pulse.io,https://www.pulse.io,1000+,AU,Interested in AI automation demos
+117,Devin Lopez,Nimbus Technologies,Founder,AI/ML,devin.lopez@nimbus.io,https://www.nimbus.io,1000+,DE,Inbound from referral
+118,Riley Johnson,Vertex Studios,COO,AI/ML,riley.johnson@vertex.io,https://www.vertex.io,501-1000,IN,Interested in AI automation demos
+119,Jordan Lopez,Vista Partners,CIO,Cybersecurity,jordan.lopez@vista.io,https://www.vista.io,11-50,FR,Inbound from referral
+120,Chris Singh,Acme Labs,VP Engineering,Healthtech,chris.singh@acme.io,https://www.acme.io,1000+,UK,Interested in AI automation demos
+121,Riley Miller,Nova Technologies,Head of Product,Cybersecurity,riley.miller@nova.io,https://www.nova.io,1-10,CA,Requested pricing info
+122,Alex Garcia,Vista Solutions,VP Marketing,Retail,alex.garcia@vista.io,https://www.vista.io,1000+,IN,Interested in AI automation demos
+123,Riley Williams,Vista Systems,COO,Healthtech,riley.williams@vista.io,https://www.vista.io,501-1000,CA,Interested in AI automation demos
+124,Jamie Lopez,Acme Holdings,Founder,SaaS,jamie.lopez@acme.io,https://www.acme.io,11-50,AU,Using competitor tool
+125,Casey Khan,Nova Systems,Head of Product,Healthtech,casey.khan@nova.io,https://www.nova.io,11-50,IN,Using competitor tool
+126,Quinn Singh,Pulse Studios,VP Marketing,Cybersecurity,quinn.singh@pulse.io,https://www.pulse.io,501-1000,AU,Inbound from referral
+127,Jamie Khan,Pulse Software,CIO,AI/ML,jamie.khan@pulse.io,https://www.pulse.io,501-1000,US,Interested in AI automation demos
+128,Devin Lopez,Zenith Analytics,VP Marketing,Fintech,devin.lopez@zenith.io,https://www.zenith.io,501-1000,SG,Inbound from referral
+129,Quinn Garcia,Acme Technologies,CIO,Healthtech,quinn.garcia@acme.io,https://www.acme.io,1000+,IN,Signed up for newsletter
+130,Chris Williams,Zenith Studios,VP Engineering,Edtech,chris.williams@zenith.io,https://www.zenith.io,51-200,CA,Inbound from referral
+131,Taylor Lopez,Pulse Solutions,Head of Sales,SaaS,taylor.lopez@pulse.io,https://www.pulse.io,201-500,AU,Signed up for newsletter
+132,Chris Singh,Nimbus Analytics,Growth Lead,Cybersecurity,chris.singh@nimbus.io,https://www.nimbus.io,11-50,DE,Met at conference
+133,Chris Martinez,Acme Labs,VP Marketing,Edtech,chris.martinez@acme.io,https://www.acme.io,501-1000,IN,Inbound from referral
+134,Devin Miller,Pulse Partners,CTO,SaaS,devin.miller@pulse.io,https://www.pulse.io,501-1000,IN,Inbound from referral
+135,Taylor Khan,Pulse Analytics,Head of Product,DevTools,taylor.khan@pulse.io,https://www.pulse.io,501-1000,AU,Met at conference
+136,Jordan Lopez,Vista Systems,Founder,Healthtech,jordan.lopez@vista.io,https://www.vista.io,1-10,UK,Interested in AI automation demos
+137,Riley Martinez,Zenith Solutions,VP Marketing,Edtech,riley.martinez@zenith.io,https://www.zenith.io,201-500,UK,Inbound from referral
+138,Avery Patel,Summit Solutions,COO,Fintech,avery.patel@summit.io,https://www.summit.io,201-500,AU,Requested pricing info
+139,Chris Brown,Vista Software,VP Engineering,Cybersecurity,chris.brown@vista.io,https://www.vista.io,51-200,SG,Interested in AI automation demos
+140,Avery Brown,Orbit Software,VP Engineering,Healthtech,avery.brown@orbit.io,https://www.orbit.io,51-200,US,Using competitor tool
+141,Casey Smith,Vertex Partners,Growth Lead,Retail,casey.smith@vertex.io,https://www.vertex.io,1-10,IN,Interested in AI automation demos
+142,Sam Smith,Vertex Partners,CIO,AI/ML,sam.smith@vertex.io,https://www.vertex.io,501-1000,SG,Requested pricing info
+143,Chris Martinez,Vertex Partners,Growth Lead,Cybersecurity,chris.martinez@vertex.io,https://www.vertex.io,1-10,SG,Using competitor tool
+144,Morgan Lopez,Vista Analytics,COO,DevTools,morgan.lopez@vista.io,https://www.vista.io,51-200,AU,Met at conference
+145,Avery Khan,Acme Software,CTO,Edtech,avery.khan@acme.io,https://www.acme.io,1000+,FR,Requested pricing info
+146,Alex Lopez,Orbit Systems,Head of Sales,Healthtech,alex.lopez@orbit.io,https://www.orbit.io,51-200,CA,Signed up for newsletter
+147,Sam Patel,Orbit Studios,CIO,E-commerce,sam.patel@orbit.io,https://www.orbit.io,501-1000,DE,Met at conference
+148,Quinn Johnson,Orbit Holdings,COO,Retail,quinn.johnson@orbit.io,https://www.orbit.io,1-10,SG,Requested pricing info
+149,Chris Patel,Nova Partners,Head of Product,AI/ML,chris.patel@nova.io,https://www.nova.io,11-50,CA,Inbound from referral
+150,Sam Williams,Vertex Solutions,VP Engineering,Edtech,sam.williams@vertex.io,https://www.vertex.io,51-200,AU,Signed up for newsletter
+151,Casey Johnson,Pulse Solutions,CTO,DevTools,casey.johnson@pulse.io,https://www.pulse.io,11-50,US,Using competitor tool
+152,Quinn Singh,Vertex Software,Head of Product,SaaS,quinn.singh@vertex.io,https://www.vertex.io,11-50,UK,Interested in AI automation demos
+153,Morgan Garcia,Orbit Technologies,COO,Healthtech,morgan.garcia@orbit.io,https://www.orbit.io,51-200,UK,Interested in AI automation demos
+154,Alex Singh,Vista Studios,VP Engineering,SaaS,alex.singh@vista.io,https://www.vista.io,201-500,US,Using competitor tool
+155,Taylor Miller,Pulse Holdings,Head of Sales,Healthtech,taylor.miller@pulse.io,https://www.pulse.io,1000+,AU,Inbound from referral
+156,Devin Davis,Acme Analytics,Head of Product,AI/ML,devin.davis@acme.io,https://www.acme.io,11-50,CA,Met at conference
+157,Jordan Lopez,Zenith Labs,Growth Lead,Cybersecurity,jordan.lopez@zenith.io,https://www.zenith.io,501-1000,CA,Requested pricing info
+158,Jordan Johnson,Zenith Systems,Growth Lead,SaaS,jordan.johnson@zenith.io,https://www.zenith.io,1-10,SG,Inbound from referral
+159,Morgan Davis,Acme Partners,Head of Product,AI/ML,morgan.davis@acme.io,https://www.acme.io,11-50,UK,Interested in AI automation demos
+160,Casey Davis,Zenith Partners,VP Marketing,SaaS,casey.davis@zenith.io,https://www.zenith.io,11-50,CA,Inbound from referral
+161,Casey Lopez,Nova Solutions,COO,Fintech,casey.lopez@nova.io,https://www.nova.io,51-200,CA,Met at conference
+162,Alex Singh,Summit Systems,VP Marketing,Healthtech,alex.singh@summit.io,https://www.summit.io,501-1000,IN,Met at conference
+163,Devin Martinez,Vista Labs,CIO,DevTools,devin.martinez@vista.io,https://www.vista.io,1-10,DE,Using competitor tool
+164,Quinn Singh,Zenith Systems,CTO,SaaS,quinn.singh@zenith.io,https://www.zenith.io,501-1000,IN,Inbound from referral
+165,Jamie Martinez,Vista Systems,VP Marketing,Fintech,jamie.martinez@vista.io,https://www.vista.io,1-10,AU,Requested pricing info
+166,Casey Williams,Zenith Technologies,CIO,Healthtech,casey.williams@zenith.io,https://www.zenith.io,51-200,UK,Signed up for newsletter
+167,Jamie Miller,Acme Software,Head of Product,E-commerce,jamie.miller@acme.io,https://www.acme.io,11-50,FR,Inbound from referral
+168,Devin Brown,Pulse Technologies,Head of Product,Cybersecurity,devin.brown@pulse.io,https://www.pulse.io,1000+,DE,Interested in AI automation demos
+169,Taylor Brown,Nova Systems,Growth Lead,Retail,taylor.brown@nova.io,https://www.nova.io,1000+,US,Using competitor tool
+170,Jamie Garcia,Orbit Partners,CIO,Edtech,jamie.garcia@orbit.io,https://www.orbit.io,1-10,IN,Interested in AI automation demos
+171,Riley Miller,Acme Software,VP Marketing,Cybersecurity,riley.miller@acme.io,https://www.acme.io,501-1000,US,Inbound from referral
+172,Taylor Smith,Nova Partners,Growth Lead,AI/ML,taylor.smith@nova.io,https://www.nova.io,1-10,UK,Interested in AI automation demos
+173,Devin Singh,Vertex Software,COO,Healthtech,devin.singh@vertex.io,https://www.vertex.io,51-200,FR,Requested pricing info
+174,Jamie Davis,Vista Labs,Head of Sales,Fintech,jamie.davis@vista.io,https://www.vista.io,51-200,US,Signed up for newsletter
+175,Casey Khan,Orbit Partners,VP Marketing,AI/ML,casey.khan@orbit.io,https://www.orbit.io,501-1000,FR,Using competitor tool
+176,Morgan Singh,Acme Labs,Head of Sales,Retail,morgan.singh@acme.io,https://www.acme.io,51-200,CA,Requested pricing info
+177,Chris Garcia,Nimbus Solutions,Head of Product,Fintech,chris.garcia@nimbus.io,https://www.nimbus.io,501-1000,US,Requested pricing info
+178,Taylor Lopez,Summit Analytics,Head of Sales,E-commerce,taylor.lopez@summit.io,https://www.summit.io,1-10,IN,Inbound from referral
+179,Devin Singh,Pulse Holdings,Founder,E-commerce,devin.singh@pulse.io,https://www.pulse.io,501-1000,SG,Using competitor tool
+180,Riley Johnson,Orbit Partners,VP Engineering,E-commerce,riley.johnson@orbit.io,https://www.orbit.io,51-200,UK,Interested in AI automation demos
+181,Sam Khan,Vista Analytics,Growth Lead,Fintech,sam.khan@vista.io,https://www.vista.io,51-200,FR,Requested pricing info
+182,Chris Williams,Nova Analytics,VP Marketing,DevTools,chris.williams@nova.io,https://www.nova.io,501-1000,IN,Interested in AI automation demos
+183,Casey Martinez,Vista Labs,Head of Sales,E-commerce,casey.martinez@vista.io,https://www.vista.io,501-1000,IN,Met at conference
+184,Sam Garcia,Nova Partners,VP Marketing,SaaS,sam.garcia@nova.io,https://www.nova.io,51-200,SG,Met at conference
+185,Alex Davis,Nova Software,CTO,Fintech,alex.davis@nova.io,https://www.nova.io,201-500,CA,Signed up for newsletter
+186,Jamie Garcia,Vertex Partners,Head of Sales,Fintech,jamie.garcia@vertex.io,https://www.vertex.io,51-200,IN,Met at conference
+187,Sam Khan,Vista Partners,Growth Lead,Edtech,sam.khan@vista.io,https://www.vista.io,201-500,AU,Interested in AI automation demos
+188,Taylor Garcia,Nimbus Analytics,Head of Sales,Fintech,taylor.garcia@nimbus.io,https://www.nimbus.io,1000+,IN,Requested pricing info
+189,Jamie Miller,Vertex Studios,CIO,Healthtech,jamie.miller@vertex.io,https://www.vertex.io,201-500,CA,Inbound from referral
+190,Quinn Williams,Nova Holdings,VP Engineering,Edtech,quinn.williams@nova.io,https://www.nova.io,501-1000,UK,Inbound from referral
+191,Taylor Miller,Summit Analytics,VP Marketing,Fintech,taylor.miller@summit.io,https://www.summit.io,1-10,US,Requested pricing info
+192,Avery Lopez,Orbit Technologies,Head of Product,SaaS,avery.lopez@orbit.io,https://www.orbit.io,201-500,FR,Inbound from referral
+193,Quinn Johnson,Vertex Solutions,CIO,Cybersecurity,quinn.johnson@vertex.io,https://www.vertex.io,1-10,SG,Met at conference
+194,Riley Lopez,Acme Software,Founder,Cybersecurity,riley.lopez@acme.io,https://www.acme.io,11-50,CA,Requested pricing info
+195,Casey Singh,Pulse Partners,Growth Lead,E-commerce,casey.singh@pulse.io,https://www.pulse.io,1000+,FR,Met at conference
+196,Devin Singh,Vertex Labs,Founder,DevTools,devin.singh@vertex.io,https://www.vertex.io,201-500,SG,Inbound from referral
+197,Jordan Patel,Zenith Software,VP Engineering,Edtech,jordan.patel@zenith.io,https://www.zenith.io,51-200,UK,Using competitor tool
+198,Riley Lopez,Vista Solutions,VP Engineering,Fintech,riley.lopez@vista.io,https://www.vista.io,201-500,AU,Using competitor tool
+199,Riley Martinez,Pulse Technologies,Head of Sales,E-commerce,riley.martinez@pulse.io,https://www.pulse.io,11-50,AU,Using competitor tool
+200,Morgan Martinez,Nimbus Analytics,VP Engineering,SaaS,morgan.martinez@nimbus.io,https://www.nimbus.io,1-10,UK,Requested pricing info
+201,Taylor Brown,Acme Software,VP Engineering,Retail,taylor.brown@acme.io,https://www.acme.io,201-500,US,Inbound from referral
+202,Jamie Miller,Orbit Holdings,CTO,Healthtech,jamie.miller@orbit.io,https://www.orbit.io,1-10,US,Using competitor tool
+203,Sam Davis,Nimbus Partners,Head of Sales,AI/ML,sam.davis@nimbus.io,https://www.nimbus.io,501-1000,UK,Met at conference
+204,Jamie Singh,Vista Partners,VP Marketing,AI/ML,jamie.singh@vista.io,https://www.vista.io,51-200,UK,Using competitor tool
+205,Riley Martinez,Acme Holdings,CTO,Cybersecurity,riley.martinez@acme.io,https://www.acme.io,201-500,US,Met at conference
+206,Jamie Singh,Pulse Technologies,CIO,Cybersecurity,jamie.singh@pulse.io,https://www.pulse.io,51-200,CA,Using competitor tool
+207,Jordan Davis,Nimbus Solutions,COO,Healthtech,jordan.davis@nimbus.io,https://www.nimbus.io,51-200,US,Signed up for newsletter
+208,Alex Johnson,Orbit Software,Founder,AI/ML,alex.johnson@orbit.io,https://www.orbit.io,1-10,IN,Requested pricing info
+209,Devin Singh,Acme Technologies,VP Marketing,Retail,devin.singh@acme.io,https://www.acme.io,51-200,UK,Inbound from referral
+210,Casey Davis,Nimbus Labs,CTO,DevTools,casey.davis@nimbus.io,https://www.nimbus.io,11-50,IN,Met at conference
+211,Taylor Brown,Acme Systems,Head of Sales,Fintech,taylor.brown@acme.io,https://www.acme.io,1-10,CA,Signed up for newsletter
+212,Avery Martinez,Nova Partners,Head of Sales,Fintech,avery.martinez@nova.io,https://www.nova.io,1000+,CA,Signed up for newsletter
+213,Chris Johnson,Vertex Technologies,VP Engineering,AI/ML,chris.johnson@vertex.io,https://www.vertex.io,501-1000,FR,Using competitor tool
+214,Taylor Johnson,Pulse Holdings,Head of Sales,AI/ML,taylor.johnson@pulse.io,https://www.pulse.io,201-500,US,Interested in AI automation demos
+215,Jamie Johnson,Zenith Studios,Growth Lead,SaaS,jamie.johnson@zenith.io,https://www.zenith.io,1000+,DE,Requested pricing info
+216,Quinn Davis,Nimbus Partners,Growth Lead,Fintech,quinn.davis@nimbus.io,https://www.nimbus.io,1-10,US,Using competitor tool
+217,Riley Patel,Nova Partners,VP Marketing,DevTools,riley.patel@nova.io,https://www.nova.io,11-50,CA,Inbound from referral
+218,Sam Martinez,Orbit Technologies,Founder,Fintech,sam.martinez@orbit.io,https://www.orbit.io,11-50,FR,Met at conference
+219,Quinn Khan,Acme Holdings,VP Engineering,Edtech,quinn.khan@acme.io,https://www.acme.io,1000+,CA,Inbound from referral
+220,Morgan Miller,Zenith Technologies,Growth Lead,Edtech,morgan.miller@zenith.io,https://www.zenith.io,1000+,DE,Interested in AI automation demos
+221,Casey Singh,Acme Holdings,COO,Retail,casey.singh@acme.io,https://www.acme.io,201-500,FR,Signed up for newsletter
+222,Jamie Johnson,Vista Technologies,CTO,SaaS,jamie.johnson@vista.io,https://www.vista.io,1000+,IN,Using competitor tool
+223,Jamie Singh,Acme Solutions,Founder,Fintech,jamie.singh@acme.io,https://www.acme.io,201-500,CA,Inbound from referral
+224,Casey Khan,Pulse Technologies,Growth Lead,Retail,casey.khan@pulse.io,https://www.pulse.io,501-1000,SG,Interested in AI automation demos
+225,Alex Miller,Pulse Solutions,VP Marketing,E-commerce,alex.miller@pulse.io,https://www.pulse.io,11-50,UK,Using competitor tool
+226,Avery Smith,Pulse Solutions,Head of Product,Fintech,avery.smith@pulse.io,https://www.pulse.io,1000+,US,Requested pricing info
+227,Avery Khan,Vista Labs,VP Engineering,E-commerce,avery.khan@vista.io,https://www.vista.io,201-500,AU,Inbound from referral
+228,Devin Garcia,Nova Systems,CTO,SaaS,devin.garcia@nova.io,https://www.nova.io,51-200,FR,Requested pricing info
+229,Devin Khan,Acme Studios,Growth Lead,SaaS,devin.khan@acme.io,https://www.acme.io,1-10,UK,Interested in AI automation demos
+230,Alex Garcia,Nova Studios,Founder,Edtech,alex.garcia@nova.io,https://www.nova.io,501-1000,IN,Using competitor tool
+231,Casey Singh,Pulse Systems,COO,Retail,casey.singh@pulse.io,https://www.pulse.io,1000+,CA,Requested pricing info
+232,Jordan Patel,Acme Partners,VP Engineering,AI/ML,jordan.patel@acme.io,https://www.acme.io,1000+,DE,Interested in AI automation demos
+233,Jordan Williams,Nimbus Labs,VP Marketing,E-commerce,jordan.williams@nimbus.io,https://www.nimbus.io,1-10,UK,Signed up for newsletter
+234,Jordan Martinez,Nova Software,COO,Healthtech,jordan.martinez@nova.io,https://www.nova.io,1000+,AU,Requested pricing info
+235,Casey Patel,Zenith Holdings,CIO,DevTools,casey.patel@zenith.io,https://www.zenith.io,51-200,CA,Interested in AI automation demos
+236,Taylor Singh,Acme Software,CIO,Cybersecurity,taylor.singh@acme.io,https://www.acme.io,1000+,SG,Using competitor tool
+237,Jordan Williams,Nimbus Systems,Head of Sales,Cybersecurity,jordan.williams@nimbus.io,https://www.nimbus.io,11-50,US,Using competitor tool
+238,Alex Patel,Summit Systems,VP Marketing,Edtech,alex.patel@summit.io,https://www.summit.io,201-500,UK,Inbound from referral
+239,Avery Garcia,Nova Partners,Founder,Cybersecurity,avery.garcia@nova.io,https://www.nova.io,1000+,AU,Interested in AI automation demos
+240,Quinn Martinez,Zenith Technologies,Founder,SaaS,quinn.martinez@zenith.io,https://www.zenith.io,1-10,CA,Signed up for newsletter
+241,Alex Singh,Nimbus Labs,CTO,Fintech,alex.singh@nimbus.io,https://www.nimbus.io,1000+,SG,Met at conference
+242,Devin Miller,Nova Analytics,CIO,Healthtech,devin.miller@nova.io,https://www.nova.io,201-500,UK,Inbound from referral
+243,Chris Patel,Vertex Studios,Head of Sales,Retail,chris.patel@vertex.io,https://www.vertex.io,1000+,FR,Using competitor tool
+244,Taylor Brown,Orbit Labs,Founder,Cybersecurity,taylor.brown@orbit.io,https://www.orbit.io,501-1000,SG,Signed up for newsletter
+245,Riley Lopez,Vertex Systems,Growth Lead,Edtech,riley.lopez@vertex.io,https://www.vertex.io,1000+,DE,Using competitor tool
+246,Avery Davis,Acme Software,Growth Lead,Edtech,avery.davis@acme.io,https://www.acme.io,11-50,US,Met at conference
+247,Taylor Brown,Zenith Holdings,Founder,DevTools,taylor.brown@zenith.io,https://www.zenith.io,51-200,AU,Inbound from referral
+248,Alex Singh,Vertex Solutions,COO,Retail,alex.singh@vertex.io,https://www.vertex.io,1-10,SG,Using competitor tool
+249,Casey Brown,Orbit Solutions,CTO,Retail,casey.brown@orbit.io,https://www.orbit.io,11-50,FR,Signed up for newsletter
+250,Riley Garcia,Vista Studios,Head of Sales,SaaS,riley.garcia@vista.io,https://www.vista.io,1-10,FR,Using competitor tool
+251,Devin Smith,Summit Software,VP Marketing,E-commerce,devin.smith@summit.io,https://www.summit.io,11-50,CA,Requested pricing info
+252,Avery Patel,Orbit Systems,COO,SaaS,avery.patel@orbit.io,https://www.orbit.io,11-50,US,Requested pricing info
+253,Morgan Martinez,Nimbus Solutions,Head of Product,Edtech,morgan.martinez@nimbus.io,https://www.nimbus.io,1-10,SG,Interested in AI automation demos
+254,Jamie Singh,Orbit Analytics,Growth Lead,Edtech,jamie.singh@orbit.io,https://www.orbit.io,51-200,US,Requested pricing info
+255,Devin Singh,Nimbus Software,Growth Lead,DevTools,devin.singh@nimbus.io,https://www.nimbus.io,11-50,IN,Interested in AI automation demos
+256,Casey Patel,Acme Labs,Founder,AI/ML,casey.patel@acme.io,https://www.acme.io,11-50,FR,Inbound from referral
+257,Jordan Smith,Nimbus Software,Head of Product,Cybersecurity,jordan.smith@nimbus.io,https://www.nimbus.io,201-500,CA,Signed up for newsletter
+258,Alex Williams,Nova Software,Head of Sales,Cybersecurity,alex.williams@nova.io,https://www.nova.io,51-200,US,Using competitor tool
+259,Alex Davis,Nimbus Holdings,Head of Product,E-commerce,alex.davis@nimbus.io,https://www.nimbus.io,11-50,AU,Interested in AI automation demos
+260,Chris Williams,Orbit Holdings,Head of Product,Cybersecurity,chris.williams@orbit.io,https://www.orbit.io,51-200,AU,Inbound from referral
+261,Avery Garcia,Nimbus Analytics,COO,SaaS,avery.garcia@nimbus.io,https://www.nimbus.io,51-200,UK,Inbound from referral
+262,Jordan Garcia,Zenith Systems,Growth Lead,AI/ML,jordan.garcia@zenith.io,https://www.zenith.io,1-10,IN,Met at conference
+263,Chris Brown,Acme Analytics,VP Marketing,Edtech,chris.brown@acme.io,https://www.acme.io,51-200,IN,Inbound from referral
+264,Taylor Williams,Acme Technologies,Head of Sales,Retail,taylor.williams@acme.io,https://www.acme.io,1000+,IN,Inbound from referral
+265,Jamie Smith,Pulse Holdings,Head of Sales,Retail,jamie.smith@pulse.io,https://www.pulse.io,1000+,DE,Using competitor tool
+266,Jordan Singh,Vista Solutions,Founder,Fintech,jordan.singh@vista.io,https://www.vista.io,1000+,CA,Inbound from referral
+267,Jordan Patel,Vertex Systems,Founder,Retail,jordan.patel@vertex.io,https://www.vertex.io,11-50,DE,Inbound from referral
+268,Chris Miller,Nova Labs,CTO,SaaS,chris.miller@nova.io,https://www.nova.io,501-1000,FR,Inbound from referral
+269,Riley Khan,Nova Systems,COO,Healthtech,riley.khan@nova.io,https://www.nova.io,1-10,IN,Signed up for newsletter
+270,Morgan Miller,Pulse Studios,CTO,Retail,morgan.miller@pulse.io,https://www.pulse.io,51-200,US,Interested in AI automation demos
+271,Devin Williams,Pulse Holdings,Head of Sales,Retail,devin.williams@pulse.io,https://www.pulse.io,1000+,IN,Met at conference
+272,Casey Khan,Nimbus Holdings,VP Marketing,Healthtech,casey.khan@nimbus.io,https://www.nimbus.io,11-50,IN,Requested pricing info
+273,Avery Davis,Nova Systems,VP Engineering,SaaS,avery.davis@nova.io,https://www.nova.io,1000+,AU,Using competitor tool
+274,Taylor Martinez,Acme Software,VP Engineering,Healthtech,taylor.martinez@acme.io,https://www.acme.io,11-50,AU,Requested pricing info
+275,Taylor Lopez,Nimbus Systems,Head of Sales,E-commerce,taylor.lopez@nimbus.io,https://www.nimbus.io,11-50,DE,Met at conference
+276,Taylor Brown,Pulse Solutions,Founder,Fintech,taylor.brown@pulse.io,https://www.pulse.io,1000+,IN,Using competitor tool
+277,Avery Brown,Acme Partners,COO,E-commerce,avery.brown@acme.io,https://www.acme.io,501-1000,AU,Requested pricing info
+278,Riley Khan,Vista Holdings,VP Engineering,Cybersecurity,riley.khan@vista.io,https://www.vista.io,1000+,US,Met at conference
+279,Devin Khan,Vista Systems,VP Marketing,SaaS,devin.khan@vista.io,https://www.vista.io,501-1000,IN,Interested in AI automation demos
+280,Taylor Brown,Summit Holdings,VP Marketing,SaaS,taylor.brown@summit.io,https://www.summit.io,1-10,DE,Requested pricing info
+281,Taylor Patel,Acme Technologies,CTO,E-commerce,taylor.patel@acme.io,https://www.acme.io,11-50,FR,Using competitor tool
+282,Quinn Miller,Nova Studios,Founder,DevTools,quinn.miller@nova.io,https://www.nova.io,201-500,FR,Inbound from referral
+283,Taylor Davis,Summit Studios,Founder,Healthtech,taylor.davis@summit.io,https://www.summit.io,1000+,UK,Interested in AI automation demos
+284,Morgan Lopez,Nova Technologies,Founder,E-commerce,morgan.lopez@nova.io,https://www.nova.io,201-500,AU,Signed up for newsletter
+285,Devin Brown,Acme Holdings,VP Engineering,DevTools,devin.brown@acme.io,https://www.acme.io,51-200,US,Met at conference
+286,Jamie Patel,Vista Technologies,Head of Sales,E-commerce,jamie.patel@vista.io,https://www.vista.io,1000+,US,Requested pricing info
+287,Quinn Smith,Summit Technologies,Head of Product,Healthtech,quinn.smith@summit.io,https://www.summit.io,11-50,US,Signed up for newsletter
+288,Casey Miller,Vista Partners,Founder,Cybersecurity,casey.miller@vista.io,https://www.vista.io,501-1000,SG,Inbound from referral
+289,Sam Garcia,Vertex Holdings,COO,Edtech,sam.garcia@vertex.io,https://www.vertex.io,501-1000,US,Requested pricing info
+290,Chris Johnson,Pulse Partners,VP Engineering,Healthtech,chris.johnson@pulse.io,https://www.pulse.io,11-50,DE,Interested in AI automation demos
+291,Taylor Singh,Vertex Software,Head of Product,Healthtech,taylor.singh@vertex.io,https://www.vertex.io,1-10,DE,Interested in AI automation demos
+292,Quinn Garcia,Nimbus Analytics,COO,E-commerce,quinn.garcia@nimbus.io,https://www.nimbus.io,1000+,DE,Met at conference
+293,Taylor Miller,Pulse Partners,VP Engineering,AI/ML,taylor.miller@pulse.io,https://www.pulse.io,201-500,CA,Signed up for newsletter
+294,Sam Singh,Pulse Solutions,VP Marketing,SaaS,sam.singh@pulse.io,https://www.pulse.io,501-1000,FR,Using competitor tool
+295,Sam Brown,Vista Holdings,CIO,AI/ML,sam.brown@vista.io,https://www.vista.io,51-200,IN,Using competitor tool
+296,Morgan Davis,Nova Analytics,COO,DevTools,morgan.davis@nova.io,https://www.nova.io,201-500,DE,Inbound from referral
+297,Chris Johnson,Acme Holdings,CIO,Healthtech,chris.johnson@acme.io,https://www.acme.io,1000+,SG,Interested in AI automation demos
+298,Morgan Brown,Nova Systems,Founder,SaaS,morgan.brown@nova.io,https://www.nova.io,1000+,DE,Interested in AI automation demos
+299,Jamie Martinez,Nimbus Labs,Growth Lead,SaaS,jamie.martinez@nimbus.io,https://www.nimbus.io,501-1000,DE,Signed up for newsletter
+300,Jamie Martinez,Acme Software,CIO,E-commerce,jamie.martinez@acme.io,https://www.acme.io,501-1000,FR,Requested pricing info
+301,Jordan Khan,Nimbus Systems,COO,AI/ML,jordan.khan@nimbus.io,https://www.nimbus.io,11-50,UK,Met at conference
+302,Jamie Lopez,Pulse Studios,VP Engineering,Cybersecurity,jamie.lopez@pulse.io,https://www.pulse.io,201-500,DE,Signed up for newsletter
+303,Jordan Martinez,Nova Software,CTO,Fintech,jordan.martinez@nova.io,https://www.nova.io,501-1000,US,Using competitor tool
+304,Devin Brown,Nova Labs,VP Marketing,Fintech,devin.brown@nova.io,https://www.nova.io,11-50,UK,Using competitor tool
+305,Chris Johnson,Acme Labs,CTO,AI/ML,chris.johnson@acme.io,https://www.acme.io,1-10,UK,Using competitor tool
+306,Sam Patel,Zenith Software,Founder,E-commerce,sam.patel@zenith.io,https://www.zenith.io,51-200,UK,Met at conference
+307,Casey Davis,Zenith Technologies,VP Engineering,Fintech,casey.davis@zenith.io,https://www.zenith.io,501-1000,CA,Inbound from referral
+308,Chris Smith,Vertex Holdings,CTO,Edtech,chris.smith@vertex.io,https://www.vertex.io,201-500,CA,Using competitor tool
+309,Sam Patel,Orbit Analytics,Head of Sales,SaaS,sam.patel@orbit.io,https://www.orbit.io,201-500,DE,Using competitor tool
+310,Jamie Smith,Pulse Holdings,VP Marketing,E-commerce,jamie.smith@pulse.io,https://www.pulse.io,201-500,AU,Met at conference
+311,Quinn Garcia,Acme Systems,CTO,Retail,quinn.garcia@acme.io,https://www.acme.io,1000+,US,Inbound from referral
+312,Taylor Martinez,Vista Partners,Founder,AI/ML,taylor.martinez@vista.io,https://www.vista.io,201-500,CA,Requested pricing info
+313,Jordan Williams,Summit Systems,VP Engineering,DevTools,jordan.williams@summit.io,https://www.summit.io,201-500,CA,Using competitor tool
+314,Avery Williams,Orbit Systems,Head of Sales,AI/ML,avery.williams@orbit.io,https://www.orbit.io,11-50,FR,Requested pricing info
+315,Jordan Davis,Orbit Partners,VP Engineering,Retail,jordan.davis@orbit.io,https://www.orbit.io,1000+,CA,Met at conference
+316,Riley Patel,Vertex Technologies,CTO,E-commerce,riley.patel@vertex.io,https://www.vertex.io,1000+,SG,Inbound from referral
+317,Jamie Brown,Pulse Systems,CTO,DevTools,jamie.brown@pulse.io,https://www.pulse.io,11-50,FR,Met at conference
+318,Riley Martinez,Vista Software,VP Engineering,Edtech,riley.martinez@vista.io,https://www.vista.io,51-200,UK,Signed up for newsletter
+319,Chris Brown,Nimbus Studios,CIO,AI/ML,chris.brown@nimbus.io,https://www.nimbus.io,11-50,SG,Using competitor tool
+320,Devin Khan,Summit Software,Growth Lead,E-commerce,devin.khan@summit.io,https://www.summit.io,501-1000,SG,Requested pricing info
+321,Devin Miller,Nimbus Partners,Head of Sales,Retail,devin.miller@nimbus.io,https://www.nimbus.io,1-10,US,Signed up for newsletter
+322,Morgan Davis,Pulse Studios,VP Engineering,Cybersecurity,morgan.davis@pulse.io,https://www.pulse.io,1000+,UK,Met at conference
+323,Morgan Lopez,Orbit Technologies,Head of Sales,E-commerce,morgan.lopez@orbit.io,https://www.orbit.io,51-200,SG,Interested in AI automation demos
+324,Alex Martinez,Summit Technologies,CIO,Cybersecurity,alex.martinez@summit.io,https://www.summit.io,51-200,US,Requested pricing info
+325,Jamie Williams,Orbit Technologies,Growth Lead,DevTools,jamie.williams@orbit.io,https://www.orbit.io,201-500,SG,Interested in AI automation demos
+326,Devin Singh,Zenith Systems,Head of Product,DevTools,devin.singh@zenith.io,https://www.zenith.io,1000+,AU,Inbound from referral
+327,Alex Brown,Vista Studios,VP Marketing,Edtech,alex.brown@vista.io,https://www.vista.io,1000+,CA,Signed up for newsletter
+328,Avery Garcia,Zenith Software,COO,Healthtech,avery.garcia@zenith.io,https://www.zenith.io,201-500,US,Signed up for newsletter
+329,Riley Patel,Summit Holdings,Head of Product,DevTools,riley.patel@summit.io,https://www.summit.io,51-200,US,Requested pricing info
+330,Jamie Smith,Vista Systems,Head of Product,Edtech,jamie.smith@vista.io,https://www.vista.io,1-10,AU,Using competitor tool
+331,Chris Patel,Orbit Software,VP Engineering,Cybersecurity,chris.patel@orbit.io,https://www.orbit.io,501-1000,DE,Interested in AI automation demos
+332,Casey Singh,Orbit Systems,Growth Lead,E-commerce,casey.singh@orbit.io,https://www.orbit.io,1000+,AU,Inbound from referral
+333,Chris Brown,Zenith Systems,Head of Product,DevTools,chris.brown@zenith.io,https://www.zenith.io,11-50,DE,Met at conference
+334,Avery Singh,Nova Labs,COO,Edtech,avery.singh@nova.io,https://www.nova.io,201-500,FR,Interested in AI automation demos
+335,Chris Johnson,Vertex Solutions,CTO,AI/ML,chris.johnson@vertex.io,https://www.vertex.io,11-50,DE,Interested in AI automation demos
+336,Chris Williams,Nova Solutions,Founder,Cybersecurity,chris.williams@nova.io,https://www.nova.io,51-200,DE,Inbound from referral
+337,Chris Williams,Pulse Analytics,COO,Edtech,chris.williams@pulse.io,https://www.pulse.io,51-200,DE,Requested pricing info
+338,Quinn Lopez,Vertex Partners,COO,AI/ML,quinn.lopez@vertex.io,https://www.vertex.io,11-50,US,Using competitor tool
+339,Devin Brown,Acme Holdings,Growth Lead,Retail,devin.brown@acme.io,https://www.acme.io,201-500,UK,Met at conference
+340,Casey Singh,Orbit Technologies,VP Engineering,SaaS,casey.singh@orbit.io,https://www.orbit.io,1000+,UK,Met at conference
+341,Devin Lopez,Vista Software,VP Marketing,AI/ML,devin.lopez@vista.io,https://www.vista.io,501-1000,AU,Interested in AI automation demos
+342,Jamie Garcia,Nimbus Partners,CIO,Healthtech,jamie.garcia@nimbus.io,https://www.nimbus.io,201-500,IN,Met at conference
+343,Alex Singh,Summit Holdings,VP Marketing,DevTools,alex.singh@summit.io,https://www.summit.io,51-200,DE,Using competitor tool
+344,Alex Garcia,Acme Holdings,Head of Sales,Cybersecurity,alex.garcia@acme.io,https://www.acme.io,11-50,CA,Signed up for newsletter
+345,Chris Khan,Summit Partners,Head of Sales,Retail,chris.khan@summit.io,https://www.summit.io,1000+,US,Using competitor tool
+346,Avery Smith,Nova Systems,VP Marketing,Cybersecurity,avery.smith@nova.io,https://www.nova.io,1000+,FR,Signed up for newsletter
+347,Quinn Martinez,Summit Labs,Growth Lead,Retail,quinn.martinez@summit.io,https://www.summit.io,1000+,US,Met at conference
+348,Riley Miller,Zenith Systems,COO,Edtech,riley.miller@zenith.io,https://www.zenith.io,11-50,UK,Interested in AI automation demos
+349,Jordan Lopez,Nimbus Labs,Head of Sales,Edtech,jordan.lopez@nimbus.io,https://www.nimbus.io,1000+,US,Inbound from referral
+350,Alex Johnson,Nova Solutions,CIO,Retail,alex.johnson@nova.io,https://www.nova.io,1000+,US,Signed up for newsletter
+351,Taylor Williams,Acme Labs,Growth Lead,AI/ML,taylor.williams@acme.io,https://www.acme.io,51-200,CA,Inbound from referral
+352,Morgan Singh,Pulse Partners,VP Engineering,E-commerce,morgan.singh@pulse.io,https://www.pulse.io,1000+,US,Using competitor tool
+353,Avery Johnson,Summit Technologies,Growth Lead,AI/ML,avery.johnson@summit.io,https://www.summit.io,1-10,CA,Using competitor tool
+354,Chris Williams,Summit Studios,Growth Lead,Fintech,chris.williams@summit.io,https://www.summit.io,11-50,UK,Using competitor tool
+355,Taylor Williams,Nova Labs,COO,SaaS,taylor.williams@nova.io,https://www.nova.io,1000+,FR,Met at conference
+356,Chris Lopez,Vertex Partners,CTO,Retail,chris.lopez@vertex.io,https://www.vertex.io,1-10,DE,Using competitor tool
+357,Morgan Johnson,Orbit Software,VP Engineering,AI/ML,morgan.johnson@orbit.io,https://www.orbit.io,201-500,DE,Signed up for newsletter
+358,Morgan Khan,Summit Analytics,Founder,Retail,morgan.khan@summit.io,https://www.summit.io,11-50,AU,Requested pricing info
+359,Morgan Lopez,Nimbus Systems,Head of Product,AI/ML,morgan.lopez@nimbus.io,https://www.nimbus.io,501-1000,FR,Requested pricing info
+360,Taylor Patel,Zenith Software,Founder,Retail,taylor.patel@zenith.io,https://www.zenith.io,51-200,AU,Interested in AI automation demos
+361,Casey Miller,Summit Partners,Head of Sales,AI/ML,casey.miller@summit.io,https://www.summit.io,201-500,AU,Using competitor tool
+362,Quinn Miller,Nova Studios,Founder,AI/ML,quinn.miller@nova.io,https://www.nova.io,501-1000,CA,Using competitor tool
+363,Avery Lopez,Orbit Partners,Head of Sales,Healthtech,avery.lopez@orbit.io,https://www.orbit.io,11-50,SG,Interested in AI automation demos
+364,Chris Singh,Nimbus Technologies,VP Engineering,Healthtech,chris.singh@nimbus.io,https://www.nimbus.io,201-500,SG,Met at conference
+365,Morgan Patel,Orbit Partners,VP Engineering,Healthtech,morgan.patel@orbit.io,https://www.orbit.io,501-1000,SG,Signed up for newsletter
+366,Alex Singh,Vista Systems,CTO,Fintech,alex.singh@vista.io,https://www.vista.io,1-10,UK,Requested pricing info
+367,Devin Johnson,Summit Labs,VP Engineering,Fintech,devin.johnson@summit.io,https://www.summit.io,1000+,DE,Met at conference
+368,Jamie Singh,Zenith Solutions,VP Engineering,Fintech,jamie.singh@zenith.io,https://www.zenith.io,201-500,FR,Met at conference
+369,Riley Khan,Acme Software,Head of Product,Fintech,riley.khan@acme.io,https://www.acme.io,1-10,DE,Requested pricing info
+370,Morgan Williams,Acme Technologies,VP Engineering,Retail,morgan.williams@acme.io,https://www.acme.io,1-10,US,Interested in AI automation demos
+371,Alex Smith,Acme Software,Head of Product,Edtech,alex.smith@acme.io,https://www.acme.io,501-1000,DE,Inbound from referral
+372,Avery Garcia,Zenith Systems,Founder,E-commerce,avery.garcia@zenith.io,https://www.zenith.io,51-200,AU,Interested in AI automation demos
+373,Avery Patel,Vista Technologies,Growth Lead,Cybersecurity,avery.patel@vista.io,https://www.vista.io,1-10,DE,Met at conference
+374,Casey Martinez,Orbit Holdings,Head of Product,Cybersecurity,casey.martinez@orbit.io,https://www.orbit.io,1000+,FR,Requested pricing info
+375,Casey Khan,Acme Software,Head of Product,Healthtech,casey.khan@acme.io,https://www.acme.io,51-200,SG,Met at conference
+376,Sam Khan,Orbit Systems,CIO,DevTools,sam.khan@orbit.io,https://www.orbit.io,11-50,AU,Met at conference
+377,Devin Patel,Summit Analytics,Founder,Edtech,devin.patel@summit.io,https://www.summit.io,501-1000,IN,Interested in AI automation demos
+378,Casey Brown,Nova Studios,COO,Edtech,casey.brown@nova.io,https://www.nova.io,51-200,IN,Met at conference
+379,Taylor Davis,Acme Systems,Head of Product,Retail,taylor.davis@acme.io,https://www.acme.io,11-50,DE,Inbound from referral
+380,Riley Davis,Nova Software,VP Engineering,Healthtech,riley.davis@nova.io,https://www.nova.io,501-1000,FR,Inbound from referral
+381,Chris Patel,Nimbus Labs,VP Marketing,Edtech,chris.patel@nimbus.io,https://www.nimbus.io,201-500,FR,Using competitor tool
+382,Morgan Miller,Nova Holdings,CTO,SaaS,morgan.miller@nova.io,https://www.nova.io,11-50,AU,Met at conference
+383,Riley Davis,Summit Studios,Head of Product,AI/ML,riley.davis@summit.io,https://www.summit.io,201-500,SG,Signed up for newsletter
+384,Morgan Miller,Summit Studios,VP Marketing,Fintech,morgan.miller@summit.io,https://www.summit.io,201-500,CA,Inbound from referral
+385,Jamie Garcia,Summit Analytics,Head of Sales,Edtech,jamie.garcia@summit.io,https://www.summit.io,201-500,AU,Signed up for newsletter
+386,Riley Patel,Nova Software,Head of Product,Cybersecurity,riley.patel@nova.io,https://www.nova.io,11-50,UK,Inbound from referral
+387,Jamie Khan,Summit Solutions,VP Engineering,Cybersecurity,jamie.khan@summit.io,https://www.summit.io,201-500,IN,Met at conference
+388,Quinn Martinez,Zenith Holdings,VP Marketing,AI/ML,quinn.martinez@zenith.io,https://www.zenith.io,51-200,US,Interested in AI automation demos
+389,Devin Lopez,Summit Software,VP Marketing,Retail,devin.lopez@summit.io,https://www.summit.io,1000+,SG,Interested in AI automation demos
+390,Casey Garcia,Pulse Holdings,Growth Lead,E-commerce,casey.garcia@pulse.io,https://www.pulse.io,201-500,SG,Signed up for newsletter
+391,Sam Patel,Orbit Software,COO,DevTools,sam.patel@orbit.io,https://www.orbit.io,201-500,FR,Using competitor tool
+392,Sam Martinez,Vista Solutions,VP Engineering,E-commerce,sam.martinez@vista.io,https://www.vista.io,51-200,DE,Met at conference
+393,Morgan Patel,Summit Software,Head of Product,Edtech,morgan.patel@summit.io,https://www.summit.io,1000+,FR,Requested pricing info
+394,Morgan Johnson,Acme Analytics,CIO,Cybersecurity,morgan.johnson@acme.io,https://www.acme.io,201-500,IN,Inbound from referral
+395,Jamie Davis,Zenith Solutions,Growth Lead,DevTools,jamie.davis@zenith.io,https://www.zenith.io,11-50,US,Interested in AI automation demos
+396,Avery Brown,Vertex Holdings,CTO,Retail,avery.brown@vertex.io,https://www.vertex.io,1000+,CA,Using competitor tool
+397,Sam Brown,Summit Software,CTO,Fintech,sam.brown@summit.io,https://www.summit.io,1-10,FR,Requested pricing info
+398,Taylor Williams,Pulse Software,VP Engineering,Healthtech,taylor.williams@pulse.io,https://www.pulse.io,1-10,IN,Using competitor tool
+399,Sam Williams,Vista Analytics,VP Engineering,AI/ML,sam.williams@vista.io,https://www.vista.io,51-200,SG,Signed up for newsletter
+400,Riley Williams,Nimbus Studios,Founder,SaaS,riley.williams@nimbus.io,https://www.nimbus.io,1-10,FR,Met at conference
+401,Avery Khan,Summit Solutions,Founder,Edtech,avery.khan@summit.io,https://www.summit.io,201-500,US,Requested pricing info
+402,Morgan Miller,Orbit Partners,Head of Sales,Retail,morgan.miller@orbit.io,https://www.orbit.io,11-50,UK,Interested in AI automation demos
+403,Casey Miller,Vista Systems,VP Marketing,Retail,casey.miller@vista.io,https://www.vista.io,1000+,FR,Met at conference
+404,Riley Davis,Vista Labs,CTO,SaaS,riley.davis@vista.io,https://www.vista.io,1-10,US,Signed up for newsletter
+405,Devin Johnson,Nimbus Partners,CTO,Fintech,devin.johnson@nimbus.io,https://www.nimbus.io,1000+,IN,Met at conference
+406,Devin Martinez,Zenith Technologies,CTO,Fintech,devin.martinez@zenith.io,https://www.zenith.io,501-1000,SG,Inbound from referral
+407,Riley Williams,Nova Analytics,VP Engineering,Healthtech,riley.williams@nova.io,https://www.nova.io,11-50,CA,Signed up for newsletter
+408,Morgan Miller,Vista Partners,Growth Lead,Retail,morgan.miller@vista.io,https://www.vista.io,1-10,FR,Using competitor tool
+409,Avery Patel,Pulse Analytics,VP Engineering,Retail,avery.patel@pulse.io,https://www.pulse.io,51-200,FR,Met at conference
+410,Devin Khan,Vertex Systems,CTO,Cybersecurity,devin.khan@vertex.io,https://www.vertex.io,1000+,CA,Met at conference
+411,Casey Davis,Vertex Studios,VP Engineering,AI/ML,casey.davis@vertex.io,https://www.vertex.io,51-200,UK,Using competitor tool
+412,Jordan Johnson,Vista Labs,Head of Sales,DevTools,jordan.johnson@vista.io,https://www.vista.io,1000+,AU,Signed up for newsletter
+413,Quinn Martinez,Pulse Partners,VP Engineering,Retail,quinn.martinez@pulse.io,https://www.pulse.io,201-500,CA,Requested pricing info
+414,Devin Williams,Orbit Labs,Head of Sales,SaaS,devin.williams@orbit.io,https://www.orbit.io,51-200,CA,Interested in AI automation demos
+415,Devin Patel,Vertex Partners,Growth Lead,DevTools,devin.patel@vertex.io,https://www.vertex.io,501-1000,SG,Interested in AI automation demos
+416,Devin Patel,Acme Systems,CIO,Healthtech,devin.patel@acme.io,https://www.acme.io,1000+,FR,Inbound from referral
+417,Avery Smith,Vertex Solutions,Growth Lead,E-commerce,avery.smith@vertex.io,https://www.vertex.io,201-500,UK,Signed up for newsletter
+418,Jordan Lopez,Acme Software,COO,Healthtech,jordan.lopez@acme.io,https://www.acme.io,51-200,US,Using competitor tool
+419,Sam Lopez,Nimbus Systems,Head of Product,Cybersecurity,sam.lopez@nimbus.io,https://www.nimbus.io,201-500,IN,Using competitor tool
+420,Sam Patel,Pulse Solutions,VP Engineering,AI/ML,sam.patel@pulse.io,https://www.pulse.io,201-500,US,Met at conference
+421,Morgan Lopez,Nimbus Holdings,VP Marketing,Cybersecurity,morgan.lopez@nimbus.io,https://www.nimbus.io,1-10,IN,Interested in AI automation demos
+422,Riley Johnson,Pulse Systems,Head of Sales,Edtech,riley.johnson@pulse.io,https://www.pulse.io,1000+,CA,Using competitor tool
+423,Alex Brown,Summit Partners,CIO,DevTools,alex.brown@summit.io,https://www.summit.io,501-1000,AU,Requested pricing info
+424,Devin Williams,Zenith Studios,CIO,Fintech,devin.williams@zenith.io,https://www.zenith.io,11-50,DE,Signed up for newsletter
+425,Chris Johnson,Vista Solutions,Head of Sales,DevTools,chris.johnson@vista.io,https://www.vista.io,1-10,CA,Interested in AI automation demos
+426,Devin Johnson,Vista Technologies,VP Engineering,Fintech,devin.johnson@vista.io,https://www.vista.io,501-1000,FR,Using competitor tool
+427,Quinn Brown,Nimbus Analytics,Founder,Cybersecurity,quinn.brown@nimbus.io,https://www.nimbus.io,501-1000,SG,Requested pricing info
+428,Jamie Garcia,Acme Studios,Founder,Cybersecurity,jamie.garcia@acme.io,https://www.acme.io,51-200,DE,Requested pricing info
+429,Morgan Lopez,Orbit Technologies,Growth Lead,SaaS,morgan.lopez@orbit.io,https://www.orbit.io,201-500,IN,Using competitor tool
+430,Riley Williams,Pulse Partners,Head of Sales,DevTools,riley.williams@pulse.io,https://www.pulse.io,1-10,FR,Using competitor tool
+431,Taylor Khan,Zenith Partners,VP Engineering,Cybersecurity,taylor.khan@zenith.io,https://www.zenith.io,11-50,AU,Requested pricing info
+432,Casey Davis,Zenith Analytics,CTO,Fintech,casey.davis@zenith.io,https://www.zenith.io,1-10,AU,Using competitor tool
+433,Sam Khan,Vista Software,CTO,Retail,sam.khan@vista.io,https://www.vista.io,1-10,FR,Requested pricing info
+434,Morgan Garcia,Vertex Technologies,COO,Fintech,morgan.garcia@vertex.io,https://www.vertex.io,1000+,AU,Requested pricing info
+435,Avery Khan,Summit Labs,COO,Retail,avery.khan@summit.io,https://www.summit.io,1000+,DE,Using competitor tool
+436,Jordan Johnson,Vista Solutions,Founder,Retail,jordan.johnson@vista.io,https://www.vista.io,51-200,SG,Met at conference
+437,Sam Brown,Vertex Technologies,Head of Sales,Healthtech,sam.brown@vertex.io,https://www.vertex.io,1-10,SG,Met at conference
+438,Jamie Davis,Vertex Software,Growth Lead,Edtech,jamie.davis@vertex.io,https://www.vertex.io,1000+,IN,Interested in AI automation demos
+439,Taylor Singh,Acme Analytics,CIO,Cybersecurity,taylor.singh@acme.io,https://www.acme.io,51-200,CA,Using competitor tool
+440,Sam Smith,Nimbus Holdings,Head of Product,E-commerce,sam.smith@nimbus.io,https://www.nimbus.io,51-200,US,Signed up for newsletter
+441,Alex Williams,Summit Solutions,Founder,Retail,alex.williams@summit.io,https://www.summit.io,11-50,US,Signed up for newsletter
+442,Taylor Smith,Nova Labs,Growth Lead,SaaS,taylor.smith@nova.io,https://www.nova.io,1-10,AU,Using competitor tool
+443,Taylor Miller,Vista Systems,CTO,Fintech,taylor.miller@vista.io,https://www.vista.io,1000+,FR,Met at conference
+444,Jordan Garcia,Zenith Holdings,Growth Lead,Retail,jordan.garcia@zenith.io,https://www.zenith.io,1000+,IN,Using competitor tool
+445,Jordan Johnson,Nimbus Studios,Growth Lead,SaaS,jordan.johnson@nimbus.io,https://www.nimbus.io,1-10,DE,Signed up for newsletter
+446,Sam Singh,Vista Partners,CTO,Healthtech,sam.singh@vista.io,https://www.vista.io,501-1000,SG,Requested pricing info
+447,Chris Brown,Vista Labs,Head of Product,AI/ML,chris.brown@vista.io,https://www.vista.io,51-200,CA,Inbound from referral
+448,Avery Garcia,Nova Partners,Head of Product,DevTools,avery.garcia@nova.io,https://www.nova.io,201-500,FR,Interested in AI automation demos
+449,Devin Martinez,Acme Labs,Head of Sales,DevTools,devin.martinez@acme.io,https://www.acme.io,1000+,AU,Signed up for newsletter
+450,Taylor Singh,Vista Studios,CIO,Edtech,taylor.singh@vista.io,https://www.vista.io,1000+,DE,Inbound from referral
+451,Riley Smith,Summit Solutions,Growth Lead,Healthtech,riley.smith@summit.io,https://www.summit.io,1-10,CA,Requested pricing info
+452,Taylor Miller,Zenith Analytics,CTO,E-commerce,taylor.miller@zenith.io,https://www.zenith.io,1-10,IN,Inbound from referral
+453,Morgan Williams,Summit Software,CTO,Healthtech,morgan.williams@summit.io,https://www.summit.io,11-50,FR,Requested pricing info
+454,Sam Miller,Vista Technologies,Growth Lead,DevTools,sam.miller@vista.io,https://www.vista.io,201-500,FR,Met at conference
+455,Devin Davis,Acme Studios,Head of Sales,E-commerce,devin.davis@acme.io,https://www.acme.io,51-200,US,Signed up for newsletter
+456,Taylor Davis,Acme Software,COO,Retail,taylor.davis@acme.io,https://www.acme.io,51-200,CA,Signed up for newsletter
+457,Devin Martinez,Acme Technologies,Founder,E-commerce,devin.martinez@acme.io,https://www.acme.io,501-1000,DE,Met at conference
+458,Taylor Williams,Nova Systems,CTO,SaaS,taylor.williams@nova.io,https://www.nova.io,201-500,FR,Signed up for newsletter
+459,Chris Smith,Orbit Technologies,Head of Sales,Edtech,chris.smith@orbit.io,https://www.orbit.io,1-10,SG,Inbound from referral
+460,Morgan Davis,Nova Systems,VP Marketing,Cybersecurity,morgan.davis@nova.io,https://www.nova.io,11-50,FR,Signed up for newsletter
+461,Casey Brown,Orbit Software,CTO,Healthtech,casey.brown@orbit.io,https://www.orbit.io,201-500,IN,Requested pricing info
+462,Morgan Patel,Summit Solutions,Head of Sales,Fintech,morgan.patel@summit.io,https://www.summit.io,1000+,UK,Signed up for newsletter
+463,Alex Johnson,Nimbus Partners,VP Engineering,Edtech,alex.johnson@nimbus.io,https://www.nimbus.io,1000+,UK,Met at conference
+464,Jamie Johnson,Vista Solutions,CIO,Cybersecurity,jamie.johnson@vista.io,https://www.vista.io,201-500,CA,Requested pricing info
+465,Taylor Miller,Nimbus Holdings,Head of Sales,Edtech,taylor.miller@nimbus.io,https://www.nimbus.io,1000+,SG,Met at conference
+466,Avery Garcia,Vertex Solutions,COO,SaaS,avery.garcia@vertex.io,https://www.vertex.io,51-200,FR,Using competitor tool
+467,Chris Williams,Pulse Analytics,VP Marketing,Fintech,chris.williams@pulse.io,https://www.pulse.io,11-50,SG,Requested pricing info
+468,Riley Martinez,Summit Labs,COO,Edtech,riley.martinez@summit.io,https://www.summit.io,51-200,CA,Interested in AI automation demos
+469,Casey Khan,Nova Analytics,CIO,AI/ML,casey.khan@nova.io,https://www.nova.io,501-1000,IN,Requested pricing info
+470,Taylor Singh,Pulse Studios,CTO,AI/ML,taylor.singh@pulse.io,https://www.pulse.io,1000+,US,Using competitor tool
+471,Alex Miller,Nimbus Technologies,CTO,SaaS,alex.miller@nimbus.io,https://www.nimbus.io,501-1000,AU,Using competitor tool
+472,Alex Martinez,Vista Systems,VP Marketing,Retail,alex.martinez@vista.io,https://www.vista.io,1-10,DE,Inbound from referral
+473,Sam Lopez,Vista Systems,Founder,E-commerce,sam.lopez@vista.io,https://www.vista.io,1-10,UK,Requested pricing info
+474,Chris Smith,Acme Studios,Head of Product,DevTools,chris.smith@acme.io,https://www.acme.io,201-500,US,Inbound from referral
+475,Chris Davis,Acme Partners,Head of Product,Fintech,chris.davis@acme.io,https://www.acme.io,51-200,IN,Interested in AI automation demos
+476,Devin Lopez,Summit Labs,CIO,Edtech,devin.lopez@summit.io,https://www.summit.io,1000+,CA,Using competitor tool
+477,Sam Patel,Nova Labs,CIO,Fintech,sam.patel@nova.io,https://www.nova.io,51-200,US,Requested pricing info
+478,Jordan Khan,Zenith Studios,Founder,Fintech,jordan.khan@zenith.io,https://www.zenith.io,501-1000,UK,Requested pricing info
+479,Riley Singh,Zenith Solutions,CTO,SaaS,riley.singh@zenith.io,https://www.zenith.io,201-500,AU,Met at conference
+480,Avery Johnson,Acme Software,Growth Lead,Cybersecurity,avery.johnson@acme.io,https://www.acme.io,201-500,IN,Interested in AI automation demos
+481,Sam Martinez,Vertex Solutions,VP Marketing,Edtech,sam.martinez@vertex.io,https://www.vertex.io,11-50,IN,Interested in AI automation demos
+482,Riley Williams,Orbit Labs,CIO,DevTools,riley.williams@orbit.io,https://www.orbit.io,11-50,AU,Signed up for newsletter
+483,Alex Singh,Nova Solutions,VP Marketing,SaaS,alex.singh@nova.io,https://www.nova.io,201-500,UK,Interested in AI automation demos
+484,Alex Garcia,Nimbus Systems,Growth Lead,E-commerce,alex.garcia@nimbus.io,https://www.nimbus.io,501-1000,CA,Requested pricing info
+485,Alex Johnson,Nimbus Studios,Head of Product,SaaS,alex.johnson@nimbus.io,https://www.nimbus.io,1-10,AU,Requested pricing info
+486,Taylor Lopez,Summit Studios,Growth Lead,Edtech,taylor.lopez@summit.io,https://www.summit.io,51-200,FR,Signed up for newsletter
+487,Sam Martinez,Nova Systems,Founder,Edtech,sam.martinez@nova.io,https://www.nova.io,1-10,CA,Signed up for newsletter
+488,Taylor Lopez,Vista Partners,Growth Lead,DevTools,taylor.lopez@vista.io,https://www.vista.io,501-1000,AU,Requested pricing info
+489,Quinn Davis,Vertex Technologies,VP Marketing,Retail,quinn.davis@vertex.io,https://www.vertex.io,1-10,FR,Requested pricing info
+490,Casey Lopez,Vertex Studios,Growth Lead,Cybersecurity,casey.lopez@vertex.io,https://www.vertex.io,11-50,FR,Signed up for newsletter
+491,Jamie Smith,Acme Analytics,Founder,E-commerce,jamie.smith@acme.io,https://www.acme.io,1-10,AU,Interested in AI automation demos
+492,Quinn Khan,Nimbus Labs,VP Marketing,AI/ML,quinn.khan@nimbus.io,https://www.nimbus.io,51-200,AU,Inbound from referral
+493,Chris Smith,Nova Partners,Head of Product,DevTools,chris.smith@nova.io,https://www.nova.io,201-500,SG,Requested pricing info
+494,Quinn Garcia,Acme Partners,VP Marketing,Cybersecurity,quinn.garcia@acme.io,https://www.acme.io,1000+,UK,Inbound from referral
+495,Jamie Lopez,Orbit Partners,Founder,E-commerce,jamie.lopez@orbit.io,https://www.orbit.io,201-500,SG,Met at conference
+496,Devin Khan,Acme Studios,CTO,SaaS,devin.khan@acme.io,https://www.acme.io,1000+,UK,Inbound from referral
+497,Devin Singh,Zenith Systems,COO,Fintech,devin.singh@zenith.io,https://www.zenith.io,51-200,AU,Inbound from referral
+498,Avery Miller,Nova Software,VP Engineering,E-commerce,avery.miller@nova.io,https://www.nova.io,51-200,IN,Signed up for newsletter
+499,Riley Garcia,Vertex Holdings,Head of Sales,Retail,riley.garcia@vertex.io,https://www.vertex.io,501-1000,DE,Requested pricing info
+500,Taylor Garcia,Zenith Holdings,Growth Lead,DevTools,taylor.garcia@zenith.io,https://www.zenith.io,501-1000,DE,Requested pricing info
+501,Avery Davis,Pulse Partners,CTO,DevTools,avery.davis@pulse.io,https://www.pulse.io,501-1000,AU,Requested pricing info
+502,Devin Miller,Nimbus Software,CTO,Edtech,devin.miller@nimbus.io,https://www.nimbus.io,51-200,FR,Signed up for newsletter
+503,Taylor Patel,Vertex Technologies,COO,Healthtech,taylor.patel@vertex.io,https://www.vertex.io,201-500,SG,Signed up for newsletter
+504,Sam Williams,Vista Partners,Founder,Edtech,sam.williams@vista.io,https://www.vista.io,11-50,DE,Inbound from referral
+505,Avery Brown,Summit Partners,Head of Sales,Healthtech,avery.brown@summit.io,https://www.summit.io,11-50,UK,Using competitor tool
+506,Riley Davis,Acme Studios,Founder,Retail,riley.davis@acme.io,https://www.acme.io,11-50,FR,Using competitor tool
+507,Taylor Patel,Nimbus Technologies,Head of Sales,Retail,taylor.patel@nimbus.io,https://www.nimbus.io,501-1000,UK,Met at conference
+508,Sam Miller,Summit Partners,VP Engineering,Healthtech,sam.miller@summit.io,https://www.summit.io,501-1000,IN,Met at conference
+509,Sam Smith,Pulse Solutions,Head of Product,Fintech,sam.smith@pulse.io,https://www.pulse.io,501-1000,IN,Requested pricing info
+510,Chris Miller,Summit Labs,Growth Lead,Cybersecurity,chris.miller@summit.io,https://www.summit.io,501-1000,IN,Signed up for newsletter
+511,Quinn Khan,Zenith Systems,COO,DevTools,quinn.khan@zenith.io,https://www.zenith.io,501-1000,SG,Using competitor tool
+512,Devin Martinez,Orbit Solutions,Head of Product,SaaS,devin.martinez@orbit.io,https://www.orbit.io,501-1000,SG,Requested pricing info
+513,Taylor Brown,Nimbus Studios,VP Marketing,Healthtech,taylor.brown@nimbus.io,https://www.nimbus.io,1-10,AU,Using competitor tool
+514,Riley Brown,Nova Analytics,Head of Product,DevTools,riley.brown@nova.io,https://www.nova.io,1000+,AU,Met at conference
+515,Devin Brown,Vertex Partners,Founder,E-commerce,devin.brown@vertex.io,https://www.vertex.io,501-1000,SG,Met at conference
+516,Sam Smith,Vista Studios,Founder,Healthtech,sam.smith@vista.io,https://www.vista.io,201-500,SG,Signed up for newsletter
+517,Morgan Smith,Nova Studios,Founder,SaaS,morgan.smith@nova.io,https://www.nova.io,11-50,AU,Signed up for newsletter
+518,Alex Williams,Vista Labs,VP Engineering,Retail,alex.williams@vista.io,https://www.vista.io,11-50,DE,Using competitor tool
+519,Jordan Brown,Nimbus Technologies,Head of Sales,Cybersecurity,jordan.brown@nimbus.io,https://www.nimbus.io,11-50,AU,Using competitor tool
+520,Jordan Lopez,Nova Analytics,CTO,Edtech,jordan.lopez@nova.io,https://www.nova.io,1000+,SG,Using competitor tool
+521,Morgan Smith,Vertex Studios,VP Engineering,Retail,morgan.smith@vertex.io,https://www.vertex.io,201-500,US,Inbound from referral
+522,Sam Patel,Zenith Analytics,Head of Sales,Cybersecurity,sam.patel@zenith.io,https://www.zenith.io,11-50,CA,Met at conference
+523,Devin Johnson,Acme Holdings,CTO,Cybersecurity,devin.johnson@acme.io,https://www.acme.io,201-500,DE,Requested pricing info
+524,Sam Brown,Vertex Holdings,COO,Retail,sam.brown@vertex.io,https://www.vertex.io,51-200,UK,Requested pricing info
+525,Riley Martinez,Orbit Technologies,COO,Retail,riley.martinez@orbit.io,https://www.orbit.io,51-200,CA,Requested pricing info
+526,Casey Martinez,Nimbus Labs,VP Engineering,Cybersecurity,casey.martinez@nimbus.io,https://www.nimbus.io,1-10,US,Using competitor tool
+527,Riley Williams,Acme Holdings,VP Marketing,AI/ML,riley.williams@acme.io,https://www.acme.io,51-200,FR,Signed up for newsletter
+528,Taylor Garcia,Summit Technologies,VP Marketing,Cybersecurity,taylor.garcia@summit.io,https://www.summit.io,1-10,FR,Inbound from referral
+529,Riley Singh,Nimbus Holdings,Head of Product,Cybersecurity,riley.singh@nimbus.io,https://www.nimbus.io,11-50,SG,Using competitor tool
+530,Casey Garcia,Vista Analytics,Founder,Fintech,casey.garcia@vista.io,https://www.vista.io,51-200,IN,Requested pricing info
+531,Jordan Lopez,Pulse Studios,VP Marketing,Cybersecurity,jordan.lopez@pulse.io,https://www.pulse.io,11-50,IN,Using competitor tool
+532,Casey Smith,Nimbus Studios,Founder,Cybersecurity,casey.smith@nimbus.io,https://www.nimbus.io,201-500,US,Using competitor tool
+533,Chris Smith,Orbit Partners,VP Marketing,AI/ML,chris.smith@orbit.io,https://www.orbit.io,11-50,FR,Requested pricing info
+534,Sam Patel,Summit Partners,Founder,Cybersecurity,sam.patel@summit.io,https://www.summit.io,1000+,AU,Requested pricing info
+535,Jamie Singh,Pulse Holdings,Head of Product,E-commerce,jamie.singh@pulse.io,https://www.pulse.io,51-200,AU,Using competitor tool
+536,Jordan Johnson,Summit Partners,Growth Lead,Healthtech,jordan.johnson@summit.io,https://www.summit.io,11-50,FR,Requested pricing info
+537,Quinn Martinez,Orbit Studios,VP Marketing,DevTools,quinn.martinez@orbit.io,https://www.orbit.io,1-10,UK,Met at conference
+538,Taylor Khan,Vista Studios,Founder,DevTools,taylor.khan@vista.io,https://www.vista.io,1000+,SG,Met at conference
+539,Chris Smith,Vertex Software,VP Engineering,Cybersecurity,chris.smith@vertex.io,https://www.vertex.io,1000+,CA,Met at conference
+540,Taylor Miller,Vista Solutions,Growth Lead,E-commerce,taylor.miller@vista.io,https://www.vista.io,201-500,IN,Inbound from referral
+541,Riley Lopez,Orbit Systems,CTO,SaaS,riley.lopez@orbit.io,https://www.orbit.io,1000+,US,Interested in AI automation demos
+542,Morgan Smith,Acme Solutions,CTO,AI/ML,morgan.smith@acme.io,https://www.acme.io,1000+,DE,Using competitor tool
+543,Jamie Brown,Zenith Partners,VP Marketing,Healthtech,jamie.brown@zenith.io,https://www.zenith.io,11-50,CA,Using competitor tool
+544,Morgan Davis,Vista Partners,COO,E-commerce,morgan.davis@vista.io,https://www.vista.io,51-200,CA,Using competitor tool
+545,Riley Miller,Summit Analytics,Head of Product,Edtech,riley.miller@summit.io,https://www.summit.io,201-500,SG,Interested in AI automation demos
+546,Jordan Miller,Nova Labs,CIO,AI/ML,jordan.miller@nova.io,https://www.nova.io,501-1000,FR,Interested in AI automation demos
+547,Casey Davis,Nova Studios,COO,E-commerce,casey.davis@nova.io,https://www.nova.io,501-1000,UK,Interested in AI automation demos
+548,Casey Miller,Nimbus Partners,VP Marketing,Cybersecurity,casey.miller@nimbus.io,https://www.nimbus.io,501-1000,SG,Interested in AI automation demos
+549,Taylor Williams,Vertex Software,Head of Product,Edtech,taylor.williams@vertex.io,https://www.vertex.io,1-10,US,Met at conference
+550,Avery Martinez,Nimbus Holdings,VP Engineering,AI/ML,avery.martinez@nimbus.io,https://www.nimbus.io,501-1000,FR,Using competitor tool
+551,Chris Garcia,Acme Technologies,COO,Cybersecurity,chris.garcia@acme.io,https://www.acme.io,1-10,US,Using competitor tool
+552,Devin Brown,Vista Technologies,Head of Sales,AI/ML,devin.brown@vista.io,https://www.vista.io,1000+,SG,Signed up for newsletter
+553,Avery Brown,Vista Technologies,Founder,AI/ML,avery.brown@vista.io,https://www.vista.io,11-50,AU,Met at conference
+554,Jordan Smith,Nova Holdings,COO,Fintech,jordan.smith@nova.io,https://www.nova.io,501-1000,AU,Met at conference
+555,Jamie Khan,Nova Holdings,Head of Sales,Edtech,jamie.khan@nova.io,https://www.nova.io,51-200,CA,Requested pricing info
+556,Avery Lopez,Orbit Software,CIO,Healthtech,avery.lopez@orbit.io,https://www.orbit.io,201-500,SG,Interested in AI automation demos
+557,Alex Khan,Nova Systems,COO,Retail,alex.khan@nova.io,https://www.nova.io,1000+,AU,Inbound from referral
+558,Taylor Patel,Nova Systems,Founder,SaaS,taylor.patel@nova.io,https://www.nova.io,1-10,DE,Signed up for newsletter
+559,Morgan Lopez,Pulse Solutions,Growth Lead,E-commerce,morgan.lopez@pulse.io,https://www.pulse.io,501-1000,DE,Signed up for newsletter
+560,Chris Garcia,Zenith Holdings,Head of Sales,Retail,chris.garcia@zenith.io,https://www.zenith.io,1-10,US,Inbound from referral
+561,Devin Brown,Zenith Systems,Growth Lead,E-commerce,devin.brown@zenith.io,https://www.zenith.io,1-10,AU,Inbound from referral
+562,Devin Patel,Pulse Technologies,CTO,AI/ML,devin.patel@pulse.io,https://www.pulse.io,201-500,IN,Met at conference
+563,Morgan Garcia,Vertex Software,COO,Retail,morgan.garcia@vertex.io,https://www.vertex.io,1-10,UK,Met at conference
+564,Taylor Lopez,Orbit Solutions,VP Engineering,E-commerce,taylor.lopez@orbit.io,https://www.orbit.io,201-500,UK,Inbound from referral
+565,Jordan Smith,Vista Technologies,VP Engineering,Retail,jordan.smith@vista.io,https://www.vista.io,1000+,UK,Requested pricing info
+566,Jamie Garcia,Acme Partners,CTO,Healthtech,jamie.garcia@acme.io,https://www.acme.io,1-10,DE,Using competitor tool
+567,Sam Singh,Nova Labs,Head of Sales,SaaS,sam.singh@nova.io,https://www.nova.io,1-10,CA,Met at conference
+568,Riley Brown,Vertex Systems,Founder,E-commerce,riley.brown@vertex.io,https://www.vertex.io,1000+,AU,Requested pricing info
+569,Devin Johnson,Vista Studios,Founder,SaaS,devin.johnson@vista.io,https://www.vista.io,1000+,US,Using competitor tool
+570,Quinn Brown,Summit Holdings,VP Engineering,AI/ML,quinn.brown@summit.io,https://www.summit.io,201-500,AU,Using competitor tool
+571,Devin Singh,Orbit Solutions,Founder,DevTools,devin.singh@orbit.io,https://www.orbit.io,501-1000,UK,Inbound from referral
+572,Morgan Brown,Acme Solutions,VP Engineering,Cybersecurity,morgan.brown@acme.io,https://www.acme.io,51-200,AU,Requested pricing info
+573,Jamie Khan,Acme Solutions,VP Marketing,AI/ML,jamie.khan@acme.io,https://www.acme.io,11-50,IN,Inbound from referral
+574,Casey Davis,Pulse Technologies,Growth Lead,Healthtech,casey.davis@pulse.io,https://www.pulse.io,501-1000,UK,Interested in AI automation demos
+575,Jordan Smith,Vista Technologies,COO,Retail,jordan.smith@vista.io,https://www.vista.io,51-200,CA,Using competitor tool
+576,Riley Davis,Vertex Holdings,Head of Product,AI/ML,riley.davis@vertex.io,https://www.vertex.io,11-50,US,Requested pricing info
+577,Jordan Singh,Pulse Studios,Head of Sales,SaaS,jordan.singh@pulse.io,https://www.pulse.io,51-200,UK,Requested pricing info
+578,Jamie Singh,Vertex Software,VP Engineering,Cybersecurity,jamie.singh@vertex.io,https://www.vertex.io,1000+,CA,Interested in AI automation demos
+579,Devin Singh,Summit Partners,Founder,Fintech,devin.singh@summit.io,https://www.summit.io,51-200,IN,Interested in AI automation demos
+580,Jamie Brown,Vista Labs,Founder,Cybersecurity,jamie.brown@vista.io,https://www.vista.io,501-1000,DE,Inbound from referral
+581,Chris Garcia,Zenith Technologies,COO,DevTools,chris.garcia@zenith.io,https://www.zenith.io,1000+,CA,Requested pricing info
+582,Taylor Williams,Nova Labs,Head of Product,E-commerce,taylor.williams@nova.io,https://www.nova.io,1-10,IN,Using competitor tool
+583,Riley Martinez,Summit Technologies,Growth Lead,Edtech,riley.martinez@summit.io,https://www.summit.io,501-1000,SG,Met at conference
+584,Jordan Patel,Pulse Software,CIO,AI/ML,jordan.patel@pulse.io,https://www.pulse.io,201-500,US,Met at conference
+585,Devin Johnson,Orbit Partners,COO,Healthtech,devin.johnson@orbit.io,https://www.orbit.io,51-200,AU,Met at conference
+586,Morgan Lopez,Pulse Holdings,Founder,SaaS,morgan.lopez@pulse.io,https://www.pulse.io,201-500,UK,Requested pricing info
+587,Alex Johnson,Nova Software,COO,E-commerce,alex.johnson@nova.io,https://www.nova.io,1-10,SG,Signed up for newsletter
+588,Chris Martinez,Zenith Technologies,CTO,AI/ML,chris.martinez@zenith.io,https://www.zenith.io,201-500,UK,Requested pricing info
+589,Riley Patel,Pulse Software,Head of Product,Retail,riley.patel@pulse.io,https://www.pulse.io,11-50,UK,Interested in AI automation demos
+590,Morgan Johnson,Summit Systems,CTO,SaaS,morgan.johnson@summit.io,https://www.summit.io,1000+,UK,Interested in AI automation demos
+591,Taylor Johnson,Orbit Holdings,COO,SaaS,taylor.johnson@orbit.io,https://www.orbit.io,201-500,FR,Signed up for newsletter
+592,Casey Garcia,Nimbus Labs,Head of Sales,Fintech,casey.garcia@nimbus.io,https://www.nimbus.io,51-200,DE,Signed up for newsletter
+593,Alex Miller,Vista Partners,VP Marketing,DevTools,alex.miller@vista.io,https://www.vista.io,1000+,UK,Using competitor tool
+594,Quinn Miller,Vertex Technologies,CTO,SaaS,quinn.miller@vertex.io,https://www.vertex.io,201-500,DE,Signed up for newsletter
+595,Jordan Garcia,Summit Labs,CIO,Cybersecurity,jordan.garcia@summit.io,https://www.summit.io,501-1000,UK,Inbound from referral
+596,Alex Smith,Vertex Partners,VP Marketing,Healthtech,alex.smith@vertex.io,https://www.vertex.io,51-200,AU,Signed up for newsletter
+597,Riley Garcia,Orbit Analytics,Growth Lead,Fintech,riley.garcia@orbit.io,https://www.orbit.io,1-10,DE,Using competitor tool
+598,Alex Miller,Vertex Studios,Head of Product,Healthtech,alex.miller@vertex.io,https://www.vertex.io,51-200,DE,Met at conference
+599,Jamie Patel,Summit Holdings,Head of Sales,AI/ML,jamie.patel@summit.io,https://www.summit.io,11-50,IN,Requested pricing info
+600,Jordan Davis,Vista Software,CIO,SaaS,jordan.davis@vista.io,https://www.vista.io,11-50,IN,Signed up for newsletter
+601,Casey Patel,Acme Analytics,Growth Lead,SaaS,casey.patel@acme.io,https://www.acme.io,1-10,AU,Inbound from referral
+602,Jamie Singh,Nimbus Partners,Head of Product,E-commerce,jamie.singh@nimbus.io,https://www.nimbus.io,1000+,UK,Signed up for newsletter
+603,Alex Smith,Pulse Technologies,VP Engineering,AI/ML,alex.smith@pulse.io,https://www.pulse.io,1-10,IN,Using competitor tool
+604,Casey Williams,Vertex Systems,VP Marketing,DevTools,casey.williams@vertex.io,https://www.vertex.io,1000+,US,Using competitor tool
+605,Quinn Singh,Nimbus Analytics,Founder,DevTools,quinn.singh@nimbus.io,https://www.nimbus.io,1-10,US,Using competitor tool
+606,Jordan Khan,Nova Labs,COO,SaaS,jordan.khan@nova.io,https://www.nova.io,201-500,DE,Interested in AI automation demos
+607,Casey Khan,Summit Holdings,CIO,Retail,casey.khan@summit.io,https://www.summit.io,1-10,AU,Requested pricing info
+608,Sam Lopez,Pulse Solutions,Founder,AI/ML,sam.lopez@pulse.io,https://www.pulse.io,201-500,IN,Interested in AI automation demos
+609,Alex Garcia,Summit Holdings,Founder,Retail,alex.garcia@summit.io,https://www.summit.io,11-50,SG,Signed up for newsletter
+610,Taylor Johnson,Orbit Studios,Head of Sales,Edtech,taylor.johnson@orbit.io,https://www.orbit.io,501-1000,AU,Using competitor tool
+611,Jamie Williams,Orbit Technologies,COO,Healthtech,jamie.williams@orbit.io,https://www.orbit.io,1-10,FR,Using competitor tool
+612,Riley Johnson,Vista Studios,Founder,SaaS,riley.johnson@vista.io,https://www.vista.io,1000+,AU,Interested in AI automation demos
+613,Jordan Singh,Zenith Studios,Head of Product,E-commerce,jordan.singh@zenith.io,https://www.zenith.io,11-50,US,Using competitor tool
+614,Quinn Williams,Pulse Labs,Head of Sales,Retail,quinn.williams@pulse.io,https://www.pulse.io,1-10,SG,Inbound from referral
+615,Casey Patel,Nimbus Solutions,Head of Product,AI/ML,casey.patel@nimbus.io,https://www.nimbus.io,1-10,CA,Inbound from referral
+616,Jordan Miller,Nimbus Systems,VP Marketing,Fintech,jordan.miller@nimbus.io,https://www.nimbus.io,1-10,UK,Using competitor tool
+617,Riley Patel,Nimbus Systems,CTO,Retail,riley.patel@nimbus.io,https://www.nimbus.io,201-500,AU,Using competitor tool
+618,Sam Davis,Orbit Studios,Head of Sales,E-commerce,sam.davis@orbit.io,https://www.orbit.io,51-200,DE,Interested in AI automation demos
+619,Sam Johnson,Vista Analytics,VP Engineering,DevTools,sam.johnson@vista.io,https://www.vista.io,1-10,SG,Requested pricing info
+620,Riley Lopez,Pulse Solutions,VP Engineering,AI/ML,riley.lopez@pulse.io,https://www.pulse.io,51-200,CA,Using competitor tool
+621,Quinn Patel,Summit Labs,VP Marketing,Cybersecurity,quinn.patel@summit.io,https://www.summit.io,51-200,CA,Requested pricing info
+622,Jamie Lopez,Summit Holdings,VP Marketing,Retail,jamie.lopez@summit.io,https://www.summit.io,1000+,US,Requested pricing info
+623,Morgan Davis,Acme Technologies,VP Engineering,E-commerce,morgan.davis@acme.io,https://www.acme.io,11-50,AU,Requested pricing info
+624,Quinn Martinez,Zenith Holdings,VP Marketing,E-commerce,quinn.martinez@zenith.io,https://www.zenith.io,501-1000,DE,Signed up for newsletter
+625,Avery Davis,Pulse Analytics,Head of Product,SaaS,avery.davis@pulse.io,https://www.pulse.io,51-200,US,Requested pricing info
+626,Jamie Johnson,Nova Studios,Head of Product,Edtech,jamie.johnson@nova.io,https://www.nova.io,1-10,US,Met at conference
+627,Avery Brown,Summit Technologies,Head of Product,AI/ML,avery.brown@summit.io,https://www.summit.io,501-1000,CA,Using competitor tool
+628,Taylor Brown,Summit Technologies,Head of Sales,Fintech,taylor.brown@summit.io,https://www.summit.io,1-10,FR,Interested in AI automation demos
+629,Jordan Williams,Acme Partners,Head of Sales,DevTools,jordan.williams@acme.io,https://www.acme.io,1000+,UK,Signed up for newsletter
+630,Jordan Davis,Vista Technologies,Head of Sales,E-commerce,jordan.davis@vista.io,https://www.vista.io,501-1000,FR,Signed up for newsletter
+631,Avery Garcia,Zenith Software,Head of Product,Healthtech,avery.garcia@zenith.io,https://www.zenith.io,1-10,AU,Using competitor tool
+632,Chris Smith,Acme Systems,VP Marketing,Retail,chris.smith@acme.io,https://www.acme.io,501-1000,UK,Using competitor tool
+633,Morgan Davis,Nimbus Solutions,CIO,Edtech,morgan.davis@nimbus.io,https://www.nimbus.io,1000+,DE,Interested in AI automation demos
+634,Taylor Johnson,Vista Analytics,CIO,SaaS,taylor.johnson@vista.io,https://www.vista.io,1-10,US,Requested pricing info
+635,Alex Patel,Vertex Solutions,Growth Lead,Retail,alex.patel@vertex.io,https://www.vertex.io,201-500,AU,Signed up for newsletter
+636,Jordan Williams,Acme Holdings,Founder,E-commerce,jordan.williams@acme.io,https://www.acme.io,11-50,US,Using competitor tool
+637,Jordan Williams,Nimbus Technologies,Founder,E-commerce,jordan.williams@nimbus.io,https://www.nimbus.io,1-10,UK,Using competitor tool
+638,Jordan Davis,Nova Solutions,Head of Sales,Edtech,jordan.davis@nova.io,https://www.nova.io,1000+,IN,Interested in AI automation demos
+639,Chris Davis,Pulse Analytics,Head of Sales,Cybersecurity,chris.davis@pulse.io,https://www.pulse.io,201-500,CA,Interested in AI automation demos
+640,Devin Smith,Pulse Analytics,Head of Product,SaaS,devin.smith@pulse.io,https://www.pulse.io,1000+,SG,Requested pricing info
+641,Jordan Smith,Pulse Software,CIO,Fintech,jordan.smith@pulse.io,https://www.pulse.io,201-500,FR,Interested in AI automation demos
+642,Taylor Singh,Acme Analytics,Founder,AI/ML,taylor.singh@acme.io,https://www.acme.io,51-200,UK,Signed up for newsletter
+643,Jamie Khan,Pulse Studios,Founder,Healthtech,jamie.khan@pulse.io,https://www.pulse.io,51-200,UK,Interested in AI automation demos
+644,Jordan Singh,Acme Solutions,VP Marketing,DevTools,jordan.singh@acme.io,https://www.acme.io,11-50,SG,Requested pricing info
+645,Jamie Brown,Vista Analytics,COO,Retail,jamie.brown@vista.io,https://www.vista.io,11-50,IN,Interested in AI automation demos
+646,Alex Davis,Nova Labs,Head of Sales,Edtech,alex.davis@nova.io,https://www.nova.io,201-500,CA,Using competitor tool
+647,Casey Smith,Zenith Solutions,Head of Sales,Edtech,casey.smith@zenith.io,https://www.zenith.io,51-200,DE,Using competitor tool
+648,Riley Miller,Summit Software,CIO,DevTools,riley.miller@summit.io,https://www.summit.io,1000+,AU,Requested pricing info
+649,Devin Lopez,Orbit Technologies,Head of Product,Edtech,devin.lopez@orbit.io,https://www.orbit.io,501-1000,AU,Interested in AI automation demos
+650,Avery Davis,Nova Software,COO,SaaS,avery.davis@nova.io,https://www.nova.io,501-1000,FR,Interested in AI automation demos
+651,Morgan Williams,Orbit Holdings,Head of Sales,Fintech,morgan.williams@orbit.io,https://www.orbit.io,1000+,FR,Inbound from referral
+652,Quinn Miller,Summit Studios,CIO,DevTools,quinn.miller@summit.io,https://www.summit.io,1000+,UK,Signed up for newsletter
+653,Taylor Martinez,Nimbus Holdings,VP Marketing,SaaS,taylor.martinez@nimbus.io,https://www.nimbus.io,51-200,SG,Inbound from referral
+654,Jamie Williams,Zenith Labs,Head of Product,Edtech,jamie.williams@zenith.io,https://www.zenith.io,201-500,SG,Requested pricing info
+655,Jordan Brown,Acme Software,VP Engineering,Cybersecurity,jordan.brown@acme.io,https://www.acme.io,1000+,IN,Interested in AI automation demos
+656,Avery Martinez,Nova Studios,Head of Sales,Fintech,avery.martinez@nova.io,https://www.nova.io,501-1000,IN,Interested in AI automation demos
+657,Riley Garcia,Zenith Systems,CIO,Retail,riley.garcia@zenith.io,https://www.zenith.io,501-1000,FR,Signed up for newsletter
+658,Sam Davis,Orbit Technologies,CIO,E-commerce,sam.davis@orbit.io,https://www.orbit.io,501-1000,CA,Met at conference
+659,Casey Khan,Orbit Labs,VP Engineering,AI/ML,casey.khan@orbit.io,https://www.orbit.io,51-200,UK,Requested pricing info
+660,Casey Martinez,Vertex Systems,Founder,DevTools,casey.martinez@vertex.io,https://www.vertex.io,11-50,CA,Using competitor tool
+661,Avery Lopez,Orbit Labs,CIO,DevTools,avery.lopez@orbit.io,https://www.orbit.io,501-1000,UK,Requested pricing info
+662,Casey Johnson,Orbit Partners,CTO,SaaS,casey.johnson@orbit.io,https://www.orbit.io,1000+,US,Interested in AI automation demos
+663,Jordan Smith,Orbit Labs,COO,Retail,jordan.smith@orbit.io,https://www.orbit.io,1-10,CA,Using competitor tool
+664,Jordan Garcia,Nimbus Labs,COO,AI/ML,jordan.garcia@nimbus.io,https://www.nimbus.io,501-1000,AU,Using competitor tool
+665,Quinn Khan,Summit Analytics,Founder,E-commerce,quinn.khan@summit.io,https://www.summit.io,501-1000,US,Signed up for newsletter
+666,Chris Singh,Nova Solutions,CIO,SaaS,chris.singh@nova.io,https://www.nova.io,201-500,SG,Using competitor tool
+667,Devin Johnson,Pulse Analytics,CTO,Retail,devin.johnson@pulse.io,https://www.pulse.io,1-10,US,Interested in AI automation demos
+668,Casey Garcia,Pulse Studios,VP Marketing,E-commerce,casey.garcia@pulse.io,https://www.pulse.io,1000+,AU,Inbound from referral
+669,Avery Davis,Nimbus Software,Growth Lead,Healthtech,avery.davis@nimbus.io,https://www.nimbus.io,11-50,US,Interested in AI automation demos
+670,Chris Martinez,Pulse Solutions,Head of Product,Fintech,chris.martinez@pulse.io,https://www.pulse.io,201-500,US,Signed up for newsletter
+671,Quinn Singh,Nimbus Partners,Head of Sales,AI/ML,quinn.singh@nimbus.io,https://www.nimbus.io,1-10,IN,Requested pricing info
+672,Morgan Davis,Nimbus Solutions,CTO,Fintech,morgan.davis@nimbus.io,https://www.nimbus.io,1000+,US,Met at conference
+673,Morgan Davis,Zenith Systems,Head of Sales,SaaS,morgan.davis@zenith.io,https://www.zenith.io,501-1000,CA,Met at conference
+674,Riley Williams,Orbit Analytics,COO,SaaS,riley.williams@orbit.io,https://www.orbit.io,51-200,AU,Using competitor tool
+675,Jamie Davis,Zenith Partners,Head of Sales,Fintech,jamie.davis@zenith.io,https://www.zenith.io,11-50,US,Inbound from referral
+676,Jamie Smith,Orbit Labs,CIO,SaaS,jamie.smith@orbit.io,https://www.orbit.io,1-10,UK,Inbound from referral
+677,Devin Miller,Summit Partners,CIO,AI/ML,devin.miller@summit.io,https://www.summit.io,201-500,AU,Inbound from referral
+678,Jordan Williams,Nimbus Labs,COO,AI/ML,jordan.williams@nimbus.io,https://www.nimbus.io,501-1000,US,Requested pricing info
+679,Devin Miller,Pulse Solutions,Founder,SaaS,devin.miller@pulse.io,https://www.pulse.io,11-50,DE,Using competitor tool
+680,Morgan Khan,Nimbus Analytics,VP Marketing,Cybersecurity,morgan.khan@nimbus.io,https://www.nimbus.io,51-200,FR,Met at conference
+681,Taylor Lopez,Nova Software,COO,SaaS,taylor.lopez@nova.io,https://www.nova.io,501-1000,FR,Signed up for newsletter
+682,Avery Garcia,Zenith Analytics,VP Engineering,Retail,avery.garcia@zenith.io,https://www.zenith.io,1000+,UK,Inbound from referral
+683,Sam Martinez,Zenith Technologies,CTO,Retail,sam.martinez@zenith.io,https://www.zenith.io,51-200,US,Using competitor tool
+684,Alex Martinez,Vista Partners,Growth Lead,Healthtech,alex.martinez@vista.io,https://www.vista.io,501-1000,FR,Interested in AI automation demos
+685,Chris Garcia,Summit Partners,Growth Lead,Retail,chris.garcia@summit.io,https://www.summit.io,11-50,FR,Interested in AI automation demos
+686,Avery Garcia,Vertex Solutions,CTO,DevTools,avery.garcia@vertex.io,https://www.vertex.io,11-50,US,Met at conference
+687,Quinn Khan,Zenith Studios,Head of Sales,Edtech,quinn.khan@zenith.io,https://www.zenith.io,11-50,IN,Requested pricing info
+688,Alex Johnson,Zenith Technologies,COO,Healthtech,alex.johnson@zenith.io,https://www.zenith.io,201-500,AU,Interested in AI automation demos
+689,Avery Patel,Orbit Analytics,COO,SaaS,avery.patel@orbit.io,https://www.orbit.io,201-500,CA,Interested in AI automation demos
+690,Casey Lopez,Vista Labs,Head of Product,Retail,casey.lopez@vista.io,https://www.vista.io,1-10,SG,Signed up for newsletter
+691,Jamie Khan,Orbit Studios,VP Engineering,Retail,jamie.khan@orbit.io,https://www.orbit.io,51-200,US,Met at conference
+692,Devin Singh,Acme Software,COO,AI/ML,devin.singh@acme.io,https://www.acme.io,11-50,US,Met at conference
+693,Quinn Davis,Vista Systems,Founder,DevTools,quinn.davis@vista.io,https://www.vista.io,1-10,US,Interested in AI automation demos
+694,Alex Garcia,Acme Labs,CIO,Edtech,alex.garcia@acme.io,https://www.acme.io,51-200,IN,Using competitor tool
+695,Morgan Smith,Acme Labs,Founder,Healthtech,morgan.smith@acme.io,https://www.acme.io,201-500,US,Inbound from referral
+696,Quinn Miller,Nimbus Technologies,COO,SaaS,quinn.miller@nimbus.io,https://www.nimbus.io,501-1000,IN,Inbound from referral
+697,Jamie Williams,Pulse Partners,CIO,Retail,jamie.williams@pulse.io,https://www.pulse.io,1000+,DE,Inbound from referral
+698,Riley Patel,Acme Analytics,VP Marketing,Healthtech,riley.patel@acme.io,https://www.acme.io,11-50,DE,Signed up for newsletter
+699,Chris Lopez,Nimbus Labs,CIO,Cybersecurity,chris.lopez@nimbus.io,https://www.nimbus.io,501-1000,FR,Met at conference
+700,Casey Brown,Summit Software,COO,E-commerce,casey.brown@summit.io,https://www.summit.io,51-200,IN,Inbound from referral
+701,Casey Smith,Vertex Studios,Founder,E-commerce,casey.smith@vertex.io,https://www.vertex.io,51-200,IN,Signed up for newsletter
+702,Chris Davis,Nova Studios,Founder,AI/ML,chris.davis@nova.io,https://www.nova.io,11-50,DE,Interested in AI automation demos
+703,Casey Williams,Vertex Solutions,VP Marketing,AI/ML,casey.williams@vertex.io,https://www.vertex.io,201-500,US,Using competitor tool
+704,Morgan Garcia,Pulse Software,COO,Fintech,morgan.garcia@pulse.io,https://www.pulse.io,501-1000,US,Using competitor tool
+705,Riley Miller,Acme Labs,COO,E-commerce,riley.miller@acme.io,https://www.acme.io,201-500,CA,Interested in AI automation demos
+706,Jamie Martinez,Vista Systems,Growth Lead,AI/ML,jamie.martinez@vista.io,https://www.vista.io,201-500,AU,Inbound from referral
+707,Quinn Brown,Nimbus Labs,Founder,Cybersecurity,quinn.brown@nimbus.io,https://www.nimbus.io,501-1000,IN,Signed up for newsletter
+708,Sam Singh,Orbit Software,VP Marketing,E-commerce,sam.singh@orbit.io,https://www.orbit.io,1000+,CA,Inbound from referral
+709,Sam Brown,Vertex Software,Head of Product,DevTools,sam.brown@vertex.io,https://www.vertex.io,501-1000,US,Using competitor tool
+710,Quinn Patel,Summit Holdings,CIO,Edtech,quinn.patel@summit.io,https://www.summit.io,11-50,AU,Signed up for newsletter
+711,Taylor Miller,Acme Software,Founder,Retail,taylor.miller@acme.io,https://www.acme.io,1-10,UK,Using competitor tool
+712,Riley Miller,Zenith Systems,Head of Sales,Healthtech,riley.miller@zenith.io,https://www.zenith.io,501-1000,IN,Signed up for newsletter
+713,Jordan Martinez,Acme Software,Growth Lead,Edtech,jordan.martinez@acme.io,https://www.acme.io,201-500,DE,Using competitor tool
+714,Devin Brown,Pulse Solutions,Founder,Healthtech,devin.brown@pulse.io,https://www.pulse.io,1000+,IN,Signed up for newsletter
+715,Alex Williams,Zenith Analytics,CIO,SaaS,alex.williams@zenith.io,https://www.zenith.io,201-500,CA,Met at conference
+716,Morgan Davis,Nimbus Holdings,Founder,Healthtech,morgan.davis@nimbus.io,https://www.nimbus.io,1000+,IN,Signed up for newsletter
+717,Jordan Miller,Pulse Studios,Growth Lead,Healthtech,jordan.miller@pulse.io,https://www.pulse.io,1-10,CA,Using competitor tool
+718,Casey Smith,Vista Labs,Head of Product,DevTools,casey.smith@vista.io,https://www.vista.io,1000+,CA,Met at conference
+719,Riley Brown,Acme Labs,CTO,Healthtech,riley.brown@acme.io,https://www.acme.io,201-500,UK,Signed up for newsletter
+720,Jamie Khan,Vertex Holdings,COO,Fintech,jamie.khan@vertex.io,https://www.vertex.io,11-50,IN,Using competitor tool
+721,Devin Lopez,Summit Analytics,Growth Lead,DevTools,devin.lopez@summit.io,https://www.summit.io,11-50,US,Interested in AI automation demos
+722,Morgan Garcia,Vertex Technologies,Head of Sales,SaaS,morgan.garcia@vertex.io,https://www.vertex.io,51-200,UK,Inbound from referral
+723,Morgan Williams,Vertex Partners,Head of Product,DevTools,morgan.williams@vertex.io,https://www.vertex.io,201-500,SG,Using competitor tool
+724,Jordan Lopez,Nova Technologies,COO,Fintech,jordan.lopez@nova.io,https://www.nova.io,11-50,US,Requested pricing info
+725,Alex Martinez,Acme Studios,VP Engineering,DevTools,alex.martinez@acme.io,https://www.acme.io,51-200,AU,Signed up for newsletter
+726,Devin Williams,Orbit Labs,Founder,Healthtech,devin.williams@orbit.io,https://www.orbit.io,201-500,CA,Using competitor tool
+727,Casey Lopez,Vertex Holdings,CTO,Edtech,casey.lopez@vertex.io,https://www.vertex.io,201-500,DE,Inbound from referral
+728,Morgan Singh,Zenith Systems,COO,Cybersecurity,morgan.singh@zenith.io,https://www.zenith.io,51-200,US,Requested pricing info
+729,Alex Singh,Orbit Labs,CIO,DevTools,alex.singh@orbit.io,https://www.orbit.io,201-500,CA,Interested in AI automation demos
+730,Riley Davis,Pulse Systems,CTO,Edtech,riley.davis@pulse.io,https://www.pulse.io,51-200,IN,Interested in AI automation demos
+731,Taylor Miller,Nova Holdings,CIO,DevTools,taylor.miller@nova.io,https://www.nova.io,1-10,DE,Inbound from referral
+732,Sam Martinez,Nimbus Holdings,Head of Product,Fintech,sam.martinez@nimbus.io,https://www.nimbus.io,201-500,SG,Requested pricing info
+733,Sam Khan,Pulse Software,CTO,DevTools,sam.khan@pulse.io,https://www.pulse.io,201-500,FR,Requested pricing info
+734,Devin Garcia,Nimbus Solutions,VP Engineering,Edtech,devin.garcia@nimbus.io,https://www.nimbus.io,11-50,IN,Interested in AI automation demos
+735,Taylor Patel,Vertex Analytics,VP Engineering,SaaS,taylor.patel@vertex.io,https://www.vertex.io,1000+,SG,Requested pricing info
+736,Riley Brown,Nimbus Analytics,VP Marketing,Fintech,riley.brown@nimbus.io,https://www.nimbus.io,1-10,CA,Signed up for newsletter
+737,Jordan Brown,Nova Solutions,Founder,SaaS,jordan.brown@nova.io,https://www.nova.io,51-200,FR,Using competitor tool
+738,Avery Smith,Nova Solutions,CIO,Edtech,avery.smith@nova.io,https://www.nova.io,51-200,SG,Signed up for newsletter
+739,Devin Miller,Nova Analytics,VP Marketing,SaaS,devin.miller@nova.io,https://www.nova.io,51-200,SG,Interested in AI automation demos
+740,Casey Garcia,Nova Holdings,CTO,E-commerce,casey.garcia@nova.io,https://www.nova.io,1-10,DE,Requested pricing info
+741,Jamie Singh,Zenith Holdings,VP Engineering,SaaS,jamie.singh@zenith.io,https://www.zenith.io,51-200,FR,Inbound from referral
+742,Jordan Brown,Vertex Systems,CIO,Retail,jordan.brown@vertex.io,https://www.vertex.io,1-10,SG,Requested pricing info
+743,Chris Martinez,Nimbus Holdings,VP Engineering,Edtech,chris.martinez@nimbus.io,https://www.nimbus.io,201-500,UK,Interested in AI automation demos
+744,Jamie Smith,Nimbus Systems,Growth Lead,Fintech,jamie.smith@nimbus.io,https://www.nimbus.io,1-10,AU,Met at conference
+745,Sam Davis,Pulse Studios,Growth Lead,SaaS,sam.davis@pulse.io,https://www.pulse.io,1000+,IN,Signed up for newsletter
+746,Chris Williams,Vista Analytics,Head of Sales,SaaS,chris.williams@vista.io,https://www.vista.io,201-500,US,Met at conference
+747,Jamie Lopez,Orbit Labs,VP Engineering,AI/ML,jamie.lopez@orbit.io,https://www.orbit.io,201-500,US,Met at conference
+748,Avery Smith,Vertex Labs,CTO,Fintech,avery.smith@vertex.io,https://www.vertex.io,501-1000,UK,Inbound from referral
+749,Morgan Miller,Pulse Analytics,VP Marketing,SaaS,morgan.miller@pulse.io,https://www.pulse.io,11-50,UK,Met at conference
+750,Sam Singh,Orbit Studios,VP Engineering,Fintech,sam.singh@orbit.io,https://www.orbit.io,11-50,DE,Inbound from referral
+751,Jordan Martinez,Nova Labs,COO,Fintech,jordan.martinez@nova.io,https://www.nova.io,201-500,SG,Interested in AI automation demos
+752,Chris Singh,Vista Systems,Growth Lead,SaaS,chris.singh@vista.io,https://www.vista.io,11-50,SG,Using competitor tool
+753,Quinn Singh,Zenith Software,CIO,Fintech,quinn.singh@zenith.io,https://www.zenith.io,201-500,DE,Signed up for newsletter
+754,Alex Brown,Orbit Partners,Founder,Fintech,alex.brown@orbit.io,https://www.orbit.io,1-10,DE,Inbound from referral
+755,Sam Martinez,Nimbus Technologies,Head of Sales,Healthtech,sam.martinez@nimbus.io,https://www.nimbus.io,11-50,FR,Inbound from referral
+756,Sam Williams,Vertex Solutions,COO,Edtech,sam.williams@vertex.io,https://www.vertex.io,51-200,UK,Interested in AI automation demos
+757,Jamie Martinez,Nimbus Studios,CTO,E-commerce,jamie.martinez@nimbus.io,https://www.nimbus.io,51-200,SG,Signed up for newsletter
+758,Avery Smith,Acme Studios,CTO,Cybersecurity,avery.smith@acme.io,https://www.acme.io,11-50,FR,Inbound from referral
+759,Devin Williams,Pulse Partners,Growth Lead,Cybersecurity,devin.williams@pulse.io,https://www.pulse.io,501-1000,SG,Inbound from referral
+760,Morgan Garcia,Acme Partners,VP Engineering,E-commerce,morgan.garcia@acme.io,https://www.acme.io,501-1000,UK,Signed up for newsletter
+761,Devin Lopez,Nova Partners,VP Engineering,DevTools,devin.lopez@nova.io,https://www.nova.io,1-10,AU,Interested in AI automation demos
+762,Devin Miller,Zenith Analytics,Head of Product,E-commerce,devin.miller@zenith.io,https://www.zenith.io,51-200,IN,Using competitor tool
+763,Devin Garcia,Nova Labs,CTO,Healthtech,devin.garcia@nova.io,https://www.nova.io,501-1000,UK,Signed up for newsletter
+764,Sam Davis,Pulse Analytics,VP Engineering,Healthtech,sam.davis@pulse.io,https://www.pulse.io,501-1000,UK,Requested pricing info
+765,Devin Johnson,Acme Technologies,VP Marketing,Retail,devin.johnson@acme.io,https://www.acme.io,1000+,IN,Requested pricing info
+766,Riley Singh,Vertex Labs,Head of Product,Retail,riley.singh@vertex.io,https://www.vertex.io,201-500,UK,Inbound from referral
+767,Chris Lopez,Acme Solutions,COO,Retail,chris.lopez@acme.io,https://www.acme.io,51-200,UK,Requested pricing info
+768,Quinn Johnson,Acme Labs,Growth Lead,Healthtech,quinn.johnson@acme.io,https://www.acme.io,1-10,FR,Requested pricing info
+769,Casey Patel,Pulse Solutions,Head of Product,Cybersecurity,casey.patel@pulse.io,https://www.pulse.io,11-50,AU,Interested in AI automation demos
+770,Casey Garcia,Summit Holdings,VP Engineering,Cybersecurity,casey.garcia@summit.io,https://www.summit.io,501-1000,CA,Requested pricing info
+771,Devin Smith,Orbit Holdings,VP Marketing,Healthtech,devin.smith@orbit.io,https://www.orbit.io,11-50,SG,Inbound from referral
+772,Sam Garcia,Vista Software,CTO,Retail,sam.garcia@vista.io,https://www.vista.io,1-10,SG,Signed up for newsletter
+773,Quinn Patel,Nimbus Labs,Growth Lead,Cybersecurity,quinn.patel@nimbus.io,https://www.nimbus.io,1000+,DE,Inbound from referral
+774,Taylor Khan,Vista Solutions,Head of Sales,Retail,taylor.khan@vista.io,https://www.vista.io,501-1000,DE,Inbound from referral
+775,Sam Khan,Acme Studios,VP Marketing,Cybersecurity,sam.khan@acme.io,https://www.acme.io,501-1000,US,Signed up for newsletter
+776,Taylor Brown,Nova Technologies,Head of Product,E-commerce,taylor.brown@nova.io,https://www.nova.io,11-50,IN,Interested in AI automation demos
+777,Devin Martinez,Acme Studios,CIO,Healthtech,devin.martinez@acme.io,https://www.acme.io,51-200,DE,Inbound from referral
+778,Jamie Garcia,Acme Technologies,CTO,DevTools,jamie.garcia@acme.io,https://www.acme.io,1-10,CA,Requested pricing info
+779,Quinn Martinez,Pulse Solutions,CTO,Healthtech,quinn.martinez@pulse.io,https://www.pulse.io,51-200,AU,Inbound from referral
+780,Alex Davis,Acme Labs,CTO,Edtech,alex.davis@acme.io,https://www.acme.io,1000+,AU,Inbound from referral
+781,Riley Lopez,Vertex Systems,Founder,AI/ML,riley.lopez@vertex.io,https://www.vertex.io,1-10,AU,Inbound from referral
+782,Sam Patel,Summit Systems,COO,AI/ML,sam.patel@summit.io,https://www.summit.io,1000+,CA,Met at conference
+783,Sam Davis,Nova Partners,COO,SaaS,sam.davis@nova.io,https://www.nova.io,201-500,AU,Met at conference
+784,Devin Johnson,Summit Software,CIO,Healthtech,devin.johnson@summit.io,https://www.summit.io,1-10,DE,Interested in AI automation demos
+785,Chris Johnson,Orbit Solutions,Head of Sales,Retail,chris.johnson@orbit.io,https://www.orbit.io,1000+,UK,Interested in AI automation demos
+786,Alex Williams,Zenith Software,Head of Sales,Healthtech,alex.williams@zenith.io,https://www.zenith.io,201-500,CA,Inbound from referral
+787,Alex Williams,Vista Software,Founder,Cybersecurity,alex.williams@vista.io,https://www.vista.io,51-200,IN,Using competitor tool
+788,Taylor Garcia,Orbit Solutions,Head of Product,DevTools,taylor.garcia@orbit.io,https://www.orbit.io,501-1000,AU,Interested in AI automation demos
+789,Casey Smith,Nova Technologies,VP Marketing,Healthtech,casey.smith@nova.io,https://www.nova.io,51-200,UK,Met at conference
+790,Devin Miller,Pulse Partners,Founder,AI/ML,devin.miller@pulse.io,https://www.pulse.io,201-500,SG,Using competitor tool
+791,Alex Brown,Pulse Partners,Head of Sales,AI/ML,alex.brown@pulse.io,https://www.pulse.io,51-200,CA,Interested in AI automation demos
+792,Devin Davis,Nimbus Labs,CIO,E-commerce,devin.davis@nimbus.io,https://www.nimbus.io,501-1000,US,Inbound from referral
+793,Alex Johnson,Vista Studios,COO,SaaS,alex.johnson@vista.io,https://www.vista.io,51-200,AU,Inbound from referral
+794,Casey Williams,Vertex Partners,VP Marketing,Edtech,casey.williams@vertex.io,https://www.vertex.io,11-50,US,Signed up for newsletter
+795,Avery Brown,Orbit Analytics,CTO,DevTools,avery.brown@orbit.io,https://www.orbit.io,1000+,CA,Inbound from referral
+796,Chris Williams,Nimbus Holdings,VP Marketing,Edtech,chris.williams@nimbus.io,https://www.nimbus.io,1000+,FR,Requested pricing info
+797,Taylor Patel,Pulse Technologies,Founder,Healthtech,taylor.patel@pulse.io,https://www.pulse.io,51-200,CA,Interested in AI automation demos
+798,Chris Williams,Orbit Partners,CIO,Edtech,chris.williams@orbit.io,https://www.orbit.io,1-10,AU,Requested pricing info
+799,Taylor Martinez,Zenith Systems,Head of Product,AI/ML,taylor.martinez@zenith.io,https://www.zenith.io,201-500,CA,Signed up for newsletter
+800,Morgan Davis,Vista Studios,COO,Retail,morgan.davis@vista.io,https://www.vista.io,1-10,FR,Using competitor tool
+801,Casey Patel,Vista Partners,Head of Product,Healthtech,casey.patel@vista.io,https://www.vista.io,1-10,SG,Interested in AI automation demos
+802,Morgan Singh,Summit Technologies,COO,Healthtech,morgan.singh@summit.io,https://www.summit.io,51-200,IN,Met at conference
+803,Taylor Garcia,Nova Technologies,CTO,AI/ML,taylor.garcia@nova.io,https://www.nova.io,51-200,UK,Requested pricing info
+804,Taylor Lopez,Acme Studios,Growth Lead,SaaS,taylor.lopez@acme.io,https://www.acme.io,501-1000,US,Inbound from referral
+805,Jamie Williams,Nimbus Systems,VP Engineering,SaaS,jamie.williams@nimbus.io,https://www.nimbus.io,11-50,AU,Interested in AI automation demos
+806,Sam Johnson,Zenith Partners,Head of Sales,DevTools,sam.johnson@zenith.io,https://www.zenith.io,1000+,AU,Met at conference
+807,Taylor Williams,Vista Holdings,VP Marketing,AI/ML,taylor.williams@vista.io,https://www.vista.io,11-50,FR,Signed up for newsletter
+808,Quinn Johnson,Orbit Labs,CTO,Retail,quinn.johnson@orbit.io,https://www.orbit.io,1-10,IN,Interested in AI automation demos
+809,Devin Garcia,Summit Software,COO,Retail,devin.garcia@summit.io,https://www.summit.io,501-1000,US,Using competitor tool
+810,Sam Williams,Acme Systems,VP Marketing,Edtech,sam.williams@acme.io,https://www.acme.io,1-10,FR,Met at conference
+811,Avery Miller,Nimbus Systems,Founder,Retail,avery.miller@nimbus.io,https://www.nimbus.io,1000+,US,Signed up for newsletter
+812,Taylor Martinez,Nimbus Solutions,VP Marketing,Retail,taylor.martinez@nimbus.io,https://www.nimbus.io,1000+,AU,Signed up for newsletter
+813,Riley Williams,Vertex Software,Head of Product,Fintech,riley.williams@vertex.io,https://www.vertex.io,1000+,SG,Interested in AI automation demos
+814,Casey Garcia,Vertex Labs,Founder,Retail,casey.garcia@vertex.io,https://www.vertex.io,501-1000,DE,Signed up for newsletter
+815,Devin Smith,Pulse Holdings,VP Engineering,Healthtech,devin.smith@pulse.io,https://www.pulse.io,1-10,DE,Interested in AI automation demos
+816,Devin Singh,Orbit Labs,Head of Product,Edtech,devin.singh@orbit.io,https://www.orbit.io,1000+,IN,Requested pricing info
+817,Quinn Miller,Nimbus Partners,CTO,AI/ML,quinn.miller@nimbus.io,https://www.nimbus.io,201-500,DE,Met at conference
+818,Sam Khan,Vertex Systems,Founder,AI/ML,sam.khan@vertex.io,https://www.vertex.io,51-200,FR,Inbound from referral
+819,Riley Garcia,Zenith Systems,CIO,Edtech,riley.garcia@zenith.io,https://www.zenith.io,51-200,US,Using competitor tool
+820,Avery Khan,Acme Partners,Head of Sales,Edtech,avery.khan@acme.io,https://www.acme.io,201-500,US,Using competitor tool
+821,Casey Singh,Vista Labs,Head of Product,Healthtech,casey.singh@vista.io,https://www.vista.io,1000+,FR,Using competitor tool
+822,Jamie Lopez,Acme Solutions,Growth Lead,Edtech,jamie.lopez@acme.io,https://www.acme.io,1-10,DE,Using competitor tool
+823,Devin Khan,Vista Analytics,Founder,Healthtech,devin.khan@vista.io,https://www.vista.io,11-50,UK,Requested pricing info
+824,Chris Miller,Vista Partners,Head of Product,Cybersecurity,chris.miller@vista.io,https://www.vista.io,501-1000,FR,Inbound from referral
+825,Morgan Lopez,Vista Studios,Growth Lead,Fintech,morgan.lopez@vista.io,https://www.vista.io,11-50,CA,Interested in AI automation demos
+826,Alex Garcia,Orbit Holdings,CTO,Healthtech,alex.garcia@orbit.io,https://www.orbit.io,1-10,SG,Signed up for newsletter
+827,Morgan Miller,Vista Holdings,Founder,E-commerce,morgan.miller@vista.io,https://www.vista.io,201-500,AU,Signed up for newsletter
+828,Casey Khan,Vertex Partners,Growth Lead,Cybersecurity,casey.khan@vertex.io,https://www.vertex.io,51-200,UK,Requested pricing info
+829,Riley Davis,Acme Partners,COO,Retail,riley.davis@acme.io,https://www.acme.io,1000+,UK,Met at conference
+830,Jordan Martinez,Vista Analytics,COO,AI/ML,jordan.martinez@vista.io,https://www.vista.io,201-500,FR,Met at conference
+831,Jamie Patel,Vista Holdings,CIO,Cybersecurity,jamie.patel@vista.io,https://www.vista.io,201-500,SG,Using competitor tool
+832,Jamie Smith,Zenith Labs,CTO,AI/ML,jamie.smith@zenith.io,https://www.zenith.io,51-200,CA,Using competitor tool
+833,Devin Lopez,Nimbus Systems,Head of Product,Retail,devin.lopez@nimbus.io,https://www.nimbus.io,501-1000,US,Interested in AI automation demos
+834,Morgan Davis,Nimbus Software,Head of Sales,SaaS,morgan.davis@nimbus.io,https://www.nimbus.io,11-50,UK,Met at conference
+835,Riley Singh,Orbit Labs,Growth Lead,E-commerce,riley.singh@orbit.io,https://www.orbit.io,1-10,DE,Interested in AI automation demos
+836,Riley Martinez,Orbit Labs,VP Marketing,Fintech,riley.martinez@orbit.io,https://www.orbit.io,11-50,DE,Met at conference
+837,Avery Williams,Vista Software,CTO,E-commerce,avery.williams@vista.io,https://www.vista.io,501-1000,UK,Using competitor tool
+838,Jamie Davis,Acme Solutions,COO,Healthtech,jamie.davis@acme.io,https://www.acme.io,51-200,AU,Signed up for newsletter
+839,Riley Martinez,Nimbus Labs,COO,Cybersecurity,riley.martinez@nimbus.io,https://www.nimbus.io,1000+,IN,Requested pricing info
+840,Jordan Miller,Vertex Partners,Head of Sales,E-commerce,jordan.miller@vertex.io,https://www.vertex.io,1000+,UK,Signed up for newsletter
+841,Morgan Miller,Summit Systems,Founder,E-commerce,morgan.miller@summit.io,https://www.summit.io,1000+,AU,Interested in AI automation demos
+842,Morgan Brown,Vertex Systems,VP Engineering,Cybersecurity,morgan.brown@vertex.io,https://www.vertex.io,1000+,US,Met at conference
+843,Alex Singh,Vertex Labs,COO,Fintech,alex.singh@vertex.io,https://www.vertex.io,1-10,DE,Inbound from referral
+844,Jordan Williams,Pulse Solutions,Growth Lead,SaaS,jordan.williams@pulse.io,https://www.pulse.io,1000+,AU,Interested in AI automation demos
+845,Avery Brown,Acme Systems,Founder,DevTools,avery.brown@acme.io,https://www.acme.io,51-200,FR,Signed up for newsletter
+846,Morgan Singh,Summit Studios,CTO,Edtech,morgan.singh@summit.io,https://www.summit.io,11-50,SG,Using competitor tool
+847,Riley Williams,Summit Systems,Founder,Fintech,riley.williams@summit.io,https://www.summit.io,1-10,IN,Interested in AI automation demos
+848,Casey Singh,Vista Partners,Growth Lead,Retail,casey.singh@vista.io,https://www.vista.io,11-50,SG,Using competitor tool
+849,Avery Davis,Vertex Studios,CIO,Edtech,avery.davis@vertex.io,https://www.vertex.io,1000+,DE,Signed up for newsletter
+850,Avery Davis,Orbit Technologies,CTO,DevTools,avery.davis@orbit.io,https://www.orbit.io,1-10,SG,Requested pricing info
+851,Casey Garcia,Pulse Solutions,Founder,Healthtech,casey.garcia@pulse.io,https://www.pulse.io,1-10,AU,Interested in AI automation demos
+852,Morgan Johnson,Summit Studios,CTO,DevTools,morgan.johnson@summit.io,https://www.summit.io,201-500,US,Requested pricing info
+853,Morgan Williams,Orbit Systems,CIO,Fintech,morgan.williams@orbit.io,https://www.orbit.io,201-500,FR,Requested pricing info
+854,Taylor Smith,Summit Solutions,Head of Product,Healthtech,taylor.smith@summit.io,https://www.summit.io,201-500,SG,Requested pricing info
+855,Jordan Johnson,Nova Holdings,CTO,AI/ML,jordan.johnson@nova.io,https://www.nova.io,1-10,IN,Signed up for newsletter
+856,Casey Garcia,Nova Partners,COO,Edtech,casey.garcia@nova.io,https://www.nova.io,51-200,CA,Met at conference
+857,Casey Lopez,Pulse Partners,VP Engineering,AI/ML,casey.lopez@pulse.io,https://www.pulse.io,11-50,AU,Requested pricing info
+858,Avery Khan,Vertex Labs,Head of Sales,Retail,avery.khan@vertex.io,https://www.vertex.io,1000+,UK,Interested in AI automation demos
+859,Chris Brown,Nimbus Holdings,Head of Sales,SaaS,chris.brown@nimbus.io,https://www.nimbus.io,1-10,AU,Inbound from referral
+860,Sam Garcia,Acme Systems,VP Marketing,Healthtech,sam.garcia@acme.io,https://www.acme.io,201-500,DE,Met at conference
+861,Casey Smith,Orbit Technologies,Head of Product,Cybersecurity,casey.smith@orbit.io,https://www.orbit.io,51-200,IN,Using competitor tool
+862,Casey Smith,Vertex Analytics,Head of Sales,E-commerce,casey.smith@vertex.io,https://www.vertex.io,201-500,FR,Inbound from referral
+863,Taylor Williams,Vertex Systems,VP Marketing,SaaS,taylor.williams@vertex.io,https://www.vertex.io,11-50,FR,Met at conference
+864,Morgan Williams,Pulse Systems,Head of Sales,AI/ML,morgan.williams@pulse.io,https://www.pulse.io,1-10,IN,Inbound from referral
+865,Chris Johnson,Nimbus Holdings,CIO,DevTools,chris.johnson@nimbus.io,https://www.nimbus.io,1-10,SG,Met at conference
+866,Quinn Lopez,Pulse Partners,Growth Lead,E-commerce,quinn.lopez@pulse.io,https://www.pulse.io,11-50,AU,Interested in AI automation demos
+867,Taylor Lopez,Vertex Labs,CTO,DevTools,taylor.lopez@vertex.io,https://www.vertex.io,11-50,UK,Requested pricing info
+868,Avery Williams,Nimbus Holdings,VP Marketing,Fintech,avery.williams@nimbus.io,https://www.nimbus.io,201-500,US,Using competitor tool
+869,Jordan Smith,Vertex Partners,VP Engineering,Healthtech,jordan.smith@vertex.io,https://www.vertex.io,11-50,SG,Signed up for newsletter
+870,Quinn Davis,Nimbus Analytics,VP Engineering,Retail,quinn.davis@nimbus.io,https://www.nimbus.io,501-1000,AU,Using competitor tool
+871,Jamie Martinez,Vista Technologies,COO,SaaS,jamie.martinez@vista.io,https://www.vista.io,11-50,AU,Signed up for newsletter
+872,Riley Singh,Nimbus Software,Founder,Cybersecurity,riley.singh@nimbus.io,https://www.nimbus.io,1-10,SG,Interested in AI automation demos
+873,Chris Garcia,Summit Holdings,VP Engineering,Edtech,chris.garcia@summit.io,https://www.summit.io,51-200,CA,Inbound from referral
+874,Riley Brown,Vista Partners,Head of Sales,Edtech,riley.brown@vista.io,https://www.vista.io,1000+,UK,Met at conference
+875,Riley Johnson,Pulse Technologies,CIO,E-commerce,riley.johnson@pulse.io,https://www.pulse.io,1000+,IN,Signed up for newsletter
+876,Devin Martinez,Vista Systems,VP Marketing,Fintech,devin.martinez@vista.io,https://www.vista.io,51-200,AU,Met at conference
+877,Sam Garcia,Orbit Labs,COO,Healthtech,sam.garcia@orbit.io,https://www.orbit.io,11-50,US,Signed up for newsletter
+878,Jordan Khan,Summit Holdings,VP Marketing,AI/ML,jordan.khan@summit.io,https://www.summit.io,1-10,UK,Met at conference
+879,Jordan Smith,Zenith Software,VP Engineering,Healthtech,jordan.smith@zenith.io,https://www.zenith.io,1000+,DE,Inbound from referral
+880,Devin Lopez,Nova Technologies,Founder,Healthtech,devin.lopez@nova.io,https://www.nova.io,1000+,DE,Requested pricing info
+881,Chris Garcia,Nimbus Systems,VP Marketing,E-commerce,chris.garcia@nimbus.io,https://www.nimbus.io,201-500,UK,Interested in AI automation demos
+882,Devin Lopez,Orbit Studios,Head of Product,Fintech,devin.lopez@orbit.io,https://www.orbit.io,11-50,IN,Inbound from referral
+883,Morgan Khan,Acme Studios,Founder,E-commerce,morgan.khan@acme.io,https://www.acme.io,51-200,FR,Inbound from referral
+884,Taylor Garcia,Summit Holdings,Growth Lead,Retail,taylor.garcia@summit.io,https://www.summit.io,11-50,AU,Requested pricing info
+885,Jordan Miller,Orbit Solutions,VP Engineering,Fintech,jordan.miller@orbit.io,https://www.orbit.io,11-50,IN,Requested pricing info
+886,Sam Lopez,Acme Analytics,CIO,Fintech,sam.lopez@acme.io,https://www.acme.io,1-10,FR,Met at conference
+887,Quinn Patel,Vertex Systems,VP Marketing,Edtech,quinn.patel@vertex.io,https://www.vertex.io,501-1000,AU,Using competitor tool
+888,Avery Davis,Pulse Solutions,Head of Sales,Cybersecurity,avery.davis@pulse.io,https://www.pulse.io,501-1000,SG,Using competitor tool
+889,Riley Johnson,Vista Analytics,CTO,Healthtech,riley.johnson@vista.io,https://www.vista.io,501-1000,SG,Signed up for newsletter
+890,Chris Martinez,Nova Partners,Head of Sales,Cybersecurity,chris.martinez@nova.io,https://www.nova.io,51-200,US,Signed up for newsletter
+891,Jordan Khan,Summit Technologies,Head of Product,E-commerce,jordan.khan@summit.io,https://www.summit.io,1-10,CA,Using competitor tool
+892,Casey Brown,Acme Labs,CTO,SaaS,casey.brown@acme.io,https://www.acme.io,201-500,IN,Using competitor tool
+893,Chris Khan,Vertex Labs,VP Engineering,AI/ML,chris.khan@vertex.io,https://www.vertex.io,1000+,SG,Interested in AI automation demos
+894,Devin Garcia,Vertex Studios,CIO,SaaS,devin.garcia@vertex.io,https://www.vertex.io,201-500,IN,Met at conference
+895,Riley Khan,Orbit Solutions,CTO,Healthtech,riley.khan@orbit.io,https://www.orbit.io,501-1000,IN,Requested pricing info
+896,Chris Khan,Pulse Technologies,VP Engineering,DevTools,chris.khan@pulse.io,https://www.pulse.io,1000+,IN,Signed up for newsletter
+897,Casey Patel,Zenith Technologies,Founder,Fintech,casey.patel@zenith.io,https://www.zenith.io,1-10,AU,Met at conference
+898,Jamie Davis,Vista Analytics,Head of Product,Retail,jamie.davis@vista.io,https://www.vista.io,201-500,SG,Met at conference
+899,Riley Khan,Zenith Solutions,CIO,Cybersecurity,riley.khan@zenith.io,https://www.zenith.io,1000+,DE,Requested pricing info
+900,Devin Brown,Nimbus Solutions,Head of Product,Edtech,devin.brown@nimbus.io,https://www.nimbus.io,501-1000,DE,Inbound from referral
+901,Jamie Williams,Nimbus Partners,Head of Product,E-commerce,jamie.williams@nimbus.io,https://www.nimbus.io,11-50,DE,Requested pricing info
+902,Jordan Miller,Vertex Labs,Founder,DevTools,jordan.miller@vertex.io,https://www.vertex.io,501-1000,FR,Signed up for newsletter
+903,Alex Lopez,Zenith Studios,CIO,Retail,alex.lopez@zenith.io,https://www.zenith.io,1-10,UK,Inbound from referral
+904,Riley Garcia,Vertex Software,COO,DevTools,riley.garcia@vertex.io,https://www.vertex.io,1-10,IN,Signed up for newsletter
+905,Riley Williams,Nova Labs,Head of Sales,E-commerce,riley.williams@nova.io,https://www.nova.io,1000+,UK,Inbound from referral
+906,Devin Williams,Vista Partners,VP Engineering,AI/ML,devin.williams@vista.io,https://www.vista.io,501-1000,IN,Met at conference
+907,Riley Miller,Vista Software,CIO,Healthtech,riley.miller@vista.io,https://www.vista.io,201-500,DE,Inbound from referral
+908,Chris Garcia,Vista Systems,VP Engineering,AI/ML,chris.garcia@vista.io,https://www.vista.io,201-500,CA,Signed up for newsletter
+909,Avery Miller,Vista Partners,CIO,AI/ML,avery.miller@vista.io,https://www.vista.io,11-50,CA,Requested pricing info
+910,Chris Williams,Nova Solutions,Head of Sales,SaaS,chris.williams@nova.io,https://www.nova.io,1000+,CA,Interested in AI automation demos
+911,Avery Davis,Vertex Partners,VP Marketing,AI/ML,avery.davis@vertex.io,https://www.vertex.io,1-10,IN,Requested pricing info
+912,Alex Miller,Orbit Software,VP Engineering,AI/ML,alex.miller@orbit.io,https://www.orbit.io,1-10,DE,Met at conference
+913,Jamie Miller,Vertex Partners,Head of Product,SaaS,jamie.miller@vertex.io,https://www.vertex.io,1000+,AU,Inbound from referral
+914,Casey Singh,Summit Software,COO,SaaS,casey.singh@summit.io,https://www.summit.io,51-200,AU,Met at conference
+915,Jordan Singh,Vertex Technologies,Founder,Retail,jordan.singh@vertex.io,https://www.vertex.io,1-10,CA,Interested in AI automation demos
+916,Jamie Brown,Vista Solutions,VP Engineering,Retail,jamie.brown@vista.io,https://www.vista.io,501-1000,CA,Requested pricing info
+917,Alex Williams,Acme Partners,Head of Product,DevTools,alex.williams@acme.io,https://www.acme.io,51-200,IN,Met at conference
+918,Morgan Lopez,Pulse Technologies,Head of Product,E-commerce,morgan.lopez@pulse.io,https://www.pulse.io,1000+,CA,Using competitor tool
+919,Avery Davis,Vista Systems,VP Marketing,Edtech,avery.davis@vista.io,https://www.vista.io,201-500,FR,Inbound from referral
+920,Devin Khan,Nova Software,CIO,SaaS,devin.khan@nova.io,https://www.nova.io,1-10,FR,Using competitor tool
+921,Jordan Miller,Nova Analytics,Head of Sales,Fintech,jordan.miller@nova.io,https://www.nova.io,201-500,FR,Interested in AI automation demos
+922,Devin Brown,Nimbus Technologies,CIO,E-commerce,devin.brown@nimbus.io,https://www.nimbus.io,501-1000,IN,Requested pricing info
+923,Casey Smith,Vertex Studios,VP Engineering,Edtech,casey.smith@vertex.io,https://www.vertex.io,201-500,SG,Signed up for newsletter
+924,Chris Khan,Pulse Partners,CTO,DevTools,chris.khan@pulse.io,https://www.pulse.io,201-500,SG,Met at conference
+925,Riley Singh,Nimbus Holdings,Growth Lead,DevTools,riley.singh@nimbus.io,https://www.nimbus.io,1000+,CA,Interested in AI automation demos
+926,Taylor Miller,Summit Partners,VP Engineering,SaaS,taylor.miller@summit.io,https://www.summit.io,1000+,IN,Signed up for newsletter
+927,Quinn Lopez,Zenith Technologies,CIO,Fintech,quinn.lopez@zenith.io,https://www.zenith.io,201-500,SG,Met at conference
+928,Avery Johnson,Nova Holdings,CIO,E-commerce,avery.johnson@nova.io,https://www.nova.io,11-50,FR,Met at conference
+929,Riley Martinez,Pulse Holdings,CTO,Fintech,riley.martinez@pulse.io,https://www.pulse.io,51-200,CA,Interested in AI automation demos
+930,Riley Smith,Nimbus Technologies,COO,Retail,riley.smith@nimbus.io,https://www.nimbus.io,501-1000,CA,Inbound from referral
+931,Jamie Singh,Vertex Holdings,COO,SaaS,jamie.singh@vertex.io,https://www.vertex.io,51-200,AU,Signed up for newsletter
+932,Devin Lopez,Vista Holdings,CTO,Retail,devin.lopez@vista.io,https://www.vista.io,1000+,UK,Met at conference
+933,Casey Lopez,Zenith Systems,Head of Sales,DevTools,casey.lopez@zenith.io,https://www.zenith.io,51-200,DE,Signed up for newsletter
+934,Quinn Singh,Acme Technologies,VP Marketing,Edtech,quinn.singh@acme.io,https://www.acme.io,11-50,SG,Using competitor tool
+935,Jordan Miller,Zenith Technologies,Head of Product,Cybersecurity,jordan.miller@zenith.io,https://www.zenith.io,1-10,IN,Signed up for newsletter
+936,Riley Lopez,Summit Technologies,VP Marketing,AI/ML,riley.lopez@summit.io,https://www.summit.io,11-50,CA,Interested in AI automation demos
+937,Sam Miller,Nimbus Partners,Founder,Fintech,sam.miller@nimbus.io,https://www.nimbus.io,201-500,UK,Using competitor tool
+938,Avery Davis,Vista Studios,Head of Product,Retail,avery.davis@vista.io,https://www.vista.io,201-500,IN,Inbound from referral
+939,Devin Patel,Zenith Analytics,Founder,Cybersecurity,devin.patel@zenith.io,https://www.zenith.io,1000+,CA,Inbound from referral
+940,Chris Garcia,Zenith Software,Head of Sales,SaaS,chris.garcia@zenith.io,https://www.zenith.io,201-500,IN,Inbound from referral
+941,Jordan Singh,Pulse Technologies,CTO,Retail,jordan.singh@pulse.io,https://www.pulse.io,1000+,IN,Using competitor tool
+942,Chris Martinez,Pulse Analytics,Growth Lead,SaaS,chris.martinez@pulse.io,https://www.pulse.io,201-500,SG,Using competitor tool
+943,Avery Johnson,Vertex Analytics,Founder,E-commerce,avery.johnson@vertex.io,https://www.vertex.io,1-10,SG,Using competitor tool
+944,Taylor Williams,Zenith Analytics,CTO,AI/ML,taylor.williams@zenith.io,https://www.zenith.io,201-500,IN,Requested pricing info
+945,Sam Singh,Vertex Holdings,VP Engineering,Edtech,sam.singh@vertex.io,https://www.vertex.io,1000+,US,Using competitor tool
+946,Avery Martinez,Vista Partners,VP Engineering,Retail,avery.martinez@vista.io,https://www.vista.io,1-10,US,Requested pricing info
+947,Casey Khan,Zenith Studios,CTO,Cybersecurity,casey.khan@zenith.io,https://www.zenith.io,11-50,US,Met at conference
+948,Devin Johnson,Vista Solutions,CIO,Healthtech,devin.johnson@vista.io,https://www.vista.io,201-500,DE,Met at conference
+949,Taylor Williams,Vista Studios,VP Engineering,AI/ML,taylor.williams@vista.io,https://www.vista.io,51-200,FR,Interested in AI automation demos
+950,Alex Singh,Vista Holdings,Growth Lead,Edtech,alex.singh@vista.io,https://www.vista.io,51-200,SG,Met at conference
+951,Alex Johnson,Nimbus Labs,Founder,Healthtech,alex.johnson@nimbus.io,https://www.nimbus.io,1-10,US,Requested pricing info
+952,Avery Martinez,Zenith Solutions,Head of Sales,Fintech,avery.martinez@zenith.io,https://www.zenith.io,1000+,FR,Signed up for newsletter
+953,Chris Brown,Summit Labs,CTO,SaaS,chris.brown@summit.io,https://www.summit.io,51-200,SG,Using competitor tool
+954,Casey Martinez,Nimbus Holdings,Growth Lead,Healthtech,casey.martinez@nimbus.io,https://www.nimbus.io,11-50,CA,Interested in AI automation demos
+955,Quinn Brown,Orbit Partners,Founder,Cybersecurity,quinn.brown@orbit.io,https://www.orbit.io,201-500,SG,Using competitor tool
+956,Quinn Khan,Summit Analytics,Founder,Edtech,quinn.khan@summit.io,https://www.summit.io,501-1000,SG,Signed up for newsletter
+957,Alex Miller,Vista Systems,VP Engineering,Healthtech,alex.miller@vista.io,https://www.vista.io,501-1000,US,Requested pricing info
+958,Morgan Martinez,Nimbus Analytics,VP Marketing,AI/ML,morgan.martinez@nimbus.io,https://www.nimbus.io,11-50,FR,Requested pricing info
+959,Devin Khan,Acme Software,VP Marketing,Retail,devin.khan@acme.io,https://www.acme.io,1-10,SG,Inbound from referral
+960,Alex Lopez,Acme Studios,VP Marketing,Cybersecurity,alex.lopez@acme.io,https://www.acme.io,51-200,US,Signed up for newsletter
+961,Devin Garcia,Vista Technologies,COO,SaaS,devin.garcia@vista.io,https://www.vista.io,201-500,CA,Signed up for newsletter
+962,Jordan Davis,Pulse Analytics,COO,Edtech,jordan.davis@pulse.io,https://www.pulse.io,51-200,IN,Signed up for newsletter
+963,Taylor Smith,Nimbus Software,Head of Product,Healthtech,taylor.smith@nimbus.io,https://www.nimbus.io,1000+,US,Using competitor tool
+964,Chris Patel,Vertex Systems,Founder,AI/ML,chris.patel@vertex.io,https://www.vertex.io,201-500,IN,Met at conference
+965,Devin Miller,Orbit Labs,CTO,Healthtech,devin.miller@orbit.io,https://www.orbit.io,1000+,UK,Signed up for newsletter
+966,Casey Singh,Orbit Systems,COO,E-commerce,casey.singh@orbit.io,https://www.orbit.io,1-10,US,Interested in AI automation demos
+967,Alex Singh,Acme Systems,Head of Product,Edtech,alex.singh@acme.io,https://www.acme.io,51-200,IN,Inbound from referral
+968,Jamie Brown,Vertex Analytics,CTO,DevTools,jamie.brown@vertex.io,https://www.vertex.io,501-1000,FR,Met at conference
+969,Jamie Singh,Nimbus Analytics,CIO,SaaS,jamie.singh@nimbus.io,https://www.nimbus.io,1000+,AU,Interested in AI automation demos
+970,Taylor Khan,Nova Solutions,Growth Lead,AI/ML,taylor.khan@nova.io,https://www.nova.io,201-500,AU,Using competitor tool
+971,Devin Khan,Vertex Analytics,CTO,Cybersecurity,devin.khan@vertex.io,https://www.vertex.io,1000+,SG,Requested pricing info
+972,Riley Khan,Vista Solutions,Head of Product,SaaS,riley.khan@vista.io,https://www.vista.io,1-10,DE,Using competitor tool
+973,Alex Patel,Pulse Studios,VP Engineering,DevTools,alex.patel@pulse.io,https://www.pulse.io,1000+,IN,Interested in AI automation demos
+974,Jordan Smith,Vista Studios,VP Marketing,E-commerce,jordan.smith@vista.io,https://www.vista.io,501-1000,CA,Signed up for newsletter
+975,Taylor Smith,Acme Solutions,CIO,Cybersecurity,taylor.smith@acme.io,https://www.acme.io,1-10,CA,Signed up for newsletter
+976,Casey Brown,Summit Solutions,CIO,Retail,casey.brown@summit.io,https://www.summit.io,501-1000,CA,Interested in AI automation demos
+977,Riley Garcia,Vista Analytics,Growth Lead,AI/ML,riley.garcia@vista.io,https://www.vista.io,501-1000,SG,Signed up for newsletter
+978,Avery Miller,Nova Labs,Founder,Retail,avery.miller@nova.io,https://www.nova.io,11-50,IN,Inbound from referral
+979,Quinn Brown,Pulse Analytics,COO,DevTools,quinn.brown@pulse.io,https://www.pulse.io,1000+,SG,Inbound from referral
+980,Chris Lopez,Nova Holdings,VP Engineering,Retail,chris.lopez@nova.io,https://www.nova.io,501-1000,IN,Interested in AI automation demos
+981,Chris Johnson,Zenith Partners,Head of Sales,Retail,chris.johnson@zenith.io,https://www.zenith.io,51-200,SG,Interested in AI automation demos
+982,Avery Lopez,Acme Technologies,VP Engineering,Edtech,avery.lopez@acme.io,https://www.acme.io,1-10,CA,Interested in AI automation demos
+983,Chris Garcia,Vista Studios,Founder,E-commerce,chris.garcia@vista.io,https://www.vista.io,11-50,CA,Requested pricing info
+984,Chris Garcia,Nimbus Labs,VP Engineering,Retail,chris.garcia@nimbus.io,https://www.nimbus.io,51-200,DE,Requested pricing info
+985,Jamie Lopez,Acme Software,Growth Lead,E-commerce,jamie.lopez@acme.io,https://www.acme.io,201-500,IN,Requested pricing info
+986,Avery Davis,Acme Solutions,Founder,Cybersecurity,avery.davis@acme.io,https://www.acme.io,501-1000,CA,Inbound from referral
+987,Avery Davis,Vertex Labs,Founder,SaaS,avery.davis@vertex.io,https://www.vertex.io,501-1000,SG,Using competitor tool
+988,Jordan Williams,Zenith Partners,Head of Product,Fintech,jordan.williams@zenith.io,https://www.zenith.io,201-500,FR,Signed up for newsletter
+989,Chris Johnson,Pulse Systems,VP Marketing,DevTools,chris.johnson@pulse.io,https://www.pulse.io,51-200,CA,Interested in AI automation demos
+990,Jordan Miller,Pulse Analytics,CIO,Healthtech,jordan.miller@pulse.io,https://www.pulse.io,51-200,CA,Requested pricing info
+991,Casey Patel,Acme Software,Growth Lead,E-commerce,casey.patel@acme.io,https://www.acme.io,1-10,US,Inbound from referral
+992,Chris Smith,Acme Partners,Growth Lead,Healthtech,chris.smith@acme.io,https://www.acme.io,1-10,IN,Interested in AI automation demos
+993,Jamie Davis,Nova Technologies,Head of Sales,SaaS,jamie.davis@nova.io,https://www.nova.io,1-10,DE,Requested pricing info
+994,Jamie Lopez,Acme Partners,Founder,Fintech,jamie.lopez@acme.io,https://www.acme.io,11-50,FR,Signed up for newsletter
+995,Jamie Williams,Zenith Holdings,Head of Sales,Healthtech,jamie.williams@zenith.io,https://www.zenith.io,11-50,SG,Using competitor tool
+996,Avery Garcia,Summit Analytics,VP Engineering,AI/ML,avery.garcia@summit.io,https://www.summit.io,501-1000,UK,Met at conference
+997,Devin Martinez,Pulse Labs,VP Marketing,Edtech,devin.martinez@pulse.io,https://www.pulse.io,11-50,CA,Requested pricing info
+998,Avery Lopez,Vertex Studios,Head of Sales,Edtech,avery.lopez@vertex.io,https://www.vertex.io,11-50,DE,Interested in AI automation demos
+999,Riley Lopez,Vista Analytics,Founder,AI/ML,riley.lopez@vista.io,https://www.vista.io,501-1000,CA,Requested pricing info
+1000,Avery Miller,Pulse Analytics,VP Marketing,DevTools,avery.miller@pulse.io,https://www.pulse.io,1000+,SG,Inbound from referral
