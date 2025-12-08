@@ -1,0 +1,216 @@
+/* GitHub-themed Code Review Dashboard Styles */
+
+.code-review-plugin {
+  --gh-bg-canvas: #0d1117;
+  --gh-bg-canvas-subtle: #161b22;
+  --gh-bg-canvas-inset: #010409;
+  --gh-border-default: #30363d;
+  --gh-border-muted: #21262d;
+  --gh-fg-default: #c9d1d9;
+  --gh-fg-muted: #8b949e;
+  --gh-fg-subtle: #6e7681;
+  --gh-accent-fg: #58a6ff;
+  --gh-accent-emphasis: #1f6feb;
+  --gh-success-fg: #3fb950;
+  --gh-success-emphasis: #238636;
+  --gh-attention-fg: #d29922;
+  --gh-attention-emphasis: #9e6a03;
+  --gh-danger-fg: #f85149;
+  --gh-danger-emphasis: #da3633;
+  --gh-done-fg: #a371f7;
+  --gh-done-emphasis: #8957e5;
+}
+
+/* Custom scrollbar for GitHub theme */
+.code-review-plugin ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-review-plugin ::-webkit-scrollbar-track {
+  background: var(--gh-bg-canvas-subtle);
+}
+
+.code-review-plugin ::-webkit-scrollbar-thumb {
+  background: var(--gh-border-default);
+  border-radius: 4px;
+}
+
+.code-review-plugin ::-webkit-scrollbar-thumb:hover {
+  background: var(--gh-fg-subtle);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(31, 111, 235, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(31, 111, 235, 0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+/* Score ring animation */
+@keyframes score-fill {
+  from {
+    stroke-dashoffset: 100;
+  }
+}
+
+.score-ring {
+  animation: score-fill 1s ease-out forwards;
+}
+
+/* Stage transition */
+.stage-indicator {
+  transition: all 0.3s ease-in-out;
+}
+
+.stage-indicator.active {
+  transform: scale(1.1);
+}
+
+/* Finding card hover effect */
+.finding-card {
+  transition: all 0.2s ease;
+}
+
+.finding-card:hover {
+  background-color: rgba(31, 111, 235, 0.05);
+  border-color: rgba(31, 111, 235, 0.3);
+}
+
+/* Agent badge styles */
+.agent-badge {
+  background: linear-gradient(135deg, rgba(31, 111, 235, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+  border: 1px solid rgba(31, 111, 235, 0.3);
+}
+
+/* Progress bar gradient */
+.progress-bar-gradient {
+  background: linear-gradient(90deg, 
+    var(--gh-success-emphasis) 0%, 
+    var(--gh-accent-emphasis) 50%, 
+    var(--gh-done-emphasis) 100%
+  );
+}
+
+/* Severity colors */
+.severity-critical {
+  --severity-color: #f85149;
+  --severity-bg: rgba(248, 81, 73, 0.15);
+}
+
+.severity-high {
+  --severity-color: #f0883e;
+  --severity-bg: rgba(240, 136, 62, 0.15);
+}
+
+.severity-medium {
+  --severity-color: #d29922;
+  --severity-bg: rgba(210, 153, 34, 0.15);
+}
+
+.severity-low {
+  --severity-color: #58a6ff;
+  --severity-bg: rgba(88, 166, 255, 0.15);
+}
+
+.severity-info {
+  --severity-color: #8b949e;
+  --severity-bg: rgba(139, 148, 158, 0.15);
+}
+
+/* Code snippet styles */
+.code-snippet {
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  background: var(--gh-bg-canvas-inset);
+  border: 1px solid var(--gh-border-default);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.code-snippet .line-number {
+  color: var(--gh-fg-subtle);
+  user-select: none;
+  padding-right: 16px;
+  text-align: right;
+  min-width: 40px;
+}
+
+.code-snippet .line-added {
+  background: rgba(63, 185, 80, 0.15);
+}
+
+.code-snippet .line-removed {
+  background: rgba(248, 81, 73, 0.15);
+}
+
+/* Tooltip styles */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  background: var(--gh-bg-canvas-subtle);
+  border: 1px solid var(--gh-border-default);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--gh-fg-default);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Empty state illustration */
+.empty-state {
+  background: radial-gradient(ellipse at center, rgba(31, 111, 235, 0.1) 0%, transparent 70%);
+}
+
+/* Status dot animation */
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.status-dot-active {
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+

@@ -1,0 +1,30 @@
+{
+  "name": "day8ofautomations",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@motiadev/adapter-bullmq-events": "^0.14.0-beta.164",
+    "@motiadev/core": "^0.14.0-beta.164",
+    "@motiadev/plugin-bullmq": "^0.14.0-beta.164",
+    "@motiadev/plugin-endpoint": "^0.14.0-beta.164",
+    "@motiadev/plugin-logs": "^0.14.0-beta.164",
+    "@motiadev/plugin-observability": "^0.14.0-beta.164",
+    "@motiadev/plugin-states": "^0.14.0-beta.164",
+    "motia": "^0.14.0-beta.164",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
