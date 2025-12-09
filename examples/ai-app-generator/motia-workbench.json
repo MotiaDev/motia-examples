@@ -1,0 +1,113 @@
+[
+  {
+    "id": "app-generator",
+    "config": {
+      "steps/app-generator/test-passed-handler.step.ts": {
+        "x": 2559,
+        "y": 0,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/retest-module.step.ts": {
+        "x": 3114,
+        "y": 429,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      },
+      "steps/app-generator/list-apps-api.step.ts": {
+        "x": 60,
+        "y": 99
+      },
+      "steps/app-generator/get-status-api.step.ts": {
+        "x": -8,
+        "y": 284
+      },
+      "steps/app-generator/generate-app-api.step.ts": {
+        "x": -483,
+        "y": -82,
+        "sourceHandlePosition": "right"
+      },
+      "steps/app-generator/failure-handler.step.ts": {
+        "x": 1537,
+        "y": -458
+      },
+      "steps/app-generator/download-zip-api.step.ts": {
+        "x": 3754,
+        "y": 221,
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/download-app-api.step.ts": {
+        "x": 3827,
+        "y": -11,
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/completion-handler.step.ts": {
+        "x": 3745,
+        "y": -279,
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/handlers/pm-risk-handler.step.ts": {
+        "x": 623,
+        "y": 464,
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/handlers/pm-milestone-handler.step.ts": {
+        "x": 605,
+        "y": 801,
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/handlers/design-enhanced-handler.step.ts": {
+        "x": 995,
+        "y": 624,
+        "targetHandlePosition": "top"
+      },
+      "steps/app-generator/agents/test-executor-agent.step.ts": {
+        "x": 2023,
+        "y": 119,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/agents/test-designer-agent.step.ts": {
+        "x": 1449,
+        "y": 374,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/agents/project-manager-agent.step.ts": {
+        "x": 0,
+        "y": 600,
+        "sourceHandlePosition": "right"
+      },
+      "steps/app-generator/agents/engineer-agent.step.ts": {
+        "x": 984,
+        "y": -19,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/agents/designer-agent.step.ts": {
+        "x": 1000,
+        "y": 300,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      },
+      "steps/app-generator/agents/code-refiner-agent.step.ts": {
+        "x": 2500,
+        "y": 250,
+        "sourceHandlePosition": "left",
+        "targetHandlePosition": "top"
+      },
+      "steps/app-generator/agents/assembly-agent.step.ts": {
+        "x": 3164,
+        "y": 0,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/app-generator/agents/architect-agent.step.ts": {
+        "x": 356,
+        "y": -33,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      }
+    }
+  }
+]
