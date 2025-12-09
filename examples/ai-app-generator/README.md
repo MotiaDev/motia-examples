@@ -119,6 +119,12 @@ GET /apps
 
 ![Download Dashboard](docs/img/download-dashbaoard.png)
 
+## 🧪 Sample Output
+
+![Generated Kanban Demo](docs/img/kanban.gif)
+
+Download the sample Kanban application bundle that was produced by the workflow: [sample-kanban-app-generated.zip](sample-kanban-app-generated.zip)
+
 ## 🎯 Example Usage
 
 ```bash
