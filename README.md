@@ -14,7 +14,9 @@ For detailed tutorials and guided walkthroughs of these examples, visit our comp
 
 ## 🗂 Organized Examples Collection
 
-We've organized 60+ examples into 8 logical categories based on complexity and use case. **[Browse all examples →](examples/)**
+We've organized 60+ examples into 8 logical categories based on complexity and use case.
+
+**[Browse all examples →](examples/)**
 
 ### Quick Navigation
 
