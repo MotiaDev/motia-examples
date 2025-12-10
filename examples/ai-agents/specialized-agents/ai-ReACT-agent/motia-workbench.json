@@ -1,0 +1,49 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "steps/petstore/state-audit-cron.step.ts": {
+        "x": -175,
+        "y": 219,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "research-assistant",
+    "config": {
+      "steps/research/synthesize-answer.step.ts": {
+        "x": 852,
+        "y": -96,
+        "sourceHandlePosition": "right"
+      },
+      "steps/research/submit-query.step.ts": {
+        "x": -59,
+        "y": 93
+      },
+      "steps/research/react-loop.step.ts": {
+        "x": 396,
+        "y": 128
+      },
+      "steps/research/handle-failure.step.ts": {
+        "x": 1307,
+        "y": 127,
+        "targetHandlePosition": "left"
+      },
+      "steps/research/handle-completion.step.ts": {
+        "x": 1304,
+        "y": -85
+      },
+      "steps/research/get-query-status.step.ts": {
+        "x": -54,
+        "y": 348
+      },
+      "steps/research/execute-tool.step.ts": {
+        "x": 835,
+        "y": 271,
+        "sourceHandlePosition": "bottom",
+        "targetHandlePosition": "top"
+      }
+    }
+  }
+]
