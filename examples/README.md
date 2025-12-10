@@ -221,18 +221,14 @@ example-name/
 cd getting-started/middleware-auth-handler-example
 
 # 2. Install dependencies
-npm install              # for JS/TS
-# or
-pip install -r requirements.txt  # for Python
+npm install    
 
 # 3. Configure environment
 cp env.example .env
 # Edit .env with your API keys
 
 # 4. Start development server
-npm run dev              # for JS/TS
-# or
-python -m motia dev      # for Python
+npm run dev        
 
 # 5. Open Workbench
 # http://localhost:3000
