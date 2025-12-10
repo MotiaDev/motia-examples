@@ -2,7 +2,7 @@
 
 An intelligent research assistant that implements the **ReAct (Reason + Act) pattern** to answer complex, multi-hop questions. Built with [Motia](https://motia.dev) for production-ready, event-driven backend orchestration.
 
-![workbench](./docs/img/workbench.png)
+![workbench](./img/workbench.png)
 
 ## Overview
 
@@ -122,7 +122,7 @@ GET /research/query/:queryId
   }
 }
 ```
-![output](./docs/img/output.png)
+![output](./img/output.png)
 
 ## Real-Time Streaming
 
