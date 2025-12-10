@@ -2,8 +2,6 @@
 
 This example builds a retrieval‑augmented pipeline: it ingests multiple document types (PDF, Markdown, HTML, TXT), chunks them with Docling and custom processors, stores the chunks in ChromaDB vector database, and answers questions using Motia's event‑driven workflow.
 
-![rag-example](docs/images/rag-example.gif)
-
 ## Key Features
 
 - Multi-format document processing (PDF, Markdown, HTML, TXT)

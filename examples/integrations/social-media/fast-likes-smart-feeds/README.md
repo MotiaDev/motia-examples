@@ -14,7 +14,7 @@ A fast-response, event-driven like system built with Motia framework, demonstrat
 ### System Architecture
 *Visual representation of the micro-actions pattern*
 
-[![Architecture Diagram](https://github.com/user-attachments/assets/30e6ab1f-750d-4294-bbef-a6b12ef8961a)](https://github.com/user-attachments/assets/30e6ab1f-750d-4294-bbef-a6b12ef8961a)
+![Architecture Diagram](./docs/img/architecture.png)
 
 
 
