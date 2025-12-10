@@ -24,7 +24,7 @@ We've organized 60+ examples into 8 logical categories based on complexity and u
 |----------|-------|----------|-------------|
 | [🚀 Getting Started](examples/getting-started/) | Beginner | 4 | Core Motia concepts - API steps, events, middleware, queues |
 | [🔧 Foundational](examples/foundational/) | Intermediate | 9 | Common patterns - automation, infrastructure, APIs |
-| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 18 | Chat agents, specialized agents, multi-agent systems |
+| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 19 | Chat agents, specialized agents, multi-agent systems |
 | [📚 RAG & Search](examples/rag-and-search/) | Advanced | 9 | Vector databases, embeddings, knowledge bases |
 | [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |
 | [📊 Monitoring](examples/monitoring-and-alerts/) | Intermediate | 3 | Cron-based monitoring and intelligent alerts |
@@ -149,6 +149,7 @@ Perfect for newcomers to Motia. Learn core concepts:
 - Multi-modal capabilities
 
 **[Specialized Agents](examples/ai-agents/specialized-agents/)** - Domain-specific AI
+- ReAct pattern with tool integration
 - Code review and analysis
 - Research automation
 - Content moderation
@@ -206,6 +207,22 @@ Complex, production-ready implementations:
 Below are additional examples from our collection. For the complete organized catalog with descriptions and learning paths, visit **[examples/](examples/)**.
 
 > **💡 Tip:** All examples below are now organized into categories. Use the [full catalog](examples/) to browse by difficulty level and use case.
+
+### ReACT Research Assistant
+
+An intelligent research assistant implementing the **ReAct (Reason + Act) pattern** to answer complex, multi-hop questions with adaptive tool usage.
+
+![ReACT Agent](examples/ai-agents/specialized-agents/ai-ReACT-agent/img/workbench.png)
+
+**Key Features:**
+- ReAct Pattern: Reasons about information needs, acts with tools, observes results, iterates
+- Multi-Tool Integration: Web search (Tavily), financial data (Alpha Vantage), custom APIs
+- Adaptive Loop: LLM orchestrates tool selection and reasoning iterations
+- Production Ready: Built-in error handling, retries, and comprehensive logging
+
+**Technologies:** TypeScript, Anthropic Claude / Google Gemini, Tavily, Alpha Vantage
+
+[View Example →](examples/ai-agents/specialized-agents/ai-ReACT-agent)
 
 ### AI Deep Research Agent
 
@@ -1081,7 +1098,7 @@ An AI-powered pipeline that automatically transforms product images into profess
 
 ## 📊 Repository Statistics
 
-- **Total Examples**: 60+
+- **Total Examples**: 61
 - **Categories**: 8 main categories
 - **Languages**: TypeScript, JavaScript, Python
 - **Difficulty Levels**: Beginner → Intermediate → Advanced → Expert
