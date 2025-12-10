@@ -2,6 +2,8 @@
 
 Welcome to the official examples repository for [Motia](https://motia.dev/) - a modern backend framework for building event-driven applications with built-in observability and state management.
 
+**✨ Newly Reorganized:** 60+ examples now organized into 8 logical categories from beginner to expert level. **[Browse the organized catalog →](examples/)**
+
 ## 📖 Documentation & Guided Tours
 
 For detailed tutorials and guided walkthroughs of these examples, visit our comprehensive documentation:
@@ -10,7 +12,26 @@ For detailed tutorials and guided walkthroughs of these examples, visit our comp
 - **[Getting Started](https://www.motia.dev/docs/getting-started/quick-start)** - Quick start guide for Motia
 - **[Core Concepts](https://www.motia.dev/docs/concepts/overview)** - Understanding Steps, Events, and Flows
 
-## 🗂 Examples
+## 🗂 Organized Examples Collection
+
+We've organized 60+ examples into 8 logical categories based on complexity and use case. **[Browse all examples →](examples/)**
+
+### Quick Navigation
+
+| Category | Level | Examples | Description |
+|----------|-------|----------|-------------|
+| [🚀 Getting Started](examples/getting-started/) | Beginner | 4 | Core Motia concepts - API steps, events, middleware, queues |
+| [🔧 Foundational](examples/foundational/) | Intermediate | 9 | Common patterns - automation, infrastructure, APIs |
+| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 18 | Chat agents, specialized agents, multi-agent systems |
+| [📚 RAG & Search](examples/rag-and-search/) | Advanced | 9 | Vector databases, embeddings, knowledge bases |
+| [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |
+| [📊 Monitoring](examples/monitoring-and-alerts/) | Intermediate | 3 | Cron-based monitoring and intelligent alerts |
+| [📧 Marketing](examples/content-and-marketing/) | Int-Advanced | 3 | Email campaigns, content automation |
+| [🚀 Advanced](examples/advanced-use-cases/) | Expert | 5 | Production-ready systems, computer vision |
+
+**[View full catalog with descriptions →](examples/)**
+
+---
 
 ## 🌟 Production-Ready Cloud Examples
 
@@ -63,11 +84,132 @@ A **real-time GitHub stars counter** showcasing production-ready deployment capa
 
 *Both examples demonstrate Motia's power for building production-ready, real-time applications that scale in the cloud with minimal infrastructure complexity.*
 
+## 🎯 Featured Examples
+
+### AI App Generator - Multi-Agent System
+
+Generate complete full-stack applications using 7 specialized AI agents working together.
+
+**Key Features:**
+- Architect, Engineer, Test Designer, and Code Refiner agents
+- Produces production-ready code with tests
+- Download complete applications
+- Real-time progress streaming
+
+**[View Example →](examples/ai-agents/multi-agent-systems/ai-app-generator)**
+
+---
+
+### Stripe Payment Demo - Production Integration
+
+Complete payment processing implementation with webhook security.
+
+**Key Features:**
+- Payment intent creation and management
+- Webhook signature verification
+- Comprehensive error handling
+- Production-ready flow
+
+**[View Example →](examples/integrations/payment/stripe-payment-demo)**
+
+---
+
+### Email Marketing Automation - Marketing Platform
+
+Full-featured email marketing platform with segmentation and analytics.
+
+**Key Features:**
+- Campaign management with drip sequences
+- Advanced audience segmentation
+- A/B testing capabilities
+- Analytics and reporting
+
+**[View Example →](examples/content-and-marketing/email-marketing-automation)**
+
+---
+
+## 📚 Browse by Category
+
+### 🚀 [Getting Started](examples/getting-started/) - Begin Here
+Perfect for newcomers to Motia. Learn core concepts:
+- [Middleware Authentication](examples/getting-started/middleware-auth-handler-example/) - Auth patterns
+- [Queue Management](examples/getting-started/queue-example/) - Background jobs
+- [Real-time Todo App](examples/getting-started/realtime-todo-app/) - SSE streaming
+- [Ollama Chat](examples/getting-started/ollama-chat/) - Local AI integration
+
+---
+
+### 🤖 [AI Agents](examples/ai-agents/) - Build Intelligent Apps
+
+**[Chat Agents](examples/ai-agents/chat-agents/)** - Conversational AI
+- Streaming chatbots with real-time responses
+- Memory and conversation history
+- Multi-modal capabilities
+
+**[Specialized Agents](examples/ai-agents/specialized-agents/)** - Domain-specific AI
+- Code review and analysis
+- Research automation
+- Content moderation
+- Financial analysis
+
+**[Multi-Agent Systems](examples/ai-agents/multi-agent-systems/)** - Complex orchestration
+- [AI App Generator](examples/ai-agents/multi-agent-systems/ai-app-generator/) - 7 agents building apps
+- [SmartTravel](examples/ai-agents/multi-agent-systems/smarttravel-multi-agent/) - Travel planning
+- [AI Hedge Fund](examples/ai-agents/multi-agent-systems/ai-hedgefund/) - Financial analysis
+
+---
+
+### 📚 [RAG & Search](examples/rag-and-search/) - Knowledge Bases
+
+**[RAG Fundamentals](examples/rag-and-search/rag-fundamentals/)**
+- Local RAG with ChromaDB and Ollama
+- Cloud RAG with Weaviate
+- Documentation search
+
+**[RAG Applications](examples/rag-and-search/rag-applications/)**
+- Property search with semantic understanding
+- Documentation Q&A systems
+- Research assistants
+
+---
+
+### 🔌 [Integrations](examples/integrations/) - Connect Services
+
+- **[GitHub](examples/integrations/github/)** - CI/CD, webhooks, automation
+- **[Payment](examples/integrations/payment/)** - Stripe integration
+- **[Communication](examples/integrations/communication/)** - Gmail, Trello
+- **[Social Media](examples/integrations/social-media/)** - Engagement automation
+
+---
+
+### 🔧 [Foundational](examples/foundational/) - Real-World Patterns
+
+- **[API Patterns](examples/foundational/api-patterns/)** - File processing, analysis
+- **[Automation](examples/foundational/automation/)** - Content workflows
+- **[Infrastructure](examples/foundational/infrastructure/)** - Docker, monitoring
+
+---
+
+### 🚀 [Advanced Use Cases](examples/advanced-use-cases/) - Production Systems
+
+Complex, production-ready implementations:
+- [AI Room Renovate](examples/advanced-use-cases/ai-room-renovate/) - Computer vision + AI design
+- [Competitor Price Scraper](examples/advanced-use-cases/competitor-price-scrapper/) - Web scraping at scale
+- [Meeting Transcription](examples/advanced-use-cases/meeting-transcription/) - Audio processing pipeline
+
+---
+
+## 📖 Additional Example Highlights
+
+Below are additional examples from our collection. For the complete organized catalog with descriptions and learning paths, visit **[examples/](examples/)**.
+
+> **💡 Tip:** All examples below are now organized into categories. Use the [full catalog](examples/) to browse by difficulty level and use case.
+
 ### AI Deep Research Agent
 
 A powerful research assistant that performs comprehensive web research on any topic or question, providing in-depth analysis and reports.
 
-![Finance Agent](examples/ai-deep-research-agent/docs/deep-research.png)
+![AI Deep Research Agent](examples/ai-agents/specialized-agents/ai-deep-research-agent/docs/deep-research.png)
 
 **Key Features:**
 - Deep Web Research: Searches the web, extracts content, and synthesizes findings
@@ -77,13 +219,13 @@ A powerful research assistant that performs comprehensive web research on any to
 
 **Technologies:** TypeScript, OpenAI, Firecrawl API
 
-[View Example →](examples/ai-deep-research-agent)
+[View Example →](examples/ai-agents/specialized-agents/ai-deep-research-agent)
 
 ### AI Hedge Fund - Comprehensive Financial Analysis Workflow
 
 A sophisticated multi-agent financial analysis system that combines parallel processing, real-time market data, and specialized AI agents for comprehensive investment insights.
 
-![AI Hedge Fund Workflow](examples/ai-hedgefund/public/aihedgefund-workflow.png)
+![AI Hedge Fund Workflow](examples/ai-agents/multi-agent-systems/ai-hedgefund/public/aihedgefund-workflow.png)
 
 **Key Features:**
 - **Multi-Agent Architecture**: 4 specialized AI analysts (Fundamental, Portfolio, Risk, Technical) running in parallel
@@ -105,13 +247,13 @@ A sophisticated multi-agent financial analysis system that combines parallel pro
 
 **🐳 Production Deployment:** Includes complete Docker setup with environment configuration
 
-[View Example →](examples/ai-hedgefund)
+[View Example →](examples/ai-agents/multi-agent-systems/ai-hedgefund)
 
 ### Finance Agent
 
 A powerful event-driven financial analysis workflow built with Motia that combines web search, financial data, and AI analysis to provide comprehensive investment insights.
 
-![Finance Agent](examples/finance-agent/docs/finance-example.gif)
+![Finance Agent](examples/ai-agents/specialized-agents/finance-agent/docs/finance-example.gif)
 
 **Key Features:**
 - Real-time Financial Analysis: Combines multiple data sources for comprehensive insights
@@ -121,15 +263,15 @@ A powerful event-driven financial analysis workflow built with Motia that combin
 
 **Technologies:** TypeScript, Alpha Vantage API, SerperDev, OpenAI
 
-[View Example →](examples/finance-agent)
+[View Example →](examples/ai-agents/specialized-agents/finance-agent)
 
 ### GitHub Integration Agent
 
 A comprehensive agent for automating GitHub issue and pull request management using AI-powered classification and routing.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/github-integration-workflow/docs/images/github-pr-management.png" width="49%" alt="GitHub PR Integration Agent" />
-  <img src="examples/github-integration-workflow/docs/images/github-issue-management.png" width="49%" alt="GitHub Issue Integration Agent" />
+  <img src="examples/integrations/github/github-integration-workflow/docs/images/github-pr-management.png" width="49%" alt="GitHub PR Integration Agent" />
+  <img src="examples/integrations/github/github-integration-workflow/docs/images/github-issue-management.png" width="49%" alt="GitHub Issue Integration Agent" />
 </div>
 
 **Key Features:**
@@ -140,13 +282,13 @@ A comprehensive agent for automating GitHub issue and pull request management us
 
 **Technologies:** TypeScript, OpenAI, GitHub API
 
-[View Example →](examples/github-integration-workflow)
+[View Example →](examples/integrations/github/github-integration-workflow)
 
 ### Gmail Account Manager
 
 An intelligent Gmail agent that monitors, analyzes, and automatically responds to incoming emails.
 
-![Gmail Agent](examples/gmail-workflow/docs/images/gmail-flow.png)
+![Gmail Agent](examples/integrations/communication/gmail-workflow/docs/images/gmail-flow.png)
 
 **Key Features:**
 - Email classification and urgency detection
@@ -156,7 +298,7 @@ An intelligent Gmail agent that monitors, analyzes, and automatically responds t
 
 **Technologies:** TypeScript, Python, Google APIs, Discord, Hugging Face
 
-[View Example →](examples/gmail-workflow)
+[View Example →](examples/integrations/communication/gmail-workflow)
 
 
 
@@ -166,7 +308,7 @@ An LLM chat-like question-answering system with RAG (Retrieval-Augmented Generat
 The system leverages Docling to parse and intelligently chunk PDF documents, Weaviate as a vector database to store vectorized chunks, and OpenAI for embeddings and text generation.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/rag-docling-weaviate-agent/docs/images/rag-example.gif" alt="PDF RAG Docling Weaviate Agent" />
+  <img src="examples/rag-and-search/rag-fundamentals/rag-docling-weaviate-agent/docs/images/rag-example.gif" alt="PDF RAG Docling Weaviate Agent" />
 </div>
 
 **Key Features:**
@@ -178,13 +320,13 @@ The system leverages Docling to parse and intelligently chunk PDF documents, Wea
 
 **Technologies:** TypeScript, Python, Docling, Weaviate, OpenAI
 
-[View Example →](examples/rag-docling-weaviate-agent)
+[View Example →](examples/rag-and-search/rag-fundamentals/rag-docling-weaviate-agent)
 
 ### Real-Time Uptime Monitor
 
 A production-ready website monitoring system that continuously checks site availability, sends intelligent Discord alerts, and provides comprehensive health reporting.
 
-![Uptime Monitor](examples/motia-uptime-monitor/docs/images/uptime-monitor-architecture.png)
+![Uptime Monitor](examples/foundational/infrastructure/motia-uptime-monitor/docs/images/uptime-monitor-architecture.png)
 
 **Key Features:**
 - Configurable cron-based website checking
@@ -196,13 +338,13 @@ A production-ready website monitoring system that continuously checks site avail
 
 **Technologies:** JavaScript, Discord Webhooks, Cron Scheduling
 
-[View Example →](examples/motia-uptime-monitor)
+[View Example →](examples/foundational/infrastructure/motia-uptime-monitor)
 
 ### Sentiment Analysis Workflow
 
 A dynamic sentiment analysis application that uses an LLM to determine workflow routing, demonstrating event-driven decision making.
 
-![Sentiment Analysis](examples/sentimental-analysis/docs/images/sentimental-analyzer-workbench.gif)
+![Sentiment Analysis](examples/foundational/api-patterns/sentimental-analysis/docs/images/sentimental-analyzer-workbench.gif)
 
 **Key Features:**
 - Dynamic workflow routing based on sentiment
@@ -212,15 +354,15 @@ A dynamic sentiment analysis application that uses an LLM to determine workflow 
 
 **Technologies:** TypeScript, OpenAI
 
-[View Example →](examples/sentimental-analysis)
+[View Example →](examples/foundational/api-patterns/sentimental-analysis)
 
 ### AI Health & Fitness Agent
 
 An intelligent health and fitness assistant that analyzes user activity, provides personalized recommendations, and tracks wellness goals.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/ai-health-fitness/docs/images/image.png" width="49%" alt="Health Fitness Agent" />
-  <img src="examples/ai-health-fitness/docs/images/whatsapp-output.png" width="49%" alt="Health Analytics" />
+  <img src="examples/ai-agents/specialized-agents/ai-health-fitness/docs/images/image.png" width="49%" alt="Health Fitness Agent" />
+  <img src="examples/ai-agents/specialized-agents/ai-health-fitness/docs/images/whatsapp-output.png" width="49%" alt="Health Analytics" />
 </div>
 
 **Key Features:**
@@ -231,14 +373,14 @@ An intelligent health and fitness assistant that analyzes user activity, provide
 
 **Technologies:** TypeScript, Health APIs, AI Analysis
 
-[View Example →](examples/ai-health-fitness)
+[View Example →](examples/ai-agents/specialized-agents/ai-health-fitness)
 
 ### Blog to Tweet Automation
 
 An automated content distribution system that transforms blog posts into engaging social media content.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/blog-to-tweet/assets/architecture.gif" alt="Blog to Tweet Architecture" />
+  <img src="examples/foundational/automation/blog-to-tweet/assets/architecture.gif" alt="Blog to Tweet Architecture" />
 </div>
 
 **Key Features:**
@@ -249,14 +391,14 @@ An automated content distribution system that transforms blog posts into engagin
 
 **Technologies:** JavaScript, Social Media APIs, Content Processing
 
-[View Example →](examples/blog-to-tweet)
+[View Example →](examples/foundational/automation/blog-to-tweet)
 
 ### LinkedIn Content Agent
 
 An intelligent content creation and management system for LinkedIn professional networking.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/linkedIn-content-agent/assets/output.gif" alt="LinkedIn Content Agent" />
+  <img src="examples/ai-agents/specialized-agents/linkedIn-content-agent/assets/output.gif" alt="LinkedIn Content Agent" />
 </div>
 
 **Key Features:**
@@ -267,7 +409,7 @@ An intelligent content creation and management system for LinkedIn professional 
 
 **Technologies:** JavaScript, LinkedIn API, Content Generation
 
-[View Example →](examples/linkedIn-content-agent)
+[View Example →](examples/ai-agents/specialized-agents/linkedIn-content-agent)
 
 ### Image Resizer Service
 
@@ -282,7 +424,7 @@ A high-performance image processing service that handles multiple formats and op
 
 **Technologies:** TypeScript, Image Processing Libraries, Storage APIs
 
-[View Example →](examples/image-resizer)
+[View Example →](examples/foundational/api-patterns/image-resizer)
 
 ### Spamurai PR Agent
 
@@ -296,7 +438,7 @@ An intelligent GitHub PR management system that automatically detects and handle
 
 **Technologies:** TypeScript, GitHub API, Machine Learning
 
-[View Example →](examples/Spamurai-pr-agent)
+[View Example →](examples/ai-agents/specialized-agents/Spamurai-pr-agent)
 
 ### Motia Docker Integration
 
@@ -310,13 +452,13 @@ A comprehensive example demonstrating how to containerize and deploy Motia appli
 
 **Technologies:** Docker, TypeScript, Deployment Tools
 
-[View Example →](examples/motia-docker)
+[View Example →](examples/foundational/infrastructure/motia-docker)
 
 ### Real-Time Chat Application
 
 A comprehensive demonstration of real-time chat functionality with asynchronous message processing using the Motia Framework.
 
-![Chat Agent](examples/chat-agent/docs/images/chat-agent.png)
+![Chat Agent](examples/ai-agents/chat-agents/chat-agent/docs/images/chat-agent.png)
 
 **Key Features:**
 - Real-time messaging with WebSocket streaming
@@ -327,7 +469,7 @@ A comprehensive demonstration of real-time chat functionality with asynchronous 
 
 **Technologies:** TypeScript, Motia Streams, Event System
 
-[View Example →](examples/chat-agent)
+[View Example →](examples/ai-agents/chat-agents/chat-agent)
 
 
 
@@ -336,7 +478,7 @@ A comprehensive demonstration of real-time chat functionality with asynchronous 
 A demonstration of parallel task execution capabilities in Motia agents.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/motia-parallel-execution/docs/images/motia-parallel-exec.gif" alt="Motia Parallel Execution" />
+  <img src="examples/foundational/infrastructure/motia-parallel-execution/docs/images/motia-parallel-exec.gif" alt="Motia Parallel Execution" />
 </div>
 
 **Key Features:**
@@ -347,14 +489,14 @@ A demonstration of parallel task execution capabilities in Motia agents.
 
 **Technologies:** TypeScript
 
-[View Example →](examples/motia-parallel-execution)
+[View Example →](examples/foundational/infrastructure/motia-parallel-execution)
 
 ### Research Assistant
 
 An intelligent research assistant that helps gather and analyze information.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/research-assistant/docs/images/workbench-image.png" alt="Research Assistant" />
+  <img src="examples/rag-and-search/rag-applications/research-assistant/docs/images/workbench-image.png" alt="Research Assistant" />
 </div>
 
 **Key Features:**
@@ -365,14 +507,14 @@ An intelligent research assistant that helps gather and analyze information.
 
 **Technologies:** TypeScript, OpenAI
 
-[View Example →](examples/research-assistant)
+[View Example →](examples/rag-and-search/rag-applications/research-assistant)
 
 ### Streaming AI Chatbot
 
 A real-time streaming chatbot implementation with AI capabilities.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/streaming-ai-chatbot/docs/images/streaming-ai-chatbot.gif" alt="Streaming AI Chatbot" />
+  <img src="examples/ai-agents/chat-agents/streaming-ai-chatbot/docs/images/streaming-ai-chatbot.gif" alt="Streaming AI Chatbot" />
 </div>
 
 **Key Features:**
@@ -383,14 +525,14 @@ A real-time streaming chatbot implementation with AI capabilities.
 
 **Technologies:** TypeScript, OpenAI Streaming
 
-[View Example →](examples/streaming-ai-chatbot)
+[View Example →](examples/ai-agents/chat-agents/streaming-ai-chatbot)
 
 ### Conversation Analyzer with Vision
 
 An advanced agent that analyzes conversations with both text and visual understanding capabilities.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/conversation-analyzer-with-vision/docs/images/conversation-analyzer-with-vision.png" alt="Conversation Analyzer with Vision" />
+  <img src="examples/content-and-marketing/conversation-analyzer-with-vision/docs/images/conversation-analyzer-with-vision.png" alt="Conversation Analyzer with Vision" />
 </div>
 
 **Key Features:**
@@ -401,13 +543,13 @@ An advanced agent that analyzes conversations with both text and visual understa
 
 **Technologies:** TypeScript, OpenAI Vision, Natural Language Processing
 
-[View Example →](examples/conversation-analyzer-with-vision)
+[View Example →](examples/content-and-marketing/conversation-analyzer-with-vision)
 
 ### Trello Task Automation
 
 Streamline development processes with an intelligent task progression agent for Trello boards.
 
-![Trello Agent](examples/trello-flow/docs/images/trello-manager.png)
+![Trello Agent](examples/integrations/communication/trello-flow/docs/images/trello-manager.png)
 
 **Key Features:**
 - Automated card movement between lists
@@ -417,36 +559,71 @@ Streamline development processes with an intelligent task progression agent for 
 
 **Technologies:** TypeScript, Trello API, OpenAI, Slack
 
-[View Example →](examples/trello-flow)
-
-### AI Image Generation and Evaluation
-
-An agent that generates and evaluates AI images with feedback loops and quality metrics.
-
-<div style="display: flex; gap: 10px;">
-  <img src="examples/vision-example/docs/images/generate-image.png" width="49%" alt="Vision Agent" />
-  <img src="examples/vision-example/docs/images/eval-agent.png" width="49%" alt="Evaluation Results" />
-</div>
-
-**Key Features:**
-- Prompt enhancement with AI
-- Image generation with Flux
-- Evaluation of generated images
-- Dataset reports with quality metrics
+[View Example →](examples/integrations/communication/trello-flow)
 
 **Technologies:** TypeScript, Python, Claude, Flux, OpenAI
 
-[View Example →](examples/vision-example)
+[View Example →](examples/advanced-use-cases/vision-example)
 
 ## 🚀 Getting Started
 
-Each example includes its own README with detailed setup instructions. Generally, you'll need:
+### Quick Start Guide
 
-1. Clone this repository
-2. Navigate to the example directory
-3. Install dependencies
-4. Configure environment variables
-5. Run the agent with Motia
+1. **Choose Your Learning Path:**
+   - New to Motia? Start with [Getting Started](examples/getting-started/)
+   - Building AI apps? Go to [AI Agents](examples/ai-agents/)
+   - Need integrations? Check [Integrations](examples/integrations/)
+   - Want production examples? Browse [Advanced Use Cases](examples/advanced-use-cases/)
+
+2. **Run Any Example:**
+   ```bash
+   # Clone the repository
+   git clone https://github.com/MotiaDev/motia-examples.git
+   cd motia-examples
+   
+   # Navigate to an example
+   cd examples/getting-started/middleware-auth-handler-example
+   
+   # Install dependencies
+   npm install
+   
+   # Configure environment
+   cp env.example .env
+   # Edit .env with your API keys
+   
+   # Start the development server
+   npm run dev
+   
+   # Open Workbench
+   # Visit http://localhost:3000
+   ```
+
+3. **Explore the Workbench:**
+   Each example includes visual workflow representations, real-time logs, and interactive testing capabilities.
+
+### Learning Paths
+
+**Path 1: Complete Beginner (2-4 hours)**
+1. [middleware-auth-handler-example](examples/getting-started/middleware-auth-handler-example/)
+2. [queue-example](examples/getting-started/queue-example/)
+3. [realtime-todo-app](examples/getting-started/realtime-todo-app/)
+
+**Path 2: AI Developer (2-5 days)**
+1. Review [Getting Started](examples/getting-started/)
+2. Build [Chat Agents](examples/ai-agents/chat-agents/)
+3. Explore [RAG Systems](examples/rag-and-search/)
+4. Create [Multi-Agent Systems](examples/ai-agents/multi-agent-systems/)
+
+**Path 3: Integration Specialist (1-2 days)**
+1. [Queue Example](examples/getting-started/queue-example/)
+2. Choose integration: [GitHub](examples/integrations/github/), [Stripe](examples/integrations/payment/), or [Gmail](examples/integrations/communication/)
+3. Build custom integration
+
+**Path 4: Production Engineer (1-2 weeks)**
+1. Review foundational patterns
+2. Study [Advanced Use Cases](examples/advanced-use-cases/)
+3. Implement monitoring and error handling
+4. Deploy to production
 
 ### Meeting Transcription Example
 
@@ -462,15 +639,15 @@ A comprehensive example demonstrating local, privacy-friendly meeting audio proc
 
 **Technologies:** TypeScript, Python, Whisper, Streamlit, Motia
 
-[View Example →](examples/meeting-transcription/)
+[View Example →](examples/advanced-use-cases/meeting-transcription/)
 
 ### AI AQI Alert System
 
 A comprehensive Air Quality Index (AQI) analysis backend providing real-time air quality monitoring, health recommendations, trend analysis, and alert notifications.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/ai-aqi-alert-system/docs/workbench.png" width="49%" alt="AQI Dashboard" />
-  <img src="examples/ai-aqi-alert-system/docs/output.png" width="49%" alt="AQI Analysis Output" />
+  <img src="examples/monitoring-and-alerts/ai-aqi-alert-system/docs/workbench.png" width="49%" alt="AQI Dashboard" />
+  <img src="examples/monitoring-and-alerts/ai-aqi-alert-system/docs/output.png" width="49%" alt="AQI Analysis Output" />
 </div>
 
 **Key Features:**
@@ -483,13 +660,13 @@ A comprehensive Air Quality Index (AQI) analysis backend providing real-time air
 
 **Technologies:** TypeScript, OpenAI, Firecrawl, OpenWeatherMap, Resend
 
-[View Example →](examples/ai-aqi-alert-system)
+[View Example →](examples/monitoring-and-alerts/ai-aqi-alert-system)
 
 ### AI Mortgage Alert System
 
 An intelligent, real-time mortgage rate monitoring and analysis system with OpenAI, Couchbase Vector Search, and Resend.
 
-![Mortgage Rate Alert System](examples/ai-morgage-alert-system/public/workbench.png)
+![Mortgage Rate Alert System](examples/monitoring-and-alerts/ai-morgage-alert-system/public/workbench.png)
 
 **Key Features:**
 - AI-powered mortgage rate trend analysis using OpenAI GPT-4
@@ -501,13 +678,13 @@ An intelligent, real-time mortgage rate monitoring and analysis system with Open
 
 **Technologies:** TypeScript, OpenAI, Couchbase, Resend
 
-[View Example →](examples/ai-morgage-alert-system)
+[View Example →](examples/monitoring-and-alerts/ai-morgage-alert-system)
 
 ### AI Home Renovation Planner
 
 A full-stack AI-powered renovation planning application with personalized design plans, budget-aware recommendations, and photorealistic rendering using Gemini 2.5 Flash.
 
-![AI Home Renovation](examples/ai-room-renovate/public/motia-room-renovate.gif)
+![AI Home Renovation](examples/advanced-use-cases/ai-room-renovate/public/motia-room-renovate.gif)
 
 **Key Features:**
 - AI-powered design planning with specific materials and colors
@@ -526,7 +703,7 @@ A full-stack AI-powered renovation planning application with personalized design
 
 An AI-powered guest assistant for Airbnb properties with RAG capabilities, conversation history tracking in Notion, and local search functionality.
 
-![Airbnb Assistant](examples/airbnb-assistant/docs/img/workbench.png)
+![Airbnb Assistant](examples/rag-and-search/rag-applications/airbnb-assistant/docs/img/workbench.png)
 
 **Key Features:**
 - Smart chat API with RAG architecture
@@ -538,13 +715,13 @@ An AI-powered guest assistant for Airbnb properties with RAG capabilities, conve
 
 **Technologies:** TypeScript, OpenAI, Pinecone, Notion, SerpAPI
 
-[View Example →](examples/airbnb-assistant)
+[View Example →](examples/rag-and-search/rag-applications/airbnb-assistant)
 
 ### Currency Rate Monitor
 
 A sophisticated Currency Rate Monitor with RAG using OpenAI embeddings, Weaviate vector database, Google Sheets logging, and Slack notifications.
 
-![Currency Monitor](examples/currency-rate-monitor/docs/img/workbench.png)
+![Currency Monitor](examples/foundational/automation/currency-rate-monitor/docs/img/workbench.png)
 
 **Key Features:**
 - Webhook endpoint for currency rate data
@@ -557,13 +734,13 @@ A sophisticated Currency Rate Monitor with RAG using OpenAI embeddings, Weaviate
 
 **Technologies:** TypeScript, OpenAI, Weaviate, Google Sheets, Slack
 
-[View Example →](examples/currency-rate-monitor)
+[View Example →](examples/foundational/automation/currency-rate-monitor)
 
 ### GitHub Stars Video Generator
 
 Generate beautiful animated videos showcasing your GitHub repository's star history using Motia and Remotion.
 
-![GitHub Stars Video](examples/git-stars-video/public/images/workbench.png)
+![GitHub Stars Video](examples/integrations/social-media/git-stars-video/public/images/workbench.png)
 
 **Key Features:**
 - Dual theme support (dark and light)
@@ -575,13 +752,13 @@ Generate beautiful animated videos showcasing your GitHub repository's star hist
 
 **Technologies:** TypeScript, Remotion, GitHub API
 
-[View Example →](examples/git-stars-video)
+[View Example →](examples/integrations/social-media/git-stars-video)
 
 ### GitHub Commit Jenkins
 
 A production-ready workflow that processes GitHub commits using AI-powered analysis with RAG (Retrieval-Augmented Generation).
 
-![GitHub Commit Jenkins](examples/github-commit-jenkins/img/workbench.png)
+![GitHub Commit Jenkins](examples/integrations/github/github-commit-jenkins/img/workbench.png)
 
 **Key Features:**
 - Webhook integration for GitHub commits
@@ -594,15 +771,15 @@ A production-ready workflow that processes GitHub commits using AI-powered analy
 
 **Technologies:** TypeScript, Python, OpenAI, Supabase, Google Sheets, Slack
 
-[View Example →](examples/github-commit-jenkins)
+[View Example →](examples/integrations/github/github-commit-jenkins)
 
 ### Google ADK Agents on Motia
 
 Build production-grade AI agents with Google's Agent Development Kit, simplified by Motia's event-driven architecture.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/google-adk-motia/docs/agent-ui.png" width="49%" alt="Agent Dashboard" />
-  <img src="examples/google-adk-motia/docs/agent-workbench.png" width="49%" alt="Workbench Flow" />
+  <img src="examples/integrations/google-workspace/google-adk-motia/docs/agent-ui.png" width="49%" alt="Agent Dashboard" />
+  <img src="examples/integrations/google-workspace/google-adk-motia/docs/agent-workbench.png" width="49%" alt="Workbench Flow" />
 </div>
 
 **Key Features:**
@@ -616,7 +793,7 @@ Build production-grade AI agents with Google's Agent Development Kit, simplified
 
 **Technologies:** TypeScript, Google Gemini 2.5 Flash, Motia
 
-[View Example →](examples/google-adk-motia)
+[View Example →](examples/integrations/google-workspace/google-adk-motia)
 
 ### Motia Research Assistant
 
@@ -632,15 +809,15 @@ A multi-agent research system combining Motia workflow orchestration with Mastra
 
 **Technologies:** TypeScript, Mastra, OpenAI, Tavily
 
-[View Example →](examples/motia-research-assistant)
+[View Example →](examples/rag-and-search/rag-applications/motia-research-assistant)
 
 ### Property Search Agent
 
 A high-performance, event-driven real estate search system built with Motia and Agno, featuring parallel processing and interactive dashboard.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/property-search-agent/docs/img/workbench.png" width="49%" alt="Property Search Workbench" />
-  <img src="examples/property-search-agent/docs/img/plugin-ui.png" width="49%" alt="Property Dashboard" />
+  <img src="examples/rag-and-search/rag-applications/property-search-agent/docs/img/workbench.png" width="49%" alt="Property Search Workbench" />
+  <img src="examples/rag-and-search/rag-applications/property-search-agent/docs/img/plugin-ui.png" width="49%" alt="Property Dashboard" />
 </div>
 
 **Key Features:**
@@ -654,13 +831,13 @@ A high-performance, event-driven real estate search system built with Motia and 
 
 **Technologies:** TypeScript, Python, Agno, OpenAI, Firecrawl
 
-[View Example →](examples/property-search-agent)
+[View Example →](examples/rag-and-search/rag-applications/property-search-agent)
 
 ### Public Form Auto Triage
 
 A Motia workflow implementing intelligent form triage using RAG with vector similarity search and LLM processing.
 
-![Form Auto Triage](examples/public-form-auto-triage/docs/img/workflow.png)
+![Form Auto Triage](examples/advanced-use-cases/public-form-auto-triage/docs/img/workflow.png)
 
 **Key Features:**
 - Webhook integration for form submissions
@@ -673,15 +850,15 @@ A Motia workflow implementing intelligent form triage using RAG with vector simi
 
 **Technologies:** TypeScript, OpenAI, Anthropic, Supabase, Google Sheets, Slack
 
-[View Example →](examples/public-form-auto-triage)
+[View Example →](examples/advanced-use-cases/public-form-auto-triage)
 
 ### SmartTravel Multi-Agent System
 
 An intelligent travel planning system powered by 6 specialized AI agents working in harmony to create comprehensive, personalized travel itineraries.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/smarttravel-multi-agent/public/frontend.png" width="49%" alt="SmartTravel Frontend" />
-  <img src="examples/smarttravel-multi-agent/public/workbench.png" width="49%" alt="SmartTravel Workbench" />
+  <img src="examples/ai-agents/multi-agent-systems/smarttravel-multi-agent/public/frontend.png" width="49%" alt="SmartTravel Frontend" />
+  <img src="examples/ai-agents/multi-agent-systems/smarttravel-multi-agent/public/workbench.png" width="49%" alt="SmartTravel Workbench" />
 </div>
 
 **Key Features:**
@@ -694,13 +871,13 @@ An intelligent travel planning system powered by 6 specialized AI agents working
 
 **Technologies:** TypeScript, OpenAI GPT-4o, React, TanStack Router
 
-[View Example →](examples/smarttravel-multi-agent)
+[View Example →](examples/ai-agents/multi-agent-systems/smarttravel-multi-agent)
 
 ### AI Content Moderation
 
 A complete content moderation system combining AI analysis with human review via Slack integration.
 
-![Content Moderation](examples/ai-content-moderation/assets/workflow.png)
+![Content Moderation](examples/ai-agents/specialized-agents/ai-content-moderation/assets/workflow.png)
 
 **Key Features:**
 - Dual content support (text and images)
@@ -712,13 +889,13 @@ A complete content moderation system combining AI analysis with human review via
 
 **Technologies:** TypeScript, OpenAI, Slack
 
-[View Example →](examples/ai-content-moderation)
+[View Example →](examples/ai-agents/specialized-agents/ai-content-moderation)
 
 ### Car Alert System
 
 AI-powered connected car alert processing system with intelligent response generation.
 
-![Car Alert](examples/car-alert/docs/img/workbench.png)
+![Car Alert](examples/monitoring-and-alerts/car-alert/docs/img/workbench.png)
 
 **Key Features:**
 - Text chunking for large alerts
@@ -730,13 +907,13 @@ AI-powered connected car alert processing system with intelligent response gener
 
 **Technologies:** Python, OpenAI, Google Sheets
 
-[View Example →](examples/car-alert)
+[View Example →](examples/monitoring-and-alerts/car-alert)
 
 ### Competitor Price Scraper
 
 A Motia workflow implementing a full RAG system for analyzing competitor pricing data with vector storage.
 
-![Competitor Scraper](examples/competitor-price-scrapper/docs/img/workbench.png)
+![Competitor Scraper](examples/advanced-use-cases/competitor-price-scrapper/docs/img/workbench.png)
 
 **Key Features:**
 - Webhook endpoint for competitor data
@@ -750,15 +927,15 @@ A Motia workflow implementing a full RAG system for analyzing competitor pricing
 
 **Technologies:** TypeScript, OpenAI, Anthropic, Supabase, Google Sheets, Slack
 
-[View Example →](examples/competitor-price-scrapper)
+[View Example →](examples/advanced-use-cases/competitor-price-scrapper)
 
 ### Email Marketing Automation
 
 A comprehensive email marketing automation platform featuring AI-powered personalization, behavioral triggers, and scalable campaign management.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/email-marketing-automation/assets/email-dashboard.png" width="49%" alt="Email Dashboard" />
-  <img src="examples/email-marketing-automation/assets/email-campaigns.png" width="49%" alt="Campaign Management" />
+  <img src="examples/content-and-marketing/email-marketing-automation/assets/email-dashboard.png" width="49%" alt="Email Dashboard" />
+  <img src="examples/content-and-marketing/email-marketing-automation/assets/email-campaigns.png" width="49%" alt="Campaign Management" />
 </div>
 
 **Key Features:**
@@ -780,7 +957,7 @@ A comprehensive email marketing automation platform featuring AI-powered persona
 
 A fast-response, event-driven like system demonstrating mixed TypeScript/Python microservices architecture with immediate API responses and asynchronous background processing.
 
-![Fast Likes System](examples/fast-likes-smart-feeds/docs/img/architecture.png)
+![Fast Likes System](examples/integrations/social-media/fast-likes-smart-feeds/docs/img/architecture.png)
 
 **Key Features:**
 - Micro-actions pattern with real-time integrations
@@ -792,13 +969,13 @@ A fast-response, event-driven like system demonstrating mixed TypeScript/Python 
 
 **Technologies:** TypeScript, Python, Firebase, Supabase
 
-[View Example →](examples/fast-likes-smart-feeds)
+[View Example →](examples/integrations/social-media/fast-likes-smart-feeds)
 
 ### Harvest Logbook RAG
 
 A hands-on demonstration of building a production-ready RAG system with fine-grained authorization using SpiceDB.
 
-![Harvest Logbook](examples/harvest-logbook-rag/docs/img/image.png)
+![Harvest Logbook](examples/rag-and-search/rag-applications/harvest-logbook-rag/docs/img/image.png)
 
 **Key Features:**
 - RAG pipeline with Motia's event-driven architecture
@@ -811,13 +988,13 @@ A hands-on demonstration of building a production-ready RAG system with fine-gra
 
 **Technologies:** TypeScript, OpenAI, Pinecone, SpiceDB
 
-[View Example →](examples/harvest-logbook-rag)
+[View Example →](examples/rag-and-search/rag-applications/harvest-logbook-rag)
 
 ### NVIDIA Docs AI Generator
 
 An intelligent documentation generation system that automatically analyzes GitHub repositories and creates comprehensive documentation with architecture diagrams, code analysis, and test generation.
 
-![NVIDIA Docs](examples/nvidia-docs-motia/docs/image.png)
+![NVIDIA Docs](examples/rag-and-search/rag-fundamentals/nvidia-docs-motia/docs/image.png)
 
 **Key Features:**
 - AI-powered repository analysis using NVIDIA NIM LLMs
@@ -829,7 +1006,7 @@ An intelligent documentation generation system that automatically analyzes GitHu
 
 **Technologies:** TypeScript, NVIDIA NIM, Mermaid
 
-[View Example →](examples/nvidia-docs-motia)
+[View Example →](examples/rag-and-search/rag-fundamentals/nvidia-docs-motia)
 
 ### Ollama Chat
 
@@ -845,13 +1022,11 @@ A minimal example demonstrating real-time AI streaming and conversation state ma
 
 **Technologies:** TypeScript, Ollama
 
-[View Example →](examples/ollama-chat)
+[View Example →](examples/getting-started/ollama-chat)
 
 ### RAG Dockling ChromaDB Ollama Agent
 
 Multi-format document RAG agent supporting PDF, Markdown, HTML, and TXT files with Docling and vector databases.
-
-![RAG Example](examples/rag-dockling-chromadb-ollama-agent/docs/images/rag-example.gif)
 
 **Key Features:**
 - Multi-format document processing
@@ -863,15 +1038,15 @@ Multi-format document RAG agent supporting PDF, Markdown, HTML, and TXT files wi
 
 **Technologies:** TypeScript, Python, Docling, ChromaDB, OpenAI, Ollama
 
-[View Example →](examples/rag-dockling-chromadb-ollama-agent)
+[View Example →](examples/rag-and-search/rag-fundamentals/rag-dockling-chromadb-ollama-agent)
 
 ### Real-time Todo App
 
 A modern todo application featuring real-time streaming capabilities, React frontend, and type-safe API backend built with Motia.
 
 <div style="display: flex; gap: 10px;">
-  <img src="examples/realtime-todo-app/images/workbench.png" width="49%" alt="Workbench" />
-  <img src="examples/realtime-todo-app/images/webapp.png" width="49%" alt="Todo App" />
+  <img src="examples/getting-started/realtime-todo-app/images/workbench.png" width="49%" alt="Workbench" />
+  <img src="examples/getting-started/realtime-todo-app/images/webapp.png" width="49%" alt="Todo App" />
 </div>
 
 **Key Features:**
@@ -884,7 +1059,7 @@ A modern todo application featuring real-time streaming capabilities, React fron
 
 **Technologies:** TypeScript, React, Motia Streams, TailwindCSS
 
-[View Example →](examples/realtime-todo-app)
+[View Example →](examples/getting-started/realtime-todo-app)
 
 ### UGC Workflow
 
@@ -900,20 +1075,73 @@ An AI-powered pipeline that automatically transforms product images into profess
 
 **Technologies:** TypeScript, Python, OpenAI, Google Gemini, Veo 3, ImageKit, Box
 
-[View Example →](examples/ugc-workflow)
+[View Example →](examples/content-and-marketing/ugc-workflow)
+
+## 📊 Repository Statistics
+
+- **Total Examples**: 60+
+- **Categories**: 8 main categories
+- **Languages**: TypeScript, JavaScript, Python
+- **Difficulty Levels**: Beginner → Intermediate → Advanced → Expert
+- **Topics Covered**: AI agents, RAG, integrations, monitoring, marketing, computer vision, and more
+
+## 🗺️ Find Examples By
+
+### By Motia Feature
+- **API Steps**: [Getting Started](examples/getting-started/), [Integrations](examples/integrations/)
+- **Event Steps**: [AI Agents](examples/ai-agents/), [Foundational](examples/foundational/)
+- **Cron Steps**: [Monitoring](examples/monitoring-and-alerts/)
+- **Streaming (SSE)**: [Getting Started](examples/getting-started/realtime-todo-app/), [AI Agents](examples/ai-agents/chat-agents/)
+- **State Management**: Most AI and RAG examples
+- **Queues**: [Queue Example](examples/getting-started/queue-example/)
+
+### By Technology
+- **OpenAI**: [AI Agents](examples/ai-agents/), [RAG](examples/rag-and-search/)
+- **Anthropic Claude**: [Multi-Agent Systems](examples/ai-agents/multi-agent-systems/)
+- **Vector Databases**: [RAG and Search](examples/rag-and-search/)
+- **GitHub**: [GitHub Integrations](examples/integrations/github/)
+- **Stripe**: [Payment Integration](examples/integrations/payment/)
+- **Docker**: [Infrastructure](examples/foundational/infrastructure/)
+
+### By Use Case
+- **Chatbots**: [Chat Agents](examples/ai-agents/chat-agents/)
+- **Search**: [RAG and Search](examples/rag-and-search/)
+- **E-commerce**: [Integrations](examples/integrations/payment/), [Monitoring](examples/monitoring-and-alerts/)
+- **Marketing**: [Content and Marketing](examples/content-and-marketing/)
+- **Monitoring**: [Monitoring and Alerts](examples/monitoring-and-alerts/)
 
 ## 🤝 Contributing
 
-We welcome contributions! If you've built an interesting agent with Motia, please share it by following our [contribution guidelines](CONTRIBUTING.md).
+We welcome contributions! If you've built an interesting application with Motia, please share it:
+
+1. **Report Issues**: Found a bug? [Open an issue](https://github.com/MotiaDev/motia-examples/issues)
+2. **Improve Examples**: Submit PRs to enhance existing examples
+3. **Add Examples**: Share your Motia applications following our structure
+4. **Update Documentation**: Help improve READMEs and guides
+
+See our [contribution guidelines](CONTRIBUTING.md) for details.
 
 ## 📝 License
 
 This repository and its contents are licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📚 Learn More
+## 📚 Resources
 
+### Documentation
 - **[Motia Documentation](https://motia.dev/docs)** - Complete framework documentation
-- **[Examples Documentation](https://www.motia.dev/docs/examples)** - Detailed tutorials for each example
+- **[Examples Catalog](examples/)** - Organized examples with learning paths
+- **[Examples Documentation](https://www.motia.dev/docs/examples)** - Detailed tutorials
 - **[Getting Started Guide](https://www.motia.dev/docs/getting-started)** - Quick start tutorial
 - **[Core Concepts](https://www.motia.dev/docs/concepts)** - Understanding Steps, Events, and Flows
 - **[Deployment Guide](https://www.motia.dev/docs/deployment)** - Production deployment strategies
+
+### Community
+- **[GitHub Discussions](https://github.com/MotiaDev/motia/discussions)** - Ask questions and share ideas
+- **[Discord](https://motia.dev/discord)** - Join the community
+- **[Twitter](https://twitter.com/motiadev)** - Latest updates and tips
+
+---
+
+**Built with ❤️ by the Motia community**
+
+[motia.dev](https://motia.dev) | [Documentation](https://motia.dev/docs) | [GitHub](https://github.com/MotiaDev/motia)
