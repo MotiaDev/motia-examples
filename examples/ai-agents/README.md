@@ -26,6 +26,10 @@ Complex orchestrations with multiple AI agents working together.
 
 ## 📚 Examples by Category
 
+**Total Examples**: 19 (3 chat agents + 8 specialized agents + 8 multi-agent systems)
+
+> **Note**: Includes the ReAct (Reason + Act) pattern agent for adaptive tool-based research
+
 ### Chat Agents
 
 #### [chat-agent](./chat-agents/chat-agent)
@@ -71,6 +75,20 @@ Build a real-time streaming chatbot with a modern UI.
 ---
 
 ### Specialized Agents
+
+#### [ai-ReACT-agent](./specialized-agents/ai-ReACT-agent)
+**Level**: Advanced  
+**Concepts**: ReAct Pattern, Tool Integration, Multi-Hop Reasoning
+
+Intelligent research assistant implementing the ReAct (Reason + Act) pattern for complex questions.
+
+**Key Features**:
+- Adaptive reasoning and tool selection
+- Multi-tool integration (Tavily, Alpha Vantage)
+- Iterative information gathering
+- Production-ready with error handling
+
+---
 
 #### [ai-code-reviewer-agent](./specialized-agents/ai-code-reviewer-agent)
 **Level**: Advanced  
@@ -287,7 +305,8 @@ Score and qualify leads using LangGraph-powered agents.
 **For Intermediate Users**: Explore Specialized Agents
 1. `ai-content-moderation` - Single-purpose agent
 2. `ai-health-fitness` - Domain-specific logic
-3. `ai-code-reviewer-agent` - Complex analysis
+3. `ai-ReACT-agent` - ReAct pattern with tool integration
+4. `ai-code-reviewer-agent` - Complex analysis
 
 **For Advanced Users**: Build Multi-Agent Systems
 1. `ai-vs-ai-tictactoe-game` - Agent coordination
