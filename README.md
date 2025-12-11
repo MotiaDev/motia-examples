@@ -24,7 +24,7 @@ We've organized 60+ examples into 8 logical categories based on complexity and u
 |----------|-------|----------|-------------|
 | [🚀 Getting Started](examples/getting-started/) | Beginner | 4 | Core Motia concepts - API steps, events, middleware, queues |
 | [🔧 Foundational](examples/foundational/) | Intermediate | 9 | Common patterns - automation, infrastructure, APIs |
-| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 19 | Chat agents, specialized agents, multi-agent systems |
+| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 20 | Chat agents, specialized agents, multi-agent systems |
 | [📚 RAG & Search](examples/rag-and-search/) | Advanced | 9 | Vector databases, embeddings, knowledge bases |
 | [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |
 | [📊 Monitoring](examples/monitoring-and-alerts/) | Intermediate | 3 | Cron-based monitoring and intelligent alerts |
@@ -223,6 +223,26 @@ An intelligent research assistant implementing the **ReAct (Reason + Act) patter
 **Technologies:** TypeScript, Anthropic Claude / Google Gemini, Tavily, Alpha Vantage
 
 [View Example →](examples/ai-agents/specialized-agents/ai-ReACT-agent)
+
+
+### AI Planning Agent
+
+A planning agent that uses the **Planning Architecture** to decompose tasks into subtasks and execute them with AI-powered planning, intelligent failure handling, and human-in-the-loop approvals.
+
+![AI Planning Agent](examples/ai-agents/specialized-agents/ai-planning-agent/docs/img/workbench.png)
+
+**Key Features:**
+- Planning Architecture: Decomposes tasks into subtasks and executes them with AI-powered planning, intelligent failure handling, and human-in-the-loop approvals
+- AI-powered planning
+- Intelligent failure handling
+- Human-in-the-loop approvals
+- Task decomposition
+- Task execution
+- Task monitoring
+
+**Technologies:** TypeScript, Google Gemini
+
+[View Example →](examples/ai-agents/specialized-agents/ai-planning-agent)
 
 ### AI Deep Research Agent
 
@@ -1098,7 +1118,7 @@ An AI-powered pipeline that automatically transforms product images into profess
 
 ## 📊 Repository Statistics
 
-- **Total Examples**: 61
+- **Total Examples**: 62
 - **Categories**: 8 main categories
 - **Languages**: TypeScript, JavaScript, Python
 - **Difficulty Levels**: Beginner → Intermediate → Advanced → Expert
