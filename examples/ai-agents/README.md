@@ -26,9 +26,7 @@ Complex orchestrations with multiple AI agents working together.
 
 ## 📚 Examples by Category
 
-**Total Examples**: 19 (3 chat agents + 8 specialized agents + 8 multi-agent systems)
-
-> **Note**: Includes the ReAct (Reason + Act) pattern agent for adaptive tool-based research
+**Total Examples**: 20 (3 chat agents + 9 specialized agents + 8 multi-agent systems)
 
 ### Chat Agents
 
@@ -143,6 +141,24 @@ Analyze financial data and generate insights.
 - Financial metrics
 - Trend detection
 - Report generation
+
+---
+
+#### [ai-planning-agent](./specialized-agents/ai-planning-agent)
+**Level**: Advanced  
+**Concepts**: Planning Architecture, AI-powered planning, intelligent failure handling, and human-in-the-loop approvals.
+
+Plan and execute tasks with AI-powered planning, intelligent failure handling, and human-in-the-loop approvals.
+
+**Key Features**:
+
+- AI-powered planning
+- Intelligent failure handling
+- Human-in-the-loop approvals
+- Task decomposition
+- Task execution
+- Task monitoring
+- Task reporting
 
 ---
 
@@ -306,12 +322,13 @@ Score and qualify leads using LangGraph-powered agents.
 1. `ai-content-moderation` - Single-purpose agent
 2. `ai-health-fitness` - Domain-specific logic
 3. `ai-ReACT-agent` - ReAct pattern with tool integration
-4. `ai-code-reviewer-agent` - Complex analysis
+4. `ai-planning-agent` - Planning Architecture with AI-powered planning, intelligent failure handling, and human-in-the-loop approvals.
+5. `ai-code-reviewer-agent` - Complex analysis
 
 **For Advanced Users**: Build Multi-Agent Systems
-1. `ai-vs-ai-tictactoe-game` - Agent coordination
-2. `smarttravel-multi-agent` - Multi-agent workflow
-3. `ai-app-generator` - Full orchestration
+1. `ai-vs-ai-tictactoe-game` - Agent coordination  
+2. `smarttravel-multi-agent` - Multi-agent workflow  
+3. `ai-app-generator` - Full orchestration  
 
 ## 💡 Best Practices
 
