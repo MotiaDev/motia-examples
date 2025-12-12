@@ -1,0 +1,42 @@
+{
+  "name": "contract-gpt",
+  "description": "ContractGPT - AI-powered legal contract analysis and generation using Gemini Interactions API",
+  "type": "module",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "start": "motia start",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia",
+    "contract-analysis",
+    "gemini",
+    "legal-ai",
+    "llm"
+  ],
+  "dependencies": {
+    "@google/genai": "^1.33.0",
+    "@motiadev/adapter-bullmq-events": "^0.17.4-beta.185",
+    "@motiadev/core": "^0.17.4-beta.185",
+    "@motiadev/plugin-bullmq": "^0.17.4-beta.185",
+    "@motiadev/plugin-endpoint": "^0.17.4-beta.185",
+    "@motiadev/plugin-logs": "^0.17.4-beta.185",
+    "@motiadev/plugin-observability": "^0.17.4-beta.185",
+    "@motiadev/plugin-states": "^0.17.4-beta.185",
+    "mammoth": "^1.8.0",
+    "motia": "^0.17.4-beta.185",
+    "pdf-parse": "^1.1.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@motiadev/workbench": "^0.17.4-beta.185",
+    "@types/node": "^22.0.0",
+    "@types/pdf-parse": "^1.1.4",
+    "@types/react": "^19.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
