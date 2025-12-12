@@ -1,0 +1,160 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 612 792] /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 2850 >>
+stream
+BT
+/F1 14 Tf
+50 750 Td
+(SOFTWARE SERVICES AGREEMENT) Tj
+0 -30 Td
+/F1 10 Tf
+(This Software Services Agreement \("Agreement"\) is entered into as of) Tj
+0 -15 Td
+(December 12, 2025 \("Effective Date"\), by and between TechCorp Inc.,) Tj
+0 -15 Td
+(a Delaware corporation \("Company"\), and CloudSolutions Ltd.,) Tj
+0 -15 Td
+(a foreign corporation \("Vendor"\).) Tj
+0 -30 Td
+/F1 12 Tf
+(1. SERVICES) Tj
+/F1 10 Tf
+0 -15 Td
+(Vendor shall provide cloud infrastructure management services as detailed) Tj
+0 -12 Td
+(in Schedule A, including: 24/7 monitoring, backup management, disaster) Tj
+0 -12 Td
+(recovery, and infrastructure optimization. Service level agreement: 99.9%) Tj
+0 -12 Td
+(uptime guarantee.) Tj
+0 -30 Td
+/F1 12 Tf
+(2. TERM AND RENEWAL) Tj
+/F1 10 Tf
+0 -15 Td
+(This Agreement shall be effective for an initial one \(1\) year period from the) Tj
+0 -12 Td
+(Effective Date. This Agreement shall automatically renew for successive) Tj
+0 -12 Td
+(one-year periods unless either party provides written notice 30 days prior) Tj
+0 -12 Td
+(to expiration. [POLICY VIOLATION: Company policy requires 90 days notice]) Tj
+0 -30 Td
+/F1 12 Tf
+(3. PAYMENT TERMS) Tj
+/F1 10 Tf
+0 -15 Td
+(Annual Fee: $100,000 USD) Tj
+0 -12 Td
+(Invoicing: Quarterly in advance) Tj
+0 -12 Td
+(Payment Due: Net 30 days from invoice date) Tj
+0 -12 Td
+(Late payments subject to 1.5% monthly interest) Tj
+0 -30 Td
+/F1 12 Tf
+(4. LIMITATION OF LIABILITY) Tj
+/F1 10 Tf
+0 -15 Td
+(Neither party shall be liable for indirect, incidental, consequential, or) Tj
+0 -12 Td
+(punitive damages, including lost profits or data loss. Total liability of) Tj
+0 -12 Td
+(either party under this Agreement shall not exceed $100,000.) Tj
+0 -12 Td
+([RISK: Liability cap equals annual contract value. Industry standard is) Tj
+0 -12 Td
+(2-3x annual value. Should be $250,000 minimum]) Tj
+0 -30 Td
+/F1 12 Tf
+(5. INTELLECTUAL PROPERTY) Tj
+/F1 10 Tf
+0 -15 Td
+(All work product created under this Agreement shall be owned by Vendor.) Tj
+0 -12 Td
+(Customer retains a perpetual, non-exclusive license to use deliverables) Tj
+0 -12 Td
+(for Customer's internal business purposes only.) Tj
+0 -12 Td
+([RISK: Ambiguous on custom deliverables vs. pre-existing IP]) Tj
+0 -30 Td
+/F1 12 Tf
+(6. DATA SECURITY) Tj
+/F1 10 Tf
+0 -15 Td
+(Vendor shall maintain reasonable security measures to protect Customer) Tj
+0 -12 Td
+(data consistent with industry standards.) Tj
+0 -12 Td
+([RISK: "Reasonable" is vague. Should specify SOC 2, ISO 27001 or NIST]) Tj
+0 -30 Td
+/F1 12 Tf
+(7. TERMINATION FOR CONVENIENCE) Tj
+/F1 10 Tf
+0 -15 Td
+(Either party may terminate this Agreement for convenience with 30 days') Tj
+0 -12 Td
+(written notice. Upon termination, all obligations cease except survival) Tj
+0 -12 Td
+(clauses. No termination fees or wind-down assistance required.) Tj
+0 -12 Td
+([RISK: Vendor could exit mid-project without transition period]) Tj
+0 -30 Td
+/F1 12 Tf
+(8. CONFIDENTIALITY) Tj
+/F1 10 Tf
+0 -15 Td
+(Each party agrees to maintain confidentiality of proprietary information) Tj
+0 -12 Td
+(for a period of 3 years following termination.) Tj
+0 -30 Td
+/F1 12 Tf
+(9. GOVERNING LAW) Tj
+/F1 10 Tf
+0 -15 Td
+(This Agreement shall be governed by the laws of the State of Delaware,) Tj
+0 -12 Td
+(without regard to conflicts of law principles.) Tj
+0 -30 Td
+/F1 10 Tf
+(Executed as of December 12, 2025) Tj
+0 -40 Td
+(_________________________________        _________________________________) Tj
+0 -12 Td
+(TechCorp Inc.                             CloudSolutions Ltd.) Tj
+0 -40 Td
+(By: ____________________________        By: ____________________________) Tj
+0 -12 Td
+(Name: __________________________        Name: __________________________) Tj
+0 -12 Td
+(Title: ___________________________        Title: ___________________________) Tj
+0 -12 Td
+(Date: ___________________________        Date: ___________________________) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000229 00000 n 
+0000000322 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3222
+%%EOF

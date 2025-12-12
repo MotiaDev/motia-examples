@@ -1,0 +1,77 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "src/hello/log-greeting.step.js": {
+        "x": 409,
+        "y": 44
+      },
+      "src/hello/hello-api.step.ts": {
+        "x": -409,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      },
+      "src/hello/process_greeting_step.py": {
+        "x": 0,
+        "y": 34,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "contract-generation",
+    "config": {
+      "src/contracts/generate-contract.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "contract-analysis",
+    "config": {
+      "src/contracts/refiner.step.ts": {
+        "x": 1322,
+        "y": -156,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "src/contracts/list-contracts.step.ts": {
+        "x": -471,
+        "y": -86
+      },
+      "src/contracts/get-analysis.step.ts": {
+        "x": 2226,
+        "y": 183
+      },
+      "src/contracts/generator.step.ts": {
+        "x": -109,
+        "y": 182,
+        "targetHandlePosition": "top"
+      },
+      "src/contracts/generate-contract.step.ts": {
+        "x": -88,
+        "y": -407
+      },
+      "src/contracts/critic.step.ts": {
+        "x": 679,
+        "y": 180,
+        "sourceHandlePosition": "right"
+      },
+      "src/contracts/analyze-contract.step.ts": {
+        "x": -114,
+        "y": -143,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/contracts/analysis-failed.step.ts": {
+        "x": 792,
+        "y": -528,
+        "targetHandlePosition": "left"
+      },
+      "src/contracts/analysis-completed.step.ts": {
+        "x": 2242,
+        "y": -312
+      }
+    }
+  }
+]
