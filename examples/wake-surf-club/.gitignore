@@ -6,3 +6,9 @@ venv
 .mermaid
 dist
 *.pyc
+.env
+AGENTS.md
+CLAUDE.md
+.cursor/
+.cursorrules
+.claude
