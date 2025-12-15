@@ -1,0 +1,45 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "src/hello/process-greeting.step.ts": {
+        "x": 409,
+        "y": 44
+      },
+      "src/hello/hello-api.step.ts": {
+        "x": 0,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "realtime-cursor",
+    "config": {
+      "src/cursor/update-cursor.step.ts": {
+        "x": -410,
+        "y": 65
+      },
+      "src/cursor/on-cursor-left.step.ts": {
+        "x": 342,
+        "y": 99
+      },
+      "src/cursor/on-cursor-joined.step.ts": {
+        "x": 354,
+        "y": 319
+      },
+      "src/cursor/leave-room.step.ts": {
+        "x": 11,
+        "y": 64
+      },
+      "src/cursor/join-room.step.ts": {
+        "x": 3,
+        "y": 286
+      },
+      "src/cursor/clear-room.step.ts": {
+        "x": -408,
+        "y": 287
+      }
+    }
+  }
+]

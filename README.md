@@ -22,9 +22,9 @@ We've organized 60+ examples into 8 logical categories based on complexity and u
 
 | Category | Level | Examples | Description |
 |----------|-------|----------|-------------|
-| [🚀 Getting Started](examples/getting-started/) | Beginner | 4 | Core Motia concepts - API steps, events, middleware, queues |
-| [🔧 Foundational](examples/foundational/) | Intermediate | 9 | Common patterns - automation, infrastructure, APIs |
-| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 20 | Chat agents, specialized agents, multi-agent systems |
+| [🚀 Getting Started](examples/getting-started/) | Beginner | 5 | Core Motia concepts - API steps, events, middleware, queues, real-time |
+| [🔧 Foundational](examples/foundational/) | Intermediate | 8 | Common patterns - automation, infrastructure, APIs |
+| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 19 | Chat agents, specialized agents, multi-agent systems |
 | [📚 RAG & Search](examples/rag-and-search/) | Advanced | 9 | Vector databases, embeddings, knowledge bases |
 | [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |
 | [📊 Monitoring](examples/monitoring-and-alerts/) | Intermediate | 3 | Cron-based monitoring and intelligent alerts |
@@ -1115,6 +1115,22 @@ An AI-powered pipeline that automatically transforms product images into profess
 **Technologies:** TypeScript, Python, OpenAI, Google Gemini, Veo 3, ImageKit, Box
 
 [View Example →](examples/content-and-marketing/ugc-workflow)
+
+### Wake Surf Club
+
+A complete wake surf club booking and session management system with SMS notifications, calendar integration, and automated workflows.
+
+**Key Features:**
+- Session Management: Create and manage surf sessions with capacity limits
+- Booking System: Direct booking with automatic waitlist handling
+- SMS Notifications: Automated invites, confirmations, reminders via Twilio
+- Calendar Integration: Generate ICS calendar files for sessions
+- Admin Panel: Custom Workbench plugin for managing bookings
+- Automated Workflows: Morning reminders, invite blasts, session seeding via cron jobs
+
+**Technologies:** TypeScript, Motia, Redis, BullMQ, Twilio, React
+
+[View Example →](examples/advanced-use-cases/wake-surf-club)
 
 ## 📊 Repository Statistics
 
