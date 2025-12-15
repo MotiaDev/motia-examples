@@ -24,7 +24,7 @@ Explore containerization, parallel processing, and monitoring patterns.
 - Parallel execution patterns
 - Health monitoring and uptime tracking
 
-## 📚 Examples by Category
+## 📚 Examples by Category (8 Total)
 
 ### API Patterns
 

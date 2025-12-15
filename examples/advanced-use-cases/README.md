@@ -183,6 +183,35 @@ Comprehensive computer vision capabilities with object detection, OCR, and scene
 
 ---
 
+### [wake-surf-club](./wake-surf-club)
+**Level**: Expert  
+**Concepts**: Booking System, SMS Integration, Calendar Management, Full-Stack App
+
+Complete wake surf club booking and session management system with event-driven workflows.
+
+**Key Features**:
+- Session management with capacity limits
+- Automated booking with waitlist handling
+- SMS notifications via Twilio (invites, confirmations, reminders)
+- Calendar integration (ICS file generation)
+- Admin panel plugin for Workbench
+- React frontend for viewing and booking
+- Cron jobs for automated workflows
+
+**Tech Stack**:
+- Backend: Motia, TypeScript, Redis, BullMQ
+- Frontend: React, TailwindCSS
+- SMS: Twilio
+- Calendar: ICS generation
+
+**Use Cases**:
+- Club booking systems
+- Event management platforms
+- Session-based services
+- Membership management
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites

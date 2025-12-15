@@ -26,7 +26,7 @@ Complex orchestrations with multiple AI agents working together.
 
 ## 📚 Examples by Category
 
-**Total Examples**: 20 (3 chat agents + 9 specialized agents + 8 multi-agent systems)
+**Total Examples**: 19 (3 chat agents + 10 specialized agents + 6 multi-agent systems)
 
 ### Chat Agents
 

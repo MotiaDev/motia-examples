@@ -12,10 +12,11 @@ Learn core concepts with simple, focused examples:
 - API endpoints and event processing
 - Middleware and authentication
 - Queue management
-- Real-time updates with SSE
+- Real-time updates with SSE and WebSocket
+- Collaborative real-time features
 
-**Time to Complete**: 2-4 hours  
-**Examples**: 4
+**Time to Complete**: 2-5 hours  
+**Examples**: 5
 
 ---
 
@@ -24,12 +25,12 @@ Learn core concepts with simple, focused examples:
 **Common patterns for real-world applications**
 
 Master essential patterns for building production apps:
-- **[API Patterns](./foundational/api-patterns/)** - File processing, text analysis
-- **[Automation](./foundational/automation/)** - Content workflows, scheduling
-- **[Infrastructure](./foundational/infrastructure/)** - Docker, monitoring, performance
+- **[API Patterns](./foundational/api-patterns/)** - File processing, text analysis (2 examples)
+- **[Automation](./foundational/automation/)** - Content workflows, scheduling (3 examples)
+- **[Infrastructure](./foundational/infrastructure/)** - Docker, monitoring, performance (3 examples)
 
 **Time to Complete**: 1-2 days  
-**Examples**: 9 across 3 subcategories
+**Examples**: 8 across 3 subcategories
 
 ---
 
@@ -43,7 +44,7 @@ From simple chatbots to complex multi-agent systems:
 - **[Multi-Agent Systems](./ai-agents/multi-agent-systems/)** - Complex orchestration (app generator, travel planner, hedge fund)
 
 **Time to Complete**: 2-5 days  
-**Examples**: 20 across 3 subcategories  
+**Examples**: 19 across 3 subcategories (3 chat + 10 specialized + 6 multi-agent)  
 **⭐ Featured**: [ai-app-generator](./ai-agents/multi-agent-systems/ai-app-generator) - Generate complete full-stack apps
 
 ---
@@ -133,7 +134,7 @@ Enterprise-grade applications:
 #### Path 1: "I'm New to Motia"
 1. Start with [Getting Started](./getting-started/)
 2. Pick the [middleware-auth-handler-example](./getting-started/middleware-auth-handler-example)
-3. Progress through all 4 getting-started examples
+3. Progress through all 5 getting-started examples
 4. Move to [Foundational](./foundational/)
 
 #### Path 2: "I Want to Build AI Apps"
@@ -158,14 +159,14 @@ Enterprise-grade applications:
 
 | Category | Level | Examples | Time | Best For |
 |----------|-------|----------|------|----------|
-| Getting Started | Beginner | 4 | 2-4h | Learning Motia basics |
-| Foundational | Intermediate | 9 | 1-2d | Common app patterns |
-| AI Agents | Int-Expert | 20 | 2-5d | AI applications |
+| Getting Started | Beginner | 5 | 2-5h | Learning Motia basics |
+| Foundational | Intermediate | 8 | 1-2d | Common app patterns |
+| AI Agents | Int-Expert | 19 | 2-5d | AI applications |
 | RAG and Search | Advanced | 9 | 3-5d | Knowledge bases |
 | Integrations | Intermediate | 9 | 1-2d | External services |
 | Monitoring | Intermediate | 3 | 1d | Alert systems |
 | Content/Marketing | Int-Advanced | 3 | 2-3d | Marketing automation |
-| Advanced | Expert | 5 | 1-2w | Production systems |
+| Advanced | Expert | 6 | 1-2w | Production systems |
 
 **Total Examples**: 62
 

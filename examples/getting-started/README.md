@@ -10,7 +10,7 @@ Welcome to Motia! This section contains beginner-friendly examples to help you l
 - Managing queues and job processing
 - Building real-time applications with Server-Sent Events (SSE)
 
-## 📚 Examples
+## 📚 Examples (5 Total)
 
 ### [middleware-auth-handler-example](./middleware-auth-handler-example)
 **Concepts**: Middleware, Authentication, Request/Response Processing
@@ -64,6 +64,20 @@ Create a real-time todo application with Server-Sent Events for instant updates.
 
 ---
 
+### [real-time-cursor-pointers](./real-time-cursor-pointers)
+**Concepts**: Real-time Streaming, WebSocket, Collaborative Features
+
+Build a real-time cursor sharing system with Motia Streams - perfect for collaborative apps.
+
+**Key Features**:
+- Real-time cursor position sync via WebSocket
+- Room-based collaboration
+- User colors and names
+- Auto cleanup when users leave
+- Next.js frontend demo
+
+---
+
 ## 🚀 Getting Started
 
 1. **Choose an example** that matches what you want to learn
@@ -81,6 +95,7 @@ We recommend following this order:
 2. **queue-example** - Learn event-driven architecture
 3. **ollama-chat** - Build your first API endpoint
 4. **realtime-todo-app** - Add real-time capabilities
+5. **real-time-cursor-pointers** - Build collaborative real-time features
 
 ## 🔗 Next Steps
 
