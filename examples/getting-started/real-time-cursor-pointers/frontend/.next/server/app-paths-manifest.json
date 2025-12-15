@@ -1,7 +1,0 @@
-{
-  "/api/cursor/clear/route": "app/api/cursor/clear/route.js",
-  "/api/cursor/join/route": "app/api/cursor/join/route.js",
-  "/api/cursor/leave/route": "app/api/cursor/leave/route.js",
-  "/api/cursor/update/route": "app/api/cursor/update/route.js",
-  "/page": "app/page.js"
-}
