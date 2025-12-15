@@ -23,7 +23,7 @@ We've organized 60+ examples into 8 logical categories based on complexity and u
 | Category | Level | Examples | Description |
 |----------|-------|----------|-------------|
 | [🚀 Getting Started](examples/getting-started/) | Beginner | 5 | Core Motia concepts - API steps, events, middleware, queues, real-time |
-| [🔧 Foundational](examples/foundational/) | Intermediate | 8 | Common patterns - automation, infrastructure, APIs |
+| [🔧 Foundational](examples/foundational/) | Intermediate | 9 | Common patterns - automation, infrastructure, APIs |
 | [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 19 | Chat agents, specialized agents, multi-agent systems |
 | [📚 RAG & Search](examples/rag-and-search/) | Advanced | 9 | Vector databases, embeddings, knowledge bases |
 | [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |
@@ -187,7 +187,7 @@ Perfect for newcomers to Motia. Learn core concepts:
 
 ### 🔧 [Foundational](examples/foundational/) - Real-World Patterns
 
-- **[API Patterns](examples/foundational/api-patterns/)** - File processing, analysis
+- **[API Patterns](examples/foundational/api-patterns/)** - Complete todo app demo, file processing, analysis
 - **[Automation](examples/foundational/automation/)** - Content workflows
 - **[Infrastructure](examples/foundational/infrastructure/)** - Docker, monitoring
 
@@ -449,6 +449,27 @@ An intelligent content creation and management system for LinkedIn professional 
 **Technologies:** JavaScript, LinkedIn API, Content Generation
 
 [View Example →](examples/ai-agents/specialized-agents/linkedIn-content-agent)
+
+### Todo App - Complete Motia Demo
+
+A comprehensive todo application showcasing all Motia capabilities - APIs, background jobs, real-time streaming, and scheduled tasks.
+
+![Todo App](examples/foundational/api-patterns/todo-app/docs/img/workbench.png)
+
+**Key Features:**
+- RESTful CRUD API for todo management
+- Real-time updates via Motia Streams
+- Background jobs (notifications, analytics, gamification)
+- Scheduled tasks (cleanup, statistics)
+- Visual Workbench plugin
+- Redis-backed state persistence
+- Complete production-ready application
+
+**Technologies:** TypeScript, Motia Streams, Redis, BullMQ
+
+**⭐ Highlights**: Perfect example demonstrating ALL Motia features in one cohesive application
+
+[View Example →](examples/foundational/api-patterns/todo-app)
 
 ### Image Resizer Service
 
@@ -1134,7 +1155,7 @@ A complete wake surf club booking and session management system with SMS notific
 
 ## 📊 Repository Statistics
 
-- **Total Examples**: 62
+- **Total Examples**: 63
 - **Categories**: 8 main categories
 - **Languages**: TypeScript, JavaScript, Python
 - **Difficulty Levels**: Beginner → Intermediate → Advanced → Expert

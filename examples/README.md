@@ -25,12 +25,12 @@ Learn core concepts with simple, focused examples:
 **Common patterns for real-world applications**
 
 Master essential patterns for building production apps:
-- **[API Patterns](./foundational/api-patterns/)** - File processing, text analysis (2 examples)
+- **[API Patterns](./foundational/api-patterns/)** - Full-stack todo app, file processing, text analysis (3 examples)
 - **[Automation](./foundational/automation/)** - Content workflows, scheduling (3 examples)
 - **[Infrastructure](./foundational/infrastructure/)** - Docker, monitoring, performance (3 examples)
 
 **Time to Complete**: 1-2 days  
-**Examples**: 8 across 3 subcategories
+**Examples**: 9 across 3 subcategories
 
 ---
 
@@ -160,7 +160,7 @@ Enterprise-grade applications:
 | Category | Level | Examples | Time | Best For |
 |----------|-------|----------|------|----------|
 | Getting Started | Beginner | 5 | 2-5h | Learning Motia basics |
-| Foundational | Intermediate | 8 | 1-2d | Common app patterns |
+| Foundational | Intermediate | 9 | 1-2d | Common app patterns |
 | AI Agents | Int-Expert | 19 | 2-5d | AI applications |
 | RAG and Search | Advanced | 9 | 3-5d | Knowledge bases |
 | Integrations | Intermediate | 9 | 1-2d | External services |
@@ -168,7 +168,7 @@ Enterprise-grade applications:
 | Content/Marketing | Int-Advanced | 3 | 2-3d | Marketing automation |
 | Advanced | Expert | 6 | 1-2w | Production systems |
 
-**Total Examples**: 62
+**Total Examples**: 63
 
 ---
 
@@ -334,9 +334,11 @@ All examples are MIT licensed unless otherwise specified.
 
 ## ⭐ Featured Examples
 
-### For Learning
+### For Learning & Comprehensive Demos
+- **[todo-app](./foundational/api-patterns/todo-app/)** - 🌟 COMPLETE Motia demo showcasing ALL features (APIs, events, cron, streams, state)
 - [middleware-auth-handler-example](./getting-started/middleware-auth-handler-example/) - Essential middleware patterns
 - [realtime-todo-app](./getting-started/realtime-todo-app/) - Real-time with SSE
+- [real-time-cursor-pointers](./getting-started/real-time-cursor-pointers/) - Collaborative real-time
 
 ### For AI Development
 - [ai-app-generator](./ai-agents/multi-agent-systems/ai-app-generator/) - Multi-agent app generation

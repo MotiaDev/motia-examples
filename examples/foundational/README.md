@@ -24,9 +24,26 @@ Explore containerization, parallel processing, and monitoring patterns.
 - Parallel execution patterns
 - Health monitoring and uptime tracking
 
-## 📚 Examples by Category (8 Total)
+## 📚 Examples by Category (9 Total)
 
 ### API Patterns
+
+#### [todo-app](./api-patterns/todo-app)
+**Concepts**: Full-Stack Application, CRUD APIs, Real-time Streaming, Background Jobs
+
+Comprehensive todo application showcasing Motia's complete feature set - APIs, events, cron jobs, streaming, and state management.
+
+**Key Features**:
+- RESTful CRUD API (create, list, get, update, delete)
+- Real-time updates via Motia Streams
+- Background jobs (notifications, analytics, gamification)
+- Scheduled tasks (cleanup, statistics)
+- Visual Workbench plugin for management
+- Redis-backed state persistence
+
+**⭐ Highlights**: Complete production-ready application demonstrating all Motia capabilities in one example
+
+---
 
 #### [image-resizer](./api-patterns/image-resizer)
 **Concepts**: File Processing, Image Transformation, API Design
