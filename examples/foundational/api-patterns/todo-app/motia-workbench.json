@@ -1,0 +1,240 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "src/petstore/state-audit-cron.step.ts": {
+        "x": -175,
+        "y": 219,
+        "sourceHandlePosition": "right"
+      },
+      "src/petstore/process-food-order.step.ts": {
+        "x": 144,
+        "y": 17,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/petstore/notification.step.ts": {
+        "x": 331,
+        "y": 261,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/petstore/api.step.ts": {
+        "x": -175,
+        "y": 3,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "analytics",
+    "config": {
+      "src/todo/analytics-tracker.step.ts": {
+        "x": 33,
+        "y": 0
+      },
+      "src/.motia/compiled/todo/analytics-tracker.step.js": {
+        "x": 33,
+        "y": 135
+      },
+      "src/todo/daily-stats-cron.step.ts": {
+        "x": 0,
+        "y": 270
+      },
+      "src/.motia/compiled/todo/daily-stats-cron.step.js": {
+        "x": 0,
+        "y": 469
+      }
+    }
+  },
+  {
+    "id": "todo-management",
+    "config": {
+      "src/todo/update-todo.step.ts": {
+        "x": 49,
+        "y": 307,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/todo/todo-updated-handler.step.ts": {
+        "x": 354,
+        "y": 806,
+        "targetHandlePosition": "top"
+      },
+      "src/todo/todo-deleted-handler.step.ts": {
+        "x": 40,
+        "y": 134
+      },
+      "src/todo/todo-created-notification.step.ts": {
+        "x": -1394,
+        "y": 786,
+        "targetHandlePosition": "top"
+      },
+      "src/todo/todo-completed-workflow.step.ts": {
+        "x": -196,
+        "y": 866,
+        "targetHandlePosition": "top"
+      },
+      "src/todo/list-todos.step.ts": {
+        "x": -1747,
+        "y": 748
+      },
+      "src/todo/get-todo.step.ts": {
+        "x": -1682,
+        "y": 279
+      },
+      "src/todo/get-stats.step.ts": {
+        "x": -1711,
+        "y": 495
+      },
+      "src/todo/delete-todo.step.ts": {
+        "x": -1271,
+        "y": 110
+      },
+      "src/todo/daily-stats-cron.step.ts": {
+        "x": -2107,
+        "y": 497
+      },
+      "src/todo/create-todo.step.ts": {
+        "x": -1097,
+        "y": 319,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/todo/cleanup-cron.step.ts": {
+        "x": -2098,
+        "y": 249
+      },
+      "src/todo/analytics-tracker.step.ts": {
+        "x": -759,
+        "y": 803,
+        "targetHandlePosition": "top"
+      }
+    }
+  },
+  {
+    "id": "notifications",
+    "config": {
+      "src/todo/todo-created-notification.step.ts": {
+        "x": -181,
+        "y": -5
+      },
+      "src/todo/notification-sent-logger.step.ts": {
+        "x": 732,
+        "y": -3
+      }
+    }
+  },
+  {
+    "id": "gamification",
+    "config": {
+      "src/todo/todo-completed-workflow.step.ts": {
+        "x": -200,
+        "y": -19
+      },
+      "src/todo/achievement-handler.step.ts": {
+        "x": 525,
+        "y": -18
+      }
+    }
+  },
+  {
+    "id": "maintenance",
+    "config": {
+      "src/todo/cleanup-cron.step.ts": {
+        "x": -106,
+        "y": 6
+      },
+      "src/todo/cleanup-completed-handler.step.ts": {
+        "x": 535,
+        "y": 42
+      }
+    }
+  },
+  {
+    "id": "audit",
+    "config": {
+      "src/todo/todo-updated-handler.step.ts": {
+        "x": 183,
+        "y": 31
+      },
+      "src/todo/todo-deleted-handler.step.ts": {
+        "x": -227,
+        "y": 29
+      }
+    }
+  },
+  {
+    "id": "todo-app",
+    "config": {
+      "src/todo/update-todo.step.ts": {
+        "x": -218,
+        "y": 490,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/todo/todo-updated-handler.step.ts": {
+        "x": 286,
+        "y": 685
+      },
+      "src/todo/todo-deleted-handler.step.ts": {
+        "x": 1130,
+        "y": 1515,
+        "targetHandlePosition": "top"
+      },
+      "src/todo/todo-created-notification.step.ts": {
+        "x": -647,
+        "y": 1520,
+        "targetHandlePosition": "top"
+      },
+      "src/todo/todo-completed-workflow.step.ts": {
+        "x": 333,
+        "y": 888
+      },
+      "src/todo/notification-sent-logger.step.ts": {
+        "x": 700,
+        "y": 1518
+      },
+      "src/todo/list-todos.step.ts": {
+        "x": -662,
+        "y": 785
+      },
+      "src/todo/get-todo.step.ts": {
+        "x": -1082,
+        "y": 677
+      },
+      "src/todo/get-stats.step.ts": {
+        "x": -653,
+        "y": 586
+      },
+      "src/todo/delete-todo.step.ts": {
+        "x": 1025,
+        "y": 1049,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/todo/daily-stats-cron.step.ts": {
+        "x": -1153,
+        "y": 924
+      },
+      "src/todo/create-todo.step.ts": {
+        "x": -582,
+        "y": 1036,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/todo/cleanup-cron.step.ts": {
+        "x": -1158,
+        "y": 1152,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/todo/cleanup-completed-handler.step.ts": {
+        "x": -1143,
+        "y": 1559,
+        "targetHandlePosition": "top"
+      },
+      "src/todo/analytics-tracker.step.ts": {
+        "x": -240,
+        "y": 1420,
+        "targetHandlePosition": "top"
+      },
+      "src/todo/achievement-handler.step.ts": {
+        "x": 915,
+        "y": 632
+      }
+    }
+  }
+]

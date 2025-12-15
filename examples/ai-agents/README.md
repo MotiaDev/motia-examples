@@ -162,6 +162,22 @@ Plan and execute tasks with AI-powered planning, intelligent failure handling, a
 
 ---
 
+#### [ai-reflection-deep-research-agent](./specialized-agents/ai-reflection-deep-research-agent)
+**Level**: Expert  
+**Concepts**: Multi-Agent Reflection, Gemini Deep Research, Legal AI
+
+AI-powered legal contract analysis using Gemini's reflection pipeline (Generator → Critic → Refiner).
+
+**Key Features**:
+- Multi-agent reflection architecture
+- Gemini Deep Research Pro integration
+- Contract analysis and generation
+- Real-time SSE progress streaming
+- Beautiful Workbench plugin
+- Complete audit trail
+
+---
+
 #### [ai-health-fitness](./specialized-agents/ai-health-fitness)
 **Level**: Intermediate  
 **Concepts**: Health Tracking, Recommendations
