@@ -44,7 +44,7 @@ From simple chatbots to complex multi-agent systems:
 - **[Multi-Agent Systems](./ai-agents/multi-agent-systems/)** - Complex orchestration (app generator, travel planner, hedge fund)
 
 **Time to Complete**: 2-5 days  
-**Examples**: 19 across 3 subcategories (3 chat + 10 specialized + 6 multi-agent)  
+**Examples**: 20 across 3 subcategories (3 chat + 11 specialized + 6 multi-agent)  
 **⭐ Featured**: [ai-app-generator](./ai-agents/multi-agent-systems/ai-app-generator) - Generate complete full-stack apps
 
 ---
@@ -161,14 +161,16 @@ Enterprise-grade applications:
 |----------|-------|----------|------|----------|
 | Getting Started | Beginner | 5 | 2-5h | Learning Motia basics |
 | Foundational | Intermediate | 9 | 1-2d | Common app patterns |
-| AI Agents | Int-Expert | 19 | 2-5d | AI applications |
+| AI Agents | Int-Expert | 20 | 2-5d | AI applications |
 | RAG and Search | Advanced | 9 | 3-5d | Knowledge bases |
 | Integrations | Intermediate | 9 | 1-2d | External services |
 | Monitoring | Intermediate | 3 | 1d | Alert systems |
 | Content/Marketing | Int-Advanced | 3 | 2-3d | Marketing automation |
 | Advanced | Expert | 6 | 1-2w | Production systems |
 
-**Total Examples**: 63
+**Total Examples**: 64
+
+> **Latest**: Added comprehensive [todo-app](./foundational/api-patterns/todo-app/) and [ProspectAI](./ai-agents/specialized-agents/ai-prospect-agent/) examples
 
 ---
 

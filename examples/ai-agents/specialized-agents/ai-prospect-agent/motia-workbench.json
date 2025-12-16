@@ -1,0 +1,144 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "src/hello/log-greeting.step.js": {
+        "x": 409,
+        "y": 44
+      },
+      "src/hello/hello-api.step.ts": {
+        "x": -409,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      },
+      "src/hello/process_greeting_step.py": {
+        "x": 0,
+        "y": 34,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "streaming",
+    "config": {
+      "src/events/update-research-stream.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "src/api/sse-subscribe.step.ts": {
+        "x": 0,
+        "y": 156
+      }
+    }
+  },
+  {
+    "id": "notifications",
+    "config": {
+      "src/events/notify-slack.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "src/events/news-alert-handler.step.ts": {
+        "x": 0,
+        "y": 156
+      },
+      "src/cron/weekly-summary.step.ts": {
+        "x": 0,
+        "y": 292
+      }
+    }
+  },
+  {
+    "id": "outreach",
+    "config": {
+      "src/api/send-outreach.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "copilot",
+    "config": {
+      "src/api/copilot-query.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "src/api/copilot-actions.step.ts": {
+        "x": 0,
+        "y": 224
+      }
+    }
+  },
+  {
+    "id": "prospect-research",
+    "config": {
+      "src/events/update-research-stream.step.ts": {
+        "x": 1690,
+        "y": -217
+      },
+      "src/events/update-batch-progress.step.ts": {
+        "x": 1687,
+        "y": -21
+      },
+      "src/events/notify-slack.step.ts": {
+        "x": 1654,
+        "y": -416
+      },
+      "src/events/handle-research-failure.step.ts": {
+        "x": 1409,
+        "y": 352,
+        "targetHandlePosition": "top"
+      },
+      "src/events/generate-email.step.ts": {
+        "x": 1117,
+        "y": -211
+      },
+      "src/events/collect-signals.step.ts": {
+        "x": 97,
+        "y": 186
+      },
+      "src/events/analyze-prospect.step.ts": {
+        "x": 630,
+        "y": -23
+      },
+      "src/api/upload-prospects.step.ts": {
+        "x": -303,
+        "y": 153
+      },
+      "src/api/top-prospects.step.ts": {
+        "x": -310,
+        "y": 411
+      },
+      "src/api/send-outreach.step.ts": {
+        "x": -273,
+        "y": -51
+      },
+      "src/api/get-prospects.step.ts": {
+        "x": -634,
+        "y": 160
+      },
+      "src/api/get-prospect-detail.step.ts": {
+        "x": -676,
+        "y": 403
+      },
+      "src/api/copilot-query.step.ts": {
+        "x": -666,
+        "y": -106
+      },
+      "src/api/batch-status.step.ts": {
+        "x": -1081,
+        "y": 131
+      }
+    }
+  },
+  {
+    "id": "maintenance",
+    "config": {
+      "src/cron/stale-data-cleanup.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  }
+]

@@ -24,7 +24,7 @@ We've organized 60+ examples into 8 logical categories based on complexity and u
 |----------|-------|----------|-------------|
 | [🚀 Getting Started](examples/getting-started/) | Beginner | 5 | Core Motia concepts - API steps, events, middleware, queues, real-time |
 | [🔧 Foundational](examples/foundational/) | Intermediate | 9 | Common patterns - automation, infrastructure, APIs |
-| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 19 | Chat agents, specialized agents, multi-agent systems |
+| [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 20 | Chat agents, specialized agents, multi-agent systems |
 | [📚 RAG & Search](examples/rag-and-search/) | Advanced | 9 | Vector databases, embeddings, knowledge bases |
 | [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |
 | [📊 Monitoring](examples/monitoring-and-alerts/) | Intermediate | 3 | Cron-based monitoring and intelligent alerts |
@@ -149,6 +149,7 @@ Perfect for newcomers to Motia. Learn core concepts:
 - Multi-modal capabilities
 
 **[Specialized Agents](examples/ai-agents/specialized-agents/)** - Domain-specific AI
+- Sales intelligence and lead scoring
 - ReAct pattern with tool integration
 - Code review and analysis
 - Research automation
@@ -224,6 +225,26 @@ An intelligent research assistant implementing the **ReAct (Reason + Act) patter
 
 [View Example →](examples/ai-agents/specialized-agents/ai-ReACT-agent)
 
+
+### ProspectAI - Sales Intelligence Platform
+
+AI-powered sales prospect research and scoring platform that automates lead qualification at scale.
+
+![ProspectAI](examples/ai-agents/specialized-agents/ai-prospect-agent/docs/img/workbench.png)
+
+**Key Features:**
+- CSV Upload: Batch process prospect lists automatically
+- AI Fit Scoring: Gemini 3 Pro or Claude Opus 4.5 generates 0-100 fit scores
+- Email Drafts: AI-generated personalized outreach emails
+- Signal Collection: 15+ data points via NewsAPI
+- Slack Alerts: Real-time notifications for high-scoring prospects
+- AI Assistant: Natural language queries like "Who should I call this week?"
+- Multi-Flow Architecture: Upload, Research, and Assistant flows
+- CopilotKit Integration: Conversational AI interface
+
+**Technologies:** TypeScript, Gemini 3 Pro / Claude Opus 4.5, NewsAPI, Slack, React, CopilotKit
+
+[View Example →](examples/ai-agents/specialized-agents/ai-prospect-agent)
 
 ### AI Planning Agent
 
@@ -1155,7 +1176,11 @@ A complete wake surf club booking and session management system with SMS notific
 
 ## 📊 Repository Statistics
 
-- **Total Examples**: 63
+- **Total Examples**: 64
+
+**Latest Additions:**
+- [todo-app](examples/foundational/api-patterns/todo-app/) - Complete Motia demo
+- [ProspectAI](examples/ai-agents/specialized-agents/ai-prospect-agent/) - Sales intelligence platform
 - **Categories**: 8 main categories
 - **Languages**: TypeScript, JavaScript, Python
 - **Difficulty Levels**: Beginner → Intermediate → Advanced → Expert

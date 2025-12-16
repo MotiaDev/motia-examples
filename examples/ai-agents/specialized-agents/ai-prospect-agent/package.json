@@ -1,0 +1,46 @@
+{
+  "name": "prospectai",
+  "description": "AI-powered prospect research and sales intelligence platform",
+  "type": "module",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "start": "motia start",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia",
+    "prospectai",
+    "sales-intelligence",
+    "ai"
+  ],
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.35.0",
+    "@copilotkit/react-core": "^1.50.0",
+    "@copilotkit/react-textarea": "^1.50.0",
+    "@copilotkit/react-ui": "^1.50.0",
+    "@google/generative-ai": "^0.21.0",
+    "@motiadev/adapter-bullmq-events": "^0.17.6-beta.187",
+    "@motiadev/core": "^0.17.6-beta.187",
+    "@motiadev/plugin-bullmq": "^0.17.6-beta.187",
+    "@motiadev/plugin-endpoint": "^0.17.6-beta.187",
+    "@motiadev/plugin-logs": "^0.17.6-beta.187",
+    "@motiadev/plugin-observability": "^0.17.6-beta.187",
+    "@motiadev/plugin-states": "^0.17.6-beta.187",
+    "csv-parse": "^5.6.0",
+    "motia": "^0.17.6-beta.187",
+    "resend": "^4.0.0",
+    "uuid": "^11.0.3",
+    "zod": "^4.2.1"
+  },
+  "devDependencies": {
+    "@motiadev/workbench": "^0.17.6-beta.187",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.1.1",
+    "@types/uuid": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
