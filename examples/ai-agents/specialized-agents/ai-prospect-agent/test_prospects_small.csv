@@ -1,0 +1,7 @@
+company_name,domain,email,first_name,last_name,title,industry,region,company_size,stage,estimated_revenue_millions,funding_status,last_funding_date,actively_hiring,website_updated,linkedin_url
+TechFlow Inc,techflow.io,john.smith@techflow.io,John,Smith,VP Sales,Software,North America,150,Growth,25,Series B,2024-06-15,yes,2024-12-01,https://linkedin.com/in/johnsmith
+DataDrive Corp,datadrive.com,sarah.jones@datadrive.com,Sarah,Jones,Director Marketing,Data Analytics,Europe,80,Expansion,12,Series A,2024-03-20,yes,2024-11-28,https://linkedin.com/in/sarahjones
+CloudNext Solutions,cloudnext.io,mike.chen@cloudnext.io,Mike,Chen,CTO,Cloud Infrastructure,Asia Pacific,200,Scale,45,Series C,2024-08-10,no,2024-12-05,https://linkedin.com/in/mikechen
+InnovateTech,innovatetech.co,lisa.wang@innovatetech.co,Lisa,Wang,Head of Ops,Enterprise Software,North America,50,Early,5,Seed,2024-01-15,yes,2024-12-10,https://linkedin.com/in/lisawang
+SmartData AI,smartdata.ai,david.kim@smartdata.ai,David,Kim,CEO,Artificial Intelligence,North America,30,Growth,8,Series A,2024-05-22,yes,2024-12-08,https://linkedin.com/in/davidkim
+

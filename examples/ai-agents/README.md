@@ -26,7 +26,7 @@ Complex orchestrations with multiple AI agents working together.
 
 ## 📚 Examples by Category
 
-**Total Examples**: 19 (3 chat agents + 10 specialized agents + 6 multi-agent systems)
+**Total Examples**: 20 (3 chat agents + 11 specialized agents + 6 multi-agent systems)
 
 ### Chat Agents
 
@@ -192,6 +192,24 @@ Track health metrics and provide fitness recommendations.
 
 ---
 
+#### [ai-prospect-agent](./specialized-agents/ai-prospect-agent)
+**Level**: Expert  
+**Concepts**: Sales Intelligence, Lead Scoring, Multi-Flow Architecture
+
+AI-powered sales prospect research and scoring platform with automated lead qualification.
+
+**Key Features**:
+- CSV upload and batch processing
+- AI-powered fit scoring (0-100)
+- Personalized email generation
+- Buying intent signals (15+ data points)
+- Slack alerts for high-scoring prospects
+- AI assistant with natural language queries
+- Multi-flow architecture
+- CopilotKit integration
+
+---
+
 #### [linkedIn-content-agent](./specialized-agents/linkedIn-content-agent)
 **Level**: Intermediate  
 **Concepts**: Content Generation, Social Media
@@ -338,8 +356,9 @@ Score and qualify leads using LangGraph-powered agents.
 1. `ai-content-moderation` - Single-purpose agent
 2. `ai-health-fitness` - Domain-specific logic
 3. `ai-ReACT-agent` - ReAct pattern with tool integration
-4. `ai-planning-agent` - Planning Architecture with AI-powered planning, intelligent failure handling, and human-in-the-loop approvals.
-5. `ai-code-reviewer-agent` - Complex analysis
+4. `ai-prospect-agent` - Sales intelligence with multi-flow architecture
+5. `ai-planning-agent` - Planning Architecture with AI-powered planning
+6. `ai-code-reviewer-agent` - Complex analysis
 
 **For Advanced Users**: Build Multi-Agent Systems
 1. `ai-vs-ai-tictactoe-game` - Agent coordination  
