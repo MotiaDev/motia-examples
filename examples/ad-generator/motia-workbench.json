@@ -1,0 +1,29 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "src/hello/process-greeting.step.ts": {
+        "x": 409,
+        "y": 44
+      },
+      "src/hello/hello-api.step.ts": {
+        "x": 0,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "ad-generation",
+    "config": {
+      "steps/events/scrape-landing-page.step.ts": {
+        "x": 350,
+        "y": 0
+      },
+      "steps/api/generate-ad.step.ts": {
+        "x": -436,
+        "y": -6
+      }
+    }
+  }
+]
