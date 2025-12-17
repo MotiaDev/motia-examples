@@ -1,6 +1,7 @@
 import { EventConfig, Handlers } from "motia";
 import { z } from "zod";
 import { scrapeUrl } from "../services/firecrawl.service";
+import { uploadFromUrl } from "../services/imagekit.service";
 
 export const config: EventConfig = {
   type: "event",
@@ -50,11 +51,17 @@ export const handler: Handlers["ScrapeLandingPage"] = async (
       timeout: 60000,
     });
 
+    const imagekitResult = await uploadFromUrl(
+      scrapedContent.screenshot,
+      `screenshot-${jobId}.png`,
+      "/ad-screenshots"
+    );
+
     const result = {
       jobId,
       url,
       markdown: scrapedContent.markdown,
-      screenshot: scrapedContent.screenshot,
+      screenshot: imagekitResult.url,
       brandInfo: scrapedContent.brandInfo,
       metadata: scrapedContent.metadata,
       options,
@@ -62,8 +69,7 @@ export const handler: Handlers["ScrapeLandingPage"] = async (
       scrapedAt: new Date().toISOString(),
     };
 
-    logger.info("Landing page scraped successfully", result);
-
+    logger.info("Landing page scraped successfully", imagekitResult);
     await state.set("scraped-pages", jobId, result);
 
     await emit({
