@@ -6,3 +6,19 @@ venv
 .mermaid
 dist
 *.pyc
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Docker
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

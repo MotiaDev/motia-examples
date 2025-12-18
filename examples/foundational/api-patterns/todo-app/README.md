@@ -215,6 +215,198 @@ The custom Todo Tester plugin provides:
 - ✅ **Real-time Updates** - Instant synchronization
 - ✅ **Beautiful UI** - Clean, modern design
 
+## 🚢 Deployment
+
+### Motia Cloud (Recommended)
+
+The easiest way to deploy your Motia app is using [Motia Cloud](https://motia.dev/docs/deployment-guide/motia-cloud/deployment) - a serverless platform optimized for Motia applications.
+
+#### Option 1: Deploy via CLI
+
+```bash
+# Deploy with version tag
+motia cloud deploy --api-key <your-api-key> --version-name 1.0.0
+
+# Deploy to specific project and environment
+motia cloud deploy --api-key <your-api-key> \
+  --version-name 1.0.0 \
+  --project-name my-todo-app \
+  --environment-id <env-id> \
+  --env-file .env.production
+```
+
+**CLI Options:**
+
+| Option | Alias | Description |
+|--------|-------|-------------|
+| `--api-key` | `-k` | API key for authentication (required) |
+| `--version-name` | `-v` | Version tag for deployment (required) |
+| `--project-name` | `-p` | Project name (creates if doesn't exist) |
+| `--environment-id` | `-s` | Environment ID |
+| `--env-file` | `-e` | Path to environment file |
+
+#### Option 2: Deploy via Web Interface (One-Click)
+
+1. Have your local project running (`npm run dev`)
+2. Go to **Import from Workbench** on [Motia Cloud](https://motia.cloud)
+3. Select the port your local project is running on
+4. Choose project and environment name
+5. Add environment variables (upload `.env` file or paste content)
+6. Click **Deploy**
+
+---
+
+### Self-Hosted Deployment
+
+For self-hosted deployments, you'll need Redis for production adapters.
+
+#### Prerequisites
+
+- Docker and Docker Compose (for local testing)
+- Railway CLI (`npm install -g @railway/cli`) or Fly CLI
+- Railway account (https://railway.com) or Fly.io account
+
+#### Local Docker Testing
+
+```bash
+# Start local production environment with Redis
+docker-compose up -d
+
+# Check logs
+docker logs motia-app
+
+# Test endpoints
+curl http://localhost:3000/todos
+curl -X POST http://localhost:3000/todos -H "Content-Type: application/json" -d '{"title":"Test Todo"}'
+
+# Stop
+docker-compose down
+```
+
+#### Railway Deployment
+
+**Step 1: Authenticate with Railway**
+
+```bash
+railway login
+```
+
+**Step 2: Initialize Railway Project**
+
+```bash
+railway init
+```
+
+Select "Empty Project" when prompted.
+
+**Step 3: Add Redis Service**
+
+```bash
+railway add
+```
+
+Select **Redis** from the list. This provisions a managed Redis instance.
+
+**Step 4: Link and Deploy Motia App**
+
+```bash
+# Create a new service for the Motia app
+railway service
+
+# Deploy the app
+railway up
+```
+
+**Step 5: Set Environment Variables**
+
+```bash
+# Set production environment variables
+railway variables set NODE_ENV=production
+railway variables set USE_REDIS=true
+```
+
+The Redis connection is automatically injected by Railway when you add a Redis service.
+
+**Step 6: Generate Public Domain**
+
+```bash
+railway domain
+```
+
+This generates a public URL like `https://your-app.up.railway.app`
+
+**Step 7: Verify Deployment**
+
+```bash
+curl https://your-app.up.railway.app/todos
+curl -X POST https://your-app.up.railway.app/todos -H "Content-Type: application/json" -d '{"title":"Production Todo"}'
+```
+
+#### Fly.io Deployment
+
+```bash
+# Install Fly CLI
+curl -L https://fly.io/install.sh | sh
+
+# Login and launch
+fly auth login
+fly launch --no-deploy
+
+# Create Redis (Upstash)
+fly redis create --name motia-redis
+
+# Set environment variables
+fly secrets set NODE_ENV=production USE_REDIS=true
+
+# Deploy
+fly deploy
+```
+
+#### Environment Variables (Self-Hosted)
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `NODE_ENV` | Set to `production` for Redis adapters | - |
+| `USE_REDIS` | Force Redis adapters | `false` |
+| `REDIS_HOST` | Redis hostname | `localhost` |
+| `REDIS_PORT` | Redis port | `6379` |
+| `REDIS_PASSWORD` | Redis password (optional) | - |
+
+#### Configuration Details (Self-Hosted)
+
+The `motia.config.ts` automatically detects production mode and uses Redis adapters:
+
+- **State Adapter**: RedisStateAdapter (node-redis)
+- **Streams Adapter**: RedisStreamAdapterManager (node-redis)  
+- **Events Adapter**: BullMQEventAdapter (ioredis)
+- **Cron Adapter**: RedisCronAdapter (node-redis)
+
+#### Troubleshooting
+
+**Redis Connection Issues:**
+```bash
+docker exec motia-redis redis-cli ping
+# Should return: PONG
+```
+
+**View Logs:**
+```bash
+# Local Docker
+docker logs motia-app -f
+
+# Railway
+railway logs
+
+# Fly.io
+fly logs
+```
+
+**Health Check:**
+```bash
+curl http://localhost:3000/todos
+# Should return: {"todos":[...],"count":0}
+```
+
 ## 📚 Learn More
 
 - [Motia Documentation](https://motia.dev/docs) - Complete guides and API reference
