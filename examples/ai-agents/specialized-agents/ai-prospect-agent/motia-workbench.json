@@ -71,6 +71,15 @@
     }
   },
   {
+    "id": "maintenance",
+    "config": {
+      "src/cron/stale-data-cleanup.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
     "id": "prospect-research",
     "config": {
       "src/events/update-research-stream.step.ts": {
@@ -129,15 +138,6 @@
       "src/api/batch-status.step.ts": {
         "x": -1081,
         "y": 131
-      }
-    }
-  },
-  {
-    "id": "maintenance",
-    "config": {
-      "src/cron/stale-data-cleanup.step.ts": {
-        "x": 0,
-        "y": 0
       }
     }
   }
