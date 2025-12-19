@@ -189,7 +189,7 @@ export const handler: Handlers['GenerateEmail'] = async (input, { emit, logger, 
         contact_name: `${prospect.first_name} ${prospect.last_name}`,
         fit_score: analysis.fitScore,
         buying_intent_score: analysis.buyingIntentScore,
-        key_insight: analysis.keyInsights[0] || analysis.fitReasoning.slice(0, 100),
+        key_insight: String(analysis.keyInsights?.[0] || analysis.fitReasoning?.slice(0, 100) || 'Analysis complete'),
         industry: prospect.industry,
       },
     })

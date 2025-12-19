@@ -31,11 +31,14 @@
     "@motiadev/plugin-states": "^0.17.6-beta.187",
     "csv-parse": "^5.6.0",
     "motia": "^0.17.6-beta.187",
+    "cors": "^2.8.5",
     "resend": "^4.0.0",
     "uuid": "^11.0.3",
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "@motiadev/workbench": "^0.17.6-beta.187",
     "@types/node": "^22.10.0",
     "@types/react": "^19.1.1",
