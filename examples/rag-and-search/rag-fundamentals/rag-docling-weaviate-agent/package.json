@@ -24,7 +24,7 @@
     "weaviate"
   ],
   "author": "Filipe Leandro <github:ffleandro>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "dotenv": "^16.5.0",
     "motia": "^0.5.5-beta.113",

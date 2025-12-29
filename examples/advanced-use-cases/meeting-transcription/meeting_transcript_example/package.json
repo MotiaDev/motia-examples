@@ -21,7 +21,7 @@
     "event-driven"
   ],
   "author": "Motia Team",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "motia": "^0.5.8-beta.116",
     "zod": "^3.24.4"

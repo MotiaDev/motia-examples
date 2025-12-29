@@ -323,7 +323,7 @@ We welcome contributions! Here's how you can help:
 
 ## 📄 License
 
-All examples are MIT licensed unless otherwise specified.
+All examples are licensed under the Apache License 2.0 unless otherwise specified.
 
 ---
 
