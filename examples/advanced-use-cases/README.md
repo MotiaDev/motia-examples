@@ -82,6 +82,37 @@ Enterprise-grade price monitoring system with intelligent scraping and anti-dete
 
 ---
 
+### [ecommerce-shopify-whatsapp](./ecommerce-shopify-whatsapp)
+**Level**: Expert  
+**Concepts**: Shopify Integration, WhatsApp Cloud API, Conversational AI, E-commerce Automation
+
+AI-powered WhatsApp customer support automation for Shopify stores (order tracking, product recommendations, cart recovery, and support escalations).
+
+**Key Features**:
+- WhatsApp webhook receiver + message sender (Cloud API)
+- Intent classification and response generation (Gemini)
+- Shopify Admin API integration (products, orders, draft orders)
+- Refund requests and human escalation workflow
+- Dashboard + analytics endpoints
+
+**Tech Stack**:
+- Backend: Motia, TypeScript
+- Integrations: Shopify Admin API, WhatsApp Cloud API
+- AI: Google Gemini
+
+**Use Cases**:
+- Shopify merchants
+- Conversational commerce support
+- Cart recovery automation
+- Support triage and escalation
+
+**⭐ Highlights**: 
+- End-to-end webhook integration
+- Real-world e-commerce automation
+- Production-ready integration patterns
+
+---
+
 ### [meeting-transcription](./meeting-transcription)
 **Level**: Expert  
 **Concepts**: Audio Processing, Speech-to-Text, Meeting Intelligence

@@ -29,7 +29,7 @@ We've organized 60+ examples into 8 logical categories based on complexity and u
 | [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |
 | [📊 Monitoring](examples/monitoring-and-alerts/) | Intermediate | 3 | Cron-based monitoring and intelligent alerts |
 | [📧 Marketing](examples/content-and-marketing/) | Int-Advanced | 3 | Email campaigns, content automation |
-| [🚀 Advanced](examples/advanced-use-cases/) | Expert | 5 | Production-ready systems, computer vision |
+| [🚀 Advanced](examples/advanced-use-cases/) | Expert | 7 | Production-ready systems, computer vision, e-commerce automation |
 
 **[View full catalog with descriptions →](examples/)**
 
@@ -200,6 +200,7 @@ Complex, production-ready implementations:
 - [AI Room Renovate](examples/advanced-use-cases/ai-room-renovate/) - Computer vision + AI design
 - [Competitor Price Scraper](examples/advanced-use-cases/competitor-price-scrapper/) - Web scraping at scale
 - [Meeting Transcription](examples/advanced-use-cases/meeting-transcription/) - Audio processing pipeline
+- [ShopFlow (Shopify + WhatsApp)](examples/advanced-use-cases/ecommerce-shopify-whatsapp/) - Conversational commerce support automation
 
 ---
 
