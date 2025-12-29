@@ -117,12 +117,14 @@ Marketing automation and content management:
 Enterprise-grade applications:
 - AI room renovation (computer vision + design)
 - Competitor price scraping
+- ShopFlow (Shopify + WhatsApp customer support automation)
 - Meeting transcription and analysis
 - Intelligent form routing
 - Computer vision examples
+- Wake surf club booking + SMS + calendar
 
 **Time to Complete**: 1-2 weeks  
-**Examples**: 5  
+**Examples**: 7  
 **Note**: These are production-ready systems, not tutorials
 
 ---
@@ -166,9 +168,9 @@ Enterprise-grade applications:
 | Integrations | Intermediate | 9 | 1-2d | External services |
 | Monitoring | Intermediate | 3 | 1d | Alert systems |
 | Content/Marketing | Int-Advanced | 3 | 2-3d | Marketing automation |
-| Advanced | Expert | 6 | 1-2w | Production systems |
+| Advanced | Expert | 7 | 1-2w | Production systems |
 
-**Total Examples**: 64
+**Total Examples**: 65
 
 > **Latest**: Added comprehensive [todo-app](./foundational/api-patterns/todo-app/) and [ProspectAI](./ai-agents/specialized-agents/ai-prospect-agent/) examples
 
@@ -290,7 +292,7 @@ npm run dev
 ### By Use Case
 - **Chatbots**: [AI Agents](./ai-agents/chat-agents/)
 - **Search**: [RAG and Search](./rag-and-search/)
-- **E-commerce**: [Integrations](./integrations/payment/), [Monitoring](./monitoring-and-alerts/)
+- **E-commerce**: [Integrations](./integrations/payment/), [ShopFlow](./advanced-use-cases/ecommerce-shopify-whatsapp/), [Monitoring](./monitoring-and-alerts/)
 - **Content**: [Content and Marketing](./content-and-marketing/)
 - **Analytics**: [Advanced](./advanced-use-cases/)
 - **Automation**: [Foundational](./foundational/automation/)

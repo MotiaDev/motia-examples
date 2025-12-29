@@ -1,0 +1,231 @@
+[
+  {
+    "id": "hello-world-flow",
+    "config": {
+      "src/hello/log-greeting.step.js": {
+        "x": 409,
+        "y": 44
+      },
+      "src/hello/hello-api.step.ts": {
+        "x": -409,
+        "y": 0,
+        "sourceHandlePosition": "right"
+      },
+      "src/hello/process_greeting_step.py": {
+        "x": 0,
+        "y": 34,
+        "sourceHandlePosition": "right"
+      }
+    }
+  },
+  {
+    "id": "shopflow-orders",
+    "config": {
+      "src/shopflow/handle-order-status.step.ts": {
+        "x": -181,
+        "y": -23
+      }
+    }
+  },
+  {
+    "id": "shopflow-products",
+    "config": {
+      "src/shopflow/handle-product-recommendation.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "shopflow-support",
+    "config": {
+      "src/shopflow/handle-refund-request.step.ts": {
+        "x": 0,
+        "y": 0
+      },
+      "src/shopflow/handle-general-support.step.ts": {
+        "x": 0,
+        "y": 156
+      },
+      "src/shopflow/handle-escalation.step.ts": {
+        "x": 587,
+        "y": 3
+      }
+    }
+  },
+  {
+    "id": "shopflow-whatsapp",
+    "config": {
+      "src/shopflow/api-send-whatsapp.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "shopflow-shopify",
+    "config": {
+      "src/shopflow/api-products.step.ts": {
+        "x": 42,
+        "y": 0
+      },
+      "src/shopflow/api-orders.step.ts": {
+        "x": 50,
+        "y": 204
+      },
+      "src/shopflow/api-locations.step.ts": {
+        "x": 42,
+        "y": 408
+      },
+      "src/shopflow/api-draft-orders.step.ts": {
+        "x": 41,
+        "y": 612
+      },
+      "src/shopflow/api-create-draft-order.step.ts": {
+        "x": 29,
+        "y": 816
+      },
+      "src/shopflow/api-complete-draft-order.step.ts": {
+        "x": 0,
+        "y": 1020
+      }
+    }
+  },
+  {
+    "id": "shopflow-main",
+    "config": {
+      "src/shopflow/classify-intent.step.ts": {
+        "x": 648,
+        "y": 89
+      }
+    }
+  },
+  {
+    "id": "shopflow-cart",
+    "config": {
+      "src/shopflow/process-cart-recovery-batch.step.ts": {
+        "x": 619,
+        "y": 41
+      }
+    }
+  },
+  {
+    "id": "shopflow-analytics",
+    "config": {
+      "src/shopflow/log-status-update.step.ts": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  {
+    "id": "shopflow",
+    "config": {
+      "src/shopflow/whatsapp-webhook.step.ts": {
+        "x": -1028,
+        "y": -197
+      },
+      "src/shopflow/whatsapp-verify.step.ts": {
+        "x": -497,
+        "y": 684
+      },
+      "src/shopflow/process-cart-recovery-batch.step.ts": {
+        "x": 1449,
+        "y": 30
+      },
+      "src/shopflow/log-status-update.step.ts": {
+        "x": 116,
+        "y": 163
+      },
+      "src/shopflow/log-response.step.ts": {
+        "x": 2689,
+        "y": 336
+      },
+      "src/shopflow/handle-refund-request.step.ts": {
+        "x": 784,
+        "y": 322
+      },
+      "src/shopflow/handle-product-recommendation.step.ts": {
+        "x": 1776,
+        "y": 1039
+      },
+      "src/shopflow/handle-order-status.step.ts": {
+        "x": 570,
+        "y": 1043
+      },
+      "src/shopflow/handle-general-support.step.ts": {
+        "x": 1445,
+        "y": -136
+      },
+      "src/shopflow/handle-escalation.step.ts": {
+        "x": 1460,
+        "y": 201
+      },
+      "src/shopflow/handle-cart-recovery.step.ts": {
+        "x": 1967,
+        "y": 474,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/shopflow/cron-cart-recovery.step.ts": {
+        "x": 847,
+        "y": -511
+      },
+      "src/shopflow/cron-analytics.step.ts": {
+        "x": -996,
+        "y": 952
+      },
+      "src/shopflow/classify-intent.step.ts": {
+        "x": -209,
+        "y": -331
+      },
+      "src/shopflow/api-whatsapp-status.step.ts": {
+        "x": -1427,
+        "y": 955
+      },
+      "src/shopflow/api-send-whatsapp.step.ts": {
+        "x": -1531,
+        "y": -41
+      },
+      "src/shopflow/api-resolve-escalation.step.ts": {
+        "x": -1149,
+        "y": 334
+      },
+      "src/shopflow/api-products.step.ts": {
+        "x": -551,
+        "y": 921
+      },
+      "src/shopflow/api-orders.step.ts": {
+        "x": -754,
+        "y": 723
+      },
+      "src/shopflow/api-locations.step.ts": {
+        "x": -1133,
+        "y": 740
+      },
+      "src/shopflow/api-escalations.step.ts": {
+        "x": -1120,
+        "y": 87
+      },
+      "src/shopflow/api-draft-orders.step.ts": {
+        "x": -1447,
+        "y": 735
+      },
+      "src/shopflow/api-dashboard.step.ts": {
+        "x": -749,
+        "y": 74
+      },
+      "src/shopflow/api-create-draft-order.step.ts": {
+        "x": -1471,
+        "y": 480
+      },
+      "src/shopflow/api-complete-draft-order.step.ts": {
+        "x": -1557,
+        "y": 200
+      },
+      "src/shopflow/analytics-logger.step.ts": {
+        "x": 1422,
+        "y": 793
+      }
+    }
+  }
+]
