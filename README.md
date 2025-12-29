@@ -1225,7 +1225,7 @@ See our [contribution guidelines](CONTRIBUTING.md) for details.
 
 ## 📝 License
 
-This repository and its contents are licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This repository and its contents are licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## 📚 Resources
 

@@ -245,4 +245,4 @@ Access at: `http://localhost:3000/__workbench`
 
 ## License
 
-MIT
+Apache License 2.0

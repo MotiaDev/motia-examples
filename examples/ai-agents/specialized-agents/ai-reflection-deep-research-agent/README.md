@@ -356,7 +356,7 @@ curl http://localhost:3000/contracts/{id}/analysis
 
 ## 📜 License
 
-MIT
+Apache License 2.0
 
 ## 🙏 Acknowledgments
 

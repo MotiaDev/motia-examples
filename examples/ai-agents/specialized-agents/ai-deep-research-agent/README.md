@@ -5,7 +5,7 @@ A powerful research assistant that leverages the Motia Framework to perform comp
 ![AI Deep Research Agent](./docs/deep-research.png)
 
 [![Motia Framework](https://img.shields.io/badge/Powered%20by-Motia-blue)](https://motia.dev)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](../../../../LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
 
 ## 📚 Table of Contents
@@ -451,7 +451,7 @@ We welcome contributions! Here's how you can help:
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](../../../../LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 

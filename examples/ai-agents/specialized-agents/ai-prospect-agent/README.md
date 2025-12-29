@@ -3,7 +3,7 @@
 [![Made with Motia](https://img.shields.io/badge/Made%20with-Motia-blue)](https://motia.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ![Workbench Overview](docs/img/workbench.png)
 
@@ -282,7 +282,7 @@ Contributions welcome! Submit issues or PRs.
 
 ## 📄 License
 
-MIT License - free for commercial use.
+Apache License 2.0 - free for commercial use.
 
 ---
 

@@ -228,4 +228,4 @@ For detailed instructions, see the [Motia Cloud Deployment Guide](https://motia.
 
 ## License
 
-MIT
+Apache License 2.0

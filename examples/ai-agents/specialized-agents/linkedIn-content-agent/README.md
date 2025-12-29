@@ -7,7 +7,7 @@
 [![Website](https://img.shields.io/badge/Website-motia.dev-blue?style=flat&logo=globe&logoColor=white&labelColor=000000)](https://www.motia.dev)
 [![Documentation](https://img.shields.io/badge/Docs-docs.motia.dev-green?style=flat&logo=gitbook&logoColor=white&labelColor=000000)](https://www.motia.dev/docs)
 [![npm](https://img.shields.io/npm/v/motia?style=flat&logo=npm&logoColor=white&color=CB3837&labelColor=000000)](https://www.npmjs.com/package/motia)
-[![License](https://img.shields.io/badge/license-MIT-green?style=flat&logo=opensourceinitiative&logoColor=white&labelColor=000000)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat&logo=opensourceinitiative&logoColor=white&labelColor=000000)](../../../../LICENSE)
 
 [![GitHub Stars](https://img.shields.io/github/stars/MotiaDev/motia?style=flat&logo=github&logoColor=white&color=yellow&labelColor=000000)](https://github.com/MotiaDev/motia)
 [![Discord](https://img.shields.io/discord/1322278831184281721?style=flat&logo=discord&logoColor=white&color=5865F2&label=Discord&labelColor=000000)](https://discord.gg/motia)

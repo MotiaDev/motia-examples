@@ -25,7 +25,7 @@
     "chromadb"
   ],
   "author": "Filipe Leandro <github:ffleandro>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "chromadb": "^1.9.2",
     "cohere-ai": "^7.14.0",

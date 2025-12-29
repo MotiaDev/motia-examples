@@ -263,7 +263,7 @@ curl http://localhost:3000/__motia/state/metrics/current
 
 ## License
 
-MIT
+Apache License 2.0
 
 ---
 

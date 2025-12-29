@@ -2,7 +2,7 @@
   "name": "todo-app",
   "description": "A modern todo application built with Motia Streams",
   "author": "Motia",
-  "license": "GPL-3.0-or-later",
+  "license": "Apache-2.0",
   "version": "1.0.0",
   "scripts": {
     "api": "pnpm --filter @motiadev/todo-api dev",
