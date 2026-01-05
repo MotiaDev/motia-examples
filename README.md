@@ -23,7 +23,7 @@ We've organized 60+ examples into 8 logical categories based on complexity and u
 | Category | Level | Examples | Description |
 |----------|-------|----------|-------------|
 | [🚀 Getting Started](examples/getting-started/) | Beginner | 5 | Core Motia concepts - API steps, events, middleware, queues, real-time |
-| [🔧 Foundational](examples/foundational/) | Intermediate | 9 | Common patterns - automation, infrastructure, APIs |
+| [🔧 Foundational](examples/foundational/) | Intermediate | 10 | Common patterns - APIs, workflows, automation, infrastructure |
 | [🤖 AI Agents](examples/ai-agents/) | Int-Expert | 20 | Chat agents, specialized agents, multi-agent systems |
 | [📚 RAG & Search](examples/rag-and-search/) | Advanced | 9 | Vector databases, embeddings, knowledge bases |
 | [🔌 Integrations](examples/integrations/) | Intermediate | 9 | GitHub, Stripe, Gmail, social media platforms |

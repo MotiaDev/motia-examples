@@ -7,6 +7,9 @@ This section contains intermediate examples demonstrating common patterns for bu
 ### [API Patterns](./api-patterns/)
 Learn how to build robust APIs with file processing, data transformation, and analysis capabilities.
 
+### [Workflow Patterns](./workflow-patterns/)
+Master essential workflow patterns for production applications.
+
 ### [Automation](./automation/)
 Discover automation patterns for content processing, messaging, and scheduled tasks.
 
@@ -18,13 +21,14 @@ Explore containerization, parallel processing, and monitoring patterns.
 ## 🎯 What You'll Learn
 
 - File processing and transformation
+- Essential workflow patterns (human-in-the-loop, long-running workflows)
 - Content automation workflows
 - Scheduled data fetching with Cron Steps
 - Docker containerization
 - Parallel execution patterns
 - Health monitoring and uptime tracking
 
-## 📚 Examples by Category (9 Total)
+## 📚 Examples by Category (10 Total)
 
 ### API Patterns
 
@@ -68,6 +72,24 @@ Analyze text sentiment using natural language processing.
 - Text classification
 - API endpoint design
 - Response formatting
+
+---
+
+### Workflow Patterns
+
+#### [human-in-the-loop](./workflow-patterns/human-in-the-loop)
+**Concepts**: Long-Running Workflows, Human Approval, State Checkpointing, Webhook Re-Entry
+
+Build workflows that pause for human decisions and resume when ready - perfect for order approvals, content moderation, or any process requiring human judgment.
+
+**Key Features**:
+- Auto vs. manual routing (low-risk bypasses, high-risk pauses)
+- Visual approval gate with red/green buttons
+- Webhook re-entry pattern
+- State checkpointing at every step
+- Idempotent processing
+
+**⭐ Highlights**: Answers the common question "How does Motia handle workflows that pause and wait for external signals?"
 
 ---
 

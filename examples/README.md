@@ -26,11 +26,12 @@ Learn core concepts with simple, focused examples:
 
 Master essential patterns for building production apps:
 - **[API Patterns](./foundational/api-patterns/)** - Full-stack todo app, file processing, text analysis (3 examples)
+- **[Workflow Patterns](./foundational/workflow-patterns/)** - Long-running workflows, human-in-the-loop (1 example)
 - **[Automation](./foundational/automation/)** - Content workflows, scheduling (3 examples)
 - **[Infrastructure](./foundational/infrastructure/)** - Docker, monitoring, performance (3 examples)
 
 **Time to Complete**: 1-2 days  
-**Examples**: 9 across 3 subcategories
+**Examples**: 10 across 4 subcategories
 
 ---
 
@@ -162,7 +163,7 @@ Enterprise-grade applications:
 | Category | Level | Examples | Time | Best For |
 |----------|-------|----------|------|----------|
 | Getting Started | Beginner | 5 | 2-5h | Learning Motia basics |
-| Foundational | Intermediate | 9 | 1-2d | Common app patterns |
+| Foundational | Intermediate | 10 | 1-2d | Common app patterns |
 | AI Agents | Int-Expert | 20 | 2-5d | AI applications |
 | RAG and Search | Advanced | 9 | 3-5d | Knowledge bases |
 | Integrations | Intermediate | 9 | 1-2d | External services |
@@ -170,7 +171,7 @@ Enterprise-grade applications:
 | Content/Marketing | Int-Advanced | 3 | 2-3d | Marketing automation |
 | Advanced | Expert | 7 | 1-2w | Production systems |
 
-**Total Examples**: 65
+**Total Examples**: 66
 
 > **Latest**: Added comprehensive [todo-app](./foundational/api-patterns/todo-app/) and [ProspectAI](./ai-agents/specialized-agents/ai-prospect-agent/) examples
 
