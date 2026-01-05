@@ -1,0 +1,30 @@
+[
+  {
+    "id": "order-approval",
+    "config": {
+      "src/order-approval/04-complete-order.step.ts": {
+        "x": 822,
+        "y": 312,
+        "targetHandlePosition": "left"
+      },
+      "src/order-approval/03-human-approval-gate.step.ts": {
+        "x": -31,
+        "y": -110
+      },
+      "src/order-approval/03-approval-webhook.step.ts": {
+        "x": 371,
+        "y": -3,
+        "sourceHandlePosition": "right"
+      },
+      "src/order-approval/02-analyze-risk.step.ts": {
+        "x": -548,
+        "y": -89,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/order-approval/01-submit-order.step.ts": {
+        "x": -954,
+        "y": -113
+      }
+    }
+  }
+]
