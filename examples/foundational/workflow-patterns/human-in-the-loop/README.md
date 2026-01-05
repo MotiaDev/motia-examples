@@ -66,13 +66,14 @@ curl -X POST http://localhost:3000/webhooks/orders/abc-123/approve \
 
 ## 🎨 In Workbench
 
-You'll see **5 nodes**:
+You'll see **6 nodes**:
 
 1. **SubmitOrder** (green) - API entry point
 2. **AnalyzeRisk** (blue) - Risk calculation
 3. **HumanApprovalGate** (gray Noop) - ⏸️ **Pause indicator with [Approve ✓] [Reject ✗] buttons**
 4. **ApprovalWebhook** (green) - Re-entry point
 5. **CompleteOrder** (blue) - Final fulfillment
+6. **DetectTimeouts** (purple Cron) - Background timeout detection (runs every 5 min)
 
 The **virtual connections** (dashed lines) show:
 - `approval.required` → HumanApprovalGate
@@ -181,21 +182,41 @@ These **don't affect execution** - they only create visual connections in Workbe
 
 ## 🔧 Production Patterns
 
-### Add Timeout Detection
+### Timeout Detection (Included)
+
+**`06-detect-timeouts.step.ts`** - Cron job that runs every 5 minutes (demo) to detect stuck approvals:
 
 ```typescript
-// Cron job runs every hour
-const orders = await state.getGroup('orders')
-for (const order of orders) {
-  if (order.status === 'awaiting_approval') {
-    const age = Date.now() - new Date(order.updatedAt).getTime()
-    if (age > 24 * 60 * 60 * 1000) {  // 24 hours
-      logger.warn('Approval timeout', { orderId: order.id })
-      // Auto-reject or escalate
+export const config: CronConfig = {
+  type: 'cron',
+  cron: '*/5 * * * *',  // Every 5 minutes (use hourly in production)
+  name: 'DetectTimeouts',
+}
+
+export const handler = async ({ state, logger }) => {
+  const orders = await state.getGroup('orders')
+  const timeoutMs = 10 * 60 * 1000  // 10 minutes (use 24 hours in production)
+  
+  for (const order of orders) {
+    if (order.status === 'awaiting_approval') {
+      const age = Date.now() - new Date(order.updatedAt).getTime()
+      
+      if (age > timeoutMs) {
+        logger.warn('Approval timeout detected', { orderId: order.id })
+        
+        // Mark as timed out
+        order.status = 'timeout'
+        order.timeoutAt = new Date().toISOString()
+        await state.set('orders', order.id, order)
+        
+        // In production: escalate to manager, send urgent notification
+      }
     }
   }
 }
 ```
+
+**Test it:** Submit a high-risk order, don't approve it, wait 10+ minutes - the cron will detect and mark it as timed out.
 
 ### Send Notifications
 
