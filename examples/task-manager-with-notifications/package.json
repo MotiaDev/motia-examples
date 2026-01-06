@@ -1,0 +1,26 @@
+{
+  "name": "task-manager-with-notifications",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Task manager example",
+  "scripts": {
+    "dev": "motia dev",
+    "build": "motia build",
+    "start": "motia start"
+  },
+  "dependencies": {
+    "@motiadev/adapter-bullmq-events": "^0.17.6-beta.187",
+    "@motiadev/core": "^0.17.6-beta.187",
+    "@motiadev/plugin-bullmq": "^0.17.6-beta.187",
+    "@motiadev/plugin-endpoint": "^0.17.6-beta.187",
+    "@motiadev/plugin-logs": "^0.17.6-beta.187",
+    "@motiadev/plugin-observability": "^0.17.6-beta.187",
+    "@motiadev/plugin-states": "^0.17.6-beta.187",
+    "motia": "^0.17.6-beta.187",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@motiadev/workbench": "^0.17.6-beta.187",
+    "typescript": "^5.3.3"
+  }
+}
