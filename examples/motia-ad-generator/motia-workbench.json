@@ -1,0 +1,66 @@
+[
+  {
+    "id": "basic-tutorial",
+    "config": {
+      "src/petstore/state-audit-cron.step.ts": {
+        "x": -175,
+        "y": 219,
+        "sourceHandlePosition": "right"
+      },
+      "src/petstore/process-food-order.step.ts": {
+        "x": 144,
+        "y": 17,
+        "sourceHandlePosition": "bottom"
+      }
+    }
+  },
+  {
+    "id": "ad-generator",
+    "config": {
+      "src/adgenerator/scrape-landing-page.step.ts": {
+        "x": -517,
+        "y": 33
+      },
+      "src/adgenerator/generate-video.step.ts": {
+        "x": 1624,
+        "y": 551,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/adgenerator/generate-video-prompt.step.ts": {
+        "x": 1470,
+        "y": 87
+      },
+      "src/adgenerator/generate-image.step.ts": {
+        "x": 482,
+        "y": 735
+      },
+      "src/adgenerator/generate-image-prompt.step.ts": {
+        "x": 442,
+        "y": 343,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/adgenerator/filter-images.step.ts": {
+        "x": 76,
+        "y": 23
+      },
+      "src/adgenerator/api-generate-ad.step.ts": {
+        "x": -1097,
+        "y": -2
+      },
+      "src/adgenerator/analyze-brand.step.ts": {
+        "x": 828,
+        "y": 10,
+        "sourceHandlePosition": "bottom"
+      },
+      "src/adgenerator/aggregate-results.step.ts": {
+        "x": 969,
+        "y": 924,
+        "targetHandlePosition": "top"
+      },
+      "src/adgenerator/api-job-status.step.ts": {
+        "x": 0,
+        "y": 268
+      }
+    }
+  }
+]
