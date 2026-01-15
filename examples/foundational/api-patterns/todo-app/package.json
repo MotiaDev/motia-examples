@@ -14,21 +14,21 @@
     "motia"
   ],
   "dependencies": {
-    "@motiadev/adapter-bullmq-events": "^0.17.9-beta.191",
-    "@motiadev/adapter-redis-cron": "^0.17.9-beta.191",
-    "@motiadev/adapter-redis-state": "^0.17.9-beta.191",
-    "@motiadev/adapter-redis-streams": "^0.17.9-beta.191",
-    "@motiadev/core": "^0.17.9-beta.191",
-    "@motiadev/plugin-bullmq": "^0.17.9-beta.191",
-    "@motiadev/plugin-endpoint": "^0.17.9-beta.191",
-    "@motiadev/plugin-logs": "^0.17.9-beta.191",
-    "@motiadev/plugin-observability": "^0.17.9-beta.191",
-    "@motiadev/plugin-states": "^0.17.9-beta.191",
-    "motia": "^0.17.9-beta.191",
+    "@motiadev/adapter-bullmq-events": "^0.17.14-beta.196",
+    "@motiadev/adapter-redis-cron": "^0.17.14-beta.196",
+    "@motiadev/adapter-redis-state": "^0.17.14-beta.196",
+    "@motiadev/adapter-redis-streams": "^0.17.14-beta.196",
+    "@motiadev/core": "^0.17.14-beta.196",
+    "@motiadev/plugin-bullmq": "^0.17.14-beta.196",
+    "@motiadev/plugin-endpoint": "^0.17.14-beta.196",
+    "@motiadev/plugin-logs": "^0.17.14-beta.196",
+    "@motiadev/plugin-observability": "^0.17.14-beta.196",
+    "@motiadev/plugin-states": "^0.17.14-beta.196",
+    "motia": "^0.17.14-beta.196",
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@motiadev/workbench": "^0.17.9-beta.191",
+    "@motiadev/workbench": "^0.17.14-beta.196",
     "@types/react": "^19.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
