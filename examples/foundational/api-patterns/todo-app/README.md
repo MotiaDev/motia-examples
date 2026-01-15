@@ -342,6 +342,59 @@ curl https://your-app.up.railway.app/todos
 curl -X POST https://your-app.up.railway.app/todos -H "Content-Type: application/json" -d '{"title":"Production Todo"}'
 ```
 
+#### PM2 Process Management
+
+For running the app with PM2 (process manager for Node.js):
+
+```bash
+# Install PM2 globally
+npm install -g pm2
+
+# Start the app with PM2
+pm2 start "npx motia start --port 3000 --host 0.0.0.0" --name motia-todo-app
+
+# Check status
+pm2 status
+
+# View logs
+pm2 logs motia-todo-app
+
+# Restart the app
+pm2 restart motia-todo-app
+
+# Stop the app
+pm2 stop motia-todo-app
+
+# Delete from PM2
+pm2 delete motia-todo-app
+```
+
+**PM2 Ecosystem File (Optional):**
+
+Create `ecosystem.config.cjs` for advanced configuration:
+
+```javascript
+module.exports = {
+  apps: [{
+    name: 'motia-todo-app',
+    script: 'npx',
+    args: 'motia start --port 3000 --host 0.0.0.0',
+    env: {
+      NODE_ENV: 'development',
+    },
+    env_production: {
+      NODE_ENV: 'production',
+      USE_REDIS: 'true',
+    },
+  }],
+};
+```
+
+Then start with:
+```bash
+pm2 start ecosystem.config.cjs --env production
+```
+
 #### Fly.io Deployment
 
 ```bash
