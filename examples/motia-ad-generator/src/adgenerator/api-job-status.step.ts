@@ -17,17 +17,13 @@ const responseSchema = z.object({
     .optional(),
   generatedImage: z
     .object({
-      imagePath: z.string().optional(),
-      imageUrl: z.string().optional(), // ImageKit CDN URL
-      thumbnailUrl: z.string().optional(),
+      imagePath: z.string(),
       adFormat: z.string(),
     })
     .optional(),
   generatedVideo: z
     .object({
-      videoPath: z.string().optional(),
-      videoUrl: z.string().optional(), // ImageKit CDN URL
-      thumbnailUrl: z.string().optional(),
+      videoPath: z.string(),
       provider: z.string(),
       duration: z.number(),
     })
@@ -75,34 +71,6 @@ export const handler: Handlers["GetJobStatus"] = async (
       };
     }
 
-    // Extract completedOutputs for ImageKit URLs
-    const completedOutputs = jobState.completedOutputs as any;
-    const generatedImageState = jobState.generatedImage as any;
-    const generatedVideoState = jobState.generatedVideo as any;
-
-    // Build generatedImage with ImageKit URL if available
-    let generatedImage = undefined;
-    if (generatedImageState || completedOutputs?.image?.completed) {
-      generatedImage = {
-        imagePath: generatedImageState?.imagePath || completedOutputs?.image?.localPath,
-        imageUrl: completedOutputs?.image?.imageKitUrl, // CDN URL from ImageKit
-        thumbnailUrl: completedOutputs?.image?.thumbnailUrl,
-        adFormat: generatedImageState?.adFormat || completedOutputs?.image?.adFormat,
-      };
-    }
-
-    // Build generatedVideo with ImageKit URL if available
-    let generatedVideo = undefined;
-    if (generatedVideoState || completedOutputs?.video?.completed) {
-      generatedVideo = {
-        videoPath: generatedVideoState?.videoPath || completedOutputs?.video?.localPath,
-        videoUrl: completedOutputs?.video?.imageKitUrl, // CDN URL from ImageKit
-        thumbnailUrl: completedOutputs?.video?.thumbnailUrl,
-        provider: generatedVideoState?.provider || completedOutputs?.video?.provider || "unknown",
-        duration: generatedVideoState?.duration || completedOutputs?.video?.duration || 0,
-      };
-    }
-
     return {
       status: 200,
       body: {
@@ -112,8 +80,8 @@ export const handler: Handlers["GetJobStatus"] = async (
         output: jobState.output as string,
         status: jobState.status as string,
         brandAnalysis: jobState.brandAnalysis as any,
-        generatedImage,
-        generatedVideo,
+        generatedImage: jobState.generatedImage as any,
+        generatedVideo: jobState.generatedVideo as any,
         error: jobState.error as string,
         scrapedAt: jobState.scrapedAt as string,
         filteredAt: jobState.filteredAt as string,

@@ -90,7 +90,7 @@ async function downloadImageAsBlob(
   return new Blob([new Uint8Array(arrayBuffer)], { type: mimeType });
 }
 
-// Generate with Kling AI - Text-to-Video (simplified, no image uploads)
+// Generate with Kling AI (10 seconds, native audio)
 async function generateWithKling(
   config: GenerateVideoConfig,
   logger?: Logger
@@ -99,23 +99,34 @@ async function generateWithKling(
     throw new Error("FAL_API_KEY not set in environment variables");
   }
 
-  logger?.info("Generating video with Kling AI (text-to-video) via FAL", {
+  logger?.info("Generating video with Kling AI via FAL", {
+    referenceImageCount: config.referenceImages.length,
     promptLength: config.prompt.length,
   });
 
-  // TEMPORARILY DISABLED: Image upload/download
-  // const primaryImageUrl = config.referenceImages[0];
-  // const imageBlob = await downloadImageAsBlob(primaryImageUrl, logger);
-  // const imageUrl = await fal.storage.upload(imageBlob);
+  // Kling only accepts 1 start image, so use the first one (best product image)
+  const primaryImageUrl = config.referenceImages[0];
 
-  // Call Kling Text-to-Video API via FAL (simple prompt only)
+  logger?.info("Using primary reference image for Kling", {
+    imageUrl: primaryImageUrl,
+  });
+
+  // Download image as Blob
+  const imageBlob = await downloadImageAsBlob(primaryImageUrl, logger);
+
+  logger?.info("Uploading image to FAL storage");
+  const imageUrl = await fal.storage.upload(imageBlob);
+
+  logger?.info("Image uploaded to FAL", { falImageUrl: imageUrl });
+
+  // Call Kling API via FAL
   const result = await fal.subscribe(
-    "fal-ai/kling-video/v2.6/pro/text-to-video",
+    "fal-ai/kling-video/v2.6/pro/image-to-video",
     {
       input: {
+        start_image_url: imageUrl,
         prompt: config.prompt,
         duration: "10",
-        aspect_ratio: "9:16", // TikTok vertical format
         negative_prompt: "blur, distort, and low quality",
         generate_audio: true,
       },
@@ -161,7 +172,7 @@ async function generateWithKling(
   };
 }
 
-// Generate with Veo 3.1 - Text-to-Video (simplified, no image uploads)
+// Generate with Veo 3.1 (8 seconds, 1080p, supports multiple reference images)
 async function generateWithVeo(
   config: GenerateVideoConfig,
   logger?: Logger
@@ -170,26 +181,47 @@ async function generateWithVeo(
     throw new Error("FAL_API_KEY not set in environment variables");
   }
 
-  logger?.info("Generating video with Veo 3.1 (text-to-video) via FAL", {
+  logger?.info("Generating video with Veo 3.1 via FAL", {
+    referenceImageCount: config.referenceImages.length,
     promptLength: config.prompt.length,
   });
 
-  // TEMPORARILY DISABLED: Image upload/download for reference images
-  // const MAX_VEO_IMAGES = 3;
-  // const imagesToUse = config.referenceImages.slice(0, MAX_VEO_IMAGES);
-  // const uploadedImageUrls: string[] = [];
-  // for (let i = 0; i < imagesToUse.length; i++) {
-  //   const imageUrl = imagesToUse[i];
-  //   const imageBlob = await downloadImageAsBlob(imageUrl, logger);
-  //   const falImageUrl = await fal.storage.upload(imageBlob);
-  //   uploadedImageUrls.push(falImageUrl);
-  // }
+  // Download and upload all reference images to FAL storage
+  const uploadedImageUrls: string[] = [];
 
-  // Call Veo 3.1 Text-to-Video API via FAL (simple prompt only)
-  const result = await fal.subscribe("fal-ai/veo3.1", {
+  for (let i = 0; i < config.referenceImages.length; i++) {
+    const imageUrl = config.referenceImages[i];
+
+    logger?.info(
+      `Processing reference image ${i + 1}/${config.referenceImages.length}`,
+      {
+        imageUrl,
+      }
+    );
+
+    // Download image as Blob
+    const imageBlob = await downloadImageAsBlob(imageUrl, logger);
+
+    // Upload to FAL storage
+    const falImageUrl = await fal.storage.upload(imageBlob);
+    uploadedImageUrls.push(falImageUrl);
+
+    logger?.info(`Reference image ${i + 1} uploaded to FAL`, {
+      falImageUrl,
+    });
+  }
+
+  logger?.info("All reference images uploaded", {
+    count: uploadedImageUrls.length,
+  });
+
+  // Call Veo 3.1 API via FAL
+  const result = await fal.subscribe("fal-ai/veo3.1/reference-to-video", {
     input: {
       prompt: config.prompt,
-      aspect_ratio: "9:16", // TikTok vertical format
+      image_urls: uploadedImageUrls, // Multiple reference images
+      duration: "8s",
+      resolution: "1080p",
       generate_audio: true,
     },
     logs: true,

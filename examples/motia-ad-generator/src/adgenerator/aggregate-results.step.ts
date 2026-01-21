@@ -139,58 +139,21 @@ export const handler: Handlers["AggregateResults"] = async (
 
   try {
     // Get current job state to determine what was requested
-    const jobStateProxy = await state.get<any>("ad-generator", `job_${jobId}`);
+    const jobState = await state.get<any>("ad-generator", `job_${jobId}`);
 
-    if (!jobStateProxy) {
+    if (!jobState) {
       throw new Error("Job state not found");
     }
 
-    // IMPORTANT: Create a clean copy of state to avoid circular references
-    // Don't spread or mutate the proxy directly
-    const currentState = {
-      jobId: jobStateProxy.jobId,
-      url: jobStateProxy.url,
-      type: jobStateProxy.type,
-      output: jobStateProxy.output,
-      status: jobStateProxy.status,
-      brandAnalysis: jobStateProxy.brandAnalysis,
-      generatedImage: jobStateProxy.generatedImage,
-      generatedVideo: jobStateProxy.generatedVideo,
-      scrapedAt: jobStateProxy.scrapedAt,
-      filteredAt: jobStateProxy.filteredAt,
-      analyzedAt: jobStateProxy.analyzedAt,
-      imageCompletedAt: jobStateProxy.imageCompletedAt,
-      videoCompletedAt: jobStateProxy.videoCompletedAt,
-    };
+    const requestedOutput = jobState.output; // 'image' | 'video' | 'both'
 
-    const requestedOutput = currentState.output; // 'image' | 'video' | 'both'
-
-    // Initialize completedOutputs as a clean object (not from proxy)
-    const existingImageOutput = jobStateProxy.completedOutputs?.image;
-    const existingVideoOutput = jobStateProxy.completedOutputs?.video;
-    
-    const completedOutputs = {
-      image: existingImageOutput ? {
-        completed: existingImageOutput.completed || false,
-        localPath: existingImageOutput.localPath,
-        imageKitUrl: existingImageOutput.imageKitUrl,
-        imageKitFileId: existingImageOutput.imageKitFileId,
-        thumbnailUrl: existingImageOutput.thumbnailUrl,
-        adFormat: existingImageOutput.adFormat,
-        completedAt: existingImageOutput.completedAt,
-      } : { completed: false },
-      video: existingVideoOutput ? {
-        completed: existingVideoOutput.completed || false,
-        localPath: existingVideoOutput.localPath,
-        imageKitUrl: existingVideoOutput.imageKitUrl,
-        imageKitFileId: existingVideoOutput.imageKitFileId,
-        thumbnailUrl: existingVideoOutput.thumbnailUrl,
-        provider: existingVideoOutput.provider,
-        duration: existingVideoOutput.duration,
-        adType: existingVideoOutput.adType,
-        completedAt: existingVideoOutput.completedAt,
-      } : { completed: false },
-    };
+    // Initialize outputs tracking
+    if (!jobState.completedOutputs) {
+      jobState.completedOutputs = {
+        image: { completed: false },
+        video: { completed: false },
+      };
+    }
 
     // Process image completion
     if (
@@ -213,8 +176,8 @@ export const handler: Handlers["AggregateResults"] = async (
         logger
       );
 
-      // Update completedOutputs with new image data
-      completedOutputs.image = {
+      // Update state with ImageKit URL
+      jobState.completedOutputs.image = {
         completed: true,
         localPath: imagePath,
         imageKitUrl: imageKitResult.url,
@@ -251,8 +214,8 @@ export const handler: Handlers["AggregateResults"] = async (
         logger
       );
 
-      // Update completedOutputs with new video data
-      completedOutputs.video = {
+      // Update state with ImageKit URL
+      jobState.completedOutputs.video = {
         completed: true,
         localPath: videoPath,
         imageKitUrl: imageKitResult.url,
@@ -271,56 +234,61 @@ export const handler: Handlers["AggregateResults"] = async (
       });
     }
 
+    // Update state
+    await state.set("ad-generator", `job_${jobId}`, {
+      ...jobState,
+      status: "processing",
+      lastUpdated: new Date().toISOString(),
+    });
+
     // Check if all requested outputs are complete
     const allCompleted =
-      (requestedOutput === "image" && completedOutputs.image.completed) ||
-      (requestedOutput === "video" && completedOutputs.video.completed) ||
+      (requestedOutput === "image" &&
+        jobState.completedOutputs.image.completed) ||
+      (requestedOutput === "video" &&
+        jobState.completedOutputs.video.completed) ||
       (requestedOutput === "both" &&
-        completedOutputs.image.completed &&
-        completedOutputs.video.completed);
-
-    // Build clean state object (no proxy spreading)
-    const newState = {
-      ...currentState,
-      completedOutputs,
-      status: allCompleted ? "fully_completed" : "processing",
-      lastUpdated: new Date().toISOString(),
-      ...(allCompleted ? { fullyCompletedAt: new Date().toISOString() } : {}),
-    };
-
-    // Update state with clean object
-    await state.set("ad-generator", `job_${jobId}`, newState);
+        jobState.completedOutputs.image.completed &&
+        jobState.completedOutputs.video.completed);
 
     if (allCompleted) {
       logger.info("All requested outputs completed", {
         jobId,
         requestedOutput,
+        completedOutputs: jobState.completedOutputs,
+      });
+
+      // Update final state
+      await state.set("ad-generator", `job_${jobId}`, {
+        ...jobState,
+        status: "fully_completed",
+        fullyCompletedAt: new Date().toISOString(),
       });
 
       // Prepare final response
       const finalOutputs: any = {};
 
-      if (completedOutputs.image.completed) {
+      if (jobState.completedOutputs.image.completed) {
         finalOutputs.image = {
-          imageKitUrl: completedOutputs.image.imageKitUrl,
-          fileId: completedOutputs.image.imageKitFileId,
-          thumbnailUrl: completedOutputs.image.thumbnailUrl,
-          adFormat: completedOutputs.image.adFormat,
+          imageKitUrl: jobState.completedOutputs.image.imageKitUrl,
+          fileId: jobState.completedOutputs.image.imageKitFileId,
+          thumbnailUrl: jobState.completedOutputs.image.thumbnailUrl,
+          adFormat: jobState.completedOutputs.image.adFormat,
         };
       }
 
-      if (completedOutputs.video.completed) {
+      if (jobState.completedOutputs.video.completed) {
         finalOutputs.video = {
-          imageKitUrl: completedOutputs.video.imageKitUrl,
-          fileId: completedOutputs.video.imageKitFileId,
-          thumbnailUrl: completedOutputs.video.thumbnailUrl,
-          provider: completedOutputs.video.provider,
-          duration: completedOutputs.video.duration,
-          adType: completedOutputs.video.adType,
+          imageKitUrl: jobState.completedOutputs.video.imageKitUrl,
+          fileId: jobState.completedOutputs.video.imageKitFileId,
+          thumbnailUrl: jobState.completedOutputs.video.thumbnailUrl,
+          provider: jobState.completedOutputs.video.provider,
+          duration: jobState.completedOutputs.video.duration,
+          adType: jobState.completedOutputs.video.adType,
         };
       }
 
-      // Emit final completion event
+      // Emit final completion event emit as any
       await (emit as any)({
         topic: "ad.generation.fully.completed",
         data: {
@@ -342,8 +310,8 @@ export const handler: Handlers["AggregateResults"] = async (
       logger.info("Waiting for remaining outputs", {
         jobId,
         requestedOutput,
-        imageCompleted: completedOutputs.image.completed,
-        videoCompleted: completedOutputs.video.completed,
+        imageCompleted: jobState.completedOutputs.image.completed,
+        videoCompleted: jobState.completedOutputs.video.completed,
       });
     }
   } catch (error) {
@@ -352,7 +320,6 @@ export const handler: Handlers["AggregateResults"] = async (
       error: error instanceof Error ? error.message : String(error),
     });
 
-    // Set error state with clean object
     await state.set("ad-generator", `job_${jobId}`, {
       jobId,
       url,

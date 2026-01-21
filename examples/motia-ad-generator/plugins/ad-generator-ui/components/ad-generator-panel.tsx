@@ -4,12 +4,13 @@
  * Workbench plugin component for generating AI-powered ads from landing page URLs.
  */
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Badge, Button } from "@motiadev/ui";
 import {
   Sparkles,
   Image,
   Video,
+  Send,
   RefreshCw,
   Loader2,
   AlertCircle,
@@ -38,15 +39,11 @@ interface JobState {
     visualStyle: string;
   };
   generatedImage?: {
-    imagePath?: string;
-    imageUrl?: string; // ImageKit CDN URL
-    thumbnailUrl?: string;
+    imagePath: string;
     adFormat: string;
   };
   generatedVideo?: {
-    videoPath?: string;
-    videoUrl?: string; // ImageKit CDN URL
-    thumbnailUrl?: string;
+    videoPath: string;
     provider: string;
     duration: number;
   };
@@ -76,22 +73,18 @@ export const AdGeneratorPanel = () => {
   // Jobs state
   const [currentJobId, setCurrentJobId] = useState<string | null>(null);
   const [jobStatus, setJobStatus] = useState<JobState | null>(null);
-  const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Helper to stop polling
-  const stopPolling = useCallback(() => {
-    if (pollingIntervalRef.current) {
-      clearInterval(pollingIntervalRef.current);
-      pollingIntervalRef.current = null;
-    }
-  }, []);
+  const [pollingInterval, setPollingInterval] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
   // Cleanup polling on unmount
   useEffect(() => {
     return () => {
-      stopPolling();
+      if (pollingInterval) {
+        clearInterval(pollingInterval);
+      }
     };
-  }, [stopPolling]);
+  }, [pollingInterval]);
 
   // Poll job status
   const pollJobStatus = useCallback(
@@ -102,30 +95,22 @@ export const AdGeneratorPanel = () => {
           const data = await response.json();
           setJobStatus(data);
 
-          // Check if we have any results to show (image or video with URLs)
-          const hasImageResult = data.generatedImage?.imageUrl || data.generatedImage?.imagePath;
-          const hasVideoResult = data.generatedVideo?.videoUrl || data.generatedVideo?.videoPath;
-          const hasAnyResult = hasImageResult || hasVideoResult;
-
-          // Auto-switch to Results tab as soon as ANY result is available
-          if (hasAnyResult) {
-            setActiveTab("results");
-          }
-
-          // Stop polling ONLY when fully_completed or failed
-          // This ensures we keep polling until all outputs are done
+          // Stop polling if job is complete or failed
           if (
-            data.status === "fully_completed" ||
+            data.status?.includes("completed") ||
             data.status?.includes("failed")
           ) {
-            stopPolling();
+            if (pollingInterval) {
+              clearInterval(pollingInterval);
+              setPollingInterval(null);
+            }
           }
         }
       } catch (err) {
         console.error("Error polling job status:", err);
       }
     },
-    [stopPolling]
+    [pollingInterval]
   );
 
   // Generate ad
@@ -158,13 +143,11 @@ export const AdGeneratorPanel = () => {
         setCurrentJobId(data.jobId);
         setActiveTab("jobs");
 
-        // Stop any existing polling before starting new one
-        stopPolling();
-
         // Start polling for status
-        pollingIntervalRef.current = setInterval(() => {
+        const interval = setInterval(() => {
           pollJobStatus(data.jobId);
         }, 3000);
+        setPollingInterval(interval);
 
         // Initial poll
         pollJobStatus(data.jobId);
@@ -187,11 +170,17 @@ export const AdGeneratorPanel = () => {
     });
   };
 
-  const getStatusBadgeVariant = (
-    status: string
-  ): "default" | "success" | "error" | "warning" | "info" | "outline" => {
-    if (status?.includes("completed")) return "success";
-    if (status?.includes("failed")) return "error";
+  const getStatusColor = (status: string) => {
+    if (status?.includes("completed")) return "text-green-500";
+    if (status?.includes("failed")) return "text-red-500";
+    if (status?.includes("generating") || status?.includes("analyzing"))
+      return "text-blue-500";
+    return "text-yellow-500";
+  };
+
+  const getStatusBadgeVariant = (status: string) => {
+    if (status?.includes("completed")) return "default";
+    if (status?.includes("failed")) return "destructive";
     return "outline";
   };
 
@@ -357,16 +346,13 @@ export const AdGeneratorPanel = () => {
                           key={provider}
                           onClick={() => setVideoProvider(provider)}
                           className={cn(
-                            "flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all capitalize",
+                            "px-4 py-2 rounded-lg border transition-all capitalize",
                             videoProvider === provider
-                              ? "border-purple-500 bg-purple-500/20 text-purple-300 font-semibold"
-                              : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-300"
+                              ? "border-purple-500 bg-purple-500/10 text-purple-400"
+                              : "border-zinc-700 hover:border-zinc-600"
                           )}
                         >
                           {provider === "auto" ? "Auto Select" : provider}
-                          {videoProvider === provider && (
-                            <CheckCircle2 className="w-4 h-4 text-purple-400" />
-                          )}
                         </button>
                       ))}
                     </div>
@@ -377,7 +363,7 @@ export const AdGeneratorPanel = () => {
                 <Button
                   onClick={handleGenerateAd}
                   disabled={loading || !url.trim() || platforms.length === 0}
-                  className="py-6 w-full text-lg"
+                  className="w-full py-6 text-lg"
                   size="lg"
                 >
                   {loading ? (
@@ -458,7 +444,7 @@ export const AdGeneratorPanel = () => {
                       {jobStatus.scrapedAt ? (
                         <CheckCircle2 className="w-5 h-5 text-green-500" />
                       ) : (
-                        <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                        <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
                       )}
                       <span>Scraping landing page</span>
                     </div>
@@ -466,7 +452,7 @@ export const AdGeneratorPanel = () => {
                       {jobStatus.filteredAt ? (
                         <CheckCircle2 className="w-5 h-5 text-green-500" />
                       ) : jobStatus.scrapedAt ? (
-                        <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                        <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
                       ) : (
                         <Clock className="w-5 h-5 text-zinc-500" />
                       )}
@@ -476,7 +462,7 @@ export const AdGeneratorPanel = () => {
                       {jobStatus.analyzedAt ? (
                         <CheckCircle2 className="w-5 h-5 text-green-500" />
                       ) : jobStatus.filteredAt ? (
-                        <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                        <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
                       ) : (
                         <Clock className="w-5 h-5 text-zinc-500" />
                       )}
@@ -487,7 +473,7 @@ export const AdGeneratorPanel = () => {
                         {jobStatus.imageCompletedAt ? (
                           <CheckCircle2 className="w-5 h-5 text-green-500" />
                         ) : jobStatus.analyzedAt ? (
-                          <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                          <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
                         ) : (
                           <Clock className="w-5 h-5 text-zinc-500" />
                         )}
@@ -499,7 +485,7 @@ export const AdGeneratorPanel = () => {
                         {jobStatus.videoCompletedAt ? (
                           <CheckCircle2 className="w-5 h-5 text-green-500" />
                         ) : jobStatus.analyzedAt ? (
-                          <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                          <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
                         ) : (
                           <Clock className="w-5 h-5 text-zinc-500" />
                         )}
@@ -531,7 +517,7 @@ export const AdGeneratorPanel = () => {
 
                   {/* Error */}
                   {jobStatus.error && (
-                    <div className="p-4 mt-6 rounded-lg border border-red-500 bg-red-950">
+                    <div className="p-4 mt-6 bg-red-950 rounded-lg border border-red-500">
                       <p className="text-red-300">{jobStatus.error}</p>
                     </div>
                   )}
@@ -577,43 +563,17 @@ export const AdGeneratorPanel = () => {
                         Instagram Ad
                       </h3>
                       <div className="overflow-hidden rounded-lg aspect-square bg-zinc-800">
-                        {/* Use ImageKit CDN URL if available, fallback to local path */}
-                        {jobStatus.generatedImage.imageUrl ? (
-                          <img
-                            src={jobStatus.generatedImage.imageUrl}
-                            alt="Generated Ad"
-                            className="object-cover w-full h-full"
-                          />
-                        ) : jobStatus.generatedImage.imagePath ? (
-                          <img
-                            src={`/outputs/${jobStatus.generatedImage.imagePath
-                              .split("/")
-                              .pop()}`}
-                            alt="Generated Ad"
-                            className="object-cover w-full h-full"
-                          />
-                        ) : (
-                          <div className="flex justify-center items-center w-full h-full">
-                            <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
-                          </div>
-                        )}
+                        <img
+                          src={`/outputs/${jobStatus.generatedImage.imagePath
+                            .split("/")
+                            .pop()}`}
+                          alt="Generated Ad"
+                          className="object-cover w-full h-full"
+                        />
                       </div>
-                      <div className="flex justify-between items-center mt-2">
-                        <p className="text-sm text-zinc-400">
-                          Format: {jobStatus.generatedImage.adFormat}
-                        </p>
-                        {jobStatus.generatedImage.imageUrl && (
-                          <a
-                            href={jobStatus.generatedImage.imageUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex gap-1 items-center text-sm text-blue-400 hover:underline"
-                          >
-                            Open in new tab
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
-                        )}
-                      </div>
+                      <p className="mt-2 text-sm text-zinc-400">
+                        Format: {jobStatus.generatedImage.adFormat}
+                      </p>
                     </div>
                   )}
 
@@ -625,44 +585,16 @@ export const AdGeneratorPanel = () => {
                         TikTok Video
                       </h3>
                       <div className="overflow-hidden rounded-lg bg-zinc-800 aspect-[9/16]">
-                        {/* Use ImageKit CDN URL if available, fallback to local path */}
-                        {jobStatus.generatedVideo.videoUrl ? (
-                          <video
-                            src={jobStatus.generatedVideo.videoUrl}
-                            controls
-                            className="object-cover w-full h-full"
-                          />
-                        ) : jobStatus.generatedVideo.videoPath ? (
-                          <video
-                            src={`/outputs/${jobStatus.generatedVideo.videoPath
-                              .split("/")
-                              .pop()}`}
-                            controls
-                            className="object-cover w-full h-full"
-                          />
-                        ) : (
-                          <div className="flex justify-center items-center w-full h-full">
-                            <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
-                          </div>
-                        )}
+                        <video
+                          src={jobStatus.generatedVideo.videoPath}
+                          controls
+                          className="object-cover w-full h-full"
+                        />
                       </div>
-                      <div className="flex justify-between items-center mt-2">
-                        <p className="text-sm text-zinc-400">
-                          Provider: {jobStatus.generatedVideo.provider} •
-                          Duration: {jobStatus.generatedVideo.duration}s
-                        </p>
-                        {jobStatus.generatedVideo.videoUrl && (
-                          <a
-                            href={jobStatus.generatedVideo.videoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex gap-1 items-center text-sm text-blue-400 hover:underline"
-                          >
-                            Open in new tab
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
-                        )}
-                      </div>
+                      <p className="mt-2 text-sm text-zinc-400">
+                        Provider: {jobStatus.generatedVideo.provider} •
+                        Duration: {jobStatus.generatedVideo.duration}s
+                      </p>
                     </div>
                   )}
                 </div>

@@ -53,6 +53,7 @@ export const handler: Handlers["GenerateImage"] = async (
     brandAnalysis,
     filteredImages,
     screenshot,
+    videoProvider,
     adFormat,
   } = input;
 
@@ -76,27 +77,11 @@ export const handler: Handlers["GenerateImage"] = async (
     );
 
     // Get current job state
-    const jobStateProxy = await state.get<any>("ad-generator", `job_${jobId}`);
+    const jobState = await state.get("ad-generator", `job_${jobId}`);
 
-    // IMPORTANT: Create clean copy to avoid circular references from proxy
-    const currentState = {
-      jobId: jobStateProxy?.jobId || jobId,
-      url: jobStateProxy?.url || url,
-      type: jobStateProxy?.type || type,
-      output: jobStateProxy?.output,
-      status: jobStateProxy?.status,
-      brandAnalysis: jobStateProxy?.brandAnalysis,
-      generatedVideo: jobStateProxy?.generatedVideo, // Preserve video if already generated
-      completedOutputs: jobStateProxy?.completedOutputs,
-      scrapedAt: jobStateProxy?.scrapedAt,
-      filteredAt: jobStateProxy?.filteredAt,
-      analyzedAt: jobStateProxy?.analyzedAt,
-      videoCompletedAt: jobStateProxy?.videoCompletedAt,
-    };
-
-    // Update state with generated image (clean object, no proxy spreading)
+    // Update state with generated image
     await state.set("ad-generator", `job_${jobId}`, {
-      ...currentState,
+      ...(jobState as any),
       generatedImage: {
         imagePath: result.imagePath,
         adFormat,
