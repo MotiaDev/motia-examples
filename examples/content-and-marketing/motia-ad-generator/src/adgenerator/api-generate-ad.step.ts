@@ -41,6 +41,11 @@ export const handler: Handlers["GenerateAd"] = async (
   { emit, logger }
 ) => {
   const { url, type, videoProvider } = bodySchema.parse(req.body);
+  logger.info("Ad generation requested", {
+    url,
+    type,
+    videoProvider,
+  });
 
   const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 

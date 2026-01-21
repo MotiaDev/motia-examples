@@ -4,7 +4,7 @@
  * Workbench plugin component for generating AI-powered ads from landing page URLs.
  */
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Badge, Button } from "@motiadev/ui";
 import {
   Sparkles,
@@ -38,11 +38,15 @@ interface JobState {
     visualStyle: string;
   };
   generatedImage?: {
-    imagePath: string;
+    imagePath?: string;
+    imageUrl?: string; // ImageKit CDN URL
+    thumbnailUrl?: string;
     adFormat: string;
   };
   generatedVideo?: {
-    videoPath: string;
+    videoPath?: string;
+    videoUrl?: string; // ImageKit CDN URL
+    thumbnailUrl?: string;
     provider: string;
     duration: number;
   };
@@ -72,18 +76,22 @@ export const AdGeneratorPanel = () => {
   // Jobs state
   const [currentJobId, setCurrentJobId] = useState<string | null>(null);
   const [jobStatus, setJobStatus] = useState<JobState | null>(null);
-  const [pollingInterval, setPollingInterval] = useState<NodeJS.Timeout | null>(
-    null
-  );
+  const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Helper to stop polling
+  const stopPolling = useCallback(() => {
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current);
+      pollingIntervalRef.current = null;
+    }
+  }, []);
 
   // Cleanup polling on unmount
   useEffect(() => {
     return () => {
-      if (pollingInterval) {
-        clearInterval(pollingInterval);
-      }
+      stopPolling();
     };
-  }, [pollingInterval]);
+  }, [stopPolling]);
 
   // Poll job status
   const pollJobStatus = useCallback(
@@ -94,22 +102,30 @@ export const AdGeneratorPanel = () => {
           const data = await response.json();
           setJobStatus(data);
 
-          // Stop polling if job is complete or failed
+          // Check if we have any results to show (image or video with URLs)
+          const hasImageResult = data.generatedImage?.imageUrl || data.generatedImage?.imagePath;
+          const hasVideoResult = data.generatedVideo?.videoUrl || data.generatedVideo?.videoPath;
+          const hasAnyResult = hasImageResult || hasVideoResult;
+
+          // Auto-switch to Results tab as soon as ANY result is available
+          if (hasAnyResult) {
+            setActiveTab("results");
+          }
+
+          // Stop polling ONLY when fully_completed or failed
+          // This ensures we keep polling until all outputs are done
           if (
-            data.status?.includes("completed") ||
+            data.status === "fully_completed" ||
             data.status?.includes("failed")
           ) {
-            if (pollingInterval) {
-              clearInterval(pollingInterval);
-              setPollingInterval(null);
-            }
+            stopPolling();
           }
         }
       } catch (err) {
         console.error("Error polling job status:", err);
       }
     },
-    [pollingInterval]
+    [stopPolling]
   );
 
   // Generate ad
@@ -142,11 +158,13 @@ export const AdGeneratorPanel = () => {
         setCurrentJobId(data.jobId);
         setActiveTab("jobs");
 
+        // Stop any existing polling before starting new one
+        stopPolling();
+
         // Start polling for status
-        const interval = setInterval(() => {
+        pollingIntervalRef.current = setInterval(() => {
           pollJobStatus(data.jobId);
         }, 3000);
-        setPollingInterval(interval);
 
         // Initial poll
         pollJobStatus(data.jobId);
@@ -339,13 +357,16 @@ export const AdGeneratorPanel = () => {
                           key={provider}
                           onClick={() => setVideoProvider(provider)}
                           className={cn(
-                            "px-4 py-2 rounded-lg border transition-all capitalize",
+                            "flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all capitalize",
                             videoProvider === provider
-                              ? "border-purple-500 bg-purple-500/10 text-purple-400"
-                              : "border-zinc-700 hover:border-zinc-600"
+                              ? "border-purple-500 bg-purple-500/20 text-purple-300 font-semibold"
+                              : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-300"
                           )}
                         >
                           {provider === "auto" ? "Auto Select" : provider}
+                          {videoProvider === provider && (
+                            <CheckCircle2 className="w-4 h-4 text-purple-400" />
+                          )}
                         </button>
                       ))}
                     </div>
@@ -556,17 +577,43 @@ export const AdGeneratorPanel = () => {
                         Instagram Ad
                       </h3>
                       <div className="overflow-hidden rounded-lg aspect-square bg-zinc-800">
-                        <img
-                          src={`/outputs/${jobStatus.generatedImage.imagePath
-                            .split("/")
-                            .pop()}`}
-                          alt="Generated Ad"
-                          className="object-cover w-full h-full"
-                        />
+                        {/* Use ImageKit CDN URL if available, fallback to local path */}
+                        {jobStatus.generatedImage.imageUrl ? (
+                          <img
+                            src={jobStatus.generatedImage.imageUrl}
+                            alt="Generated Ad"
+                            className="object-cover w-full h-full"
+                          />
+                        ) : jobStatus.generatedImage.imagePath ? (
+                          <img
+                            src={`/outputs/${jobStatus.generatedImage.imagePath
+                              .split("/")
+                              .pop()}`}
+                            alt="Generated Ad"
+                            className="object-cover w-full h-full"
+                          />
+                        ) : (
+                          <div className="flex justify-center items-center w-full h-full">
+                            <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+                          </div>
+                        )}
                       </div>
-                      <p className="mt-2 text-sm text-zinc-400">
-                        Format: {jobStatus.generatedImage.adFormat}
-                      </p>
+                      <div className="flex justify-between items-center mt-2">
+                        <p className="text-sm text-zinc-400">
+                          Format: {jobStatus.generatedImage.adFormat}
+                        </p>
+                        {jobStatus.generatedImage.imageUrl && (
+                          <a
+                            href={jobStatus.generatedImage.imageUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex gap-1 items-center text-sm text-blue-400 hover:underline"
+                          >
+                            Open in new tab
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   )}
 
@@ -578,16 +625,44 @@ export const AdGeneratorPanel = () => {
                         TikTok Video
                       </h3>
                       <div className="overflow-hidden rounded-lg bg-zinc-800 aspect-[9/16]">
-                        <video
-                          src={jobStatus.generatedVideo.videoPath}
-                          controls
-                          className="object-cover w-full h-full"
-                        />
+                        {/* Use ImageKit CDN URL if available, fallback to local path */}
+                        {jobStatus.generatedVideo.videoUrl ? (
+                          <video
+                            src={jobStatus.generatedVideo.videoUrl}
+                            controls
+                            className="object-cover w-full h-full"
+                          />
+                        ) : jobStatus.generatedVideo.videoPath ? (
+                          <video
+                            src={`/outputs/${jobStatus.generatedVideo.videoPath
+                              .split("/")
+                              .pop()}`}
+                            controls
+                            className="object-cover w-full h-full"
+                          />
+                        ) : (
+                          <div className="flex justify-center items-center w-full h-full">
+                            <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+                          </div>
+                        )}
                       </div>
-                      <p className="mt-2 text-sm text-zinc-400">
-                        Provider: {jobStatus.generatedVideo.provider} •
-                        Duration: {jobStatus.generatedVideo.duration}s
-                      </p>
+                      <div className="flex justify-between items-center mt-2">
+                        <p className="text-sm text-zinc-400">
+                          Provider: {jobStatus.generatedVideo.provider} •
+                          Duration: {jobStatus.generatedVideo.duration}s
+                        </p>
+                        {jobStatus.generatedVideo.videoUrl && (
+                          <a
+                            href={jobStatus.generatedVideo.videoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex gap-1 items-center text-sm text-blue-400 hover:underline"
+                          >
+                            Open in new tab
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
