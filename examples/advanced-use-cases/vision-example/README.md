@@ -2,12 +2,24 @@
 
 This example demonstrates how to generate images and evaluate the results as a dataset using Claude's vision and prompt generation capabilities, Flux image generation model, and openAI for evaluating the generated content (prompt and image).
 
+## Requirements
+- Node.js v18 or higher
+- An Anthropic API key
+- UV for python dependency management
+- pnpm for node dependency management
+
 ## Setup
 
-1. Install dependencies:
+1. Install dependencies python and node dependencies:
+python
 ```bash
-pip install -r requirements.txt
+uv sync --all-extras
 ```
+node
+```bash
+pnpm install
+```
+
 
 2. Set up your Anthropic API key:
    - Create an account at [Anthropic's website](https://www.anthropic.com/)
@@ -17,24 +29,6 @@ pip install -r requirements.txt
 export ANTHROPIC_API_KEY='your-api-key'
 ```
 
-3. Set up your Flux API key:
-   - Create an account at [Flux's website](https://flux.com/)
-   - Get your API key from the dashboard
-   - Copy the .env.example file to .env and set the FLUX_API_KEY environment variable:
-```bash
-cp .env.example .env
-```
-
-> This third step is optional, you can skip it if you don't want to execute the evaluation flow.
-
-4. Set up your OpenAI API key:
-   - Create an account at [OpenAI's website](https://platform.openai.com/)
-   - Get your API key from the dashboard
-   - Set it as a global environment variable:
-```bash
-export OPENAI_API_KEY='your-api-key'
-```
-
 ## Available Flows
 ### 1. Generate Image
 Generates an images based on a prompt, the prompt is enhanced to make it more specific and detailed. The enhanced prompt is then used to generate an image, followed by an evaluation step to check if the image is a good representation of the prompt, finally a report is generated with the results and an evaluation score. The generated image and the generated evaluation report are saved in the `tmp` directory.
@@ -42,7 +36,7 @@ Generates an images based on a prompt, the prompt is enhanced to make it more sp
 You can trigger the flow by sending a POST request to the `generate-image` endpoint, provide a prompt in the request body as shown below:
 
 ```bash
-curl -X POST http://localhost:3000/generate-image \
+curl -X POST http://localhost:3111/generate-image \
   -H "Content-Type: application/json" \
   -d '{"prompt": "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style."}'
 ```
@@ -58,7 +52,7 @@ The evaluation results are saved in the `eval-reports` folder under the name of 
 You can trigger the flow by sending a POST request to the `evaluate-image-generation-dataset` endpoint, provide an empty body as shown below:
 
 ```bash
-curl -X POST http://localhost:3000/evaluate-image-generation-dataset \
+curl -X POST http://localhost:3111/evaluate-image-generation-dataset \
   -H "Content-Type: application/json" \
   -d '{}'
 ```

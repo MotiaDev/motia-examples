@@ -3,7 +3,7 @@
  * Final step in the renovation planning pipeline
  */
 
-import { EventConfig, Handlers } from 'motia';
+import { queue, Handlers, StepConfig } from 'motia';
 import { z } from 'zod';
 import { calculateBudgetBreakdown, generateRenovationPlan } from '../../utils/renovation-tools';
 
@@ -11,17 +11,15 @@ const inputSchema = z.object({
   sessionId: z.string(),
 });
 
-export const config: EventConfig = {
-  type: 'event',
+export const config = {
   name: 'ProjectCoordinator',
   description: 'Generates comprehensive renovation roadmap with budget, timeline, and rendering instructions',
-  subscribes: ['renovation.coordinate'],
-  emits: ['renovation.render'],
-  input: inputSchema,
+  triggers: [queue('renovation.coordinate', { input: inputSchema })],
+  enqueues: ['renovation.render'],
   flows: ['home-renovation'],
-};
+} as const satisfies StepConfig;
 
-export const handler: Handlers['ProjectCoordinator'] = async (input, { emit, logger, state }) => {
+export const handler: Handlers<typeof config> = async (input, { enqueue, logger, state }) => {
   const { sessionId } = input;
 
   logger.info('Starting project coordination', { sessionId });
@@ -76,7 +74,7 @@ export const handler: Handlers['ProjectCoordinator'] = async (input, { emit, log
   // Trigger rendering generation with Gemini 2.5 Flash (Nano Banana)
   logger.info('Triggering rendering generation', { sessionId });
   
-  await emit({
+  await enqueue({
     topic: 'renovation.render',
     data: {
       session_id: sessionId,

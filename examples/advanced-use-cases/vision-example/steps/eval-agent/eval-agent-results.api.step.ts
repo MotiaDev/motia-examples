@@ -1,21 +1,22 @@
-import { ApiRouteConfig, StepHandler } from 'motia'
+import { api, Handlers, StepConfig } from 'motia'
 import { z } from 'zod'
 import fs from 'fs'
 
 const bodySchema = z.object({})
 
-export const config: ApiRouteConfig = {
-    type: 'api',
+export const config = {
     name: 'evaluate image generation flow results',
     description: 'initialize the evaluation agent, generate a new evaluation report from a dataset of image generation reports (created by the generate-image flow)',
-    path: '/evaluate-image-generation-dataset',
-    method: 'POST',
-    emits: ['eval-image-generation-dataset'],
-    bodySchema: bodySchema,
+    triggers: [
+        api('POST', '/evaluate-image-generation-dataset', {
+            bodySchema: bodySchema,
+        }),
+    ],
+    enqueues: ['eval-image-generation-dataset'],
     flows: ['eval-agent'],
-}
+} as const satisfies StepConfig
 
-export const handler: StepHandler<typeof config> = async (req, { logger, emit }) => {
+export const handler: Handlers<typeof config> = async (req, { logger, enqueue }) => {
     logger.info('evaluate agent results')
 
     // Check for minimum number of report files
@@ -29,8 +30,8 @@ export const handler: StepHandler<typeof config> = async (req, { logger, emit })
         }
     }
 
-    await emit({
-        type: 'eval-image-generation-dataset',
+    await enqueue({
+        topic: 'eval-image-generation-dataset',
         data: {},
     })
 

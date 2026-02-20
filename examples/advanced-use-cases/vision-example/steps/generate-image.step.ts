@@ -1,4 +1,4 @@
-import { EventConfig, StepHandler } from 'motia'
+import { queue, Handlers, StepConfig } from 'motia'
 import { z } from 'zod'
 import dotenv from 'dotenv'
 import {fal} from '@fal-ai/client'
@@ -17,17 +17,13 @@ const inputSchema = z.object({
   original_prompt: z.string()
 })
 
-type Input = typeof inputSchema
-
-export const config: EventConfig<Input> = {
-    type: 'event',
+export const config = {
     name: 'generate image',
     description: 'generate an ai image given a prompt',
-    subscribes: ['generate-image'],
-    emits: ['eval-image-result'],
-    input: inputSchema,
+    triggers: [queue('generate-image', { input: inputSchema })],
+    enqueues: ['eval-image-result'],
     flows: ['generate-image'],
-}
+} as const satisfies StepConfig
 
 const getRequestStatus = async (requestId: string) => {
   const status = await fal.queue.status(FAL_MODEL, {
@@ -64,7 +60,7 @@ async function saveBase64Image(base64String: string, filePath: string): Promise<
   }
 }
 
-export const handler: StepHandler<typeof config> = async (input, { traceId, emit, logger }) => {
+export const handler: Handlers<typeof config> = async (input, { traceId, enqueue, logger }) => {
   logger.info('generate an image using flux')
 
   try {
@@ -99,9 +95,9 @@ export const handler: StepHandler<typeof config> = async (input, { traceId, emit
 
     logger.info("Image saved to " + imagePath);
 
-    await emit({
-      type: 'eval-image-result',
-      data: { 
+    await enqueue({
+      topic: 'eval-image-result',
+      data: {
         image: imagePath, 
         prompt: input.prompt, 
         original_prompt: input.original_prompt

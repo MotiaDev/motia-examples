@@ -3,7 +3,7 @@
  * First step in the renovation planning pipeline
  */
 
-import { EventConfig, Handlers } from 'motia';
+import { queue, Handlers, StepConfig } from 'motia';
 import { z } from 'zod';
 import { extractRoomDetails, estimateRenovationCost } from '../../utils/renovation-tools';
 
@@ -13,17 +13,15 @@ const inputSchema = z.object({
   hasImages: z.boolean().optional(),
 });
 
-export const config: EventConfig = {
-  type: 'event',
+export const config = {
   name: 'VisualAssessor',
   description: 'Analyzes room photos and extracts renovation requirements',
-  subscribes: ['renovation.assess'],
-  emits: ['renovation.design'],
-  input: inputSchema,
+  triggers: [queue('renovation.assess', { input: inputSchema })],
+  enqueues: ['renovation.design'],
   flows: ['home-renovation'],
-};
+} as const satisfies StepConfig;
 
-export const handler: Handlers['VisualAssessor'] = async (input, { emit, logger, state }) => {
+export const handler: Handlers<typeof config> = async (input, { enqueue, logger, state }) => {
   const { sessionId, message, hasImages } = input;
 
   logger.info('Starting visual assessment', { sessionId });
@@ -125,7 +123,7 @@ export const handler: Handlers['VisualAssessor'] = async (input, { emit, logger,
   await state.set(sessionId, 'assessmentSummary', summary);
 
   // Emit to design planner
-  await emit({
+  await enqueue({
     topic: 'renovation.design',
     data: {
       sessionId,

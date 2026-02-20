@@ -2,13 +2,11 @@
   "name": "my-motia-project",
   "description": "",
   "scripts": {
-    "postinstall": "motia install",
     "generate:dataset": "ts-node generate-dataset.ts",
-    "dev": "motia dev",
-    "dev:debug": "motia dev --verbose",
-    "generate-types": "motia generate-types",
-    "build": "motia build",
-    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+    "start": "bun run --enable-source-maps dist/index-dev.js",
+    "dev": "iii",
+    "dev:py": "uv run motia dev --dir steps --watch",
+    "build": "npx motia dev"
   },
   "keywords": [
     "motia"
@@ -16,7 +14,7 @@
   "dependencies": {
     "@fal-ai/client": "^1.2.3",
     "dotenv": "^16.5.0",
-    "motia": "^0.5.5-beta.113",
+    "motia": "1.0.0-rc.14",
     "openai": "^5.7.0",
     "react": "^19.0.0",
     "zod": "^3.25.67"

@@ -1,22 +1,25 @@
 from anthropic import Anthropic
 import os
+from typing import Any
+
+from motia import queue, FlowContext
 
 client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 config = {
-  "type": "event",
   "name": "enhance image prompt",
   "description": "enhance a given image prompt",
-  "subscribes": ["enhance-image-prompt"], 
-  "emits": ["generate-image"],
+  "triggers": [
+    queue("enhance-image-prompt")
+  ],
+  "enqueues": ["generate-image"],
   "flows": ["generate-image"],
-  "input": None,  # No schema validation in Python
 }
 
-async def handler(args, ctx):
-  ctx.logger.info('enhance image prompt', args)
+async def handler(input_data: dict[str, Any], ctx: FlowContext[Any]) -> None:
+  ctx.logger.info('enhance image prompt', input_data)
 
-  prompt = args.prompt
+  prompt = input_data.get('prompt', '')
 
   prompt_enhancement_prompt = f"""
   You are a helpful assistant that can enhance a given image prompt.
@@ -39,7 +42,7 @@ async def handler(args, ctx):
 
   ctx.logger.info('enhanced prompt', enhanced_prompt)
 
-  await ctx.emit({
-    "type": 'generate-image',
+  await ctx.enqueue({
+    "topic": 'generate-image',
     "data": {"prompt": enhanced_prompt, "original_prompt": prompt },
   })

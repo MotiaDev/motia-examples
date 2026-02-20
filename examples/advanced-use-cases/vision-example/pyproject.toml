@@ -1,0 +1,19 @@
+[project]
+name = "vision-example"
+version = "0.1.0"
+description = "Generate Images and Evaluate Results"
+requires-python = ">=3.10"
+dependencies = [
+  "motia[otel]==1.0.0-rc.22",
+  "iii-sdk==0.2.0",
+  "pydantic>=2.0",
+  "anthropic>=0.31.2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
+[tool.uv]
+package = false

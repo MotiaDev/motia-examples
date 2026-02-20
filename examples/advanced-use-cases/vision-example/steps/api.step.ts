@@ -1,26 +1,27 @@
-import { ApiRouteConfig, StepHandler } from 'motia'
+import { api, Handlers, StepConfig } from 'motia'
 import { z } from 'zod'
 
 const bodySchema = z.object({
     prompt: z.string(),
 })
 
-export const config: ApiRouteConfig = {
-    type: 'api',
+export const config = {
     name: 'generate image api trigger',
     description: 'generate an ai image given a prompt',
-    path: '/generate-image',
-    method: 'POST',
-    emits: ['enhance-image-prompt'],
-    bodySchema: bodySchema,
+    triggers: [
+        api('POST', '/generate-image', {
+            bodySchema: bodySchema,
+        }),
+    ],
+    enqueues: ['enhance-image-prompt'],
     flows: ['generate-image'],
-}
+} as const satisfies StepConfig
 
-export const handler: StepHandler<typeof config> = async (req, { logger, emit }) => {
+export const handler: Handlers<typeof config> = async (req, { logger, enqueue }) => {
     logger.info('initialized generate image flow')
 
-    await emit({
-        type: 'enhance-image-prompt',
+    await enqueue({
+        topic: 'enhance-image-prompt',
         data: {
             prompt: req.body.prompt,
         },

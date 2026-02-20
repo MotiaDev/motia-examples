@@ -3,7 +3,7 @@
  * Provides system information and guidance
  */
 
-import { EventConfig, Handlers } from 'motia';
+import { queue, Handlers, StepConfig } from 'motia';
 import { z } from 'zod';
 
 const inputSchema = z.object({
@@ -11,17 +11,15 @@ const inputSchema = z.object({
   message: z.string(),
 });
 
-export const config: EventConfig = {
-  type: 'event',
+export const config = {
   name: 'InfoHandler',
   description: 'Handles general questions and provides system information',
-  subscribes: ['renovation.info'],
-  emits: [],
-  input: inputSchema,
+  triggers: [queue('renovation.info', { input: inputSchema })],
+  enqueues: [],
   flows: ['home-renovation'],
-};
+} as const satisfies StepConfig;
 
-export const handler: Handlers['InfoHandler'] = async (input, { logger, state }) => {
+export const handler: Handlers<typeof config> = async (input, { logger, state }) => {
   const { sessionId, message } = input;
 
   logger.info('Handling info request', { sessionId });
