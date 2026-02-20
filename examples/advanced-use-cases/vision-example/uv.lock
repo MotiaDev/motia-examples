@@ -437,15 +437,15 @@ wheels = [
 
 [[package]]
 name = "motia"
-version = "1.0.0rc17"
+version = "0.2.2a20260220201719"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iii-sdk" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7a/13/96a11a798273d4ae6852bb1db5775cd5f30644fe11032d58cc8ae4b8e663/motia-1.0.0rc17.tar.gz", hash = "sha256:10eabba406944ff8d33d39e18e9cf195a97b53bd0706b8bf512398bb584e1906", size = 98331, upload-time = "2026-02-18T13:35:12.951Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4f/79/a7707df4f7b82e9ff5ad5aa2c0dc7c38d70cbb3b8217e0b1bdd9681e1bcb/motia-0.2.2a20260220201719.tar.gz", hash = "sha256:978bea02888d7d365504a63b0f359df141d8181a07d12467950a5929accf1680", size = 98599, upload-time = "2026-02-20T20:17:29.197Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2b/96/e2a1e4e6c353aa8e6b01c372d68d21b7caf8ac11d76da60744cc3a03596e/motia-1.0.0rc17-py3-none-any.whl", hash = "sha256:917d65e993c2a0e4600c5914726c73aa1dcbd1de82a9724f4176655e2bb6f9db", size = 27706, upload-time = "2026-02-18T13:35:11.599Z" },
+    { url = "https://files.pythonhosted.org/packages/c2/c5/4d256ffe64717e8fa32d7943628f268e2b422f4c31c6c0c84ab8dd48c84a/motia-0.2.2a20260220201719-py3-none-any.whl", hash = "sha256:16c6f622f7e425594bd99b7f4306450090839f3dd829d217daf7b030b0320df0", size = 27916, upload-time = "2026-02-20T20:17:28.064Z" },
 ]
 
 [package.optional-dependencies]
@@ -889,7 +889,7 @@ dev = [
 requires-dist = [
     { name = "anthropic", specifier = ">=0.31.2" },
     { name = "iii-sdk", specifier = "==0.2.0" },
-    { name = "motia", extras = ["otel"], specifier = "==1.0.0rc17" },
+    { name = "motia", extras = ["otel"], specifier = "==0.2.2a20260220201719" },
     { name = "pydantic", specifier = ">=2.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0.0" },
 ]
