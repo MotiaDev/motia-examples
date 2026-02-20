@@ -1,0 +1,20 @@
+[project]
+name = "ai-room-renovate"
+version = "0.1.0"
+description = "AI Home Renovation Planner"
+requires-python = ">=3.10"
+dependencies = [
+  "motia[otel]==1.0.0rc17",
+  "iii-sdk==0.2.0",
+  "pydantic>=2.0",
+  "google-adk>=0.1.0",
+  "google-genai>=0.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
+[tool.uv]
+package = false
