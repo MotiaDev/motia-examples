@@ -3,7 +3,7 @@
  * Second step in the renovation planning pipeline
  */
 
-import { EventConfig, Handlers } from 'motia';
+import { queue, Handlers, StepConfig } from 'motia';
 import { z } from 'zod';
 import { calculateTimeline } from '../../utils/renovation-tools';
 
@@ -11,17 +11,15 @@ const inputSchema = z.object({
   sessionId: z.string(),
 });
 
-export const config: EventConfig = {
-  type: 'event',
+export const config = {
   name: 'DesignPlanner',
   description: 'Creates detailed design plans with materials and specifications',
-  subscribes: ['renovation.design'],
-  emits: ['renovation.coordinate'],
-  input: inputSchema,
+  triggers: [queue('renovation.design', { input: inputSchema })],
+  enqueues: ['renovation.coordinate'],
   flows: ['home-renovation'],
-};
+} as const satisfies StepConfig;
 
-export const handler: Handlers['DesignPlanner'] = async (input, { emit, logger, state }) => {
+export const handler: Handlers<typeof config> = async (input, { enqueue, logger, state }) => {
   const { sessionId } = input;
 
   logger.info('Starting design planning', { sessionId });
@@ -64,7 +62,7 @@ export const handler: Handlers['DesignPlanner'] = async (input, { emit, logger, 
   await state.set(sessionId, 'scope', scope);
 
   // Emit to project coordinator
-  await emit({
+  await enqueue({
     topic: 'renovation.coordinate',
     data: {
       sessionId,
