@@ -3,34 +3,35 @@
  * Allows users to refine generated renderings with natural language instructions
  */
 
-import { ApiRouteConfig, Handlers } from 'motia';
+import { api, Handlers, StepConfig } from 'motia';
 import { z } from 'zod';
 
 const bodySchema = z.object({
   editPrompt: z.string().min(1, "Edit prompt cannot be empty"),
 });
 
-export const config: ApiRouteConfig = {
-  type: 'api',
+export const config = {
   name: 'EditRenderingApi',
   description: 'Edits existing renovation rendering based on user feedback',
-  path: '/renovation/:sessionId/edit',
-  method: 'POST',
-  bodySchema,
-  emits: ['renovation.edit'],
+  triggers: [
+    api('POST', '/renovation/:sessionId/edit', {
+      bodySchema,
+      responseSchema: {
+        200: z.object({
+          sessionId: z.string(),
+          message: z.string(),
+        }),
+        400: z.object({ error: z.string() }),
+        404: z.object({ error: z.string() }),
+      },
+    }),
+  ],
+  enqueues: ['renovation.edit'],
   virtualSubscribes: ['renovation.render'],
   flows: ['home-renovation'],
-  responseSchema: {
-    200: z.object({
-      sessionId: z.string(),
-      message: z.string(),
-    }),
-    400: z.object({ error: z.string() }),
-    404: z.object({ error: z.string() }),
-  },
-};
+} as const satisfies StepConfig;
 
-export const handler: Handlers['EditRenderingApi'] = async (req, { emit, logger, state }) => {
+export const handler: Handlers<typeof config> = async (req, { enqueue, logger, state }) => {
   try {
     const { sessionId } = req.pathParams;
     const { editPrompt } = bodySchema.parse(req.body);
@@ -50,7 +51,7 @@ export const handler: Handlers['EditRenderingApi'] = async (req, { emit, logger,
     }
 
     // Trigger edit event to regenerate with modifications
-    await emit({
+    await enqueue({
       topic: 'renovation.edit',
       data: {
         session_id: sessionId,
@@ -75,4 +76,3 @@ export const handler: Handlers['EditRenderingApi'] = async (req, { emit, logger,
     };
   }
 };
-

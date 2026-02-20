@@ -3,32 +3,33 @@
  * API endpoint to fetch renovation planning results
  */
 
-import { ApiRouteConfig, Handlers } from 'motia';
+import { api, Handlers, StepConfig } from 'motia';
 import { z } from 'zod';
 
-export const config: ApiRouteConfig = {
-  type: 'api',
+export const config = {
   name: 'GetRenovationResult',
   description: 'Retrieves the completed renovation plan for a session',
-  path: '/renovation/:sessionId/result',
-  method: 'GET',
-  emits: [],
+  triggers: [
+    api('GET', '/renovation/:sessionId/result', {
+      responseSchema: {
+        200: z.object({
+          sessionId: z.string(),
+          completed: z.boolean(),
+          roadmap: z.any().optional(),
+          assessmentSummary: z.any().optional(),
+          infoResponse: z.string().optional(),
+          message: z.string(),
+        }),
+        404: z.object({ error: z.string() }),
+      },
+    }),
+  ],
+  enqueues: [],
   virtualSubscribes: ['renovation.coordinate'],
   flows: ['home-renovation'],
-  responseSchema: {
-    200: z.object({
-      sessionId: z.string(),
-      completed: z.boolean(),
-      roadmap: z.any().optional(),
-      assessmentSummary: z.any().optional(),
-      infoResponse: z.string().optional(),
-      message: z.string(),
-    }),
-    404: z.object({ error: z.string() }),
-  },
-};
+} as const satisfies StepConfig;
 
-export const handler: Handlers['GetRenovationResult'] = async (req, { logger, state }) => {
+export const handler: Handlers<typeof config> = async (req, { logger, state }) => {
   const { sessionId } = req.pathParams;
 
   logger.info('Fetching renovation result', { sessionId });
@@ -89,4 +90,3 @@ export const handler: Handlers['GetRenovationResult'] = async (req, { logger, st
     },
   };
 };
-
