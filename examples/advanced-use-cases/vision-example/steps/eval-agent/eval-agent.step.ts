@@ -1,4 +1,4 @@
-import { EventConfig, StepHandler } from 'motia'
+import { queue, Handlers, StepConfig } from 'motia'
 import { z } from 'zod'
 import { promises as fs } from 'fs'
 import path from 'path'
@@ -6,22 +6,18 @@ import OpenAI from 'openai'
 
 const inputSchema = z.object({})
 
-type Input = typeof inputSchema
-
 // Add this helper function at the top level, before the handler
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
-export const config: EventConfig<Input> = {
-    type: 'event',
+export const config = {
     name: 'eval entire flow',
     description: 'evaluate the entire flow',
-    subscribes: ['eval-image-generation-dataset'],
-    emits: ['eval-image-generation-dataset-score'],
-    input: inputSchema,
+    triggers: [queue('eval-image-generation-dataset', { input: inputSchema })],
+    enqueues: ['eval-image-generation-dataset-score'],
     flows: ['eval-agent'],
-}
+} as const satisfies StepConfig
 
-export const handler: StepHandler<typeof config> = async (input, { traceId, emit, logger }) => {
+export const handler: Handlers<typeof config> = async (input, { traceId, enqueue, logger }) => {
   logger.info('evaluate the entire flow')
 
   const openai = new OpenAI()
@@ -134,8 +130,8 @@ export const handler: StepHandler<typeof config> = async (input, { traceId, emit
 
     // For now we only emit the report path and the confidence percentage, for a future use case you can trigger
     // a webhook to notify the user that the evaluation is ready, or to enable a new flow, or to allow CI to proceed
-    await emit({
-      type: 'eval-image-generation-dataset-score',
+    await enqueue({
+      topic: 'eval-image-generation-dataset-score',
       data: {
         reportPath,
         confidencePercentage: (finalScore.success * 100) / datasetReport.length,

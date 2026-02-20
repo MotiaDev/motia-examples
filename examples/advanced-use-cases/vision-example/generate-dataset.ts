@@ -2,7 +2,7 @@ async function generateImages(numImages: number = 10) {
     const prompt = "create an image of a couple backpacking through a trail in the easter sierras. use a black and white image style. sketch style.";
     
     const requests = Array(numImages).fill(null).map(() => 
-        fetch('http://localhost:3000/generate-image', {
+        fetch('http://localhost:3111/generate-image', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
