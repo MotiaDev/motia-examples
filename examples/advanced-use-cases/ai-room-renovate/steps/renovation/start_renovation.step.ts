@@ -3,7 +3,7 @@
  * Receives renovation requests and routes them to appropriate event handlers
  */
 
-import { ApiRouteConfig, Handlers } from 'motia';
+import { api, Handlers, StepConfig } from 'motia';
 import { z } from 'zod';
 
 const bodySchema = z.object({
@@ -15,29 +15,30 @@ const bodySchema = z.object({
   imageUrls: z.array(z.string()).optional(),
 });
 
-export const config: ApiRouteConfig = {
-  type: 'api',
+export const config = {
   name: 'StartRenovation',
   description: 'Main entry point for renovation planning requests',
-  path: '/renovation/start',
-  method: 'POST',
-  bodySchema,
-  emits: [
+  triggers: [
+    api('POST', '/renovation/start', {
+      bodySchema,
+      responseSchema: {
+        200: z.object({
+          sessionId: z.string(),
+          message: z.string(),
+          routedTo: z.string(),
+        }),
+        400: z.object({ error: z.string() }),
+      },
+    }),
+  ],
+  enqueues: [
     { topic: 'renovation.assess', label: 'Start Assessment' },
     { topic: 'renovation.info', label: 'General Info', conditional: true },
   ],
   flows: ['home-renovation'],
-  responseSchema: {
-    200: z.object({
-      sessionId: z.string(),
-      message: z.string(),
-      routedTo: z.string(),
-    }),
-    400: z.object({ error: z.string() }),
-  },
-};
+} as const satisfies StepConfig;
 
-export const handler: Handlers['StartRenovation'] = async (req, { emit, logger, state }) => {
+export const handler: Handlers<typeof config> = async (req, { enqueue, logger, state }) => {
   try {
     const { message, budget, roomType, style, hasImages, imageUrls } = bodySchema.parse(req.body);
 
@@ -79,7 +80,7 @@ export const handler: Handlers['StartRenovation'] = async (req, { emit, logger, 
       // Route to info handler
       routedTo = 'info';
       
-      await emit({
+      await enqueue({
         topic: 'renovation.info',
         data: {
           sessionId,
@@ -99,7 +100,7 @@ export const handler: Handlers['StartRenovation'] = async (req, { emit, logger, 
       await state.set(sessionId, 'imageUrls', imageUrls || []);
       await state.set(sessionId, 'startTime', new Date().toISOString());
 
-      await emit({
+      await enqueue({
         topic: 'renovation.assess',
         data: {
           sessionId,
